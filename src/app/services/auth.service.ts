@@ -7,12 +7,23 @@ import { AngularFireFunctions } from '@angular/fire/functions';
   providedIn: 'root'
 })
 export class AuthService {
+  userData:any;
 
   constructor(
     private afs: AngularFirestore,
     private fns: AngularFireFunctions,
     readonly fire: AngularFireAuth, 
-  ) {} 
+  ) {
+    this.fire.authState.subscribe(user => {
+      if (user) {
+        this.userData = user;
+        console.log('logged in')
+        localStorage.setItem('user', JSON.stringify(this.userData));
+      } else {
+        localStorage.removeItem('user');
+      }
+    })
+  }
 
   public signup(email:string, password:string,displayName:string,contactNumber:string) {
     
@@ -40,6 +51,13 @@ export class AuthService {
     console.log('Signing-out');
     //this.guard.prompt('signIn').then(user => {})
     return this.fire.signOut();
+  }
+
+  public signIn(email: string, password: string) {
+    return this.fire.setPersistence('local').then(()=> {
+      this.fire.signInWithEmailAndPassword(email,password).then(res => {res.user, console.log(res.user)})
+    })
+    
   }
   
 }
