@@ -20,6 +20,7 @@ export class AuthService {
         console.log('logged in')
         localStorage.setItem('user', JSON.stringify(this.userData));
       } else {
+        console.log('logged out')
         localStorage.removeItem('user');
       }
     })

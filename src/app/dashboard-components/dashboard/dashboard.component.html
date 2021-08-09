@@ -8,13 +8,9 @@
     <button (click)="signUp()">Sign Up</button>
   </div>
 -->
-  <div>
-    <h2>Login</h2>
-    <input type="text" [(ngModel)]="email" placeholder="Email">
-    <input type="text" [(ngModel)]="password" placeholder="Password">
-    <button (click)="login()">Login</button>
-  </div>
 
   <div *ngIf="auth.userData as user">
     <p>{{user.displayName}}</p>
   </div>
+<br>
+<button (click)="logout()">Logout</button>

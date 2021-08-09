@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFireAuth  } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,21 +13,24 @@ export class DashboardComponent implements OnInit {
   password!:string;
   name!:string;
   number!:string;
+
   constructor(
     public auth: AuthService,
     readonly fire: AngularFireAuth, 
+    public router: Router
     ) { }
 
   ngOnInit(): void {
-    
+    console.log(localStorage.getItem('user'))
   }
 
-  public signUp() {
-    this.auth.signup(this.email,this.password,this.name,this.number)
+  public logout() {
+    this.auth.signOut().then(a => {
+      this.router.navigate(['login'])
+    })
   }
 
-  public login() {
-    this.auth.signIn(this.email,this.password)
-  }
+
+
 
 }
