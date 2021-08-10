@@ -11,8 +11,6 @@ import { map } from 'rxjs/operators';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
-const editorOnly = () => pipe(customClaims, map(claims => claims.role === 'editor'));
-
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: 'login', component: LoginComponent },

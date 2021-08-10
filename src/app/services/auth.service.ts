@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class AuthService {
     private afs: AngularFirestore,
     private fns: AngularFireFunctions,
     readonly fire: AngularFireAuth, 
+    public router: Router
   ) {
 /*
     this.fire.authState.subscribe(user => {
@@ -69,6 +71,7 @@ export class AuthService {
   public signIn(email: string, password: string) {
     return this.fire.setPersistence('local').then(()=> {
       this.fire.signInWithEmailAndPassword(email,password).then(res => {res.user, console.log(res.user)})
+      .then(a => {this.router.navigate(['/dashboard'])})
     })
   }
 

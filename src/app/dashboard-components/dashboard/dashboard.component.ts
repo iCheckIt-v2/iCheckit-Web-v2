@@ -28,11 +28,21 @@ export class DashboardComponent implements OnInit {
     this.fire.authState.subscribe(user => {
       if (user) {
         this.userData = user;
-        console.log(this.userData)
+        this.auth.getUserData(user.uid).subscribe(res => {
+          this.fsData = res;
+          if (res.role == 'CICS Office Staff' || res.role == 'Department Head') {
+            console.log('Allowed to access')
+          } else {
+            console.log('Restricted!')
+            this.logout();
+            this.router.navigate(['/login'])
+          }
+        })
       } else {
         this.logout()
       }
     })
+
   }
 
   public logout() {

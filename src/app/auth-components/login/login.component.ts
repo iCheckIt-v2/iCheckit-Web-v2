@@ -27,9 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.auth.signIn(this.email,this.password).then(a => {
-      this.router.navigate(['/dashboard'])
-    })
+    this.auth.signIn(this.email,this.password) 
   }
   
 }
