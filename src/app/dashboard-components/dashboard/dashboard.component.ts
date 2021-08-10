@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFireAuth  } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,9 @@ export class DashboardComponent implements OnInit {
   password!:string;
   name!:string;
   number!:string;
+  userData:any;
+  fsData!:Observable<any>
+
 
   constructor(
     public auth: AuthService,
@@ -21,7 +25,14 @@ export class DashboardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('user'))
+    this.fire.authState.subscribe(user => {
+      if (user) {
+        this.userData = user;
+        console.log(this.userData)
+      } else {
+        this.logout()
+      }
+    })
   }
 
   public logout() {

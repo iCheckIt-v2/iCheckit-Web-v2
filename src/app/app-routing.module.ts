@@ -4,9 +4,14 @@ import { DashboardComponent } from '../app/dashboard-components/dashboard/dashbo
 import { LoginComponent } from './auth-components/login/login.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ForgotPasswordComponent } from './auth-components/forgot-password/forgot-password.component';
-import { AngularFireAuthGuard, canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard, canActivate, customClaims, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+
+const editorOnly = () => pipe(customClaims, map(claims => claims.role === 'editor'));
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin) },

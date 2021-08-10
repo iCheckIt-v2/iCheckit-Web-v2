@@ -2,29 +2,41 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth  } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   userData:any;
+  fsData!: Observable<any>;
 
   constructor(
     private afs: AngularFirestore,
     private fns: AngularFireFunctions,
     readonly fire: AngularFireAuth, 
   ) {
+/*
     this.fire.authState.subscribe(user => {
       if (user) {
         this.userData = user;
         console.log('logged in')
-        localStorage.setItem('user', JSON.stringify(this.userData));
+
       } else {
         console.log('logged out')
-        localStorage.removeItem('user');
+        /*
+        localStorage.removeItem('userData');
+        localStorage.removeItem('fsData');
+
       }
     })
+    */
   }
+
+
+  public get auth() { return this.fire; }
+
 
   public signup(email:string, password:string,displayName:string,contactNumber:string) {
     
@@ -58,7 +70,19 @@ export class AuthService {
     return this.fire.setPersistence('local').then(()=> {
       this.fire.signInWithEmailAndPassword(email,password).then(res => {res.user, console.log(res.user)})
     })
-    
+  }
+
+  public getUserData(id:string) {
+    return this.afs.collection('users')
+    .doc(id)
+    .snapshotChanges()
+    .pipe(
+      map((doc: any) => {
+        // console.log(doc)
+        return { id: doc.payload.id, ...doc.payload.data() };
+      })
+    );
+
   }
   
 }
