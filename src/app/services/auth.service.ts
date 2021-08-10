@@ -85,7 +85,10 @@ export class AuthService {
         return { id: doc.payload.id, ...doc.payload.data() };
       })
     );
+  }
 
+  public sendPasswordReset(email: string) {
+    return this.fire.sendPasswordResetEmail(email).then(res => { console.log(res), console.log('password reset sent')})
   }
   
 }
