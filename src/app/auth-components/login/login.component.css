@@ -1,0 +1,11 @@
+.login-container {
+    @apply h-screen bg-cover bg-no-repeat bg-ust-main bg-center relative z-10 flex justify-center items-center;
+}
+
+.login-overlay {
+    @apply h-full absolute w-full bg-red-700 bg-opacity-50;
+}
+
+.login-content {
+    @apply z-20 h-3/4 w-3/4 bg-white
+}
