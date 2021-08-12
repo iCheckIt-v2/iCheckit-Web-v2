@@ -12,6 +12,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ForgotPasswordComponent } from './auth-components/forgot-password/forgot-password.component';
 import { environment } from "src/environments/environment";
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     AngularFirestoreModule, //Firebase imports
     AngularFireAuthModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [],

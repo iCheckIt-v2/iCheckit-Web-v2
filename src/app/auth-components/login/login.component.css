@@ -29,7 +29,6 @@
     font-family: 'Antonio', sans-serif;
 }
 .login-form {
-    padding: 0 3rem;
 }
 .input-box {
     border-bottom: 1px solid black;
@@ -40,12 +39,16 @@
 }
 .login-form input{
     font-family: 'Abel', sans-serif;
-    outline: none;
+    outline: none ;
     outline-style: none;
     width: 90%;
     border: none;
     padding-top: 0;
     padding-bottom: 3px;    
+}
+.login-form input:focus {
+    outline: none !important;
+    outline-style: none !important;
 }
 .login-form input:focus{
     outline: none;
@@ -55,7 +58,7 @@
     width: 10%;
 }
 .login-buttons {
-    @apply text-center flex justify-center items-center flex-col
+    @apply text-center flex justify-center items-center flex-col mt-6
 }
 .login-buttons button{
     background-color: #B7152F;
@@ -66,4 +69,5 @@
 .login-buttons a {
     color: gray;
     font-family: 'Abel', sans-serif;
+    margin-top: 1rem;
 }

@@ -72,6 +72,9 @@ export class AuthService {
     return this.fire.setPersistence('local').then(()=> {
       this.fire.signInWithEmailAndPassword(email,password).then(res => {res.user, console.log(res.user)})
       .then(a => {this.router.navigate(['/dashboard'])})
+      .catch((err) => {
+        alert('This user does not exist!')
+      })
     })
   }
 
@@ -88,7 +91,9 @@ export class AuthService {
   }
 
   public sendPasswordReset(email: string) {
-    return this.fire.sendPasswordResetEmail(email).then(res => { console.log(res), console.log('password reset sent')})
+    return this.fire.sendPasswordResetEmail(email).then(res => { console.log(res), alert('Email has been sent to ' + email)}).catch((err) => {
+      alert('This user does not exist!')
+    })
   }
   
 }

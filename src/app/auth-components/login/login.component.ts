@@ -16,10 +16,12 @@ export class LoginComponent implements OnInit {
   constructor(
     public auth: AuthService,
     readonly fire: AngularFireAuth, 
-    public router: Router
-  ) { }
+    public router: Router,
+  ) {}
 
   ngOnInit(): void {
+    this.email = '';
+    this.password = ''
   }
 
   public signUp() {
@@ -27,7 +29,11 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.auth.signIn(this.email,this.password) 
+    if (this.email == '' && this.password == '') {
+      alert('Please fill up all fields')
+    } if (this.email != '' && this.password != '') {
+      this.auth.signIn(this.email,this.password)
+    } 
   }
   
 }
