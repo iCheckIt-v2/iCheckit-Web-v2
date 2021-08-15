@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   name!:string;
   number!:string;
   userData:any;
-  fsData!:Observable<any>
+  fsData: any;
 
 
   constructor(
@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
         this.userData = user;
         this.auth.getUserData(user.uid).subscribe(res => {
           this.fsData = res;
+          console.log(this.fsData)
           if (res.role == 'CICS Office Staff' || res.role == 'Department Head') {
             console.log('Allowed to access')
           } else {
@@ -42,7 +43,6 @@ export class DashboardComponent implements OnInit {
         this.logout()
       }
     })
-
   }
 
   public logout() {

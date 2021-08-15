@@ -9,8 +9,9 @@
   </div>
 -->
 
-  <div *ngIf="userData as user">
-    <p>{{user.displayName}}</p>
+  <div *ngIf="fsData as user">
+    <img src="{{user.profilePicture}}" style="height: 20px; width: 20px;">
+    <p>{{user.firstName}}</p>
+    <br>
+  <button (click)="logout()">Logout</button>
   </div>
-<br>
-<button (click)="logout()">Logout</button>
