@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     public auth: AuthService,
     readonly fire: AngularFireAuth, 
-    public router: Router
+    public router: Router,
     ) { }
 
   ngOnInit(): void {

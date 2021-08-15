@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from './auth-components/forgot-password/forgo
 import { environment } from "src/environments/environment";
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     LoginComponent,
     PagenotfoundComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
