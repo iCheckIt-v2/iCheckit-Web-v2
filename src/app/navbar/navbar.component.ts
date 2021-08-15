@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarService } from '../services/navbar.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -8,7 +7,6 @@ import { NavbarService } from '../services/navbar.service';
 export class NavbarComponent implements OnInit {
 
   constructor(
-     public nav: NavbarService,
     ) { }
 
   ngOnInit(): void {
