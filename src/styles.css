@@ -2,3 +2,21 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 /* You can add global styles to this file, and also import other style files */
+
+.main-container {
+    @apply pl-52;
+}
+.main-title {
+    @apply w-full h-auto p-3 text-black shadow-md flex;
+}
+.main-title-text {
+    @apply w-1/2 flex justify-start items-center font-bold text-lg;
+    font-family: 'Antonio', sans-serif;
+}
+.main-title-date {
+    @apply w-1/2 flex items-center justify-end;
+    font-family: 'Abel', sans-serif;
+}
+.sub-container {
+
+}

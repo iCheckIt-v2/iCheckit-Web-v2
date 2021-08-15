@@ -14,6 +14,7 @@ import { environment } from "src/environments/environment";
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MyProfileComponent } from './my-profile-components/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     PagenotfoundComponent,
     ForgotPasswordComponent,
-    NavbarComponent
+    NavbarComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -8,11 +8,16 @@
     <button (click)="signUp()">Sign Up</button>
   </div>
 -->
-<app-navbar></app-navbar>
-
-  <div *ngIf="fsData as user">
-    <img src="{{user.profilePicture}}" style="height: 20px; width: 20px;">
-    <p>{{user.firstName}}</p>
-    <br>
-  <button (click)="logout()">Logout</button>
+<app-navbar></app-navbar> <!-- NAVBAR -->
+<div class="main-container"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+<div class="main-title">
+  <div class="main-title-text">
+    <h1>DASHBOARD</h1>
   </div>
+  <div class="main-title-date">
+    <h1>{{dateToday | date}}</h1>
+  </div>
+</div>
+
+</div>
+ 

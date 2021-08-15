@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   number!:string;
   userData:any;
   fsData: any;
+  dateToday = Date.now();
 
 
   constructor(
@@ -50,8 +51,4 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['login'])
     })
   }
-
-
-
-
 }
