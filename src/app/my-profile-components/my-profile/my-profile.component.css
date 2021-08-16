@@ -1,10 +1,35 @@
 .profile-container {
     @apply h-auto w-full flex justify-center items-center;
-    border: 1px solid red; 
 }
 .profile-container-left {
-    @apply w-1/2 h-72 bg-yellow-200;
+    @apply w-1/2 h-auto shadow-lg mr-3;
+}
+.profile-container-left-header {
+    @apply h-auto p-3 w-full text-white text-lg;
+    font-family: 'Antonio', sans-serif;
+    background-color: #35414F;
+}
+.profile-container-left-main {
+    @apply h-full w-full;
+}
+.profile-pic {
+    @apply flex justify-center items-center h-auto w-full p-5;
+}
+.profile-pic img {
+    @apply h-1/3 w-1/3 rounded-full;
+}
+.profile-details {
+    @apply flex justify-center items-center h-auto w-full p-5 flex-col text-center;
+}
+.details-title {
+    @apply font-bold;
 }
 .profile-container-right {
-    @apply flex justify-center items-center flex-col w-1/2 h-72 bg-blue-200;
+    @apply flex justify-center items-center flex-col w-1/2 h-96 ml-3;
+}
+.user-actions {
+    @apply h-1/2 w-full shadow-lg;
+}
+.account-type {
+    @apply h-1/2 w-full bg-green-400;
 }

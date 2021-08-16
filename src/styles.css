@@ -2,7 +2,9 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 /* You can add global styles to this file, and also import other style files */
-
+body {
+    background-color: #EEF1F6;
+}
 .main-container {
     @apply pl-52;
 }

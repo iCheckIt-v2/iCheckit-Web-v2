@@ -11,14 +11,28 @@
   <div class="sub-container">
     <div class="profile-container">
       <div class="profile-container-left">
-
+        <div class="profile-container-left-header">
+          <h1>My Account Details:</h1>
+        </div>
+        <div class="profile-container-left-main">
+          <div class="profile-pic">
+            <img src="{{user.profilePicture}}">
+          </div>
+          <div class="profile-details">
+            <p><span class="details-title">Full Name:</span> {{user.firstName}} {{user.lastName}}</p>
+            <p><span class="details-title">Email:</span>  {{user.email}}</p>
+            <p><span class="details-title">Contact Number:</span>  {{user.contactNumber}}</p>
+          </div>
+        </div>
       </div>
       <div class="profile-container-right">
         <div class="user-actions">
-
+          <div class="profile-container-left-header">
+            <h1>User Actions:</h1>
+          </div>
         </div>
         <div class="account-type">
-          
+
         </div>
       </div>
     </div>
