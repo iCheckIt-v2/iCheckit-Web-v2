@@ -18,5 +18,5 @@
     font-family: 'Abel', sans-serif;
 }
 .sub-container {
-
+    @apply h-auto w-full p-6
 }

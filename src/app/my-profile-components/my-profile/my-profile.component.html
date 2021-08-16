@@ -1,13 +1,27 @@
 <app-navbar></app-navbar> <!-- NAVBAR -->
-<div class="main-container"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
-<div class="main-title">
-  <div class="main-title-text">
-    <h1>My Profile</h1>
+<div class="main-container" *ngIf="fsData as user"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+  <div class="main-title">
+      <div class="main-title-text">
+        <h1>My Profile / {{user.firstName}} {{user.lastName}}</h1>
+      </div>
+      <div class="main-title-date">
+        <h1>{{dateToday | date}}</h1>
+      </div>
   </div>
-  <div class="main-title-date">
-    <h1>{{dateToday | date}}</h1>
-  </div>
-</div>
+  <div class="sub-container">
+    <div class="profile-container">
+      <div class="profile-container-left">
 
+      </div>
+      <div class="profile-container-right">
+        <div class="user-actions">
+
+        </div>
+        <div class="account-type">
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
  

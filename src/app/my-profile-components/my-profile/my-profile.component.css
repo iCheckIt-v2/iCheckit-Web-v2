@@ -1,0 +1,10 @@
+.profile-container {
+    @apply h-auto w-full flex justify-center items-center;
+    border: 1px solid red; 
+}
+.profile-container-left {
+    @apply w-1/2 h-72 bg-yellow-200;
+}
+.profile-container-right {
+    @apply flex justify-center items-center flex-col w-1/2 h-72 bg-blue-200;
+}

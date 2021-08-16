@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   userData:any;
-  fsData!: Observable<any>;
+  fsData:any;
 
   constructor(
     private afs: AngularFirestore,
