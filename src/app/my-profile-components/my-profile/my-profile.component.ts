@@ -12,6 +12,8 @@ export class MyProfileComponent implements OnInit {
   dateToday = Date.now();
   userData:any;
   fsData: any;
+  editModal!: boolean;
+  deleteModal!: boolean;
 
   constructor(
     public auth: AuthService,
@@ -38,6 +40,19 @@ export class MyProfileComponent implements OnInit {
         })
       }
     })
+
+    this.editModal = false;
+    this.deleteModal = false;
   }
+
+  public triggerEditModal() {
+    this.editModal = !this.editModal
+  }
+
+  public triggerDeleteModal() {
+    this.deleteModal = !this.deleteModal
+  }
+
+ 
 
 }

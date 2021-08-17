@@ -16,7 +16,8 @@ export class DashboardComponent implements OnInit {
   userData:any;
   fsData: any;
   dateToday = Date.now();
-
+  editModal!: boolean;
+  deleteModal!: boolean;
 
   constructor(
     public auth: AuthService,
@@ -42,7 +43,10 @@ export class DashboardComponent implements OnInit {
           this.router.navigate(['login'])
         })
       }
-    })
+    });
+
+    this.editModal = false;
+    this.deleteModal = false;
   }
 
 }
