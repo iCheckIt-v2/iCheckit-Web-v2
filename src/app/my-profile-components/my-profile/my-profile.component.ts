@@ -14,6 +14,11 @@ export class MyProfileComponent implements OnInit {
   fsData: any;
   editModal!: boolean;
   deleteModal!: boolean;
+  displayName!:string;
+  newEmail!:string;
+  currentEmail!:string;
+  password!:string;
+  contactNumber!:string;
 
   constructor(
     public auth: AuthService,
@@ -22,11 +27,14 @@ export class MyProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+   
     this.fire.authState.subscribe(user => {
       if (user) {
         this.userData = user;
         this.auth.getUserData(user.uid).subscribe(res => {
           this.fsData = res;
+          this.displayName = res.displayName;
+          this.contactNumber = res.contactNumber;
           if (res.role == 'CICS Office Staff' || res.role == 'Department Head') {
           } else {
             this.auth.signOut().then(a => {
@@ -40,9 +48,10 @@ export class MyProfileComponent implements OnInit {
         })
       }
     })
-
+    
     this.editModal = false;
     this.deleteModal = false;
+
   }
 
   public triggerEditModal() {
@@ -53,6 +62,17 @@ export class MyProfileComponent implements OnInit {
     this.deleteModal = !this.deleteModal
   }
 
- 
+  
+  public editMyProfile() {
+    this.auth.editMyProfile(this.displayName,this.contactNumber,this.currentEmail,this.newEmail,this.password,this.fsData.id).then(() => alert('User Profile Has Been Updated')).then(() => this.triggerEditModal())
+  } 
+
+  public deleteMyProfile() {
+    this.auth.deleteMyProfile(this.currentEmail,this.password,this.fsData.id)
+  }
+
+
+  
+
 
 }

@@ -50,6 +50,7 @@ export class AuthService {
           const data = {
             uid: res.user?.uid,
             photoUrl: '',
+            contactNumber: contactNumber,
             email: email,
             displayName: displayName,
             role: 'Admin'
@@ -94,6 +95,32 @@ export class AuthService {
     return this.fire.sendPasswordResetEmail(email).then(res => { console.log(res), alert('Email has been sent to ' + email)}).catch((err) => {
       alert('This user does not exist!')
     })
+  }
+//firstName:string,lastName:string,email:string,contactNumber:string
+
+  public editMyProfile(displayName:string, contactNumber:string, currentEmail:string, newEmail:string, password:string,id:string): Promise<any> {
+    return this.fire.signInWithEmailAndPassword(currentEmail,password).then((res) => {
+      res.user?.updateProfile({displayName: displayName})
+      .then(() => res.user?.updateEmail(newEmail))
+    }).then(() => {
+      this.afs.collection('users').doc(id).set({
+        contactNumber: contactNumber,
+        displayName: displayName,
+        email: newEmail
+      }, { merge: true })
+    }).catch((err) => console.log(err))
+  }
+
+  public deleteMyProfile(email:string,password:string,id:string): Promise<any> {
+    return this.fire.signInWithEmailAndPassword(email,password).then((res) => {
+      res.user?.delete()
+      .then(() => {
+        this.afs.collection('users').doc(id).delete();
+      })
+      .then(() => {
+        this.router.navigate(['/login'])
+      })
+    }).catch((err) => console.log(err))
   }
   
 }

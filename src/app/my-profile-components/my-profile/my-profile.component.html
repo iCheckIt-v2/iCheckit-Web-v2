@@ -2,7 +2,7 @@
 <div class="main-container" *ngIf="fsData as user"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
   <div class="main-title">
       <div class="main-title-text">
-        <h1>My Profile / {{user.firstName}} {{user.lastName}}</h1>
+        <h1>My Profile / {{user.displayName}} </h1>
       </div>
       <div class="main-title-date">
         <h1>{{dateToday | date}}</h1>
@@ -19,7 +19,7 @@
             <img src="{{user.profilePicture}}">
           </div>
           <div class="profile-details">
-            <p><span class="details-title">Full Name:</span> {{user.firstName}} {{user.lastName}}</p>
+            <p><span class="details-title">Full Name:</span> {{user.displayName}}</p>
             <p><span class="details-title">Email:</span>  {{user.email}}</p>
             <p><span class="details-title">Contact Number:</span>  {{user.contactNumber}}</p>
           </div>
@@ -81,25 +81,9 @@
             <div class="modal-form">
               <div class="mb-4">
                 <label for="firstName">
-                  First Name
+                  Full Name
                 </label>
-                <input id="firstName" type="text" placeholder="Input your first name" value="{{user.firstName}}">
-                <!--
-                <p class="error-msg">Please enter your comment for this task</p> -->
-              </div>
-              <div class="mb-4">
-                <label for="lastName">
-                  Last Name
-                </label>
-                <input id="lastName" type="text" placeholder="Input your last name" value="{{user.lastName}}">
-                <!--
-                <p class="error-msg">Please enter your comment for this task</p> -->
-              </div>
-              <div class="mb-4">
-                <label for="email">
-                  Email
-                </label>
-                <input id="email" type="text" placeholder="Input your email" value="{{user.email}}">
+                <input id="firstName" type="text" placeholder="Input your full name" [(ngModel)]="displayName">
                 <!--
                 <p class="error-msg">Please enter your comment for this task</p> -->
               </div>
@@ -107,14 +91,38 @@
                 <label for="contactNumber">
                   Contact Number
                 </label>
-                <input id="contactNumber" type="text" placeholder="Input your contact number" value="{{user.contactNumber}}">
+                <input id="contactNumber" type="text" placeholder="Input your contact number" [(ngModel)]="contactNumber">
+                <!--
+                <p class="error-msg">Please enter your comment for this task</p> -->
+              </div>
+              <div class="mb-4">
+                <label for="currentEmail">
+                  Input Your Current Email
+                </label>
+                <input id="currentEmail" type="text" placeholder="Input your current email" [(ngModel)]="currentEmail">
+                <!--
+                <p class="error-msg">Please enter your comment for this task</p> -->
+              </div>
+              <div class="mb-4">
+                <label for="newEmail">
+                  Input Your New Email
+                </label>
+                <input id="newEmail" type="text" placeholder="Input your new email" value="{{user.email}}" [(ngModel)]="newEmail">
+                <!--
+                <p class="error-msg">Please enter your comment for this task</p> -->
+              </div>
+              <div class="mb-4">
+                <label for="password">
+                  Input Your Password
+                </label>
+                <input id="password" type="password" [(ngModel)]="password">
                 <!--
                 <p class="error-msg">Please enter your comment for this task</p> -->
               </div>
             </div>
           </div>
         <div class="modal-buttons">
-          <button type="button" class="addBtn">
+          <button type="button" class="addBtn" (click)="editMyProfile()">
             Edit Profile
           </button>
           <button type="button" class="cancelBtn" (click)="triggerEditModal()">
@@ -152,8 +160,26 @@
           </div>
         </div>
         <div class="modal-form-container">
+          <div class="modal-form">
+            <div class="mb-4">
+              <label for="currentEmail">
+                Input Your Current Email
+              </label>
+              <input id="currentEmail" type="text" placeholder="Input your current email" [(ngModel)]="currentEmail">
+              <!--
+              <p class="error-msg">Please enter your comment for this task</p> -->
+            </div>
+            <div class="mb-4">
+              <label for="password">
+                Input Your Password
+              </label>
+              <input id="password" type="password" [(ngModel)]="password">
+              <!--
+              <p class="error-msg">Please enter your comment for this task</p> -->
+            </div>
+          </div>
         <div class="modal-buttons">
-          <button type="button" class="deleteBtn">
+          <button type="button" class="deleteBtn" (click)="deleteMyProfile()">
             Delete Account
           </button>
           <button type="button" class="cancelBtn" (click)="triggerDeleteModal()">

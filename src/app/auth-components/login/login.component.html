@@ -2,13 +2,15 @@
 <div>
     <h2>Login</h2>
     <input type="text" [(ngModel)]="email" placeholder="Email">
-    <input type="text" [(ngModel)]="password" placeholder="Password">
+    <input type="password" [(ngModel)]="password" placeholder="Password">
+    <input type="text" [(ngModel)]="name" placeholder="Password">
+    <input type="text" [(ngModel)]="number" placeholder="Password">
     <br>
-    <button (click)="login()">Login</button>
+    <button (click)="signUp()">Sign Up</button>
     <br>
     <a [routerLink]="['/forgot-password']" routerLinkActive="router-link-active" >Forgot Password?</a>
-</div>
--->
+</div>-->
+
 <div class="login-container">
     <div class="login-overlay"></div>
     <div class="login-content-container">
