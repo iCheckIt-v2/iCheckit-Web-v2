@@ -5,7 +5,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
+import { ToastService } from './toast.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +17,8 @@ export class AuthService {
     private afs: AngularFirestore,
     private fns: AngularFireFunctions,
     readonly fire: AngularFireAuth, 
-    public router: Router
+    public router: Router,
+    public toastService: ToastService
   ) {
 /*
     this.fire.authState.subscribe(user => {
@@ -74,7 +75,7 @@ export class AuthService {
       this.fire.signInWithEmailAndPassword(email,password).then(res => {res.user, console.log(res.user)})
       .then(a => {this.router.navigate(['/dashboard'])})
       .catch((err) => {
-        alert('This user does not exist!')
+        this.toastService.publish('User has uploaded a new comment');
       })
     })
   }
