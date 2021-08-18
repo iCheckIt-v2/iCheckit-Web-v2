@@ -8,6 +8,7 @@ import { ToastService } from './services/toast.service';
 export class AppComponent implements OnInit {
   title = 'iCheckit';
   notifMessage!:string;
+  notifType!:string;
   notifBoolean!:boolean;
   constructor(
     public toastService: ToastService
@@ -15,9 +16,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.notifBoolean = false;
-    this.toastService.subscribe((message) => {
+    this.toastService.subscribe((message,type) => {
       //alert(message);
       this.notifMessage = message;
+      this.notifType = type;
       setTimeout(() => {
           this.notifBoolean = true;
           setTimeout(() => {

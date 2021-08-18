@@ -8,5 +8,5 @@
     @apply text-green-500 rounded-full bg-white mr-3;
 }
 .notif-text {
-    @apply text-white max-w-xs;
+    @apply text-white ;
 }

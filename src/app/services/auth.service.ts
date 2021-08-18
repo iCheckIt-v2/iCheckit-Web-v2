@@ -75,7 +75,7 @@ export class AuthService {
       this.fire.signInWithEmailAndPassword(email,password).then(res => {res.user, console.log(res.user)})
       .then(a => {this.router.navigate(['/dashboard'])})
       .catch((err) => {
-        this.toastService.publish('User has uploaded a new comment');
+        this.toastService.publish('The credentials you have entered does not match any user in our database','userDoesNotExist');
       })
     })
   }
