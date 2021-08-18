@@ -17,5 +17,10 @@
 }
 .userDoesNotExist .notif-icons{
     @apply text-red-500 rounded-full bg-white mr-3;
-
+}
+.formError {
+    @apply flex items-center bg-yellow-500 border-yellow-700 py-2 px-3 shadow-md mb-2;
+}
+.formError .notif-icons{
+    @apply text-white rounded-full mr-3;
 }

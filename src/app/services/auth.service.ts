@@ -94,8 +94,7 @@ export class AuthService {
 
   public sendPasswordReset(email: string) {
     return this.fire.sendPasswordResetEmail(email).then(res => { console.log(res), alert('Email has been sent to ' + email)}).catch((err) => {
-      alert('This user does not exist!')
-    })
+      this.toastService.publish('The credentials you have entered does not match any user in our database','userDoesNotExist');})
   }
 //firstName:string,lastName:string,email:string,contactNumber:string
 
