@@ -14,9 +14,9 @@ import { map } from 'rxjs/operators';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'login', component: LoginComponent },
-  { path: 'my-profile', component: MyProfileComponent },
+  { path: 'my-profile', component: MyProfileComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: '',   redirectTo: '/dashboard', pathMatch: 'full' }, // redirect to `Home`
   { path: '**', component: PagenotfoundComponent },

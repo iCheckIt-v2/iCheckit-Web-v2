@@ -27,31 +27,14 @@ export class MyProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   
-    this.fire.authState.subscribe(user => {
-      if (user) {
-        this.userData = user;
-        this.auth.getUserData(user.uid).subscribe(res => {
-          this.fsData = res;
-          this.displayName = res.displayName;
-          this.contactNumber = res.contactNumber;
-          if (res.role == 'CICS Office Staff' || res.role == 'Department Head') {
-          } else {
-            this.auth.signOut().then(a => {
-              this.router.navigate(['login'])
-            })
-          }
-        })
-      } else {
-        this.auth.signOut().then(a => {
-          this.router.navigate(['login'])
-        })
-      }
+    this.fire.user.subscribe((user:any) => {
+      this.userData = user;
+      this.auth.getUserData(user?.uid).subscribe(res => {
+        this.fsData = res;
+      })
     })
-    
     this.editModal = false;
     this.deleteModal = false;
-
   }
 
   public triggerEditModal() {

@@ -3,6 +3,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AngularFireAuth  } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/services/toast.service';
+import { FormBuilder } from '@angular/forms';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

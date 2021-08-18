@@ -16,9 +16,7 @@ export class DashboardComponent implements OnInit {
   userData:any;
   fsData: any;
   dateToday = Date.now();
-  editModal!: boolean;
-  deleteModal!: boolean;
-
+ 
   constructor(
     public auth: AuthService,
     readonly fire: AngularFireAuth, 
@@ -26,27 +24,7 @@ export class DashboardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.fire.authState.subscribe(user => {
-      if (user) {
-        this.userData = user;
-        this.auth.getUserData(user.uid).subscribe(res => {
-          this.fsData = res;
-          if (res.role == 'CICS Office Staff' || res.role == 'Department Head') {
-          } else {
-            this.auth.signOut().then(a => {
-              this.router.navigate(['login'])
-            })
-          }
-        })
-      } else {
-        this.auth.signOut().then(a => {
-          this.router.navigate(['login'])
-        })
-      }
-    });
 
-    this.editModal = false;
-    this.deleteModal = false;
   }
 
 }

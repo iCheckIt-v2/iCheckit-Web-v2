@@ -10,8 +10,6 @@ import { ToastService } from './toast.service';
   providedIn: 'root'
 })
 export class AuthService {
-  userData:any;
-  fsData:any;
 
   constructor(
     private afs: AngularFirestore,
@@ -20,26 +18,18 @@ export class AuthService {
     public router: Router,
     public toastService: ToastService
   ) {
-/*
     this.fire.authState.subscribe(user => {
       if (user) {
-        this.userData = user;
-        console.log('logged in')
-
+        this.getUserData(user.uid).subscribe(res => {
+          if (res.role != 'CICS Office Staff' && res.role != 'Department Head') {
+            this.signOut();
+          }
+        })
       } else {
-        console.log('logged out')
-        /*
-        localStorage.removeItem('userData');
-        localStorage.removeItem('fsData');
-
+        console.log('logged out');
       }
     })
-    */
   }
-
-
-  public get auth() { return this.fire; }
-
 
   public signup(email:string, password:string,displayName:string,contactNumber:string) {
     
@@ -67,12 +57,13 @@ export class AuthService {
   public signOut(): Promise<void> {
     console.log('Signing-out');
     //this.guard.prompt('signIn').then(user => {})
-    return this.fire.signOut();
+    return this.fire.signOut()
+    .then(() => {this.router.navigate(['/login'])})
   }
 
   public signIn(email: string, password: string) {
     return this.fire.setPersistence('local').then(()=> {
-      this.fire.signInWithEmailAndPassword(email,password).then(res => {res.user, console.log(res.user)})
+      this.fire.signInWithEmailAndPassword(email,password)
       .then(a => {this.router.navigate(['/dashboard'])})
       .catch((err) => {
         this.toastService.publish('The credentials you have entered does not match any user in our database','userDoesNotExist');
@@ -80,7 +71,7 @@ export class AuthService {
     })
   }
 
-  public getUserData(id:string) {
+  public getUserData(id:string):Observable<any> {
     return this.afs.collection('users')
     .doc(id)
     .snapshotChanges()
