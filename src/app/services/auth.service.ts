@@ -44,7 +44,8 @@ export class AuthService {
             contactNumber: contactNumber,
             email: email,
             displayName: displayName,
-            role: 'Admin'
+            createdAt: Date.now(),
+            role: 'CICS Office Staff'
           }
           this.afs.collection('users')
           .doc(res.user?.uid).set(data)
@@ -104,9 +105,9 @@ export class AuthService {
 
   public deleteMyProfile(email:string,password:string,id:string): Promise<any> {
     return this.fire.signInWithEmailAndPassword(email,password).then((res) => {
-      res.user?.delete()
+      this.afs.collection('users').doc(res.user?.uid).delete()
       .then(() => {
-        this.afs.collection('users').doc(id).delete();
+        res.user?.delete()
       })
       .then(() => {
         this.router.navigate(['/login'])

@@ -15,13 +15,11 @@
           <h1>My Account Details:</h1>
         </div>
         <div class="profile-container-left-main">
-          <div class="profile-pic">
-            <img src="{{user.profilePicture}}">
-          </div>
           <div class="profile-details">
             <p><span class="details-title">Full Name:</span> {{user.displayName}}</p>
             <p><span class="details-title">Email:</span>  {{user.email}}</p>
             <p><span class="details-title">Contact Number:</span>  {{user.contactNumber}}</p>
+            <p><span class="details-title">Account Created At:</span>  {{user.createdAt | date}}</p>
           </div>
         </div>
       </div>

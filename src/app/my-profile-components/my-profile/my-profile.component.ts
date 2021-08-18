@@ -54,8 +54,4 @@ export class MyProfileComponent implements OnInit {
     this.auth.deleteMyProfile(this.currentEmail,this.password,this.fsData.id)
   }
 
-
-  
-
-
 }
