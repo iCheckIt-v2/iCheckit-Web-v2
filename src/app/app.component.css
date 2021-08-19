@@ -24,3 +24,9 @@
 .formError .notif-icons{
     @apply text-white rounded-full mr-3;
 }
+.formSuccess {
+    @apply flex items-center bg-green-500 border-green-700 py-2 px-3 shadow-md mb-2;
+}
+.formSuccess .notif-icons{
+    @apply text-green-500 rounded-full bg-white mr-3;
+}

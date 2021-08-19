@@ -31,7 +31,11 @@
 
 .input-box {
     border-bottom: 1px solid black;
-    @apply mb-4;
+    @apply mb-3;
+}
+.input-box-error {
+    border-bottom: 1px solid red;
+    @apply mb-3;
 }
 .login-form label{
     font-family: 'Abel', sans-serif;
@@ -59,14 +63,25 @@
 .login-buttons {
     @apply text-center flex justify-center items-center flex-col mt-6
 }
-.login-buttons button{
+.login-buttons .submit{
     background-color: #B7152F;
     color: white;
     padding: .5rem 5rem;
     font-family: 'Antonio', sans-serif;
 }
+.login-buttons .submit-disabled{
+    background-color: #eb4662;
+    color: white;
+    padding: .5rem 5rem;
+    font-family: 'Antonio', sans-serif;
+}
+
 .login-buttons a {
     color: gray;
     font-family: 'Abel', sans-serif;
     margin-top: 1rem;
+}
+.login-form-error {
+    @apply text-red-700 italic block text-sm;
+    margin-top: -0.75rem;
 }
