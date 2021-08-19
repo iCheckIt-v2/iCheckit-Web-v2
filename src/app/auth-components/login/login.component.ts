@@ -38,9 +38,7 @@ export class LoginComponent implements OnInit {
 
   public login() {
     if (this.loginForm.valid) {
-      this.auth.signIn(this.loginForm.controls['email'].value,this.loginForm.controls['password'].value).catch(() => {
-        this.toastService.publish('This user does not exist in our database' ,'userDoesNotExist');
-      })
+      this.auth.signIn(this.loginForm.controls['email'].value,this.loginForm.controls['password'].value)
     }
     else if (this.loginForm.invalid) {
     this.loginForm.controls['email'].markAsTouched();

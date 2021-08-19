@@ -100,7 +100,9 @@ export class AuthService {
         displayName: displayName,
         email: newEmail
       }, { merge: true })
-    }).catch((err) => console.log(err))
+    })
+    .then(() => this.toastService.publish('Your email has been updated to ' + newEmail,'formSuccess'))
+    .catch((err) => console.log(err))
   }
 
   public deleteMyProfile(email:string,password:string,id:string): Promise<any> {
@@ -111,6 +113,9 @@ export class AuthService {
       })
       .then(() => {
         this.router.navigate(['/login'])
+      })
+      .then(() => {
+        this.toastService.publish('Your account with the credentials ' + email + " has been deleted from our system",'userDoesNotExist')      
       })
     }).catch((err) => console.log(err))
   }
