@@ -34,6 +34,12 @@
             </svg>
             <p>Edit My Profile</p>
           </div>
+          <div class="actions-edit" (click)="triggerChangePassModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+            <p>Change My Password</p>
+          </div>
           <div class="actions-delete" (click)="triggerDeleteModal()">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -228,4 +234,86 @@
 </div>
   <!-- end modal container for delete -->
 
-
+  
+ <!-- modal container for edit -->
+ <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="changePassModal">
+  <div class="modal-center">
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+    <div class="modal">
+      <form [formGroup]="changePassForm" (ngSubmit)="changePassword()">
+      <div class="modal-bg">
+        <div class="modal-header">
+          <div class="modal-header-icon-edit">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="modal-header-title">
+            <h3 id="modal-title">
+              Change Password
+            </h3>
+            <div class="mt-2">
+              <p>
+                Change Your Account Password
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-form-container">
+          <div class="modal-form">
+            <div class="mb-4">
+              <label for="email">
+                Input Your Email
+              </label>
+              <input id="email" type="text" placeholder="Input your account email" formControlName="email" autocomplete="on">
+              <!--
+              <p class="error-msg">Please enter your comment for this task</p> -->
+            </div>
+            <div class="login-form-error" *ngIf="changePassForm.controls.email.errors?.required && changePassForm.controls.email.touched">
+              Email is required.
+            </div>
+            <div class="login-form-error" *ngIf="changePassForm.controls.email.errors?.email">
+              Not a valid email.
+            </div>
+            <div class="mb-4">
+              <label for="oldPassword">
+                Input Your Current Password
+              </label>
+              <input id="oldPassword" type="password" formControlName="oldPassword" autocomplete="on">
+              <!--
+              <p class="error-msg">Please enter your comment for this task</p> -->
+            </div>
+            <div class="login-form-error" *ngIf="changePassForm.controls.oldPassword.errors?.required && changePassForm.controls.oldPassword.touched">
+              Password is required.
+            </div>
+            <div class="mb-4">
+              <label for="newPassword">
+                Input Your New Password
+              </label>
+              <input id="newPassword" type="password" formControlName="newPassword" autocomplete="on">
+              <!--
+              <p class="error-msg">Please enter your comment for this task</p> -->
+            </div>
+            <div class="login-form-error" *ngIf="changePassForm.controls.newPassword.errors?.required && changePassForm.controls.newPassword.touched">
+              New Password is required.
+            </div>
+          </div>
+        </div>
+      <div class="modal-buttons">
+        <button type="submit" class="addBtn" *ngIf="changePassForm.valid">
+          Change Password
+        </button>
+        <button type="submit" class="addBtn-disabled" *ngIf="changePassForm.invalid">
+          Change Password
+        </button>
+        <button type="button" class="cancelBtn" (click)="triggerChangePassModal()">
+          Cancel
+        </button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- end modal container for edit -->

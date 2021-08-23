@@ -102,7 +102,7 @@ export class AuthService {
       }, { merge: true })
     })
     .then(() => this.toastService.publish('Your email has been updated to ' + newEmail,'formSuccess'))
-    .catch((err) => console.log(err))
+    .catch(() => this.toastService.publish('The credentials you have entered does not match any user in our database','userDoesNotExist'))
   }
 
   public deleteMyProfile(email:string,password:string,id:string): Promise<any> {
@@ -117,7 +117,20 @@ export class AuthService {
       .then(() => {
         this.toastService.publish('Your account with the credentials ' + email + " has been deleted from our system",'userDoesNotExist')      
       })
-    }).catch((err) => console.log(err))
+    }).catch(() => {
+      this.toastService.publish('The credentials you have entered does not match any user in our database','userDoesNotExist');
+    })
+  }
+
+  public changeMyPassword(email:string, oldPassword:string, newPassword:string): Promise<any> {
+    return this.fire.signInWithEmailAndPassword(email,oldPassword).then((res) => {
+      res.user?.updatePassword(newPassword)
+      .then(() => {
+        this.toastService.publish('Your password has been updated','formSuccess')
+      })
+    }).catch(() => {
+      this.toastService.publish('The credentials you have entered does not match any user in our database','userDoesNotExist');
+    })
   }
   
 }

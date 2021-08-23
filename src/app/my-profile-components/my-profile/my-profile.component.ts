@@ -16,13 +16,10 @@ export class MyProfileComponent implements OnInit {
   fsData: any;
   editModal!: boolean;
   deleteModal!: boolean;
-  displayName!:string;
-  newEmail!:string;
-  currentEmail!:string;
-  password!:string;
-  contactNumber!:string;
+  changePassModal!: boolean;
   editAccountForm!:any;
   deleteAccountForm!:any;
+  changePassForm!:any;
 
   constructor(
     public auth: AuthService,
@@ -53,12 +50,23 @@ export class MyProfileComponent implements OnInit {
       password: ['', Validators.required]
     });
 
+    this.changePassForm = this.fb.group({
+      email: ['', [Validators.required,Validators.email]],
+      oldPassword: ['', Validators.required],
+      newPassword: ['', Validators.required]
+    });
+
     this.editModal = false;
+    this.changePassModal = false;
     this.deleteModal = false;
   }
 
   public triggerEditModal() {
     this.editModal = !this.editModal
+  }
+
+  public triggerChangePassModal() {
+    this.changePassModal = !this.changePassModal
   }
 
   public triggerDeleteModal() {
@@ -70,6 +78,8 @@ export class MyProfileComponent implements OnInit {
     if (this.editAccountForm.valid) {
       this.auth.editMyProfile(this.editAccountForm.controls['displayName'].value,this.editAccountForm.controls['contactNumber'].value,this.editAccountForm.controls['currentEmail'].value,this.editAccountForm.controls['newEmail'].value,this.editAccountForm.controls['password'].value,this.fsData.id)
       .then(() => this.triggerEditModal())
+      .finally(() => this.editAccountForm.reset())
+
     }
     else if (this.editAccountForm.invalid) {
       this.editAccountForm.controls['displayName'].markAsTouched();
@@ -87,6 +97,9 @@ export class MyProfileComponent implements OnInit {
   public deleteMyProfile() {
     if (this.deleteAccountForm.valid) {
       this.auth.deleteMyProfile(this.deleteAccountForm.controls['currentEmail'].value,this.deleteAccountForm.controls['password'].value,this.fsData.id)
+      .then(() => this.triggerDeleteModal())
+      .finally(() => this.deleteAccountForm.reset())
+
     } 
     else if (this.deleteAccountForm.invalid) {
       this.deleteAccountForm.controls['currentEmail'].markAsTouched();
@@ -97,4 +110,17 @@ export class MyProfileComponent implements OnInit {
     this.auth.deleteMyProfile(this.currentEmail,this.password,this.fsData.id)*/
   }
 
+  public changePassword() {
+    if (this.changePassForm.valid) {
+      this.auth.changeMyPassword(this.changePassForm.controls['email'].value,this.changePassForm.controls['oldPassword'].value,this.changePassForm.controls['newPassword'].value,)
+      .then(() => this.triggerChangePassModal())
+      .finally(() => this.changePassForm.reset())
+    }
+    else if (this.changePassForm.invalid) {
+      this.changePassForm.controls['email'].markAsTouched();
+      this.changePassForm.controls['oldPassword'].markAsTouched();
+      this.changePassForm.controls['newPassword'].markAsTouched();
+      this.toastService.publish('Please fill up all required fields properly','formError');
+    }
+  }
 }
