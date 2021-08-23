@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MyProfileComponent } from './my-profile-components/my-profile/my-profile.component';
+import { UserManagementComponent } from './user-management-components/user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MyProfileComponent } from './my-profile-components/my-profile/my-profil
     PagenotfoundComponent,
     ForgotPasswordComponent,
     NavbarComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
