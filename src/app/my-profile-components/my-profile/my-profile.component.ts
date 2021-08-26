@@ -16,7 +16,9 @@ export class MyProfileComponent implements OnInit {
   fsData: any;
   editModal!: boolean;
   deleteModal!: boolean;
+  editEmailModal!: boolean;
   changePassModal!: boolean;
+  updateEmailForm!:any;
   editAccountForm!:any;
   deleteAccountForm!:any;
   changePassForm!:any;
@@ -40,6 +42,10 @@ export class MyProfileComponent implements OnInit {
     this.editAccountForm = this.fb.group({
       displayName: ['', Validators.required,],
       contactNumber: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+
+    this.updateEmailForm = this.fb.group({
       currentEmail: ['', [Validators.required,Validators.email]],
       newEmail: ['', [Validators.required,Validators.email]],
       password: ['', Validators.required],
@@ -63,6 +69,8 @@ export class MyProfileComponent implements OnInit {
 
   public triggerEditModal() {
     this.editModal = !this.editModal
+    this.editAccountForm.controls.displayName.setValue(this.fsData.displayName);
+    this.editAccountForm.controls.contactNumber.setValue(this.fsData.contactNumber);
   }
 
   public triggerChangePassModal() {
@@ -73,10 +81,13 @@ export class MyProfileComponent implements OnInit {
     this.deleteModal = !this.deleteModal
   }
 
+  public triggerChangeEmailModal() {
+    this.editEmailModal = !this.editEmailModal
+  }  
   
   public editMyProfile() {
     if (this.editAccountForm.valid) {
-      this.auth.editMyProfile(this.editAccountForm.controls['displayName'].value,this.editAccountForm.controls['contactNumber'].value,this.editAccountForm.controls['currentEmail'].value,this.editAccountForm.controls['newEmail'].value,this.editAccountForm.controls['password'].value,this.fsData.id)
+      this.auth.editMyProfile(this.editAccountForm.controls['displayName'].value,this.editAccountForm.controls['contactNumber'].value, this.fsData.email, this.editAccountForm.controls['password'].value, this.fsData.id)
       .then(() => this.triggerEditModal())
       .finally(() => this.editAccountForm.reset())
 
@@ -84,8 +95,6 @@ export class MyProfileComponent implements OnInit {
     else if (this.editAccountForm.invalid) {
       this.editAccountForm.controls['displayName'].markAsTouched();
       this.editAccountForm.controls['contactNumber'].markAsTouched();
-      this.editAccountForm.controls['currentEmail'].markAsTouched();
-      this.editAccountForm.controls['newEmail'].markAsTouched();
       this.editAccountForm.controls['password'].markAsTouched();
       this.toastService.publish('Please fill up all required fields properly','formError');
     }
@@ -123,4 +132,19 @@ export class MyProfileComponent implements OnInit {
       this.toastService.publish('Please fill up all required fields properly','formError');
     }
   }
+
+  public editMyEmail() {
+    if (this.updateEmailForm.valid) {
+      this.auth.changeEmail(this.updateEmailForm.controls['currentEmail'].value,this.updateEmailForm.controls['newEmail'].value, this.updateEmailForm.controls['password'].value, this.fsData.id)
+      .then(() => this.triggerChangeEmailModal())
+      .finally(() => this.updateEmailForm.reset())
+
+    }
+    else if (this.editAccountForm.invalid) {
+      this.updateEmailForm.controls['currentEmail'].markAsTouched();
+      this.updateEmailForm.controls['newEmail'].markAsTouched();
+      this.updateEmailForm.controls['password'].markAsTouched();
+      this.toastService.publish('Please fill up all required fields properly','formError');
+    }
+}
 }

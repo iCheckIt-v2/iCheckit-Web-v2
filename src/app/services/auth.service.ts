@@ -90,21 +90,32 @@ export class AuthService {
   }
 //firstName:string,lastName:string,email:string,contactNumber:string
 
-  public editMyProfile(displayName:string, contactNumber:string, currentEmail:string, newEmail:string, password:string,id:string): Promise<any> {
+  public changeEmail(currentEmail:string, newEmail:string, password:string,id:string): Promise<any> {
     return this.fire.signInWithEmailAndPassword(currentEmail,password).then((res) => {
-      res.user?.updateProfile({displayName: displayName})
-      .then(() => res.user?.updateEmail(newEmail))
-    }).then(() => {
-      this.afs.collection('users').doc(id).set({
-        contactNumber: contactNumber,
-        displayName: displayName,
-        email: newEmail
-      }, { merge: true })
+      res.user?.updateEmail(newEmail).then(() => {
+        this.afs.collection('users').doc(id).set({
+          email: newEmail
+        }, { merge: true }) })
+        .catch(() => {
+          this.toastService.publish('The email ' + newEmail + ' is already registered in our database!','userDoesNotExist')
+        })
     })
     .then(() => this.toastService.publish('Your email has been updated to ' + newEmail,'formSuccess'))
     .catch(() => this.toastService.publish('The credentials you have entered does not match any user in our database','userDoesNotExist'))
   }
 
+ public editMyProfile(displayName:string, contactNumber:string, currentEmail:string, password:string,id:string): Promise<any> {
+    return this.fire.signInWithEmailAndPassword(currentEmail,password).then((res) => {
+      res.user?.updateProfile({displayName: displayName})
+    }).then(() => {
+      this.afs.collection('users').doc(id).set({
+        contactNumber: contactNumber,
+        displayName: displayName,
+      }, { merge: true })
+    })
+    .then(() => this.toastService.publish('Your profile has been updated','formSuccess'))
+    .catch(() => this.toastService.publish('The password you have entered is incorrect','userDoesNotExist'))
+  }
   public deleteMyProfile(email:string,password:string,id:string): Promise<any> {
     return this.fire.signInWithEmailAndPassword(email,password).then((res) => {
       this.afs.collection('users').doc(res.user?.uid).delete()
