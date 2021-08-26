@@ -22,7 +22,9 @@ export class AuthService {
       if (user) {
         this.getUserData(user.uid).subscribe(res => {
           if (res.role != 'CICS Office Staff' && res.role != 'Department Head') {
-            this.signOut();
+            this.signOut().then(() => {
+              this.toastService.publish('You are not allowed to access the web system. Please use the mobile application.','userDoesNotExist');
+            })
           }
         })
       } else {
