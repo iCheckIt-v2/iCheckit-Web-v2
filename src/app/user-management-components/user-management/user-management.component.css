@@ -4,6 +4,9 @@
 .dept-heads {
     @apply w-1/2 h-auto mr-2;
 }
+.students {
+    @apply w-full h-auto mt-8;
+}
 .cics-admins {
     @apply w-1/2 h-auto ml-2;
 }
