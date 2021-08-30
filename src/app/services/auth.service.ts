@@ -26,7 +26,7 @@ export class AuthService {
               this.toastService.publish('You are not allowed to access the web system. Please use the mobile application.','userDoesNotExist');
             })
           } else if (res.role == 'CICS Office Staff' || res.role == 'Department Head') {
-              this.router.navigate(['/dashboard'])
+              console.log('Authenticated')
           }
         })
       } else {
@@ -70,6 +70,7 @@ export class AuthService {
     return this.fire.setPersistence('local').then(()=> {
       this.fire.signInWithEmailAndPassword(email,password)
       .then(a => console.log('logged in!'))
+      .then(a => this.router.navigate(['/dashboard']))
       .catch((err) => {
         this.toastService.publish('The credentials you have entered does not match any user in our database','userDoesNotExist');
       })

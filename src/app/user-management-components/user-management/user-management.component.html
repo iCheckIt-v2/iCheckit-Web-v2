@@ -7,45 +7,145 @@
           <div class="main-title-date">
             <button class="main-title-buttons">Import Users</button>
             <button class="main-title-buttons">Create Dept. Head</button>
-            <button class="main-title-buttons">Create Student</button>
+            <button class="main-title-buttons" (click)="triggerCreateStudentModal()">Create Student</button>
             <h1>{{dateToday | date}}</h1>
           </div>
     </div>
     <div class="sub-container">
         <div class="admin-container">
-            <div class="dept-heads">
+            <div class="dept-heads" *ngIf="deptHeadUsers$ as deptHeads">
                 <div class="admin-container-header">
                     <h1>Department Heads:</h1>
                 </div>
-                <div class="admin-container-children">
+                <div class="admin-container-children" *ngFor="let deptHead of deptHeads">
                     <div class="admin-container-children-left">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
                           </svg>
-                        <p>Jet Acab</p>
+                        <p>{{deptHead.displayName}}</p>
                     </div>
                     <div class="admin-container-children-right">
-                        <p>BS Information Technology</p>
+                        <p>{{deptHead.role}} of {{deptHead.department}}</p>
                     </div>
                 </div>
             </div>
-            <div class="cics-admins">
+            <div class="cics-admins" *ngIf="adminUsers$ as admins">
                 <div class="admin-container-header">
                     <h1>CICS Office Admins:</h1>
                 </div>
-                <div class="admin-container-children">
+                <div class="admin-container-children" *ngFor="let admin of admins">
                     <div class="admin-container-children-left">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
                           </svg>
-                        <p>Jet Acab</p>
+                        <p>{{admin.displayName}}</p>
                     </div>
                     <div class="admin-container-children-right">
-                        <p>BS Information Technology</p>
+                        <p>{{admin.role}}</p>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+
+<!-- modal container for create student -->
+<div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="createStudentModal">
+    <div class="modal-center">
+      <div class="modal-overlay" aria-hidden="true"></div>
+      <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+      <div class="modal">
+        <form [formGroup]="createStudentForm" (ngSubmit)="createStudent()">
+        <div class="modal-bg">
+          <div class="modal-header">
+            <div class="modal-header-icon-create">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                  </svg>
+            </div>
+            <div class="modal-header-title">
+              <h3 id="modal-title">
+                Create A Student Account
+              </h3>
+              <div class="mt-2">
+                <p>
+                  Create a new student account by inputting the fields with their respective account details
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-form-container">
+            <div class="modal-form">
+              <div class="mb-4">
+                <label for="displayName">
+                  Full Name
+                </label>
+                <input id="displayName" type="text" placeholder="Input the student's full name" formControlName="displayName" autocomplete="on">
+                <!--
+                <p class="error-msg">Please enter your comment for this task</p> -->
+              </div>
+              <div class="mb-4">
+                <label for="course">
+                  Course
+                </label>
+                <select name="course" id="course" style="width: 100%;" (change)="changeCourse($event)" formControlName="course">
+                    <option *ngFor="let course of studentCourses">{{course}}</option>
+                  </select>
+                <!--
+                <p class="error-msg">Please enter your comment for this task</p> -->
+              </div>
+              <div class="mb-4">
+                <label for="section">
+                  Section
+                </label>
+                <select name="section" id="section" style="width: 100%;" (change)="changeSection($event)" formControlName="course">
+                    <option *ngFor="let section of studentSections">{{section}}</option>
+                  </select>
+                <!--
+                <p class="error-msg">Please enter your comment for this task</p> -->
+              </div>
+              <!--
+              <div class="login-form-error" *ngIf="editAccountForm.controls.displayName.errors?.required && editAccountForm.controls.displayName.touched">
+                Full name is required.
+              </div>-->
+              <div class="mb-4">
+                <label for="contactNumber">
+                  Contact Number
+                </label>
+                <input id="contactNumber" type="number" placeholder="Input the student's contact number" formControlName="contactNumber" autocomplete="on">
+              </div>
+              <div class="mb-4">
+                <label for="email">
+                  Email 
+                </label>
+                <input id="email" type="text" placeholder="Input the student's email" formControlName="email" autocomplete="on">
+              </div>
+              <!--
+              <div class="login-form-error" *ngIf="editAccountForm.controls.contactNumber.errors?.required && editAccountForm.controls.contactNumber.touched">
+                Contact number is required.
+              </div>-->
+              <!--
+              <div class="login-form-error" *ngIf="editAccountForm.controls.password.errors?.required && editAccountForm.controls.password.touched">
+                Password is required.
+              </div>-->
+            </div>
+          </div>
+        <div class="modal-buttons">
+          <button type="submit" class="addBtn" *ngIf="createStudentForm.valid">
+            Edit Profile
+          </button>
+          <button type="submit" class="addBtn-disabled" *ngIf="createStudentForm.invalid">
+            Edit Profile
+          </button>
+          <button type="button" class="cancelBtn" (click)="triggerCreateStudentModal()">
+            Cancel
+          </button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- end modal container for edit -->
+
 </div>
+
