@@ -6,6 +6,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ForgotPasswordComponent } from './auth-components/forgot-password/forgot-password.component';
 import { MyProfileComponent } from './my-profile-components/my-profile/my-profile.component';
 import { UserManagementComponent } from './user-management-components/user-management/user-management.component';
+import { UserComponent } from './user-management-components/user/user.component';
 
 import { AngularFireAuthGuard, canActivate, customClaims, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { pipe } from 'rxjs';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'login', component: LoginComponent },
   { path: 'my-profile', component: MyProfileComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  { path: 'user/:id', component: UserComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'user-management', component: UserManagementComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: '',   redirectTo: '/dashboard', pathMatch: 'full' }, // redirect to `Home`

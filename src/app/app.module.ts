@@ -19,6 +19,7 @@ import { UserManagementComponent } from './user-management-components/user-manag
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { HttpClientModule } from '@angular/common/http';
+import { UserComponent } from './user-management-components/user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     ForgotPasswordComponent,
     NavbarComponent,
     MyProfileComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
