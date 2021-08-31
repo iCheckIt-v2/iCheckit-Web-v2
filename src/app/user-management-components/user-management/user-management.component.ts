@@ -65,7 +65,7 @@ export class UserManagementComponent implements OnInit {
 
   public createStudent() {
     if (this.createStudentForm.valid) {
-      this.userService.createStudentAccount(
+      this.userService.adminCreateStudent(
         this.createStudentForm.controls['displayName'].value,
         this.createStudentForm.controls['section'].value,
         this.createStudentForm.controls['course'].value,

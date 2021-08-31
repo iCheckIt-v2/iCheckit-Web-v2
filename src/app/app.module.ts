@@ -18,7 +18,7 @@ import { MyProfileComponent } from './my-profile-components/my-profile/my-profil
 import { UserManagementComponent } from './user-management-components/user-management/user-management.component';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +33,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     AngularFirestoreModule, //Firebase imports
     AngularFireAuthModule,

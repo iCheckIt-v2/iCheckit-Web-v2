@@ -4,6 +4,8 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth  } from '@angular/fire/auth';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,8 @@ export class UserService {
   constructor(
     private afs: AngularFirestore,
     readonly fire: AngularFireAuth, 
+    private http: HttpClient,
+    public toastService: ToastService
   ) { }
 
   public getDeptHeadUsers():Observable<any> {
@@ -62,6 +66,44 @@ export class UserService {
         )})
     );
   } 
+  //https://us-central1-icheckit-6a8bb.cloudfunctions.net/adminCreateStudent
+
+  adminCreateStudent(displayName:string,section:string,course:string,contactNumber:string,email:string) : Promise<any> { 
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+    const params: URLSearchParams = new URLSearchParams();
+    params.set('email', email);
+    params.set('displayName', displayName);
+
+    return this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/adminCreateStudent`, {
+      email,
+      displayName
+      }, {
+        headers
+      }).toPromise().then(
+        (cred: any) => {
+          const uid = cred.userRecord.uid;
+          const data = {
+            uid: uid,
+            contactNumber: contactNumber,
+            email: email,
+            section: section,
+            course: course,
+            displayName: displayName,
+            createdAt: Date.now(),
+            role: 'Student'
+          }
+          this.afs.collection('users')
+          .doc(uid).set(data)
+          .catch(error => console.log(error));
+        }
+      )
+      .then(() => {
+        this.toastService.publish('Student account with the email ' + email + ' has been successfully created','formSuccess')
+      })
+      .catch(() => {
+        this.toastService.publish('The student account creation was not successful.','userDoesNotExist');
+      });
+  }
   
   createStudentAccount(displayName:string,section:string,course:string,contactNumber:string,email:string) {
       return this.fire.createUserWithEmailAndPassword(email,'password')
