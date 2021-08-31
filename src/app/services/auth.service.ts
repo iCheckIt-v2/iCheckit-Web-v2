@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastService } from './toast.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +37,6 @@ export class AuthService {
   }
 
   public signup(email:string, password:string,displayName:string,contactNumber:string) {
-    
     return this.fire.createUserWithEmailAndPassword(email, password)
       // Update the user info with the given name
       .then(res=> {
@@ -44,7 +44,6 @@ export class AuthService {
         .then(() => {
           const data = {
             uid: res.user?.uid,
-            photoUrl: '',
             contactNumber: contactNumber,
             email: email,
             displayName: displayName,

@@ -22,6 +22,7 @@ export class UserManagementComponent implements OnInit {
   adminUsers$: any;
   studentUsers$: any;
   deptHeadUsers$:any;
+  p: number = 1;
   constructor(
     public auth: AuthService,
     readonly fire: AngularFireAuth, 
@@ -64,10 +65,24 @@ export class UserManagementComponent implements OnInit {
 
   public createStudent() {
     if (this.createStudentForm.valid) {
-      console.log(this.createStudentForm.value)
+      this.userService.createStudentAccount(
+        this.createStudentForm.controls['displayName'].value,
+        this.createStudentForm.controls['section'].value,
+        this.createStudentForm.controls['course'].value,
+        this.createStudentForm.controls['contactNumber'].value,
+        this.createStudentForm.controls['email'].value
+      )
+      .then(() => this.triggerCreateStudentModal())
+      .finally(() => this.createStudentForm.reset())
     }
     else if (this.createStudentForm.invalid) {
-      console.log('invalid');
+      console.log(this.createStudentForm.value)
+      this.createStudentForm.controls['displayName'].markAsTouched();
+      this.createStudentForm.controls['course'].markAsTouched();
+      this.createStudentForm.controls['section'].markAsTouched();
+      this.createStudentForm.controls['contactNumber'].markAsTouched();
+      this.createStudentForm.controls['email'].markAsTouched();
+      this.toastService.publish('Please fill up all required fields properly','formError');
     }
   }
 

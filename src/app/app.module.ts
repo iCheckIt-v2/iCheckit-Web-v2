@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MyProfileComponent } from './my-profile-components/my-profile/my-profile.component';
 import { UserManagementComponent } from './user-management-components/user-management/user-management.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { UserManagementComponent } from './user-management-components/user-manag
     AngularFirestoreModule, //Firebase imports
     AngularFireAuthModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
+    AngularFireFunctionsModule,
     AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [],
