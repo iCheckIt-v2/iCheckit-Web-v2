@@ -33,6 +33,15 @@ export class UserComponent implements OnInit {
       })
     })
 
+    
+    //    this.route.queryParams.subscribe(params => {
+    //   let id = params['id'];
+    //   this.userService.getStudent(id).subscribe((res) => {
+    //     console.log(res + id)
+    //   })
+      
+    // });
+    
     this.route.params.pipe(
       switchMap((params: Params) => {
         return this.userService.getStudent(params['id'])
@@ -40,6 +49,7 @@ export class UserComponent implements OnInit {
     ).subscribe((res) => {
       this.student = res;
     })
+
   }
 
 }
