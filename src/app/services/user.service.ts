@@ -116,7 +116,7 @@ export class UserService {
         this.toastService.publish('Student account with the email ' + email + ' has been successfully created','formSuccess')
       })
       .catch(() => {
-        this.toastService.publish('The student account creation was not successful.','userDoesNotExist');
+        this.toastService.publish('The student account creation was not successful. The user email might have been already existing in our database,','userDoesNotExist');
       });
   }
   
@@ -143,4 +143,12 @@ export class UserService {
       })
   }
   
+  deleteUserAccount(id:string,email:string) : Promise<any> {
+      return this.afs.collection('users').doc(id).delete()
+      .then(() => {
+        this.toastService.publish('User account with the email ' + email + ' has been successfully deleted','formSuccess')
+      }).catch(() => {
+        this.toastService.publish('There has been an issue with the deletion of the account: ' + email,'userDoesNotExist')
+      })
+  }
 }

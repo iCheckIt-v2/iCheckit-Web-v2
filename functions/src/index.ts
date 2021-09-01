@@ -51,3 +51,21 @@ exports.adminCreateStudent = functions.https.onRequest((request, response) => {
   }
   );
 });
+
+exports.deleteUser = functions.firestore
+    .document('users/{id}')
+    .onDelete((snap, context) => {
+
+        const deletedValue = snap.data();
+        const userEmail = deletedValue.email;
+
+        return admin.auth().getUserByEmail(userEmail)
+            .then(userRecord => {
+                const userID = userRecord.uid;
+                return admin.auth().deleteUser(userID)
+            })
+            .catch(error => {
+                console.log(error.message);
+                return null;
+            })
+    });

@@ -16,6 +16,8 @@ export class UserComponent implements OnInit {
   userData:any;
   fsData: any;
   student:any;
+  dateToday = Date.now();
+  deleteModal!: boolean;
   constructor(
     public auth: AuthService,
     private route: ActivatedRoute,
@@ -32,15 +34,6 @@ export class UserComponent implements OnInit {
         this.fsData = res;
       })
     })
-
-    
-    //    this.route.queryParams.subscribe(params => {
-    //   let id = params['id'];
-    //   this.userService.getStudent(id).subscribe((res) => {
-    //     console.log(res + id)
-    //   })
-      
-    // });
     
     this.route.params.pipe(
       switchMap((params: Params) => {
@@ -49,7 +42,17 @@ export class UserComponent implements OnInit {
     ).subscribe((res) => {
       this.student = res;
     })
+  }
 
+  public triggerDeleteModal() {
+    this.deleteModal = !this.deleteModal
+  }
+
+  public deleteUser(id:string,email:string) {
+    this.userService.deleteUserAccount(id,email)
+    .then(() => {
+      this.router.navigate(['/user-management']);
+    })
   }
 
 }

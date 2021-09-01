@@ -1,2 +1,98 @@
-<p>user works!</p>
-<p *ngIf="student">{{student.displayName}}</p>
+<!-- <p>user works!</p>
+<p *ngIf="student">{{student.displayName}}</p> -->
+<app-navbar></app-navbar> <!-- NAVBAR -->
+<div class="main-container" *ngIf="student as user"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+    <div class="main-title">
+        <div class="main-title-text">
+          <h1>User Management / {{user.displayName}} </h1>
+        </div>
+        <div class="main-title-date">
+          <h1>{{dateToday | date}}</h1>
+        </div>
+    </div>
+    <div class="sub-container">
+        <div class="profile-container">
+            <div class="profile-container-left">
+              <div class="profile-container-left-header">
+                <h1>My Account Details:</h1>
+              </div>
+              <div class="profile-container-left-main">
+                <div class="profile-details">
+                  <p><span class="details-title">Full Name:</span> {{user.displayName}}</p>
+                  <p><span class="details-title">Email:</span>  {{user.email}}</p>
+                  <p><span class="details-title">Contact Number:</span>  {{user.contactNumber}}</p>
+                  <p><span class="details-title">Account Created At:</span>  {{user.createdAt | date}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="profile-container-right">
+              <div class="user-actions">
+                <div class="profile-container-left-header">
+                  <h1>User Actions:</h1>
+                </div>
+                <div class="actions-edit">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                  </svg>
+                  <p>Edit User Profile</p>
+                </div>
+                <div class="actions-delete" (click)="triggerDeleteModal()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                  <p>Delete User</p>
+                </div>
+              </div>
+              <div class="account-type">
+                <h1>Account Type:</h1>
+                <p>{{user.role}}</p>
+              </div>
+              <div class="account-status">
+                <h1>Status:</h1>
+                <p>Placeholder</p>
+              </div>
+            </div>
+          </div>
+    </div>
+
+<!-- modal container for delete -->
+<div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="deleteModal">
+    <div class="modal-center">
+      <div class="modal-overlay" aria-hidden="true"></div>
+      <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+      <div class="modal">
+        <div class="modal-bg">
+          <div class="modal-header">
+            <div class="modal-header-icon-delete">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </div>
+            <div class="modal-header-title">
+              <h3 id="modal-title">
+                Delete User Account
+              </h3>
+              <div class="mt-2">
+                <p>
+                  Are You Sure You Want To Delete This Account And It's Corresponding Data?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-form-container">
+        <div class="modal-buttons">
+          <button type="submit" class="deleteBtn" (click)="deleteUser(user.uid,user.email)">
+            Delete Account
+          </button>
+          <button type="button" class="cancelBtn" (click)="triggerDeleteModal()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- end modal container for delete -->
+
+</div>
