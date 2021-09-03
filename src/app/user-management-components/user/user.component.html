@@ -30,7 +30,7 @@
                 <div class="profile-container-left-header">
                   <h1>User Actions:</h1>
                 </div>
-                <div class="actions-edit">
+                <div class="actions-edit" (click)="triggerEditUserModal()">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                   </svg>
@@ -94,5 +94,87 @@
   </div>
 </div>
   <!-- end modal container for delete -->
+
+   
+ <!-- modal container for edit -->
+ <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="editUserModal">
+  <div class="modal-center">
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+    <div class="modal">
+      <form [formGroup]="editUserForm" (ngSubmit)="editUserProfile()">
+      <div class="modal-bg">
+        <div class="modal-header">
+          <div class="modal-header-icon-edit">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+          </div>
+          <div class="modal-header-title">
+            <h3 id="modal-title">
+              Edit User Profile
+            </h3>
+            <div class="mt-2">
+              <p>
+                Edit User's Account Information
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-form-container">
+          <div class="modal-form">
+            <div class="mb-4">
+              <label for="displayName">
+                User's Full Name
+              </label>
+              <input id="displayName" type="text" placeholder="Input student's full name" formControlName="displayName" autocomplete="on">
+              <!--
+              <p class="error-msg">Please enter your comment for this task</p> -->
+            </div>
+            <div class="login-form-error" *ngIf="editUserForm.controls.displayName.errors?.required && editUserForm.controls.displayName.touched">
+              Full name is required.
+            </div>
+            <div class="mb-4">
+              <label for="email">
+                User's Email
+              </label>
+              <input id="email" type="text" placeholder="Input student's email" formControlName="email" autocomplete="on">
+            </div>
+            <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.required && editUserForm.controls.email.touched">
+               Email is required.
+            </div>
+            <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.email">
+              Not a valid email.
+            </div>
+            <div class="mb-4">
+              <label for="contactNumber">
+                User's Contact Number
+              </label>
+              <input id="contactNumber" type="text" placeholder="Input student's contact number" formControlName="contactNumber" autocomplete="on">
+              <!--
+              <p class="error-msg">Please enter your comment for this task</p> -->
+            </div>
+            <div class="login-form-error" *ngIf="editUserForm.controls.contactNumber.errors?.required && editUserForm.controls.contactNumber.touched">
+              Contact number is required.
+            </div>
+          </div>
+        </div>
+      <div class="modal-buttons">
+        <button type="submit" class="addBtn" *ngIf="editUserForm.valid">
+          Edit User Profile
+        </button>
+        <button type="submit" class="addBtn-disabled" *ngIf="editUserForm.invalid">
+          Edit User Profile
+        </button>
+        <button type="button" class="cancelBtn" (click)="triggerEditUserModal()">
+          Cancel
+        </button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- end modal container for edit -->
 
 </div>

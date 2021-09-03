@@ -69,3 +69,26 @@ exports.deleteUser = functions.firestore
                 return null;
             })
     });
+
+exports.updateUser = functions.firestore
+    .document('users/{id}')
+    .onUpdate((change, context) => {
+
+        const updatedValues = change.after.data();
+        // const userEmail = deletedValue.email;
+        const uid = updatedValues.uid;
+        const userEmail = updatedValues.email;
+        const displayName = updatedValues.displayName;
+        return admin.auth().getUser(uid)
+            .then(userRecord => {
+                const userID = userRecord.uid;
+                return admin.auth().updateUser(userID, {
+                    displayName: displayName,
+                    email: userEmail
+                })
+            })
+            .catch(error => {
+                console.log(error.message);
+                return null;
+            })
+    });

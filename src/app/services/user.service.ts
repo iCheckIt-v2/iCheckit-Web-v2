@@ -151,4 +151,16 @@ export class UserService {
         this.toastService.publish('There has been an issue with the deletion of the account: ' + email,'userDoesNotExist')
       })
   }
+
+  updateUserAccount(id:string,email:string,displayName:string,contactNumber:string) : Promise<any> {
+   return this.afs.collection('users').doc(id).update({
+     email: email,
+     displayName: displayName,
+     contactNumber: contactNumber
+   }).then(() => {
+    this.toastService.publish('User account with the email ' + email + ' has been successfully updated','formSuccess')
+  }).catch(() => {
+    this.toastService.publish('There has been an issue with the update of the account: ' + email,'userDoesNotExist')
+  })
+}
 }
