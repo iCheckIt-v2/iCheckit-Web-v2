@@ -47,9 +47,13 @@
                 <h1>Account Type:</h1>
                 <p>{{user.role}}</p>
               </div>
-              <div class="account-status">
+              <div class="account-status-verified" *ngIf="user.verified">
                 <h1>Status:</h1>
-                <p>Placeholder</p>
+                <p>Verified</p>
+              </div>
+              <div class="account-status-not-verified" *ngIf="!user.verified">
+                <h1>Status:</h1>
+                <p>Not Verified</p>
               </div>
             </div>
           </div>

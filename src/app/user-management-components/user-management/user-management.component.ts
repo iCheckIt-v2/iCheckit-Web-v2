@@ -12,11 +12,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent implements OnInit {
-  studentCourses: any = ['BS Information Technology', 'BS Information Systems', 'BS Computer Science']
-  studentSections: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE']
+  studentCourses: any = ['BS Information Technology', 'BS Information Systems', 'BS Computer Science'];
+  studentSections: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE'];
   dateToday = Date.now();
   createStudentModal!: boolean;
   createStudentForm!:any;
+  createAdminForm!:any;
+  createAdminModal!:boolean;
   userData:any;
   fsData: any;
   adminUsers$: any;
@@ -57,10 +59,21 @@ export class UserManagementComponent implements OnInit {
       contactNumber: ['', Validators.required],
       email: ['', [Validators.required,Validators.email]],
     });
+
+    this.createAdminForm = this.fb.group({
+      displayName: ['', Validators.required,],
+      department: ['', Validators.required],
+      contactNumber: ['', Validators.required],
+      email: ['', [Validators.required,Validators.email]],
+    });
   }
 
   public triggerCreateStudentModal() {
     this.createStudentModal = !this.createStudentModal;
+  }
+
+  public triggerCreateAdminModal() {
+    this.createAdminModal = !this.createAdminModal;
   }
 
   public createStudent() {
@@ -84,6 +97,34 @@ export class UserManagementComponent implements OnInit {
       this.createStudentForm.controls['email'].markAsTouched();
       this.toastService.publish('Please fill up all required fields properly','formError');
     }
+  }
+
+  public createAdmin() {
+    if (this.createAdminForm.valid) {
+      console.log(this.createAdminForm.value);
+      this.userService.createAdmin(
+        this.createAdminForm.controls['displayName'].value,
+        this.createAdminForm.controls['department'].value,
+        this.createAdminForm.controls['contactNumber'].value,
+        this.createAdminForm.controls['email'].value,
+      )
+      .then(() => this.triggerCreateAdminModal())
+      .finally(() => this.createAdminForm.reset())
+    }
+    else if (this.createAdminForm.invalid) {
+      console.log(this.createAdminForm.value)
+      this.createAdminForm.controls['displayName'].markAsTouched();
+      this.createAdminForm.controls['department'].markAsTouched();
+      this.createAdminForm.controls['email'].markAsTouched();
+      this.createAdminForm.controls['contactNumber'].markAsTouched();
+      this.toastService.publish('Please fill up all required fields properly','formError');
+    }
+  }
+
+  changeDepartment(e:any) {
+    this.createAdminForm.controls.department.setValue(e.target.value, {
+      onlySelf: true
+    });
   }
 
   changeCourse(e:any) {

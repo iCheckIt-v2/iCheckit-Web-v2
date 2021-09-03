@@ -120,6 +120,44 @@ export class UserService {
         this.toastService.publish('The student account creation was not successful. The user email might have been already existing in our database,','userDoesNotExist');
       });
   }
+
+  createAdmin(displayName:string,department:string,contactNumber:string,email:string) : Promise<any> { 
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+    const params: URLSearchParams = new URLSearchParams();
+    params.set('email', email);
+    params.set('displayName', displayName);
+
+    return this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/adminCreateStudent`, {
+      email,
+      displayName
+      }, {
+        headers
+      }).toPromise().then(
+        (cred: any) => {
+          const uid = cred.userRecord.uid;
+          const data = {
+            uid: uid,
+            contactNumber: contactNumber,
+            email: email,
+            department: department,
+            verified: true,
+            displayName: displayName,
+            createdAt: Date.now(),
+            role: 'Department Head' //just recycled the code for create student
+          }
+          this.afs.collection('users')
+          .doc(uid).set(data)
+          .catch(error => console.log(error));
+        }
+      )
+      .then(() => {
+        this.toastService.publish('Student account with the email ' + email + ' has been successfully created','formSuccess')
+      })
+      .catch((err) => {
+        console.log(err);
+        this.toastService.publish('The student account creation was not successful. The user email might have been already existing in our database,','userDoesNotExist');
+      });
+  }
   
   createStudentAccount(displayName:string,section:string,course:string,contactNumber:string,email:string) {
       return this.fire.createUserWithEmailAndPassword(email,'password')
