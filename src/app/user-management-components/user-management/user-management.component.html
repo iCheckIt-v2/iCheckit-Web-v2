@@ -65,7 +65,8 @@
                     <p>{{student.section}}</p>
                 </div>
                 <div class="admin-container-children-right">
-                    <p>Status</p>
+                  <p *ngIf="student.verified == true">Verified</p>
+                  <p *ngIf="student.verified == false">Not Verified</p>
                 </div>
             </div>
             <pagination-controls (pageChange)="p = $event"></pagination-controls>

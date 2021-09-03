@@ -102,6 +102,7 @@ export class UserService {
             contactNumber: contactNumber,
             email: email,
             section: section,
+            verified: false,
             course: course,
             displayName: displayName,
             createdAt: Date.now(),
