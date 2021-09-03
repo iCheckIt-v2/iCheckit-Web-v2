@@ -131,6 +131,7 @@ export class UserService {
             email: email,
             section: section,
             course: course,
+            verified: false,
             displayName: displayName,
             createdAt: Date.now(),
             role: 'Student'
