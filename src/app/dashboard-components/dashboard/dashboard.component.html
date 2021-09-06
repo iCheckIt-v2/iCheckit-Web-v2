@@ -9,7 +9,7 @@
   </div>
 -->
 <app-navbar></app-navbar> <!-- NAVBAR -->
-<div class="main-container"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+<div class="main-container" *ngIf="fsData as user"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
   <div class="main-title">
     <div class="main-title-text">
       <h1>DASHBOARD</h1>
@@ -19,7 +19,151 @@
     </div>
   </div>
   <div class="sub-container">
-    <h1>A</h1>
+    <div class="profile-container">
+      <div class="profile-container-left">
+        <div class="profile-container-left-main">
+          <div class="profile-details">
+            <p style="color: white !important;">Pending Tasks</p>
+            <h1 class="text-9xl mt-4 text-white">4</h1>
+          </div>
+        </div>
+      </div>
+      <div class="profile-container-right">
+        <div class="profile-container-left-main">
+          <div class="profile-details">
+            <p>Hello {{user.displayName}},</p>
+            <h1 class="text-6xl mt-4">What is your agenda for today?</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="students" *ngIf="verifyTasks$ as tasks">
+      <div class="admin-container-header">
+          <h1>Students:</h1>
+      </div>
+      <div class="admin-container-children" *ngFor="let task of tasks | paginate: { itemsPerPage: 10, currentPage: p }">
+          <div class="admin-container-children-left">
+              <p>{{task.title}}</p>
+              <p>{{task.description}}</p>
+          </div>
+          <div class="admin-container-children-right">
+              <p>{{task.description}}</p>
+          </div>
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>
+</div>
  
+
+<!-- modal container for create student -->
+<div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="addTaskModal">
+  <div class="modal-center">
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+    <div class="modal">
+      <form [formGroup]="addTaskForm" (ngSubmit)="addTask()">
+      <div class="modal-bg">
+        <div class="modal-header">
+          <div class="modal-header-icon-create">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                </svg>
+          </div>
+          <div class="modal-header-title">
+            <h3 id="modal-title">
+              Create A New Task
+            </h3>
+            <div class="mt-2">
+              <p>
+                Create a new task to be uploaded to the verified students in the system.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-form-container">
+          <div class="modal-form">
+            <div class="mb-4">
+              <label for="title">
+                Task Title
+              </label>
+              <input id="title" type="text" placeholder="Input the title of this task" autocomplete="on" formControlName="title">
+            </div>
+            <div class="login-form-error" *ngIf="addTaskForm.controls.title.errors?.required && addTaskForm.controls.title.touched">
+              Task title is required.
+            </div>
+            <div class="mb-4">
+              <label for="description">
+                Task Description
+              </label>
+              <input id="description" type="text" placeholder="Input the description of this task" autocomplete="on" formControlName="description">
+            </div>
+            <div class="login-form-error" *ngIf="addTaskForm.controls.description.errors?.required && addTaskForm.controls.description.touched">
+              Task description is required.
+            </div>
+            <div class="mb-4">
+              <label for="scope">
+                Task Scope
+              </label>
+              <select name="scope" id="scope" style="width: 100%;" (change)="changeTaskScope($event)" formControlName="scope">
+                <option value="" disabled>Choose the scope of the task</option>
+                  <option *ngFor="let scope of taskScope">{{scope}}</option>
+                </select>
+              <!--
+              <p class="error-msg">Please enter your comment for this task</p> -->
+              <div *ngIf="taskScopeArray.length > 0">
+                <p *ngFor="let item of taskScopeArray" style="display: inline-block; margin-right: 4px;">{{item}}</p>
+              </div>
+            </div>
+            <div class="login-form-error" *ngIf="addTaskForm.controls.scope.errors?.required && addTaskForm.controls.scope.touched">Task scope is required.
+            </div>
+           
+            <div class="mb-4">
+              <label for="deadline">
+                Task Deadline 
+              </label>
+              <input type="datetime-local" id="deadline" name="deadline" formControlName="deadline">
+            </div>
+            <div class="login-form-error" *ngIf="addTaskForm.controls.deadline.errors?.required && addTaskForm.controls.deadline.touched">Task scope is required.
+            </div>
+
+            <!-- <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.required && createStudentForm.controls.email.touched">
+              Student's email is required.
+            </div>
+            <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.email">
+              Not a valid email.
+            </div> -->
+            <!--
+            <div class="login-form-error" *ngIf="editAccountForm.controls.contactNumber.errors?.required && editAccountForm.controls.contactNumber.touched">
+              Contact number is required.
+            </div>-->
+            <!--
+            <div class="login-form-error" *ngIf="editAccountForm.controls.password.errors?.required && editAccountForm.controls.password.touched">
+              Password is required.
+            </div>-->
+          </div>
+        </div>
+      <div class="modal-buttons">
+        <button type="submit" class="addBtn" *ngIf="addTaskForm.valid">
+          Add Task
+        </button>
+        <button type="submit" class="addBtn-disabled" *ngIf="addTaskForm.invalid">
+          Add Task
+        </button>
+        <button type="button" class="cancelBtn" (click)="triggerAddTaskModal()">
+          Cancel
+        </button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- end modal container for edit -->
+
+<div class="addIcon">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" (click)="triggerAddTaskModal()">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+</div>
