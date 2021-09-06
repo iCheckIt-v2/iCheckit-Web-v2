@@ -79,22 +79,15 @@ export class DashboardComponent implements OnInit {
         this.addTaskForm.controls['title'].value,
         this.addTaskForm.controls['description'].value,
         this.taskScopeArray,
-        new Date(this.addTaskForm.controls['deadline'].value
-      ))
-      console.log(this.addTaskForm.value);
-      console.log(typeof this.addTaskForm.controls['deadline'].value)
+        new Date(this.addTaskForm.controls['deadline'].value),
+        this.fsData.displayName
+      )
     }
     else if (this.addTaskForm.invalid) {
       this.addTaskForm.controls['title'].markAsTouched();
       this.addTaskForm.controls['description'].markAsTouched();
       this.addTaskForm.controls['scope'].markAsTouched();
       this.addTaskForm.controls['deadline'].markAsTouched();
-      console.log('invalid');
-      console.log(this.addTaskForm.value);
-      console.log(new Date(this.addTaskForm.controls['deadline'].value))
-      
-      console.log(typeof new Date(this.addTaskForm.controls['deadline'].value))
-
     }
   }
 

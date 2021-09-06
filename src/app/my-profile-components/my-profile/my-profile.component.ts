@@ -35,6 +35,8 @@ export class MyProfileComponent implements OnInit {
     this.fire.user.subscribe((user:any) => {
       this.userData = user;
       this.auth.getUserData(user?.uid).subscribe(res => {
+        console.log(res)
+        console.log(res.uid)
         this.fsData = res;
       })
     })
