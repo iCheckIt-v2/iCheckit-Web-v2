@@ -12,7 +12,7 @@ export class TaskService {
 
   constructor(
     private afs: AngularFirestore,
-    readonly fire: AngularFireAuth, 
+    readonly fire: AngularFireAuth,
     private http: HttpClient,
     public toastService: ToastService
   ) { }
@@ -31,7 +31,7 @@ export class TaskService {
           }
         )})
     );
-  } 
+  }
 
   public getTaskRecipients():Observable<any> {
     return this.afs.collection('tasks',ref => ref.orderBy('type','desc'))
@@ -47,7 +47,7 @@ export class TaskService {
           }
         )})
     );
-  } 
+  }
 
   public setRecipients(scope:string):Observable<any> {
     return this.afs.collection('users',ref => ref.where('section','==',scope))
@@ -63,10 +63,10 @@ export class TaskService {
           }
         )})
     );
-  } 
+  }
 
   public getTask(id:string):Observable<any> {
-    return this.afs.collection('users',ref => ref.where('taskId','==',id))
+    return this.afs.collection('tasks',ref => ref.where('taskId','==',id))
     .snapshotChanges()
     .pipe(
       map((doc: any) => {
@@ -79,7 +79,7 @@ export class TaskService {
           }
         )})
     );
-  } 
+  }
 
   public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any> ) {
     let taskId = this.afs.createId();
