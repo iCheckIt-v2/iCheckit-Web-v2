@@ -1,5 +1,5 @@
 .navbar {
-    @apply w-full h-auto p-2 bg-red-700 text-white flex;
+    @apply w-full h-auto p-2 bg-red-700 text-white flex fixed;
     font-family: 'Antonio', sans-serif;
 }
 .navbar-logo {
@@ -12,7 +12,7 @@
     cursor: pointer;
 }
 .sidebar {
-    @apply h-screen w-52 bg-red-900 fixed;
+    @apply h-screen w-52 bg-red-900 fixed mt-10;
 }
 .sidebar-link {
     @apply text-white p-3 shadow-lg flex justify-start items-center text-sm;

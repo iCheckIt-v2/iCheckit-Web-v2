@@ -65,28 +65,26 @@ export class TaskService {
     );
   } 
 
+  public getTask(id:string):Observable<any> {
+    return this.afs.collection('users',ref => ref.where('taskId','==',id))
+    .snapshotChanges()
+    .pipe(
+      map((doc: any) => {
+        // console.log(doc)
+        return doc.map(
+          (c: { payload: { doc: { data: () => any; id: any; }; }; }) => {
+            const data = c.payload.doc.data();
+            const id = c.payload.doc.id;
+            return { id, ...data };
+          }
+        )})
+    );
+  } 
+
   public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any> ) {
-      // let recipients: { uid: any; status: string; section: any; submissionLink: string; displayName: any; }[] = [];
-      // let taskRecipients = [];
-
-      // scope.forEach(element => {
-      //   this.setRecipients(element).subscribe(res => {
-      //     res.forEach((data: any) => {
-      //       let userData = {
-      //         uid: data.id,
-      //         status: 'Pending',
-      //         section: data.section,
-      //         submissionLink: '',
-      //         displayName: data.displayName
-      //       }
-      //       recipients.push(userData)
-      //     });
-      //   })
-      // })
-      // console.log(recipients);
-      // taskRecipients = recipients;
-
+    let taskId = this.afs.createId();
       let task = {
+        taskId: taskId,
         title: title,
         description: description,
         scope: scope,
@@ -99,7 +97,7 @@ export class TaskService {
       }
 
       console.log(task)
-      this.afs.collection('tasks').add(task)
+      this.afs.collection('tasks').doc(taskId).set(task)
   }
 
 
