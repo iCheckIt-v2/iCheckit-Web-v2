@@ -90,9 +90,13 @@
 .admin-container-children:hover {
     background-color: #dee2e7;
 }
-.admin-container-children-left {
+.admin-container-children-left-pending {
     @apply w-1/2 p-2 flex flex-col h-full items-start;
     border-left: #FFE400 25px solid;
+}
+.admin-container-children-left-late {
+    @apply w-1/2 p-2 flex flex-col h-full items-start;
+    border-left: #F00000 25px solid;
 }
 .admin-container-children-left svg{
     @apply mr-4;

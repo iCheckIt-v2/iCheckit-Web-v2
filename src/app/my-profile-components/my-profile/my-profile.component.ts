@@ -11,7 +11,7 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./my-profile.component.css']
 })
 export class MyProfileComponent implements OnInit {
-  dateToday = Date.now();
+  dateToday = new Date();
   userData:any;
   fsData: any;
   editModal!: boolean;

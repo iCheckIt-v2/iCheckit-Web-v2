@@ -21,10 +21,10 @@ export class DashboardComponent implements OnInit {
   userData:any;
   fsData: any;
   addTaskModal!: boolean;
-  dateToday = Date.now();
+  dateToday = new Date();
   verifyTasks$: any;
   addTaskForm!:any;
- 
+  taskRecipients: { uid: any; status: string; section: any; submissionLink: string; displayName: any; }[] = [];
   constructor(
     public auth: AuthService,
     readonly fire: AngularFireAuth, 
@@ -67,20 +67,43 @@ export class DashboardComponent implements OnInit {
     } else if (!this.taskScopeArray.includes(e.target.value)) {
       this.taskScopeArray.push(e.target.value)
       console.log(this.taskScopeArray);
+
+      this.taskScopeArray.forEach(element => {
+        this.taskService.setRecipients(element).subscribe(res => {
+          res.forEach((data: any) => {
+            let userData = {
+              uid: data.id,
+              status: 'Pending',
+              section: data.section,
+              submissionLink: '',
+              displayName: data.displayName
+            }
+            if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
+              this.taskRecipients.push(userData);
+              /* vendors contains the element we're looking for */
+            }
+          });
+        })
+      })
     }
+    console.log(this.taskRecipients)
+    
+
     // this.createStudentForm.controls.section.setValue(e.target.value, {
     //   onlySelf: true
     // });
   }
 
   addTask() {
+
     if (this.addTaskForm.valid) {
       this.taskService.addTask(
         this.addTaskForm.controls['title'].value,
         this.addTaskForm.controls['description'].value,
         this.taskScopeArray,
         new Date(this.addTaskForm.controls['deadline'].value),
-        this.fsData.displayName
+        this.fsData.displayName,
+        this.taskRecipients
       )
     }
     else if (this.addTaskForm.invalid) {

@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
   userData:any;
   fsData: any;
   student:any;
-  dateToday = Date.now();
+  dateToday = new Date();
   deleteModal!: boolean;
   editUserModal!: boolean;
   editUserForm!:any;

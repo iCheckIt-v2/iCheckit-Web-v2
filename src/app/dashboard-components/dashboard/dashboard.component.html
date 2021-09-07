@@ -43,10 +43,14 @@
           <h1>Students:</h1>
       </div>
       <div class="admin-container-children" *ngFor="let task of tasks | paginate: { itemsPerPage: 10, currentPage: p }">
-          <div class="admin-container-children-left">
+          <div class="admin-container-children-left-pending" *ngIf="task.status == 'Pending'">
               <p>{{task.title}}</p>
-              <p>{{task.description}}</p>
+              <p>{{task.deadline.toDate() | date}}</p>
           </div>
+          <div class="admin-container-children-left-late" *ngIf="task.status == 'Late'">
+            <p>{{task.title}}</p>
+            <p>{{task.deadline.toDate() | date}}</p>
+        </div>
           <div class="admin-container-children-right">
               <p>{{task.description}}</p>
           </div>
@@ -124,7 +128,7 @@
               <label for="deadline">
                 Task Deadline 
               </label>
-              <input type="datetime-local" id="deadline" name="deadline" formControlName="deadline">
+              <input type="date" id="deadline" name="deadline" formControlName="deadline">
             </div>
             <div class="login-form-error" *ngIf="addTaskForm.controls.deadline.errors?.required && addTaskForm.controls.deadline.touched">Task scope is required.
             </div>

@@ -33,6 +33,22 @@ export class TaskService {
     );
   } 
 
+  public getTaskRecipients():Observable<any> {
+    return this.afs.collection('tasks',ref => ref.orderBy('type','desc'))
+    .snapshotChanges()
+    .pipe(
+      map((doc: any) => {
+        // console.log(doc)
+        return doc.map(
+          (c: { payload: { doc: { data: () => any; id: any; }; }; }) => {
+            const data = c.payload.doc.data();
+            const id = c.payload.doc.id;
+            return { id, ...data };
+          }
+        )})
+    );
+  } 
+
   public setRecipients(scope:string):Observable<any> {
     return this.afs.collection('users',ref => ref.where('section','==',scope))
     .snapshotChanges()
@@ -49,36 +65,36 @@ export class TaskService {
     );
   } 
 
-  public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string ) {
-      let recipients: { uid: any; status: string; section: any; submissionLink: string; displayName: any; }[] = [];
-      let taskRecipients = [];
+  public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any> ) {
+      // let recipients: { uid: any; status: string; section: any; submissionLink: string; displayName: any; }[] = [];
+      // let taskRecipients = [];
 
-      scope.forEach(element => {
-        this.setRecipients(element).subscribe(res => {
-          res.forEach((data: any) => {
-            let userData = {
-              uid: data.id,
-              status: 'Pending',
-              section: data.section,
-              submissionLink: '',
-              displayName: data.displayName
-            }
-            recipients.push(userData)
-          });
-        })
-      })
-      console.log(recipients);
-      taskRecipients = recipients;
+      // scope.forEach(element => {
+      //   this.setRecipients(element).subscribe(res => {
+      //     res.forEach((data: any) => {
+      //       let userData = {
+      //         uid: data.id,
+      //         status: 'Pending',
+      //         section: data.section,
+      //         submissionLink: '',
+      //         displayName: data.displayName
+      //       }
+      //       recipients.push(userData)
+      //     });
+      //   })
+      // })
+      // console.log(recipients);
+      // taskRecipients = recipients;
 
       let task = {
         title: title,
         description: description,
         scope: scope,
         status: 'Pending',
-        createdAt: new Date(Date.now()),
+        createdAt: new Date(),
         deadline: deadline,
         uploadedBy: uploadedBy,
-        recipients: taskRecipients,
+        recipients: recipients,
         type: 'task'
       }
 
