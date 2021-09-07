@@ -42,7 +42,7 @@
       <div class="admin-container-header">
           <h1>Students:</h1>
       </div>
-      <div class="admin-container-children" *ngFor="let task of tasks | paginate: { itemsPerPage: 10, currentPage: p }">
+      <div class="admin-container-children" *ngFor="let task of tasks | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/task/', task.id]">
           <div class="admin-container-children-left-pending" *ngIf="task.status == 'Pending'">
               <p>{{task.title}}</p>
               <p>{{task.deadline.toDate() | date}}</p>

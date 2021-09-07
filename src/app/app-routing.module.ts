@@ -7,6 +7,7 @@ import { ForgotPasswordComponent } from './auth-components/forgot-password/forgo
 import { MyProfileComponent } from './my-profile-components/my-profile/my-profile.component';
 import { UserManagementComponent } from './user-management-components/user-management/user-management.component';
 import { UserComponent } from './user-management-components/user/user.component';
+import { TaskComponent } from './dashboard-components/task/task.component';
 
 import { AngularFireAuthGuard, canActivate, customClaims, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { pipe } from 'rxjs';
@@ -17,6 +18,7 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  { path: 'task/:id', component: TaskComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'login', component: LoginComponent },
   { path: 'my-profile', component: MyProfileComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'user/:id', component: UserComponent, ...canActivate(redirectUnauthorizedToLogin)},

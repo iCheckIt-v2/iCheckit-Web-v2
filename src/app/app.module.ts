@@ -20,6 +20,7 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './user-management-components/user/user.component';
+import { TaskComponent } from './dashboard-components/task/task.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { UserComponent } from './user-management-components/user/user.component'
     NavbarComponent,
     MyProfileComponent,
     UserManagementComponent,
-    UserComponent
+    UserComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
