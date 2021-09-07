@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Params, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth  } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -16,7 +17,7 @@ export class TaskComponent implements OnInit {
     public auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    readonly fire: AngularFireAuth, 
+    readonly fire: AngularFireAuth,
   ) { }
 
   ngOnInit(): void {
