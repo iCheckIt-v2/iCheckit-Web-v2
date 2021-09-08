@@ -12,7 +12,7 @@ export class TaskService {
 
   constructor(
     private afs: AngularFirestore,
-    readonly fire: AngularFireAuth, 
+    readonly fire: AngularFireAuth,
     private http: HttpClient,
     public toastService: ToastService
   ) { }
@@ -31,7 +31,7 @@ export class TaskService {
           }
         )})
     );
-  } 
+  }
 
   public getTaskRecipients():Observable<any> {
     return this.afs.collection('tasks',ref => ref.orderBy('type','desc'))
@@ -47,7 +47,7 @@ export class TaskService {
           }
         )})
     );
-  } 
+  }
 
   public setRecipients(scope:string):Observable<any> {
     return this.afs.collection('users',ref => ref.where('section','==',scope))
@@ -63,23 +63,32 @@ export class TaskService {
           }
         )})
     );
-  } 
+  }
 
   public getTask(id:string):Observable<any> {
-    return this.afs.collection('users',ref => ref.where('taskId','==',id))
+    // return this.afs.collection('tasks',ref => ref.where('taskId','==',id))
+    // .snapshotChanges()
+    // .pipe(
+    //   map((doc: any) => {
+    //     // console.log(doc)
+    //     return doc.map(
+    //       (c: { payload: { doc: { data: () => any; id: any; }; }; }) => {
+    //         const data = c.payload.doc.data();
+    //         const id = c.payload.doc.id;
+    //         return { id, ...data };
+    //       }
+    //     )})
+    // );
+    return this.afs.collection('tasks',ref => ref.where('taskId','==',id))
+    .doc(id)
     .snapshotChanges()
     .pipe(
       map((doc: any) => {
         // console.log(doc)
-        return doc.map(
-          (c: { payload: { doc: { data: () => any; id: any; }; }; }) => {
-            const data = c.payload.doc.data();
-            const id = c.payload.doc.id;
-            return { id, ...data };
-          }
-        )})
+        return { id: doc.payload.id, ...doc.payload.data() };
+      })
     );
-  } 
+  }
 
   public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any>,pushTokens: any ) {
     let taskId = this.afs.createId();

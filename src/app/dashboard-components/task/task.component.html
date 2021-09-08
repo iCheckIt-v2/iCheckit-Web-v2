@@ -12,33 +12,37 @@
 
 
     </div>
-  <div class="sub-container">
+  <div class="sub-container" *ngIf="taskData as task">
     <!-- Start Coding here -->
+
         <!-- Task description -->
       <div class="task-container-middle">
           <div class="taskDescrip-container-left-main">
-              <h1 class="text-3xl mt-4">Task Description</h1>
-                <h1>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</h1>
+              <h1 class="text-3xl mt-4">Task Description: </h1>
+                <h1 class="text-2xl mt-4"> {{task.description}} </h1>
           </div>
       </div>
       <!-- elements box section -->
       <!-- uploaded by layout -->
     <div class="elements-firstrow-container">
-      <div class="uploadedBy-container-left">
+      <div class="uploadedBy-container-left" >
           <div class="uploadedBy-container-left-main">
-              <h1 class="text-5xl mt-4 text-white">Uploaded by:</h1>
+              <h1 class="text-5xl mt-4 text-white">Uploaded by: </h1>
+              <h2 class="text-5xl mt-4 text-white"> {{task.uploadedBy}} </h2>
           </div>
       </div>
       <!-- task deadline layout -->
       <div class="taskDeadline-container-mid">
         <div class="taskDeadline-container-mid-main">
-            <h1 class="text-5xl mt-4 text-white">Task Deadline:</h1>
+            <h1 class="text-5xl mt-4 text-white">Task Deadline: </h1>
+            <h2 class="text-5xl mt-4 text-white"> {{ task.deadline.seconds*1000 | date }} </h2>
         </div>
       </div>
       <!-- Task scope layout -->
       <div class="taskScope-container-right">
         <div class="taskScope-container-right-main">
             <h1 class="text-5xl mt-4 text-Black">Task Scope:</h1>
+            <h1 class="text-3xl mt-4 text-Black">{{task.scope}}</h1>
         </div>
       </div>
     </div>
