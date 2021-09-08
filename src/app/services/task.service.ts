@@ -81,7 +81,7 @@ export class TaskService {
     );
   } 
 
-  public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any> ) {
+  public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any>,pushTokens: any ) {
     let taskId = this.afs.createId();
       let task = {
         taskId: taskId,
@@ -93,7 +93,8 @@ export class TaskService {
         deadline: deadline,
         uploadedBy: uploadedBy,
         recipients: recipients,
-        type: 'task'
+        type: 'task',
+        pushTokens: pushTokens
       }
 
       console.log(task)

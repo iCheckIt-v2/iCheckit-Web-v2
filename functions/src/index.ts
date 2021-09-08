@@ -92,3 +92,39 @@ exports.updateUser = functions.firestore
                 return null;
             })
     });
+
+    exports.sendPushNotification = functions.firestore
+ .document("tasks/{taskId}")
+ .onCreate((event) => {
+
+// Access data required for payload notification
+const data = event.data();
+const taskTitle = data.title;
+const pushTokens = data.pushTokens;
+// Determine the message
+const payload = {
+  notification: {
+    title: taskTitle,
+    body: 'A new task has been uploaded. Click on this notification to open the application.',
+    sound: 'default',
+    badge: '1'
+  }
+}
+console.log(payload);
+pushTokens.forEach((element: any) => {
+  console.log(element.pushToken)
+
+  return admin.messaging().sendToDevice(element.pushToken,payload)
+});
+// // Get the user's tokenID
+// var pushToken = "";
+// return functions
+// .firestore
+//   .collection("Users/{user-ID}")
+//   .get()
+//   .then((doc) => {
+//     pushToken = doc.data().tokenID;
+//     // Send the message to the device
+//     return admin.messaging().sendTodevice(pushToken, message)
+//   });
+});

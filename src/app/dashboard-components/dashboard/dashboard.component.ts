@@ -25,6 +25,8 @@ export class DashboardComponent implements OnInit {
   verifyTasks$: any;
   addTaskForm!:any;
   taskRecipients: { uid: any; status: string; section: any; submissionLink: string; displayName: any; }[] = [];
+  userPushTokens: { pushToken: string; }[] = [];
+
   constructor(
     public auth: AuthService,
     readonly fire: AngularFireAuth, 
@@ -71,6 +73,9 @@ export class DashboardComponent implements OnInit {
       this.taskScopeArray.forEach(element => {
         this.taskService.setRecipients(element).subscribe(res => {
           res.forEach((data: any) => {
+            let pushToken = {
+              pushToken: data.pushToken
+            }
             let userData = {
               uid: data.id,
               status: 'Pending',
@@ -78,15 +83,26 @@ export class DashboardComponent implements OnInit {
               submissionLink: '',
               displayName: data.displayName
             }
+            console.log(data.pushToken)
             if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
               this.taskRecipients.push(userData);
               /* vendors contains the element we're looking for */
             }
+            if (!this.userPushTokens.some(e => e.pushToken === pushToken.pushToken)) {
+              this.userPushTokens.push(pushToken);
+              /* vendors contains the element we're looking for */
+            }
+            // if (!this.userPushTokens.some(e => e.pushToken === data.pushToken)) {
+            //   this.userPushTokens.push(data.pushToken);
+            //   /* vendors contains the element we're looking for */
+            // }
+            
           });
         })
       })
     }
     console.log(this.taskRecipients)
+    console.log(this.userPushTokens)
     
 
     // this.createStudentForm.controls.section.setValue(e.target.value, {
@@ -103,7 +119,8 @@ export class DashboardComponent implements OnInit {
         this.taskScopeArray,
         new Date(this.addTaskForm.controls['deadline'].value),
         this.fsData.displayName,
-        this.taskRecipients
+        this.taskRecipients,
+        this.userPushTokens
       )
     }
     else if (this.addTaskForm.invalid) {
