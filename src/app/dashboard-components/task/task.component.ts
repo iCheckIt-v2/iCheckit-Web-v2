@@ -16,8 +16,9 @@ export class TaskComponent implements OnInit {
   userData:any;
   fsData: any;
    id!: any;
-  taskData!: any;
+  taskData: any;
 
+  // _StudentUpload: "";
 
   constructor(
     public auth: AuthService,
@@ -48,6 +49,9 @@ export class TaskComponent implements OnInit {
       this.taskData = res;
       console.log(res);
     })
+
+
+
   }
 
 }
