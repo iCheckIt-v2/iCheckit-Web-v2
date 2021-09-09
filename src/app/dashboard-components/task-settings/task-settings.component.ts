@@ -12,6 +12,7 @@ import { switchMap } from 'rxjs/operators';
 })
 
 export class TaskSettingsComponent implements OnInit {
+
   dateToday = new Date();
   userData:any;
   fsData: any;
@@ -43,6 +44,9 @@ export class TaskSettingsComponent implements OnInit {
         this.taskData = res;
         console.log(res);
       })
+
+
+
    }
 }
 

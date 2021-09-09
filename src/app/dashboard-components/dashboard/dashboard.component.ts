@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    readonly fire: AngularFireAuth, 
+    readonly fire: AngularFireAuth,
     public router: Router,
     public taskService: TaskService,
     private fb: FormBuilder,
@@ -96,14 +96,14 @@ export class DashboardComponent implements OnInit {
             //   this.userPushTokens.push(data.pushToken);
             //   /* vendors contains the element we're looking for */
             // }
-            
+
           });
         })
       })
     }
     console.log(this.taskRecipients)
     console.log(this.userPushTokens)
-    
+
 
     // this.createStudentForm.controls.section.setValue(e.target.value, {
     //   onlySelf: true
