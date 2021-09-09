@@ -98,8 +98,8 @@ export class TaskService {
         description: description,
         scope: scope,
         status: 'Pending',
-        createdAt: new Date(),
-        deadline: deadline,
+        createdAt:+ new Date(),
+        deadline:+ deadline,
         uploadedBy: uploadedBy,
         recipients: recipients,
         type: 'task',
@@ -107,6 +107,7 @@ export class TaskService {
       }
 
       console.log(task)
+      console.log(+ new Date(Date.now()))
       this.afs.collection('tasks').doc(taskId).set(task)
   }
 

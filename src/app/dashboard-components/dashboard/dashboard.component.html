@@ -45,11 +45,11 @@
       <div class="admin-container-children" *ngFor="let task of tasks | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/task/', task.id]">
           <div class="admin-container-children-left-pending" *ngIf="task.status == 'Pending'">
               <p>{{task.title}}</p>
-              <p>{{task.deadline.toDate() | date}}</p>
+              <p>{{task.deadline | date}}</p>
           </div>
           <div class="admin-container-children-left-late" *ngIf="task.status == 'Late'">
             <p>{{task.title}}</p>
-            <p>{{task.deadline.toDate() | date}}</p>
+            <p>{{task.deadline | date}}</p>
         </div>
           <div class="admin-container-children-right">
               <p>{{task.description}}</p>

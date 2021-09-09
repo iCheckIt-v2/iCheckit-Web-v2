@@ -49,9 +49,17 @@ export class TaskComponent implements OnInit {
       this.taskData = res;
       console.log(res);
     })
+  }
 
+  compareDate() {
+    this.taskData;
+    console.log(this.taskData.createdAt);
+    console.log(this.taskData.deadline);
+    console.log(+ this.dateToday)
 
-
+    if (this.taskData.deadline >= + this.dateToday) {
+      console.log('deadline na')
+    }
   }
 
 }
