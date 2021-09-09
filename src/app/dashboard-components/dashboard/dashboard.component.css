@@ -98,6 +98,10 @@
     @apply w-1/2 p-2 flex flex-col h-full items-start;
     border-left: #F00000 25px solid;
 }
+.admin-container-children-left-completed {
+    @apply w-1/2 p-2 flex flex-col h-full items-start;
+    border-left: green 25px solid;
+}
 .admin-container-children-left svg{
     @apply mr-4;
 }

@@ -37,7 +37,7 @@
       <div class="taskDeadline-container-mid">
         <div class="taskDeadline-container-mid-main">
             <h1 class="text-5xl mt-4 text-white">Task Deadline: </h1>
-            <h2 class="text-5xl mt-4 text-white"> {{ task.deadline.seconds*1000 | date }} </h2>
+            <h2 class="text-5xl mt-4 text-white"> {{ task.deadline | date }} </h2>
         </div>
       </div>
       <!-- Task scope layout -->
@@ -90,17 +90,23 @@
 
 
         <!-- student tracker container -->
-        <div class="admin-container-header">
-          <h1>Student Tracker:</h1>
-        </div>
-        <div class="admin-container-children">
-          <div class="admin-container-children-left">
-              <p>Student Name Placeholder</p>
+        <div class="students">
+          <div class="admin-container-header">
+              <h1>Tasks:</h1>
           </div>
-          <div class="admin-container-children-right">
-              <p>Student section Placeholder</p>
+          <div class="admin-container-children" *ngFor="let recipient of taskData.recipients | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/task/', task.id]">
+              <div class="admin-container-children-left-pending" *ngIf="task.status == 'Pending'">
+                  <p>{{recipient.displayName}}</p>
+                  <p>{{recipient.section}}</p>
+              </div>
+              <div class="admin-container-children-left-completed" *ngIf="task.status == 'Completed'">
+                <p>{{recipient.displayName}}</p>
+                <p>{{recipient.section}}</p>
+            </div>
+              <div class="admin-container-children-right">
+                <p>{{recipient.status}}</p>
+              </div>
           </div>
-          <div class="admin-container-children-right">
-          </div>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
 </div>

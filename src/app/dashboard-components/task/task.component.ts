@@ -17,6 +17,8 @@ export class TaskComponent implements OnInit {
   fsData: any;
    id!: any;
   taskData: any;
+  p: number = 1;
+
 
   // _StudentUpload: "";
 

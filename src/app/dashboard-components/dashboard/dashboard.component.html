@@ -47,7 +47,7 @@
               <p>{{task.title}}</p>
               <p>{{task.deadline | date}}</p>
           </div>
-          <div class="admin-container-children-left-late" *ngIf="task.status == 'Late'">
+          <div class="admin-container-children-left-completed" *ngIf="task.status == 'Completed'">
             <p>{{task.title}}</p>
             <p>{{task.deadline | date}}</p>
         </div>
