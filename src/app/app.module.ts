@@ -21,6 +21,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './user-management-components/user/user.component';
 import { TaskComponent } from './dashboard-components/task/task.component';
+import { TaskSettingsComponent } from './dashboard-components/task-settings/task-settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { TaskComponent } from './dashboard-components/task/task.component';
     MyProfileComponent,
     UserManagementComponent,
     UserComponent,
-    TaskComponent
+    TaskComponent,
+    TaskSettingsComponent
   ],
   imports: [
     BrowserModule,
