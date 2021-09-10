@@ -113,7 +113,21 @@
               </label>
               <select name="scope" id="scope" style="width: 100%;" (change)="changeTaskScope($event)" formControlName="scope">
                 <option value="" disabled>Choose the scope of the task</option>
-                  <option *ngFor="let scope of taskScope">{{scope}}</option>
+                <optgroup label="Departmental">
+                  <option>All Departments **</option>
+                  <option>BS Information Technology</option>
+                  <option>BS Information Systems</option>
+                  <option>BS Computer Science</option>
+                </optgroup>
+                <optgroup label="BS Information Technology">
+                  <option *ngFor="let it of itScope">{{it}}</option>
+                </optgroup>
+                <optgroup label="BS Information Systems">
+                  <option *ngFor="let is of isScope">{{is}}</option>
+                </optgroup>
+                <optgroup label="BS Computer Science">
+                  <option *ngFor="let cs of csScope">{{cs}}</option>
+                </optgroup>
                 </select>
               <!--
               <p class="error-msg">Please enter your comment for this task</p> -->

@@ -11,7 +11,10 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  taskScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE','BS Information Technology', 'BS Information Systems', 'BS Computer Science'];
+  // taskScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE'];
+  itScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITG','2ITA','2ITB','2ITC','2ITD','3ITA','3ITB','3ITC','3ITD','3ITE','4ITA','4ITB','4ITC','4ITD','4ITE','4ITF','4ITG','4ITH'];
+  isScope: any = ['1ISA','1ISB','2ISA','2ISB','3ISA','3ISB','4ISA','4ISB',];
+  csScope: any = ['1CSA','1CSB','1CSC','2CSA','2CSB','2CSC','1CSA','1CSB','1CSC','3CSA','3CSB','3CSC','3CSD','4CSA','4CSB'];
   taskScopeArray!: string[];
   p: number = 1;
   email!:string;
@@ -67,9 +70,22 @@ export class DashboardComponent implements OnInit {
     if (this.taskScopeArray.includes(e.target.value)) {
       console.log('already included')
     } else if (!this.taskScopeArray.includes(e.target.value)) {
-      this.taskScopeArray.push(e.target.value)
-      console.log(this.taskScopeArray);
-
+      if (e.target.value == 'BS Information Technology') {
+        this.taskScopeArray.push(this.itScope);
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Information Systems') {
+        this.taskScopeArray.push(this.isScope);
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Computer Science') {
+        this.taskScopeArray.push(this.csScope);
+        console.log(this.taskScopeArray);
+      }
+      else {
+        this.taskScopeArray.push(e.target.value)
+        console.log(this.taskScopeArray);
+      }
       this.taskScopeArray.forEach(element => {
         this.taskService.setRecipients(element).subscribe(res => {
           res.forEach((data: any) => {
