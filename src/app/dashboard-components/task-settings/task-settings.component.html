@@ -19,6 +19,7 @@
 
     </div>
   <div class="sub-container" *ngIf="taskData as task">
+
     <!-- Start Coding here -->
         <div class="taskSettings-container" >
           <div class="taskSettings-container-bar">
@@ -35,15 +36,88 @@
                 <h2 class="text-2xl mt-4"> Task Scope: </h2>
                   <input type="text" placeholder="{{task.scope}}"  class="taskScope-textfield" />
               </div>
+
           <div class="taskSettings-buttons">
-            <button type="" class="addScopeBtn"> Add Scope </button>
+            <button type="" class="addScopeBtn" (click)="triggerAddTaskModal()"> Add Scope </button>
             <button type="" class="removeScopeBtn"> Remove Scope </button>
             <button type="" class="clearScopeBtn"> Clear Scope </button>
           </div>
+
           <div class="updateTask-button">
             <button type="" class="updateTaskBtn"> Update Task </button>
           </div>
+
           </div>
+          <!-- update new task scope beginning -->
+
+          <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="addTaskModal">
+            <div class="modal-center">
+              <div class="modal-overlay" aria-hidden="true"></div>
+              <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+              <div class="modal">
+                <form [formGroup]="addTaskForm" (ngSubmit)="updateTaskScope()">
+                <div class="modal-bg">
+                  <div class="modal-header">
+                    <div class="modal-header-icon-create">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                          </svg>
+                    </div>
+                    <div class="modal-header-title">
+                      <h3 id="modal-title">
+                        Update Task Scope
+                      </h3>
+                      <div class="mt-2">
+                        <p>
+                          Update the task scope for this assignment
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-form-container">
+                    <div class="modal-form">
+
+                      <div class="mb-4">
+                        <label for="scope">
+                          Task Scope
+                        </label>
+                        <select name="scope" id="scope" style="width: 100%;" (change)="changeTaskScope($event)" formControlName="scope">
+                          <option value="" disabled>Choose the scope of the task</option>
+                            <option *ngFor="let scope of newTaskScope">{{scope}}</option>
+                          </select>
+
+                        <div *ngIf="taskScopeArray.length > 0">
+                          <p *ngFor="let item of taskScopeArray" style="display: inline-block; margin-right: 4px;">{{item}}</p>
+                        </div>
+                      </div>
+                      <div class="login-form-error" *ngIf="addTaskForm.controls.scope.errors?.required && addTaskForm.controls.scope.touched">Task scope is required.
+                      </div>
+
+
+                    </div>
+                  </div>
+                <div class="modal-buttons">
+                  <button type="submit" class="addBtn" *ngIf="addTaskForm.valid">
+                    Update Task Scope
+                  </button>
+                  <button type="submit" class="addBtn-disabled" *ngIf="addTaskForm.invalid">
+                    Update Task Scope
+                  </button>
+                  <button type="button" class="cancelBtn" (click)="triggerAddTaskModal()">
+                    Cancel
+                  </button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+        <!-- update new task scope end -->
         </div>
 
-  </div>
+
+
+
+
