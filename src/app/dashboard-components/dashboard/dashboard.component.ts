@@ -13,8 +13,20 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class DashboardComponent implements OnInit {
   // taskScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE'];
   itScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITG','2ITA','2ITB','2ITC','2ITD','3ITA','3ITB','3ITC','3ITD','3ITE','4ITA','4ITB','4ITC','4ITD','4ITE','4ITF','4ITG','4ITH'];
-  isScope: any = ['1ISA','1ISB','2ISA','2ISB','3ISA','3ISB','4ISA','4ISB',];
-  csScope: any = ['1CSA','1CSB','1CSC','2CSA','2CSB','2CSC','1CSA','1CSB','1CSC','3CSA','3CSB','3CSC','3CSD','4CSA','4CSB'];
+  itScope1st: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITG'];
+  itScope2nd: any = ['2ITA','2ITB','2ITC','2ITD'];
+  itScope3rd: any = ['3ITA','3ITB','3ITC','3ITD','3ITE']
+  itScope4th: any = ['4ITA','4ITB','4ITC','4ITD','4ITE','4ITF','4ITG','4ITH'];
+  isScope: any = ['1ISA','1ISB','2ISA','2ISB','3ISA','3ISB','4ISA','4ISB'];
+  isScope1st: any = ['1ISA','1ISB'];
+  isScope2nd: any = ['2ISA','2ISB'];
+  isScope3rd: any = ['3ISA','3ISB'];
+  isScope4th: any = ['4ISA','4ISB'];
+  csScope: any = ['1CSA','1CSB','1CSC','2CSA','2CSB','2CSC','3CSA','3CSB','3CSC','3CSD','4CSA','4CSB'];
+  csScope1st: any = ['1CSA','1CSB','1CSC'];
+  csScope2nd: any = ['2CSA','2CSB','2CSC'];
+  csScope3rd: any = ['3CSA','3CSB','3CSC','3CSD'];
+  csScope4th: any = ['4CSA','4CSB'];
   taskScopeArray!: string[];
   p: number = 1;
   email!:string;
@@ -64,22 +76,117 @@ export class DashboardComponent implements OnInit {
     this.addTaskModal = !this.addTaskModal;
   }
 
+  public clearScope() {
+    this.taskScopeArray = [];
+  }
+
   changeTaskScope(e:any) {
     console.log(e.target.value);
     console.log(typeof e.target.value);
     if (this.taskScopeArray.includes(e.target.value)) {
       console.log('already included')
-    } else if (!this.taskScopeArray.includes(e.target.value)) {
+    }
+    else if (!this.taskScopeArray.includes(e.target.value)) {
       if (e.target.value == 'BS Information Technology') {
-        this.taskScopeArray.push(this.itScope);
+        this.itScope.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Information Technology (1st Year)') {
+        this.itScope1st.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Information Technology (2nd Year)') {
+        this.itScope2nd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Information Technology (3rd Year)') {
+        this.itScope3rd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Information Technology (4th Year)') {
+        this.itScope4th.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
         console.log(this.taskScopeArray);
       }
       else if (e.target.value == 'BS Information Systems') {
-        this.taskScopeArray.push(this.isScope);
+        this.isScope.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Information Systems (1st Year)') {
+        this.isScope1st.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Information Systems (2nd Year)') {
+        this.isScope2nd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Information Systems (3rd Year)') {
+        this.isScope1st.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Information Systems (4th Year)') {
+        this.isScope4th.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
         console.log(this.taskScopeArray);
       }
       else if (e.target.value == 'BS Computer Science') {
-        this.taskScopeArray.push(this.csScope);
+        this.csScope.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Computer Science (1st Year)') {
+        this.csScope1st.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Computer Science (2nd Year)') {
+        this.csScope2nd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Computer Science (3rd Year)') {
+        this.csScope3rd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'BS Computer Science (4th Year)') {
+        this.csScope4th.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'All Departments **') {
+        this.itScope.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        this.isScope.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        this.csScope.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
         console.log(this.taskScopeArray);
       }
       else {
@@ -89,30 +196,48 @@ export class DashboardComponent implements OnInit {
       this.taskScopeArray.forEach(element => {
         this.taskService.setRecipients(element).subscribe(res => {
           res.forEach((data: any) => {
-            let pushToken = {
-              pushToken: data.pushToken
+            if (data.pushToken == null) {
+              let pushToken = {
+                pushToken: ''
+              }
+              let userData = {
+                uid: data.id,
+                status: 'Pending',
+                section: data.section,
+                submissionLink: '',
+                displayName: data.displayName
+              }
+              console.log(data.pushToken)
+              if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
+                this.taskRecipients.push(userData);
+                /* vendors contains the element we're looking for */
+              }
+              if (!this.userPushTokens.some(e => e.pushToken === pushToken.pushToken)) {
+                this.userPushTokens.push(pushToken);
+                /* vendors contains the element we're looking for */
+              }
             }
-            let userData = {
-              uid: data.id,
-              status: 'Pending',
-              section: data.section,
-              submissionLink: '',
-              displayName: data.displayName
+            if (data.pushToken != null) {
+              let pushToken = {
+                pushToken: data.pushToken
+              }
+              let userData = {
+                uid: data.id,
+                status: 'Pending',
+                section: data.section,
+                submissionLink: '',
+                displayName: data.displayName
+              }
+              console.log(data.pushToken)
+              if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
+                this.taskRecipients.push(userData);
+                /* vendors contains the element we're looking for */
+              }
+              if (!this.userPushTokens.some(e => e.pushToken === pushToken.pushToken)) {
+                this.userPushTokens.push(pushToken);
+                /* vendors contains the element we're looking for */
+              }
             }
-            console.log(data.pushToken)
-            if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
-              this.taskRecipients.push(userData);
-              /* vendors contains the element we're looking for */
-            }
-            if (!this.userPushTokens.some(e => e.pushToken === pushToken.pushToken)) {
-              this.userPushTokens.push(pushToken);
-              /* vendors contains the element we're looking for */
-            }
-            // if (!this.userPushTokens.some(e => e.pushToken === data.pushToken)) {
-            //   this.userPushTokens.push(data.pushToken);
-            //   /* vendors contains the element we're looking for */
-            // }
-
           });
         })
       })
