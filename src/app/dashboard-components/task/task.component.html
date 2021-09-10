@@ -95,16 +95,24 @@
               <h1>Tasks:</h1>
           </div>
           <div class="admin-container-children" *ngFor="let recipient of taskData.recipients | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/task/', task.id]">
-              <div class="admin-container-children-left-pending" *ngIf="task.status == 'Pending'">
+              <div class="admin-container-children-left">
                   <p>{{recipient.displayName}}</p>
-                  <p>{{recipient.section}}</p>
               </div>
-              <div class="admin-container-children-left-completed" *ngIf="task.status == 'Completed'">
-                <p>{{recipient.displayName}}</p>
+              <div class="admin-container-children-left" >
                 <p>{{recipient.section}}</p>
-            </div>
+              </div>
+              <div class="admin-container-children-left" >
+                <p *ngIf="recipient.submissionLink != ''">{{recipient.submissionLink}}</p>
+                <p *ngIf="recipient.submissionLink == ''">No Submission Yet</p>
+              </div>
               <div class="admin-container-children-right">
-                <p>{{recipient.status}}</p>
+                <p *ngIf="recipient.status == 'Late'">Status: <span class="recipient-late">{{recipient.status}}</span></p>
+                <p *ngIf="recipient.status == 'Pending'">Status: <span class="recipient-pending">{{recipient.status}}</span></p>
+                <p *ngIf="recipient.status == 'For Approval'">Status: <span class="recipient-forApproval">{{recipient.status}}</span></p>
+                <p *ngIf="recipient.status == 'Accomplished'">Status: <span class="recipient-accomplished">{{recipient.status}}</span></p>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
               </div>
           </div>
           <pagination-controls (pageChange)="p = $event"></pagination-controls>

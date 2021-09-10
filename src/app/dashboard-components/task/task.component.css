@@ -91,5 +91,19 @@
   @apply w-1/2 flex flex-row h-full pl-2 items-center;
 }
 .admin-container-children-right {
-  @apply w-1/2 text-right pr-2;
+  @apply w-1/2 text-right pr-2 flex flex-row justify-end;
 }
+.recipient-late {
+  color: red;
+}
+.recipient-pending {
+  color: yellow;
+}
+.recipient-forApproval {
+  color: orange;
+}
+.recipient-accomplished {
+  color: green;
+}
+
+

@@ -50,6 +50,7 @@ export class TaskComponent implements OnInit {
     ).subscribe((res) => {
       this.taskData = res;
       console.log(res);
+      console.log(res.recipients.length);
     })
   }
 
