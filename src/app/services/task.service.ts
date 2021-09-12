@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastService } from './toast.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import firebase from 'firebase/app';
+// import * as firestore from '@google-cloud/firestore';
 @Injectable({
   providedIn: 'root'
 })
@@ -109,6 +111,22 @@ export class TaskService {
       console.log(task)
       console.log(+ new Date(Date.now()))
       this.afs.collection('tasks').doc(taskId).set(task)
+  }
+
+  public updateStudentStatus(id:string,newData:any,oldData:any) {
+    return this.afs.collection('tasks').doc(id).update({
+      recipients: firebase.firestore.FieldValue.arrayRemove(oldData),
+    }).then(() => {
+      this.afs.collection('tasks').doc(id).update({
+        recipients: firebase.firestore.FieldValue.arrayUnion(newData),
+      })
+    }).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    })
+    
+
   }
 
 
