@@ -36,9 +36,11 @@ export class DashboardComponent implements OnInit {
   userData:any;
   fsData: any;
   addTaskModal!: boolean;
+  deleteTaskModal!: boolean;
   dateToday = new Date();
   verifyTasks$: any;
   addTaskForm!:any;
+  deleteTaskForm!: any;
   taskRecipients: { uid: any; status: string; section: any; submissionLink: string; displayName: any; }[] = [];
   userPushTokens: { pushToken: string; }[] = [];
 
@@ -70,11 +72,15 @@ export class DashboardComponent implements OnInit {
       scope: ['', Validators.required],
       deadline: ['', Validators.required],
     });
+
+    // delete task
   }
+
 
   public triggerAddTaskModal() {
     this.addTaskModal = !this.addTaskModal;
   }
+
 
   public clearScope() {
     this.taskScopeArray = [];

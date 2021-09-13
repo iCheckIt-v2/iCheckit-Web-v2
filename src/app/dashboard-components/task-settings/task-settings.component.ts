@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TaskService } from 'src/app/services/task.service';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ToastService } from 'src/app/services/toast.service';
 // modal dialog import
 @Component({
 	selector: 'task-settings',
@@ -33,6 +34,8 @@ export class TaskSettingsComponent implements OnInit {
   addScopeModal!: boolean;
   editTaskScope!: any;
   verifyTasks$: any;
+  deleteTaskForm!: any;
+  deleteTaskModal!: boolean;
 
   // editTaskScope! : any;
   // end of edit task import
@@ -43,9 +46,9 @@ export class TaskSettingsComponent implements OnInit {
     private router: Router,
     readonly fire: AngularFireAuth,
     private taskService: TaskService,
-    // start of edit task constructors
     private fb: FormBuilder,
-    // end of edit task constructors
+    public toastService: ToastService
+
   ) { }
 
 	ngOnInit(): void {
@@ -75,21 +78,25 @@ export class TaskSettingsComponent implements OnInit {
     });
 
 
-  this.addTaskForm = this.fb.group({
-    scope: ['', Validators.required],
-
-
-  });
+  // this.deleteTaskForm = this.fb.group({
+  //     title: ['', Validators.required,],
+  //     description: ['', Validators.required],
+  //     scope: ['', Validators.required],
+  //     deadline: ['', Validators.required],
+  // });
    }
 
    public triggerAddTaskModal() {
     this.addTaskModal = !this.addTaskModal;
     this.taskScopeArray=this.taskData.scope
 
-
-
-
    }
+
+   public triggerDeleteTaskModal() {
+    this.deleteTaskModal = !this.deleteTaskModal;
+
+  }
+
 
    changeTaskScope(e:any) {
     console.log(e.target.value);
@@ -135,32 +142,39 @@ export class TaskSettingsComponent implements OnInit {
 
 
 
-  addTask() {
+//   addTask() {
 
-    if (this.addTaskForm.valid) {
-      this.taskService.addTask(
-        this.addTaskForm.controls['title'].value,
-        this.addTaskForm.controls['description'].value,
-        // this.taskScopeArray,
-        this.newTaskScopeArray,
-        new Date(this.addTaskForm.controls['deadline'].value),
-        this.fsData.displayName,
-        this.taskRecipients,
-        this.userPushTokens
-      )
+//     if (this.addTaskForm.valid) {
+//       this.taskService.addTask(
+//         this.addTaskForm.controls['title'].value,
+//         this.addTaskForm.controls['description'].value,
+//         // this.taskScopeArray,
+//         this.newTaskScopeArray,
+//         new Date(this.addTaskForm.controls['deadline'].value),
+//         this.fsData.displayName,
+//         this.taskRecipients,
+//         this.userPushTokens
+//       )
+//     }
+//     else if (this.addTaskForm.invalid) {
+//       this.addTaskForm.controls['title'].markAsTouched();
+//       this.addTaskForm.controls['description'].markAsTouched();
+//       this.addTaskForm.controls['scope'].markAsTouched();
+//       this.addTaskForm.controls['deadline'].markAsTouched();
+
+
+//   }
+// }
+
+  public deleteTask() {
+
+     this.taskService.deleteTask(this.taskData.taskId).then(() => {
+       this.router.navigate(['/dashboard'])
+     });
+
+
     }
-    else if (this.addTaskForm.invalid) {
-      this.addTaskForm.controls['title'].markAsTouched();
-      this.addTaskForm.controls['description'].markAsTouched();
-      this.addTaskForm.controls['scope'].markAsTouched();
-      this.addTaskForm.controls['deadline'].markAsTouched();
 
-
-  }
-}
-  updateTaskScope() {
-
-  }
 
   }
 

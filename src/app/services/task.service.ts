@@ -6,6 +6,8 @@ import { ToastService } from './toast.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import firebase from 'firebase/app';
+import { Router } from '@angular/router';
+
 // import * as firestore from '@google-cloud/firestore';
 @Injectable({
   providedIn: 'root'
@@ -135,9 +137,21 @@ export class TaskService {
     }).catch((err) => {
       console.log(err);
     })
-    
+
 
   }
 
 
+
+  public deleteTask(id:string): Promise <any> {
+    return this.afs.collection('tasks').doc(id).delete().then((res) => {
+      console.log(res)
+    })
+    .catch((err) =>{
+      console.log(err)
+    })
+  }
+
 }
+
+
