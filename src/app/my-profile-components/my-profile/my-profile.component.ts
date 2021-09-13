@@ -25,7 +25,7 @@ export class MyProfileComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    readonly fire: AngularFireAuth, 
+    readonly fire: AngularFireAuth,
     public router: Router,
     private fb: FormBuilder,
     public toastService: ToastService,
@@ -85,8 +85,8 @@ export class MyProfileComponent implements OnInit {
 
   public triggerChangeEmailModal() {
     this.editEmailModal = !this.editEmailModal
-  }  
-  
+  }
+
   public editMyProfile() {
     if (this.editAccountForm.valid) {
       this.auth.editMyProfile(this.editAccountForm.controls['displayName'].value,this.editAccountForm.controls['contactNumber'].value, this.fsData.email, this.editAccountForm.controls['password'].value, this.fsData.id)
@@ -103,7 +103,7 @@ export class MyProfileComponent implements OnInit {
     /*
     this.auth.editMyProfile(this.displayName,this.contactNumber,this.currentEmail,this.newEmail,this.password,this.fsData.id).then(() => alert('User Profile Has Been Updated')).then(() => this.triggerEditModal())
     */
-  } 
+  }
 
   public deleteMyProfile() {
     if (this.deleteAccountForm.valid) {
@@ -111,7 +111,7 @@ export class MyProfileComponent implements OnInit {
       .then(() => this.triggerDeleteModal())
       .finally(() => this.deleteAccountForm.reset())
 
-    } 
+    }
     else if (this.deleteAccountForm.invalid) {
       this.deleteAccountForm.controls['currentEmail'].markAsTouched();
       this.deleteAccountForm.controls['password'].markAsTouched();
@@ -150,3 +150,4 @@ export class MyProfileComponent implements OnInit {
     }
 }
 }
+
