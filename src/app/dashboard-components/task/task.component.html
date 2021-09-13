@@ -110,11 +110,69 @@
                 <p *ngIf="recipient.status == 'Pending'">Status: <span class="recipient-pending">{{recipient.status}}</span></p>
                 <p *ngIf="recipient.status == 'For Approval'">Status: <span class="recipient-forApproval">{{recipient.status}}</span></p>
                 <p *ngIf="recipient.status == 'Accomplished'">Status: <span class="recipient-accomplished">{{recipient.status}}</span></p>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" (click)="triggerAddTaskModal(recipient)">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
           </div>
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
+</div>
+
+ <!-- modal container for student user actions -->
+ <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="updateStatusModal">
+  <div class="modal-center">
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+    <div class="modal">
+      <form [formGroup]="updateStatusForm" (ngSubmit)="updateStudentStatus()">
+      <div class="modal-bg">
+        <div class="modal-header">
+          <div class="modal-header-icon-edit">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+          </div>
+          <div class="modal-header-title">
+            <h3 id="modal-title">
+              Update Submission Status Of {{displayName}}
+            </h3>
+            <div class="mt-2">
+              <p>
+                Update the status of the {{displayName}}'s submission
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-form-container">
+          <div class="modal-form">
+            <div class="mb-4">
+              <label for="taskStatus">
+                Student's Task Status
+              </label>
+              <select name="scope" id="scope" style="width: 100%;" (change)="changeTaskScope($event)" formControlName="status">
+              <option disabled>{{updateStatusForm.controls.status.value}}</option>
+              <option>Pending</option>
+              <option>For Approval</option>
+              <option>Accomplished</option>
+              <option>Late</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      <div class="modal-buttons">
+        <button type="submit" class="addBtn" *ngIf="updatedStatus">
+          Update Task Status
+        </button>
+        <button type="submit" class="addBtn-disabled" [disabled]="!updatedStatus" *ngIf="!updatedStatus">
+          Update Task Status
+        </button>
+        <button type="button" class="cancelBtn" (click)="triggerAddTaskModal()">
+          Cancel
+        </button>
+      </div>
+      </form>
+    </div>
+  </div>
 </div>
