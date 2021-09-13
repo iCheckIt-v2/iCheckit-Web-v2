@@ -1,6 +1,23 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 const cors = require("cors")({origin: true});
+const nodemailer = require('nodemailer');
+// Configure the email transport using the default SMTP transport and a GMail account.
+// For Gmail, enable these:
+// 1. https://www.google.com/settings/security/lesssecureapps
+// 2. https://accounts.google.com/DisplayUnlockCaptcha
+// For other types of transports such as Sendgrid see https://nodemailer.com/transports/
+// TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
+const mailTransport = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: gmailEmail,
+    pass: gmailPassword,
+  },
+});
+const APP_NAME = 'iCheckit';
 
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
@@ -101,6 +118,8 @@ exports.updateUser = functions.firestore
 const data = event.data();
 const taskTitle = data.title;
 const pushTokens = data.pushTokens;
+const recipients = data.recipients;
+
 // Determine the message
 const payload = {
   notification: {
@@ -112,9 +131,29 @@ const payload = {
 }
 console.log(payload);
 pushTokens.forEach((element: any) => {
-  console.log(element.pushToken)
-
-  return admin.messaging().sendToDevice(element.pushToken,payload)
+  if (element.pushToken == '') {
+      console.log('no push token')
+  }   
+  else if (element.pushToken != '') {
+      console.log(element.pushToken);
+      return admin.messaging().sendToDevice(element.pushToken, payload);
+  }
+});
+recipients.forEach(async (element: any) => {
+  if (element.email == '') {
+      console.log('no email')
+  }   
+  else if (element.email != '') {
+    const mailOptions = {
+      from: `${APP_NAME} <noreply@firebase.com>`,
+      to: element.email,
+      subject: `Welcome to ${APP_NAME}!`,
+      text: `Hey ${element.displayName || ''}! Welcome to ${APP_NAME}. I hope you will enjoy our service.`
+    };
+  
+    await mailTransport.sendMail(mailOptions);
+    functions.logger.log('New welcome email sent to:', element.email);
+    return null;  }
 });
 // // Get the user's tokenID
 // var pushToken = "";
