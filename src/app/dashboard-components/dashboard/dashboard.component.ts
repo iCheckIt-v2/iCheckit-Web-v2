@@ -205,7 +205,8 @@ export class DashboardComponent implements OnInit {
                 status: 'Pending',
                 section: data.section,
                 submissionLink: '',
-                displayName: data.displayName
+                displayName: data.displayName,
+                email: data.email
               }
               console.log(data.pushToken)
               if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
@@ -226,7 +227,8 @@ export class DashboardComponent implements OnInit {
                 status: 'Pending',
                 section: data.section,
                 submissionLink: '',
-                displayName: data.displayName
+                displayName: data.displayName,
+                email: data.email
               }
               console.log(data.pushToken)
               if (!this.taskRecipients.some(e => e.uid === userData.uid)) {

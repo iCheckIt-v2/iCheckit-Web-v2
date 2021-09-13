@@ -94,6 +94,16 @@ export class TaskService {
 
   public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any>,pushTokens: any ) {
     let taskId = this.afs.createId();
+
+    recipients.forEach(recipient => {
+      recipient.title = title;
+      recipient.taskId = taskId;
+      recipient.description = description;
+      recipient.deadline = + deadline;
+      recipient.uploadedBy = uploadedBy;
+      recipient.createdAt = + new Date();
+      console.log(recipient)
+    });
       let task = {
         taskId: taskId,
         title: title,

@@ -27,6 +27,15 @@ export class TaskComponent implements OnInit {
   status!:string;
   uid!:string;
   section!:string;
+  uploadedBy!:string;
+  createdAt!:string;
+  taskId!:string;
+  title!:string;
+  description!:string;
+  deadline!:any;
+  email!:any;
+
+
   constructor(
     public auth: AuthService,
     private route: ActivatedRoute,
@@ -57,6 +66,13 @@ export class TaskComponent implements OnInit {
       this.taskData = res;
       console.log(res);
       console.log(res.recipients.length);
+      let mydata;
+      res.recipients.forEach((element: any) => {
+        if(Object.values(element).includes("FpSzlpX4RHSLaqmFkiFkkiJqoMo2")) { 
+          console.log(element)
+            console.log('it exists')
+        }
+      });
     })
 
     this.updateStatusForm = this.fb.group({
@@ -72,6 +88,13 @@ export class TaskComponent implements OnInit {
       this.status = '';
       this.uid = '';
       this.section = '';    
+      this.createdAt = '';
+      this.uploadedBy = '';
+      this.title = '';   
+      this.description = '';    
+      this.deadline = '';
+      this.taskId = '';
+      this.email = '';
     }
     else {
       this.displayName = recipient.displayName;
@@ -79,6 +102,13 @@ export class TaskComponent implements OnInit {
       this.status = recipient.status;
       this.uid = recipient.uid;
       this.section = recipient.section; 
+      this.title = this.taskData.title; 
+      this.taskId = this.taskData.taskId; 
+      this.description = this.taskData.description; 
+      this.deadline = this.taskData.deadline; 
+      this.uploadedBy = this.taskData.uploadedBy; 
+      this.createdAt = this.taskData.createdAt;
+      this.email = recipient.uid;
     
       this.updateStatusModal = !this.updateStatusModal;
       this.updateStatusForm.controls.status.setValue(recipient.status);
@@ -97,14 +127,28 @@ export class TaskComponent implements OnInit {
       submissionLink: this.submissionLink,
       status: this.status,
       uid: this.uid,
-      section: this.section
+      section: this.section,
+      title: this.taskData.title,
+      taskId: this.taskData.taskId,
+      description: this.taskData.description,
+      deadline: this.taskData.deadline,
+      uploadedBy: this.taskData.uploadedBy,
+      createdAt: this.taskData.createdAt,
+      email: this.email
     }
     let recipientData = {
       displayName: this.displayName,
       submissionLink: this.submissionLink,
       status: this.updatedStatus,
       uid: this.uid,
-      section: this.section
+      section: this.section,
+      title: this.taskData.title,
+      taskId: this.taskData.taskId,
+      description: this.taskData.description,
+      deadline: this.taskData.deadline,
+      uploadedBy: this.taskData.uploadedBy,
+      createdAt: this.taskData.createdAt,
+      email: this.email
     }
     // console.log(recipientData);
     this.taskService.updateStudentStatus(this.taskData.taskId,recipientData,oldRecipientData).then(() => {
@@ -113,6 +157,13 @@ export class TaskComponent implements OnInit {
       this.status = '';
       this.uid = '';
       this.section = '';   
+      this.createdAt = '';
+      this.uploadedBy = '';
+      this.title = '';   
+      this.description = '';    
+      this.deadline = '';
+      this.taskId = '';
+      this.email = '';
       this.updatedStatus = null;
       this.triggerAddTaskModal();
     })
