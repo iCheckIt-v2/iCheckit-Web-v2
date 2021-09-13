@@ -45,11 +45,11 @@
   background-color: #B7152F;;
 }
 .updateTask-button {
-  @apply px-20 py-2  text-white text-sm sm:flex sm:flex-row-reverse;
+  @apply py-5 text-white text-sm flex justify-end items-end w-full;
 
 }
 .updateTaskBtn {
-  @apply px-20 py-2 border border-gray-300 text-white text-lg sm:flex sm:flex-row-reverse mb-10;
+  @apply px-20 py-2 mr-8 border border-gray-300 text-white text-base flex justify-center items-center;
   background-color: #35414F;
 }
 .scope-btn {

@@ -19,11 +19,11 @@ export class TaskSettingsComponent implements OnInit {
   fsData: any;
    id!: any;
   taskData: any;
-
+  taskStatus: any = ['Pending','Completed']
   // start of edit task import
-  taskScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE','BS Information Technology', 'BS Information Systems', 'BS Computer Science'];
+  // taskScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE','BS Information Technology', 'BS Information Systems', 'BS Computer Science'];
   taskScopeArray!: string[];
-  newTaskScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE','BS Information Technology', 'BS Information Systems', 'BS Computer Science'];
+  // newTaskScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE','BS Information Technology', 'BS Information Systems', 'BS Computer Science'];
   newTaskScopeArray!: string[];
   addTaskForm!:any;
   newTaskForm!: any;
@@ -94,44 +94,42 @@ export class TaskSettingsComponent implements OnInit {
    changeTaskScope(e:any) {
     console.log(e.target.value);
     console.log(typeof e.target.value);
-    if (this.taskScopeArray.includes(e.target.value)) {
-      console.log('already included')
-    } else if (!this.taskScopeArray.includes(e.target.value)) {
-      this.taskScopeArray.push(e.target.value)
-      console.log(this.taskScopeArray);
+    // if (this.taskScopeArray.includes(e.target.value)) {
+    //   console.log('already included')
+    // } else if (!this.taskScopeArray.includes(e.target.value)) {
+    //   this.taskScopeArray.push(e.target.value)
+    //   console.log(this.taskScopeArray);
 
-      this.taskScopeArray.forEach(element => {
-        this.taskService.setRecipients(element).subscribe(res => {
-          res.forEach((data: any) => {
-            let pushToken = {
-              pushToken: data.pushToken
-            }
-            let userData = {
-              uid: data.id,
-              status: 'Pending',
-              section: data.section,
-              submissionLink: '',
-              displayName: data.displayName
-            }
-            console.log(data.pushToken)
-            if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
-              this.taskRecipients.push(userData);
+    //   this.taskScopeArray.forEach(element => {
+    //     this.taskService.setRecipients(element).subscribe(res => {
+    //       res.forEach((data: any) => {
+    //         let pushToken = {
+    //           pushToken: data.pushToken
+    //         }
+    //         let userData = {
+    //           uid: data.id,
+    //           status: 'Pending',
+    //           section: data.section,
+    //           submissionLink: '',
+    //           displayName: data.displayName
+    //         }
+    //         console.log(data.pushToken)
+    //         if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
+    //           this.taskRecipients.push(userData);
 
-            }
-            if (!this.userPushTokens.some(e => e.pushToken === pushToken.pushToken)) {
-              this.userPushTokens.push(pushToken);
+    //         }
+    //         if (!this.userPushTokens.some(e => e.pushToken === pushToken.pushToken)) {
+    //           this.userPushTokens.push(pushToken);
 
-            }
-
-
-          });
-        })
-      })
-    }
-    console.log(this.taskRecipients)
-    console.log(this.userPushTokens)
+    //         }
 
 
+    //       });
+    //     })
+    //   })
+    // }
+    // console.log(this.taskRecipients)
+    // console.log(this.userPushTokens)
   }
 
 
