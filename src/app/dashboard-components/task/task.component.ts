@@ -36,6 +36,8 @@ export class TaskComponent implements OnInit {
   email!:any;
 
 
+  acceptAllModal!: boolean;
+  rejectAllModal!: boolean;
   constructor(
     public auth: AuthService,
     private route: ActivatedRoute,
@@ -114,11 +116,18 @@ export class TaskComponent implements OnInit {
       this.updateStatusForm.controls.status.setValue(recipient.status);
     }
   }
-  
+
   changeTaskScope(e:any) {
     // this.status = e.target.value;
     this.updatedStatus = e.target.value;
     console.log(this.updatedStatus);
+  }
+
+  public triggerAcceptAllSubmissionModal() {
+    this.acceptAllModal =! this.acceptAllModal;
+  }
+  public triggerRejectAllSubmissionModal() {
+    this.rejectAllModal =! this.rejectAllModal;
   }
 
   updateStudentStatus() {
