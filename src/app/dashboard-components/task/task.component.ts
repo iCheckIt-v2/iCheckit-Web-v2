@@ -27,6 +27,8 @@ export class TaskComponent implements OnInit {
   status!:string;
   uid!:string;
   section!:string;
+  acceptAllModal!: boolean;
+  rejectAllModal!: boolean;
   constructor(
     public auth: AuthService,
     private route: ActivatedRoute,
@@ -71,24 +73,31 @@ export class TaskComponent implements OnInit {
       this.submissionLink = '';
       this.status = '';
       this.uid = '';
-      this.section = '';    
+      this.section = '';
     }
     else {
       this.displayName = recipient.displayName;
       this.submissionLink = recipient.submissionLink;
       this.status = recipient.status;
       this.uid = recipient.uid;
-      this.section = recipient.section; 
-    
+      this.section = recipient.section;
+
       this.updateStatusModal = !this.updateStatusModal;
       this.updateStatusForm.controls.status.setValue(recipient.status);
     }
   }
-  
+
   changeTaskScope(e:any) {
     // this.status = e.target.value;
     this.updatedStatus = e.target.value;
     console.log(this.updatedStatus);
+  }
+
+  public triggerAcceptAllSubmissionModal() {
+    this.acceptAllModal =! this.acceptAllModal;
+  }
+  public triggerRejectAllSubmissionModal() {
+    this.rejectAllModal =! this.rejectAllModal;
   }
 
   updateStudentStatus() {
@@ -112,7 +121,7 @@ export class TaskComponent implements OnInit {
       this.submissionLink = '';
       this.status = '';
       this.uid = '';
-      this.section = '';   
+      this.section = '';
       this.updatedStatus = null;
       this.triggerAddTaskModal();
     })
