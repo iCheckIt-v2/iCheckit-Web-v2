@@ -34,8 +34,15 @@ export class TaskComponent implements OnInit {
   description!:string;
   deadline!:any;
   email!:any;
-
-
+  totalRecipients: any;
+  pendingRecipients = 0;
+  lateRecipients = 0;
+  forApprovalRecipients = 0;
+  accomplishedRecipients = 0;
+  pendingRecipientsPct = 0;
+  lateRecipientsPct = 0;
+  forApprovalRecipientsPct = 0;
+  accomplishedRecipientsPct = 0;
   acceptAllModal!: boolean;
   rejectAllModal!: boolean;
   constructor(
@@ -67,14 +74,31 @@ export class TaskComponent implements OnInit {
     ).subscribe((res) => {
       this.taskData = res;
       console.log(res);
-      console.log(res.recipients.length);
-      let mydata;
+      this.totalRecipients = res.recipients.length;
       res.recipients.forEach((element: any) => {
-        if(Object.values(element).includes("FpSzlpX4RHSLaqmFkiFkkiJqoMo2")) { 
-          console.log(element)
-            console.log('it exists')
+        if(Object.values(element).includes("Pending")) { 
+          this.pendingRecipients += 1;
+        }
+        if(Object.values(element).includes("For Approval")) { 
+          this.forApprovalRecipients += 1;
+        }
+        if(Object.values(element).includes("Late")) { 
+          this.lateRecipients += 1;
+        }
+        if(Object.values(element).includes("Accomplished")) { 
+          this.accomplishedRecipients += 1;
         }
       });
+      console.log(this.pendingRecipients)
+      console.log(this.forApprovalRecipients)
+      console.log(this.lateRecipients)
+      console.log(this.accomplishedRecipients)
+
+      // this.lateRecipientsPct = Math.floor((this.totalRecipients / this.lateRecipients) * 100);
+      // this.pendingRecipientsPct = Math.floor((this.totalRecipients / this.pendingRecipients) * 100);
+      // this.forApprovalRecipientsPct = Math.floor((this.totalRecipients / this.forApprovalRecipients) * 100);
+      // this.accomplishedRecipientsPct = Math.floor((this.totalRecipients / this.accomplishedRecipients) * 100)
+      // console.log(this.lateRecipientsPct)
     })
 
     this.updateStatusForm = this.fb.group({
