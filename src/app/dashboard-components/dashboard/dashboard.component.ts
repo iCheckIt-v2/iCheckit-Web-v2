@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   verifyTasks$: any;
   addTaskForm!:any;
   deleteTaskForm!: any;
-  taskRecipients: { uid: any; status: string; section: any; submissionLink: string; displayName: any; }[] = [];
+  taskRecipients: { email:string;uid: any; status: string; section: any; submissionLink: string; displayName: any; }[] = [];
   userPushTokens: { pushToken: string; }[] = [];
 
   constructor(
@@ -207,12 +207,12 @@ export class DashboardComponent implements OnInit {
                 pushToken: ''
               }
               let userData = {
+                email: data.email,
                 uid: data.id,
                 status: 'Pending',
                 section: data.section,
                 submissionLink: '',
                 displayName: data.displayName,
-                email: data.email
               }
               console.log(data.pushToken)
               if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
@@ -229,12 +229,12 @@ export class DashboardComponent implements OnInit {
                 pushToken: data.pushToken
               }
               let userData = {
+                email: data.email,
                 uid: data.id,
                 status: 'Pending',
                 section: data.section,
                 submissionLink: '',
                 displayName: data.displayName,
-                email: data.email
               }
               console.log(data.pushToken)
               if (!this.taskRecipients.some(e => e.uid === userData.uid)) {

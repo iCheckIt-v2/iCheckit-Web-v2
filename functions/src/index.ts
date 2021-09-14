@@ -11,7 +11,9 @@ const nodemailer = require('nodemailer');
 const gmailEmail = functions.config().gmail.email;
 const gmailPassword = functions.config().gmail.password;
 const mailTransport = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, 
   auth: {
     user: gmailEmail,
     pass: gmailPassword,
@@ -56,6 +58,14 @@ exports.adminCreateStudent = functions.https.onRequest((request, response) => {
         disabled: false,
       })
           .then((userRecord) => {
+            const mailOptions = {
+              from: `${APP_NAME} <noreply@firebase.com>`,
+              to: email,
+              subject: `Welcome to ${APP_NAME}!`,
+              text: `Hey ${displayName}! Welcome to ${APP_NAME}. I hope you will enjoy our service. We aim to provide a platform for students in terms of submission and keeping track of non academic college-wide tasks. Visit our mobile application to view all the tasks uploaded in our system.`
+            };
+            mailTransport.sendMail(mailOptions);
+            functions.logger.log('New welcome email sent to:', email);
             return response.status(200).send({
               message: "successfully created user",
               userRecord,
@@ -117,8 +127,11 @@ exports.updateUser = functions.firestore
 // Access data required for payload notification
 const data = event.data();
 const taskTitle = data.title;
+const uploadedBy = data.uploadedBy;
 const pushTokens = data.pushTokens;
+const deadline = data.deadline;
 const recipients = data.recipients;
+const description = data.description;
 
 // Determine the message
 const payload = {
@@ -139,7 +152,7 @@ pushTokens.forEach((element: any) => {
       return admin.messaging().sendToDevice(element.pushToken, payload);
   }
 });
-recipients.forEach(async (element: any) => {
+recipients.forEach((element: any) => {
   if (element.email == '') {
       console.log('no email')
   }   
@@ -147,13 +160,23 @@ recipients.forEach(async (element: any) => {
     const mailOptions = {
       from: `${APP_NAME} <noreply@firebase.com>`,
       to: element.email,
-      subject: `Welcome to ${APP_NAME}!`,
-      text: `Hey ${element.displayName || ''}! Welcome to ${APP_NAME}. I hope you will enjoy our service.`
+      subject: `${taskTitle} - <${APP_NAME}>`,
+      // text: `Hey ${element.displayName || ''}! Welcome to ${APP_NAME}. I hope you will enjoy our service.`
+      html: `<h2>A new task has been uploaded for you.</h2>
+      <p>1.) ${taskTitle}</p>
+      <p>- ${description}
+      <ul>
+      <li>Uploaded by: ${uploadedBy}</li>
+      <li>Deadline: ${new Date(deadline).toUTCString()}</li>
+      </ul>
+      <br>
+      <p>Please submit your proof of completion on or before the said deadline</p>
+      `
     };
-  
-    await mailTransport.sendMail(mailOptions);
+    mailTransport.sendMail(mailOptions);
     functions.logger.log('New welcome email sent to:', element.email);
-    return null;  }
+    return null;  
+  }
 });
 // // Get the user's tokenID
 // var pushToken = "";
