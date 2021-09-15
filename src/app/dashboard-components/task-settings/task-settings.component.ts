@@ -78,12 +78,7 @@ export class TaskSettingsComponent implements OnInit {
     });
 
 
-  // this.deleteTaskForm = this.fb.group({
-  //     title: ['', Validators.required,],
-  //     description: ['', Validators.required],
-  //     scope: ['', Validators.required],
-  //     deadline: ['', Validators.required],
-  // });
+
    }
 
    public triggerAddTaskModal() {

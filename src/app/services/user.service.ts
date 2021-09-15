@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { AngularFireAuth  } from '@angular/fire/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastService } from './toast.service';
+// import { countReset } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
 
   constructor(
     private afs: AngularFirestore,
-    readonly fire: AngularFireAuth, 
+    readonly fire: AngularFireAuth,
     private http: HttpClient,
     public toastService: ToastService
   ) { }
@@ -33,7 +34,20 @@ export class UserService {
           }
         )})
     );
-  } 
+  }
+
+  public getAdmin(id:string):Observable<any> {
+    // return this.afs.collection('users')
+    // .doc(id)
+    // .snapshotChanges()
+    // .pipe(
+    //   map((doc: any) => {
+    //     // console.log(doc)
+    //     return { id: doc.payload.id, ...doc.payload.data() };
+    //   })
+    // );
+    return this.afs.collection('users').doc(id).valueChanges()
+  }
 
   public getStudent(id:string):Observable<any> {
     // return this.afs.collection('users')
@@ -46,7 +60,7 @@ export class UserService {
     //   })
     // );
     return this.afs.collection('users').doc(id).valueChanges()
-  } 
+  }
 
 
 
@@ -64,7 +78,7 @@ export class UserService {
           }
         )})
     );
-  } 
+  }
 
   public getAdminUsers():Observable<any> {
     return this.afs.collection('users', ref => ref.where('role','==','CICS Office Staff').orderBy('createdAt','desc'))
@@ -80,10 +94,10 @@ export class UserService {
           }
         )})
     );
-  } 
+  }
   //https://us-central1-icheckit-6a8bb.cloudfunctions.net/adminCreateStudent
 
-  adminCreateStudent(displayName:string,section:string,course:string,contactNumber:string,email:string) : Promise<any> { 
+  adminCreateStudent(displayName:string,section:string,course:string,contactNumber:string,email:string) : Promise<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
     const params: URLSearchParams = new URLSearchParams();
     params.set('email', email);
@@ -121,7 +135,7 @@ export class UserService {
       });
   }
 
-  createAdmin(displayName:string,department:string,contactNumber:string,email:string) : Promise<any> { 
+  createAdmin(displayName:string,department:string,contactNumber:string,email:string) : Promise<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
     const params: URLSearchParams = new URLSearchParams();
     params.set('email', email);
@@ -158,7 +172,7 @@ export class UserService {
         this.toastService.publish('The student account creation was not successful. The user email might have been already existing in our database,','userDoesNotExist');
       });
   }
-  
+
   createStudentAccount(displayName:string,section:string,course:string,contactNumber:string,email:string) {
       return this.fire.createUserWithEmailAndPassword(email,'password')
       .then(res => {
@@ -182,7 +196,7 @@ export class UserService {
         .then(() => {alert('Student account with the email ' + email + ' has been created')})
       })
   }
-  
+
   deleteUserAccount(id:string,email:string) : Promise<any> {
       return this.afs.collection('users').doc(id).delete()
       .then(() => {
@@ -192,15 +206,33 @@ export class UserService {
       })
   }
 
-  updateUserAccount(id:string,email:string,displayName:string,contactNumber:string) : Promise<any> {
+  updateUserAccount(id:string,email:string,displayName:string,contactNumber:string,course:string,section:string,) : Promise<any> {
    return this.afs.collection('users').doc(id).update({
      email: email,
      displayName: displayName,
-     contactNumber: contactNumber
+     contactNumber: contactNumber,
+     course: course,
+     section: section,
+    //  department: department
    }).then(() => {
     this.toastService.publish('User account with the email ' + email + ' has been successfully updated','formSuccess')
   }).catch(() => {
     this.toastService.publish('There has been an issue with the update of the account: ' + email,'userDoesNotExist')
   })
+}
+
+updateAdminAccount(id:string,email:string,displayName:string,contactNumber:string, department:string,) : Promise<any> {
+  return this.afs.collection('users').doc(id).update({
+    email: email,
+    displayName: displayName,
+    contactNumber: contactNumber,
+    department: department,
+
+   //  department: department
+  }).then(() => {
+   this.toastService.publish('User account with the email ' + email + ' has been successfully updated','formSuccess')
+ }).catch(() => {
+   this.toastService.publish('There has been an issue with the update of the account: ' + email,'userDoesNotExist')
+ })
 }
 }

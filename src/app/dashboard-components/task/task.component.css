@@ -73,7 +73,7 @@
   font-family: Antonio;
 }
 .approveAll-icon {
-  @apply ml-20 mr-4
+  @apply ml-5 mr-4
 }
 .rejectAll-icon {
   @apply mr-1
@@ -105,18 +105,27 @@
   @apply w-1/2 flex flex-row h-full pl-2 items-center;
 }
 .admin-container-children-right {
-  @apply w-1/2 text-right pr-2 flex flex-row justify-end ;
+  @apply w-1/2 text-right  flex flex-row justify-end;
+}
+
+.acceptRejectIcon {
+  @apply text-right flex flex-row justify-end ;
 }
 .checkIcon {
-  @apply w-1/2 flex justify-center items-center
+  @apply  flex justify-end items-start mr-2 ml-2;
 }
 .checkIcon svg {
-  @apply mr-4
+  @apply mr-2;
+}
+.xIcon {
+  @apply flex justify-end items-start pr-2;
 }
 .recipient-late {
-  color: red;
+@apply mr-20;
+  color: red
 }
 .recipient-pending {
+  @apply mr-24;
   color: yellow;
 }
 .recipient-forApproval {
