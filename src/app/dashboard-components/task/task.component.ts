@@ -154,52 +154,89 @@ export class TaskComponent implements OnInit {
     this.rejectAllModal =! this.rejectAllModal;
   }
 
-  updateStudentStatus() {
-    let oldRecipientData = {
-      displayName: this.displayName,
-      submissionLink: this.submissionLink,
-      status: this.status,
-      uid: this.uid,
-      section: this.section,
-      title: this.taskData.title,
-      taskId: this.taskData.taskId,
-      description: this.taskData.description,
-      deadline: this.taskData.deadline,
-      uploadedBy: this.taskData.uploadedBy,
-      createdAt: this.taskData.createdAt,
-      email: this.email
+  public acceptSubmission(recipient:any) {
+    let accomplishedData = {
+      createdAt: recipient.createdAt,
+      deadline: recipient.deadline,
+      description: recipient.description,
+      displayName: recipient.displayName,
+      email: recipient.email,
+      section: recipient.section,
+      status: 'Accomplished',
+      submissionLink: recipient.submissionLink,
+      taskId: recipient.taskId,
+      title: recipient.title,
+      uid: recipient.uid,
+      uploadedBy: recipient.uploadedBy,
     }
-    let recipientData = {
-      displayName: this.displayName,
-      submissionLink: this.submissionLink,
-      status: this.updatedStatus,
-      uid: this.uid,
-      section: this.section,
-      title: this.taskData.title,
-      taskId: this.taskData.taskId,
-      description: this.taskData.description,
-      deadline: this.taskData.deadline,
-      uploadedBy: this.taskData.uploadedBy,
-      createdAt: this.taskData.createdAt,
-      email: this.email
-    }
-    // console.log(recipientData);
-    this.taskService.updateStudentStatus(this.taskData.taskId,recipientData,oldRecipientData).then(() => {
-      this.displayName = '';
-      this.submissionLink = '';
-      this.status = '';
-      this.uid = '';
-      this.section = '';   
-      this.createdAt = '';
-      this.uploadedBy = '';
-      this.title = '';   
-      this.description = '';    
-      this.deadline = '';
-      this.taskId = '';
-      this.email = '';
-      this.updatedStatus = null;
-      this.triggerAddTaskModal();
-    })
+
+    this.taskService.updateStudentStatus(this.taskData.taskId,accomplishedData,recipient);
   }
+
+  public rejectSubmission(recipient:any) {
+    let accomplishedData = {
+      createdAt: recipient.createdAt,
+      deadline: recipient.deadline,
+      description: recipient.description,
+      displayName: recipient.displayName,
+      email: recipient.email,
+      section: recipient.section,
+      status: 'Pending',
+      submissionLink: recipient.submissionLink,
+      taskId: recipient.taskId,
+      title: recipient.title,
+      uid: recipient.uid,
+      uploadedBy: recipient.uploadedBy,
+    }
+
+    this.taskService.updateStudentStatus(this.taskData.taskId,accomplishedData,recipient);
+  }
+  // updateStudentStatus() {
+  //   let oldRecipientData = {
+  //     displayName: this.displayName,
+  //     submissionLink: this.submissionLink,
+  //     status: this.status,
+  //     uid: this.uid,
+  //     section: this.section,
+  //     title: this.taskData.title,
+  //     taskId: this.taskData.taskId,
+  //     description: this.taskData.description,
+  //     deadline: this.taskData.deadline,
+  //     uploadedBy: this.taskData.uploadedBy,
+  //     createdAt: this.taskData.createdAt,
+  //     email: this.email
+  //   }
+  //   let recipientData = {
+  //     displayName: this.displayName,
+  //     submissionLink: this.submissionLink,
+  //     status: this.updatedStatus,
+  //     uid: this.uid,
+  //     section: this.section,
+  //     title: this.taskData.title,
+  //     taskId: this.taskData.taskId,
+  //     description: this.taskData.description,
+  //     deadline: this.taskData.deadline,
+  //     uploadedBy: this.taskData.uploadedBy,
+  //     createdAt: this.taskData.createdAt,
+  //     email: this.email
+  //   }
+  //   // console.log(recipientData);
+  //   this.taskService.updateStudentStatus(this.taskData.taskId,recipientData,oldRecipientData).then(() => {
+  //     this.displayName = '';
+  //     this.submissionLink = '';
+  //     this.status = '';
+  //     this.uid = '';
+  //     this.section = '';   
+  //     this.createdAt = '';
+  //     this.uploadedBy = '';
+  //     this.title = '';   
+  //     this.description = '';    
+  //     this.deadline = '';
+  //     this.taskId = '';
+  //     this.email = '';
+  //     this.updatedStatus = null;
+  //     this.triggerAddTaskModal();
+  //   })
+  // }
 
 }

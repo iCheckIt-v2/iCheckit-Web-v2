@@ -212,3 +212,26 @@
   @apply text-red-700 italic block text-sm;
   margin-top: -0.75rem;
 }
+.link-submission {
+  transition: .1s all ease-in;
+}
+
+.link-submission:hover {
+  text-decoration: underline;
+}
+
+.link-approve {
+  transition: .1s all ease-in;
+}
+
+.link-approve:hover {
+  @apply text-green-500;
+}
+
+.link-reject {
+  transition: .1s all ease-in;
+}
+
+.link-reject:hover {
+  @apply text-red-500;
+}

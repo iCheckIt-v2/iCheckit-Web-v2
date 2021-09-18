@@ -121,7 +121,9 @@
                 <p>{{recipient.section}}</p>
               </div>
               <div class="admin-container-children-left" >
-                <p *ngIf="recipient.submissionLink != ''">Link to submission here</p>
+                <a href="{{recipient.submissionLink}}" *ngIf="recipient.submissionLink != ''">
+                <p *ngIf="recipient.submissionLink != ''" class="link-submission">Link to submission here</p>
+                </a>
                 <a href="{{recipient.submissionLink}}" *ngIf="recipient.submissionLink != ''">
                 <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
@@ -144,18 +146,20 @@
                 </svg> -->
               <div class="acceptRejectIcon">
               <div class="checkIcon"  *ngIf="recipient.status == 'For Approval'">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 link-approve" viewBox="0 0 20 20" fill="currentColor" (click)="acceptSubmission(recipient)">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
               </div>
               <div class="xIcon"  *ngIf="recipient.status == 'For Approval'">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 link-reject" viewBox="0 0 20 20" fill="currentColor" (click)="rejectSubmission(recipient)">
                   <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
               </div>
 
               </div>
               </div>
+              <!-- <p>{{recipient.displayName}}</p> -->
+
           </div>
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
