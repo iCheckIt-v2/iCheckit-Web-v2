@@ -55,6 +55,12 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.pendingRecipients = 0;
+    this.forApprovalRecipients = 0;
+    this.lateRecipients = 0;
+    this.accomplishedRecipients = 0;
+    this.totalRecipients = 0;
+
     this.fire.user.subscribe((user:any) => {
       this.userData = user;
       this.auth.getUserData(user?.uid).subscribe(res => {
@@ -89,6 +95,11 @@ export class TaskComponent implements OnInit {
           this.accomplishedRecipients += 1;
         }
       });
+      this.pendingRecipientsPct = (this.pendingRecipients / this.totalRecipients) * 100;
+      this.lateRecipientsPct = (this.lateRecipients / this.totalRecipients) * 100;
+      this.forApprovalRecipientsPct = (this.forApprovalRecipients / this.totalRecipients) * 100;
+      this.accomplishedRecipientsPct = (this.accomplishedRecipients / this.totalRecipients) * 100;
+
       console.log(this.pendingRecipients)
       console.log(this.forApprovalRecipients)
       console.log(this.lateRecipients)

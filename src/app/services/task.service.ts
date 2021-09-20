@@ -4,7 +4,7 @@ import { AngularFireAuth  } from '@angular/fire/auth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastService } from './toast.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, retry } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import { Router } from '@angular/router';
 
@@ -18,7 +18,8 @@ export class TaskService {
     private afs: AngularFirestore,
     readonly fire: AngularFireAuth,
     private http: HttpClient,
-    public toastService: ToastService
+    public toastService: ToastService,
+    public router: Router,
   ) { }
 
   public getVerifyTasks():Observable<any> {
@@ -94,7 +95,7 @@ export class TaskService {
     );
   }
 
-  public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any>,pushTokens: any ) {
+  public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any>,pushTokens: any ):Promise<any> {
     let taskId = this.afs.createId();
     
     recipients.forEach(recipient => {
@@ -122,7 +123,16 @@ export class TaskService {
 
       console.log(task)
       console.log(+ new Date(Date.now()))
-      this.afs.collection('tasks').doc(taskId).set(task)
+
+      return this.afs.collection('tasks').doc(taskId).set(task)
+      .then(() => {
+        this.toastService.publish('Task has been succesfully created!','formSuccess')      
+      }).then(() => {
+        this.router.navigate(['/task/',taskId])
+      })
+      .catch(() => {
+        this.toastService.publish('There has been an error with the creation of the task','userDoesNotExist')
+      })
   }
 
   public updateStudentStatus(id:string,newData:any,oldData:any) {
@@ -133,7 +143,88 @@ export class TaskService {
         recipients: firebase.firestore.FieldValue.arrayUnion(newData),
       })
     }).then((res) => {
-      console.log(res);
+      if (newData.status == 'Pending') {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+        const params: URLSearchParams = new URLSearchParams();
+    
+        // console.log(newData.email);
+        var email = newData.email;
+        var uploadedBy = newData.uploadedBy;
+        var title = newData.title;
+        var deadline = newData.deadline;
+        var description = newData.description;
+        var status = newData.status;
+        var message = 'Your task status has been updated to ' + status + '!';
+        var instructions = 'Your submission was rejected! Please re-submit your proof of completion and follow the proper instructions of the given task.'
+  
+        params.set('email', email);
+        params.set('uploadedBy', uploadedBy);
+        params.set('title', title);
+        params.set('deadline', deadline);
+        params.set('description', description);
+        params.set('status', status);
+        params.set('message', message);
+        params.set('instructions', instructions);
+
+  
+        this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/sendEmail`, {
+        email,
+        uploadedBy,
+        title,
+        deadline,
+        description,
+        status,
+        message
+        }, {
+          headers
+        }).toPromise().then(
+          () => {
+            this.toastService.publish('Email has been sent to ' + email,'formSuccess')      
+          }
+        )
+      }
+
+      if (newData.status == 'Accomplished') {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+        const params: URLSearchParams = new URLSearchParams();
+    
+        // console.log(newData.email);
+        var email = newData.email;
+        var uploadedBy = newData.uploadedBy;
+        var title = newData.title;
+        var deadline = newData.deadline;
+        var description = newData.description;
+        var status = newData.status;
+        var message = 'Your task status has been updated to ' + status + '!';
+        var instructions = 'Your submission was approved! Visit the mobile app to view your accomplished submission.'
+  
+        params.set('email', email);
+        params.set('uploadedBy', uploadedBy);
+        params.set('title', title);
+        params.set('deadline', deadline);
+        params.set('description', description);
+        params.set('status', status);
+        params.set('message', message);
+        params.set('instructions', instructions);
+
+  
+        this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/sendEmail`, {
+        email,
+        uploadedBy,
+        title,
+        deadline,
+        description,
+        status,
+        message
+        }, {
+          headers
+        }).toPromise().then(
+          () => {
+            this.toastService.publish('Email has been sent to ' + email,'formSuccess')      
+          }
+        )
+      }
+    
     }).catch((err) => {
       console.log(err);
     })

@@ -160,7 +160,7 @@ recipients.forEach((element: any) => {
     const mailOptions = {
       from: `${APP_NAME} <noreply@firebase.com>`,
       to: element.email,
-      subject: `${taskTitle} - <${APP_NAME}>`,
+      subject: `New Task Assignment - <${taskTitle}>`,
       // text: `Hey ${element.displayName || ''}! Welcome to ${APP_NAME}. I hope you will enjoy our service.`
       html: `<h2>A new task has been uploaded for you.</h2>
       <p>1.) ${taskTitle}</p>
@@ -189,4 +189,43 @@ recipients.forEach((element: any) => {
 //     // Send the message to the device
 //     return admin.messaging().sendTodevice(pushToken, message)
 //   });
+});
+
+exports.sendEmail = functions.https.onRequest((request, response) => {
+  cors(request, response, () => {
+    if (request.method !== "POST") {
+      response.status(405).send("Method Not Allowed");
+    }
+    else {
+      const body = request.body;
+      const email = body.email;
+      const uploadedBy = body.uploadedBy;
+      const title = body.title;
+      const deadline = body.deadline;
+      const description = body.description;
+      const message = body.message;
+      const status = body.status;
+      const instructions = body.instructions;
+
+      const mailOptions = {
+        from: `${APP_NAME} <noreply@firebase.com>`,
+        to: email,
+        subject: `${status} - <${title}>`,
+        // text: `Hey ${element.displayName || ''}! Welcome to ${APP_NAME}. I hope you will enjoy our service.`
+        html: `<h2>${message}</h2>
+        <p>1.) ${title}</p>
+        <p>- ${description}
+        <ul>
+        <li>Uploaded by: ${uploadedBy}</li>
+        <li>Deadline: ${new Date(deadline).toUTCString()}</li>
+        </ul>
+        <br>
+        <p>${instructions}</p>
+        `
+      };
+      mailTransport.sendMail(mailOptions);
+      functions.logger.log('New welcome email sent to:', email);
+      return null;  
+    }
+  });
 });

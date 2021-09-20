@@ -270,7 +270,9 @@ export class DashboardComponent implements OnInit {
         this.fsData.displayName,
         this.taskRecipients,
         this.userPushTokens
-      )
+      ).then(() => {
+        this.addTaskForm.reset()
+      })
     }
     else if (this.addTaskForm.invalid) {
       this.addTaskForm.controls['title'].markAsTouched();
