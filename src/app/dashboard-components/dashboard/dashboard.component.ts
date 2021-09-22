@@ -235,6 +235,7 @@ export class DashboardComponent implements OnInit {
                 section: data.section,
                 submissionLink: '',
                 displayName: data.displayName,
+                pushToken: data.pushToken
               }
               console.log(data.pushToken)
               if (!this.taskRecipients.some(e => e.uid === userData.uid)) {

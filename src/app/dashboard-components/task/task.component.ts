@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TaskService } from 'src/app/services/task.service';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-task',
@@ -51,7 +52,8 @@ export class TaskComponent implements OnInit {
     private router: Router,
     readonly fire: AngularFireAuth,
     private taskService: TaskService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private storage: AngularFireStorage
   ) { }
 
   ngOnInit(): void {
@@ -165,6 +167,51 @@ export class TaskComponent implements OnInit {
     this.rejectAllModal =! this.rejectAllModal;
   }
 
+  public acceptAllSubmissions() {
+    let oldData: any[] = [];
+    let acceptedSubmissions: any[] = [];
+    this.taskData.recipients.forEach((element: any) => {
+      if(Object.values(element).includes('For Approval')) { 
+        console.log('Approved!');
+        oldData.push(element)
+      }
+    })
+    
+    oldData.forEach((element: any) => {
+        let updatedData = {
+          createdAt: element.createdAt,
+          deadline: element.deadline,
+          description: element.description,
+          displayName: element.displayName,
+          email: element.email,
+          pushToken: element.pushToken,
+          section: element.section,
+          status: "Accomplished",
+          submissionLink: element.submissionLink,
+          taskId: element.taskId,
+          title: element.title,
+          uid: element.uid,
+          uploadedBy: element.uploadedBy
+        } 
+        acceptedSubmissions.push(updatedData)
+    })
+    // acceptedSubmissions.forEach(data => {
+    //   if (data.status == 'For Approval') {
+    //     data.status == 'Accomplished'
+    //   }
+    // });
+    // acceptedSubmissions.forEach(element => {
+    //   oldData.forEach(oldElement => {
+    //     console.log(element)
+    //     console.log(oldElement)
+    //     // this.taskService.updateStudentStatus(this.taskData.taskId,element,oldElement)
+    //   });
+    // });
+    console.log(oldData)
+    console.log(acceptedSubmissions)
+    // this.taskService.updateMultipleStudentStatus(this.taskData.taskId,acceptedSubmissions,oldData)
+  }
+
   public acceptSubmission(recipient:any) {
     let accomplishedData = {
       createdAt: recipient.createdAt,
@@ -173,6 +220,7 @@ export class TaskComponent implements OnInit {
       displayName: recipient.displayName,
       email: recipient.email,
       section: recipient.section,
+      pushToken: recipient.pushToken,
       status: 'Accomplished',
       submissionLink: recipient.submissionLink,
       taskId: recipient.taskId,
@@ -192,13 +240,16 @@ export class TaskComponent implements OnInit {
       displayName: recipient.displayName,
       email: recipient.email,
       section: recipient.section,
+      pushToken: recipient.pushToken,
       status: 'Pending',
-      submissionLink: recipient.submissionLink,
+      submissionLink: '',
       taskId: recipient.taskId,
       title: recipient.title,
       uid: recipient.uid,
       uploadedBy: recipient.uploadedBy,
     }
+
+    this.storage.refFromURL(recipient.submissionLink).delete().subscribe((res) => console.log(res));
 
     this.taskService.updateStudentStatus(this.taskData.taskId,accomplishedData,recipient);
   }

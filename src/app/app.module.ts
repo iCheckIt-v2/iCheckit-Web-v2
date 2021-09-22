@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,6 +47,7 @@ import { TaskSettingsComponent } from './dashboard-components/task-settings/task
     ReactiveFormsModule,
     NgxPaginationModule,
     AngularFireFunctionsModule,
+    AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [],
