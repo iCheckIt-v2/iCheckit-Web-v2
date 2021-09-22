@@ -197,7 +197,7 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
       response.status(405).send("Method Not Allowed");
     }
     else {
-      if (request.body.pushToken != null) {
+      if (request.body.pushToken != '') {
         console.log(request.body.pushToken);
         const body = request.body;
         const email = body.email;
@@ -237,7 +237,7 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
         functions.logger.log('New welcome email sent to:', email);
         return admin.messaging().sendToDevice(request.body.pushToken, payload);
       }
-      if (request.body.pushToken == null) {
+      if (request.body.pushToken == '') {
         const body = request.body;
         const email = body.email;
         const uploadedBy = body.uploadedBy;

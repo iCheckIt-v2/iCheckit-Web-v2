@@ -209,7 +209,52 @@ export class TaskComponent implements OnInit {
     // });
     console.log(oldData)
     console.log(acceptedSubmissions)
-    // this.taskService.updateMultipleStudentStatus(this.taskData.taskId,acceptedSubmissions,oldData)
+    this.taskService.updateMultipleStudentStatus(this.taskData.taskId,acceptedSubmissions,oldData)
+  }
+
+  public rejectAllSubmission() {
+    let oldData: any[] = [];
+    let acceptedSubmissions: any[] = [];
+    this.taskData.recipients.forEach((element: any) => {
+      if(Object.values(element).includes('For Approval')) { 
+        console.log('Approved!');
+        oldData.push(element)
+      }
+    })
+    
+    oldData.forEach((element: any) => {
+        let updatedData = {
+          createdAt: element.createdAt,
+          deadline: element.deadline,
+          description: element.description,
+          displayName: element.displayName,
+          email: element.email,
+          pushToken: element.pushToken,
+          section: element.section,
+          status: "Pending",
+          submissionLink: element.submissionLink,
+          taskId: element.taskId,
+          title: element.title,
+          uid: element.uid,
+          uploadedBy: element.uploadedBy
+        } 
+        acceptedSubmissions.push(updatedData)
+    })
+    // acceptedSubmissions.forEach(data => {
+    //   if (data.status == 'For Approval') {
+    //     data.status == 'Accomplished'
+    //   }
+    // });
+    // acceptedSubmissions.forEach(element => {
+    //   oldData.forEach(oldElement => {
+    //     console.log(element)
+    //     console.log(oldElement)
+    //     // this.taskService.updateStudentStatus(this.taskData.taskId,element,oldElement)
+    //   });
+    // });
+    console.log(oldData)
+    console.log(acceptedSubmissions)
+    this.taskService.updateMultipleStudentStatus(this.taskData.taskId,acceptedSubmissions,oldData)
   }
 
   public acceptSubmission(recipient:any) {

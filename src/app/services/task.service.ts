@@ -146,7 +146,7 @@ export class TaskService {
       })
     }).then((res) => {
       if (newData.status == 'Pending') {
-        if (newData.pushToken == null) {
+        if (newData.pushToken == '') {
           const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
           const params: URLSearchParams = new URLSearchParams();
 
@@ -188,7 +188,7 @@ export class TaskService {
         )
         }
 
-        else if (newData.pushToken != null) {
+        else if (newData.pushToken != '') {
           const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
           const params: URLSearchParams = new URLSearchParams();
 
@@ -236,7 +236,7 @@ export class TaskService {
       }
 
       if (newData.status == 'Accomplished') {
-        if (newData.pushToken == null) {
+        if (newData.pushToken == '') {
           const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
           const params: URLSearchParams = new URLSearchParams();
       
@@ -277,7 +277,7 @@ export class TaskService {
             }
           )
         }
-        else if (newData.pushToken != null) {
+        else if (newData.pushToken != '') {
           const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
           const params: URLSearchParams = new URLSearchParams();
       
@@ -340,7 +340,7 @@ export class TaskService {
         })
       }).then((res) => {
         if (element.status == 'Pending') {
-          if (element.pushToken == null) {
+          if (element.pushToken == '') {
             const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             const params: URLSearchParams = new URLSearchParams();
   
@@ -382,7 +382,7 @@ export class TaskService {
           )
           }
   
-          else if (element.pushToken != null) {
+          else if (element.pushToken != '') {
             const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             const params: URLSearchParams = new URLSearchParams();
   
@@ -430,7 +430,7 @@ export class TaskService {
         }
   
         if (element.status == 'Accomplished') {
-          if (element.pushToken == null) {
+          if (element.pushToken == '') {
             const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             const params: URLSearchParams = new URLSearchParams();
         
@@ -471,7 +471,7 @@ export class TaskService {
               }
             )
           }
-          else if (element.pushToken != null) {
+          else if (element.pushToken != '') {
             const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             const params: URLSearchParams = new URLSearchParams();
         

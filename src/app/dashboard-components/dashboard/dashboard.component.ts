@@ -202,7 +202,7 @@ export class DashboardComponent implements OnInit {
       this.taskScopeArray.forEach(element => {
         this.taskService.setRecipients(element).subscribe(res => {
           res.forEach((data: any) => {
-            if (data.pushToken == null) {
+            if (data.pushToken == '') {
               let pushToken = {
                 pushToken: ''
               }
@@ -213,6 +213,7 @@ export class DashboardComponent implements OnInit {
                 section: data.section,
                 submissionLink: '',
                 displayName: data.displayName,
+                pushToken: ''
               }
               console.log(data.pushToken)
               if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
@@ -224,7 +225,7 @@ export class DashboardComponent implements OnInit {
                 /* vendors contains the element we're looking for */
               }
             }
-            if (data.pushToken != null) {
+            if (data.pushToken != '') {
               let pushToken = {
                 pushToken: data.pushToken
               }

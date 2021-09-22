@@ -117,6 +117,7 @@ export class UserService {
             email: email,
             section: section,
             verified: false,
+            pushToken: '',
             course: course,
             displayName: displayName,
             createdAt: Date.now(),
@@ -173,29 +174,29 @@ export class UserService {
       });
   }
 
-  createStudentAccount(displayName:string,section:string,course:string,contactNumber:string,email:string) {
-      return this.fire.createUserWithEmailAndPassword(email,'password')
-      .then(res => {
-        res.user?.updateProfile({displayName: displayName})
-        .then(() => {
-          const data = {
-            uid: res.user?.uid,
-            contactNumber: contactNumber,
-            email: email,
-            section: section,
-            course: course,
-            verified: false,
-            displayName: displayName,
-            createdAt: Date.now(),
-            role: 'Student'
-          }
-          this.afs.collection('users')
-          .doc(res.user?.uid).set(data)
-          .catch(error => console.log(error));
-        })
-        .then(() => {alert('Student account with the email ' + email + ' has been created')})
-      })
-  }
+  // createStudentAccount(displayName:string,section:string,course:string,contactNumber:string,email:string) {
+  //     return this.fire.createUserWithEmailAndPassword(email,'password')
+  //     .then(res => {
+  //       res.user?.updateProfile({displayName: displayName})
+  //       .then(() => {
+  //         const data = {
+  //           uid: res.user?.uid,
+  //           contactNumber: contactNumber,
+  //           email: email,
+  //           section: section,
+  //           course: course,
+  //           verified: false,
+  //           displayName: displayName,
+  //           createdAt: Date.now(),
+  //           role: 'Student'
+  //         }
+  //         this.afs.collection('users')
+  //         .doc(res.user?.uid).set(data)
+  //         .catch(error => console.log(error));
+  //       })
+  //       .then(() => {alert('Student account with the email ' + email + ' has been created')})
+  //     })
+  // }
 
   deleteUserAccount(id:string,email:string) : Promise<any> {
       return this.afs.collection('users').doc(id).delete()
