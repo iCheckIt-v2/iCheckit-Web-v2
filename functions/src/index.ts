@@ -148,8 +148,8 @@ pushTokens.forEach((element: any) => {
       console.log('no push token')
   }   
   else if (element.pushToken != '') {
-      console.log(element.pushToken);
-      return admin.messaging().sendToDevice(element.pushToken, payload);
+      console.log('sent to :', element.pushToken);
+      admin.messaging().sendToDevice(element.pushToken, payload);
   }
 });
 recipients.forEach((element: any) => {
@@ -175,7 +175,6 @@ recipients.forEach((element: any) => {
     };
     mailTransport.sendMail(mailOptions);
     functions.logger.log('New welcome email sent to:', element.email);
-    return null;  
   }
 });
 // // Get the user's tokenID

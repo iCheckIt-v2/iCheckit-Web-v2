@@ -230,13 +230,13 @@ export class DashboardComponent implements OnInit {
                 pushToken: data.pushToken
               }
               let userData = {
+                pushToken: data.pushToken,
                 email: data.email,
                 uid: data.id,
                 status: 'Pending',
                 section: data.section,
                 submissionLink: '',
                 displayName: data.displayName,
-                pushToken: data.pushToken
               }
               console.log(data.pushToken)
               if (!this.taskRecipients.some(e => e.uid === userData.uid)) {

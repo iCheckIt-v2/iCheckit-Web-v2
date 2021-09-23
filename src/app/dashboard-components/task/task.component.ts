@@ -35,7 +35,7 @@ export class TaskComponent implements OnInit {
   description!:string;
   deadline!:any;
   email!:any;
-  totalRecipients: any;
+  totalRecipients = 0;
   pendingRecipients = 0;
   lateRecipients = 0;
   forApprovalRecipients = 0;
@@ -46,6 +46,7 @@ export class TaskComponent implements OnInit {
   accomplishedRecipientsPct = 0;
   acceptAllModal!: boolean;
   rejectAllModal!: boolean;
+  
   constructor(
     public auth: AuthService,
     private route: ActivatedRoute,
@@ -57,12 +58,8 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.pendingRecipients = 0;
-    this.forApprovalRecipients = 0;
-    this.lateRecipients = 0;
-    this.accomplishedRecipients = 0;
-    this.totalRecipients = 0;
-
+    
+ 
     this.fire.user.subscribe((user:any) => {
       this.userData = user;
       this.auth.getUserData(user?.uid).subscribe(res => {
@@ -83,6 +80,14 @@ export class TaskComponent implements OnInit {
       this.taskData = res;
       console.log(res);
       this.totalRecipients = res.recipients.length;
+
+      console.log('Pending recipients length');
+      console.log(res.recipients)
+      this.pendingRecipients = 0;
+      this.forApprovalRecipients = 0;
+      this.lateRecipients = 0;
+      this.accomplishedRecipients = 0;
+      
       res.recipients.forEach((element: any) => {
         if(Object.values(element).includes("Pending")) { 
           this.pendingRecipients += 1;
@@ -256,8 +261,10 @@ export class TaskComponent implements OnInit {
     console.log(acceptedSubmissions)
     this.taskService.updateMultipleStudentStatus(this.taskData.taskId,acceptedSubmissions,oldData)
   }
-
+ 
   public acceptSubmission(recipient:any) {
+   
+
     let accomplishedData = {
       createdAt: recipient.createdAt,
       deadline: recipient.deadline,
