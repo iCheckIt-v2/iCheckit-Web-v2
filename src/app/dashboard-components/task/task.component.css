@@ -121,18 +121,19 @@
   @apply flex justify-end items-start pr-2;
 }
 .recipient-late {
-@apply mr-20;
+@apply mr-36 pr-2;
   color: red
 }
 .recipient-pending {
-  @apply mr-24;
+  @apply mr-32 pr-1;
   color: yellow;
 }
 .recipient-forApproval {
+  @apply mr-6 pr-2;
   color: orange;
 }
 .recipient-accomplished {
-  @apply mr-10;
+  @apply mr-24 ;
   color: green;
 }
 
