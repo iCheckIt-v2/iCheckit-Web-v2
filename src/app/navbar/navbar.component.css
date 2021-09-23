@@ -1,33 +1,44 @@
 .navbar {
-    @apply w-full h-auto p-2 bg-red-700 text-white flex fixed;
-    font-family: 'Antonio', sans-serif;
+  @apply w-full h-auto p-2 bg-red-700 text-white flex fixed;
+  font-family: "Antonio", sans-serif;
 }
 .navbar-logo {
-    @apply flex justify-start items-center w-1/2
+  @apply flex justify-start items-center w-1/2;
 }
 .navbar-logout {
-    @apply flex justify-end items-center w-1/2
+  @apply flex justify-end items-center w-1/2;
 }
-.navbar-logout svg{
-    cursor: pointer;
+.navbar-logout svg {
+  cursor: pointer;
 }
 .sidebar {
-    @apply h-screen w-52 bg-red-900 fixed mt-10;
+  @apply h-screen w-52 bg-red-900 fixed mt-10;
 }
 .sidebar-link {
-    @apply text-white p-3 shadow-lg flex justify-start items-center text-sm;
-    margin-bottom: 1.5px;
-    transition: .1s all ease-in-out;
-    font-family: 'Abel', sans-serif;
+  @apply text-white p-3 shadow-lg flex justify-start items-center text-sm;
+  margin-bottom: 1.5px;
+  transition: 0.1s all ease-in-out;
+  font-family: "Abel", sans-serif;
 }
 .sidebar-link svg {
-    @apply h-4 w-4 mr-2
+  @apply h-4 w-4 mr-2;
 }
 .router-link-active {
-    @apply bg-red-900;
-    border-left: 8px solid white;
+  @apply bg-red-900;
+  border-left: 8px solid white;
 }
 .sidebar-link:hover {
-    @apply bg-red-900;
-    border-left: 8px solid white;
+  @apply bg-red-900;
+  border-left: 8px solid white;
+}
+
+.cics {
+  @apply ml-5 flex-col-reverse items-center text-xs;
+  font-family: "Abel", sans-serif;
+  color: white;
+  margin-top: 31rem;
+}
+
+.cics hr {
+  @apply my-5 text-center;
 }

@@ -16,53 +16,76 @@
         <div class="login-content">
             <div class="login-logo">
                 <img src="../../../assets/logo.png">
+                <img src="../../../assets/cics.png">
+            </div>
+            <div class="welcome">
                 <h1>Welcome to <br><span class="logo-hg">iCheckit</span></h1>
             </div>
             <div class="login-form">
                 <form [formGroup]="loginForm" (ngSubmit)="login()">
-                <label for="email">Email</label>
-                <div class="input-box" *ngIf="loginForm.controls.email.untouched || loginForm.controls.email.valid">
-                    <input placeholder="Input your email here" name="email" id="email" type="text" formControlName="email" autocomplete="on">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-                      </svg>
-                </div>
-                <div class="input-box-error" *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched || loginForm.controls.email.errors?.email">
-                    <input placeholder="Input your email here" name="email" id="email" type="text" formControlName="email" autocomplete="on">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-                      </svg>
-                </div>
-                <div class="login-form-error" *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched">
-                    Email is required.
-                </div>
-                <div class="login-form-error" *ngIf="loginForm.controls.email.errors?.email">
-                    Not a valid email.
-                </div>
-                <label for="password">Password</label>
-                <div class="input-box" *ngIf="loginForm.controls.password.untouched || loginForm.controls.password.valid">
-                    <input placeholder="***********" name="password" id="password" type="password" formControlName="password" autocomplete="on">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-                      </svg>
-                </div>
-                <div class="input-box-error" *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
-                    <input placeholder="***********" name="password" id="password" type="password" formControlName="password" autocomplete="on">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-                      </svg>
-                </div>
-                <div class="login-form-error" *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
-                    Password is required.
-                </div>
-                <div class="login-buttons">
-                    <button type="submit" *ngIf="loginForm.invalid" class="submit-disabled">Login</button>
-                    <button type="submit" *ngIf="loginForm.valid" class="submit">Login</button>
-                    <a [routerLink]="['/forgot-password']" routerLinkActive="router-link-active">Forgot Password?</a>
-                </div>
+                    <label for="email">Email</label>
+                    <div class="input-box" *ngIf="loginForm.controls.email.untouched || loginForm.controls.email.valid">
+                        <input placeholder="Input your email here" name="email" id="email" type="text"
+                            formControlName="email" autocomplete="on">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="input-box-error"
+                        *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched || loginForm.controls.email.errors?.email">
+                        <input placeholder="Input your email here" name="email" id="email" type="text"
+                            formControlName="email" autocomplete="on">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="login-form-error"
+                        *ngIf="loginForm.controls.email.errors?.required && loginForm.controls.email.touched">
+                        Email is required.
+                    </div>
+                    <div class="login-form-error" *ngIf="loginForm.controls.email.errors?.email">
+                        Not a valid email.
+                    </div>
+                    <label for="password">Password</label>
+                    <div class="input-box" *ngIf="loginForm.controls.password.untouched || loginForm.controls.password.valid">
+                        <input placeholder="***********" name="password" id="password" [type]="show ? 'text' : 'password'" formControlName="password" autocomplete="on">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" (click)="password()">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd"d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="input-box-error"
+                        *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
+                        <input placeholder="***********" name="password" id="password" type="password"
+                            formControlName="password" autocomplete="on">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="login-form-error"
+                        *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
+                        Password is required.
+                    </div>
+                    <div class="login-buttons">
+                        <button type="submit" *ngIf="loginForm.invalid" class="submit-disabled">Login</button>
+                        <button type="submit" *ngIf="loginForm.valid" class="submit">Login</button>
+                        <a [routerLink]="['/forgot-password']" routerLinkActive="router-link-active">Forgot
+                            Password?</a>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
+    <div class="absolute bottom-0 left-0 ml-2 photo-credit">
+        Image by RQUI Photography via <a
+            href="https://www.flickr.com/photos/87738896@N04/9124962279/in/dateposted/?fbclid=IwAR0gz-O7oR6utB22rKHdekfVSJQbtqC6sZ5hR5W7y00aRO0vkmO0RLvkj40">
+            Flickr.</a>
+    </div>
 
+</div>
