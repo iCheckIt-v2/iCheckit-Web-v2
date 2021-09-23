@@ -1,0 +1,40 @@
+<app-navbar></app-navbar> <!-- NAVBAR -->
+<div class="main-container" *ngIf="fsData as user"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+    <div class="main-title" *ngIf="taskData as task">
+        <div class="main-title-text">
+            <h1> {{task.title}} / {{user.displayName}} </h1>
+  
+        </div>
+        <div class="main-title-date">
+            <p>{{dateToday | date}}</p>
+        </div>
+    </div>
+    <div class="sub-container" *ngIf="taskData as task">
+        <div class="elements-firstrow-container">
+            <div class="uploadedBy-container-left" style="background-color: #ffff00;">
+                <div class="uploadedBy-container-left-main" >
+                    <h1 class="text-3xl mt-4 text-white">Pending Recipients: </h1>
+                    <h2 class="text-4xl mt-4 text-white"> {{pendingRecipientsPct}}%</h2>
+                </div>
+            </div>
+            <div class="uploadedBy-container-left" style="background-color: #FF640D;">
+                <div class="uploadedBy-container-left-main">
+                    <h1 class="text-3xl mt-4 text-white">For Approval Recipients:</h1>
+                    <h2 class="text-4xl mt-4 text-white"> {{forApprovalRecipientsPct}}%</h2>
+                </div>
+            </div>
+            <div class="uploadedBy-container-left" style="background-color: #F00000;">
+                <div class="uploadedBy-container-left-main">
+                    <h1 class="text-3xl mt-4 text-white">Late Recipients: </h1>
+                    <h2 class="text-4xl mt-4 text-white"> {{lateRecipientsPct}}%</h2>
+                </div>
+            </div>
+            <div class="uploadedBy-container-left" style="background-color: #00B633;">
+                <div class="uploadedBy-container-left-main">
+                    <h1 class="text-3xl mt-4 text-white">Accomplished Recipients: </h1>
+                    <h2 class="text-4xl mt-4 text-white"> {{accomplishedRecipientsPct}}%</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
