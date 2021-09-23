@@ -162,6 +162,9 @@
               <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.required && createStudentForm.controls.email.touched">
                 Student's email is required.
               </div>
+              <!-- <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.required && createStudentForm.controls.email.touched || createStudentForm.controls.email.pattern">
+                Please use your UST email
+              </div> -->
               <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.email">
                 Not a valid email.
               </div>
@@ -266,6 +269,9 @@
             <div class="login-form-error" *ngIf="createAdminForm.controls.email.errors?.required && createAdminForm.controls.email.touched">
               Admin's email is required.
             </div>
+            <!-- <div class="login-form-error" *ngIf="createAdminForm.controls.email.errors?.required && createAdminForm.controls.email.touched || createAdminForm.controls.email.pattern">
+              Please use your UST email
+            </div> -->
             <div class="login-form-error" *ngIf="createAdminForm.controls.email.errors?.email">
               Not a valid email.
             </div>

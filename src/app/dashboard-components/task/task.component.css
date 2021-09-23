@@ -132,6 +132,7 @@
   color: orange;
 }
 .recipient-accomplished {
+  @apply mr-10;
   color: green;
 }
 

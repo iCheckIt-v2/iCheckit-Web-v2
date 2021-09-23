@@ -155,18 +155,6 @@
 
 
 
-            <!-- newly added components in edit student detail. Start from here onwards -->
-
-                          <!-- <div class="mb-4" *ngIf="user.role == 'Department Head'">
-              <label for="Department" >
-                Department
-              </label>
-              <select name="course" id="course" style="width: 100%;"  formControlName="course">
-                <option value="{{user.course}}" disabled> {{user.course}} </option>
-                  <option *ngFor="let course of studentCourses">{{course}}</option>
-              </select>
-            </div> -->
-
 
             <div class="mb-4" >
               <label for="Department" >
@@ -203,6 +191,9 @@
             <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.required && editUserForm.controls.email.touched">
                Email is required.
             </div>
+            <!-- <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.required && editUserForm.controls.email.touched || editUserForm.controls.email.pattern">
+              Please use your UST email
+           </div> -->
             <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.email">
               Not a valid email.
             </div>
@@ -304,6 +295,9 @@
             <div class="login-form-error" *ngIf="editAdminForm.controls.email.errors?.required && editAdminForm.controls.email.touched">
                Email is required.
             </div>
+            <!-- <div class="login-form-error" *ngIf="editAdminForm.controls.email.errors?.required && editAdminForm.controls.email.touched || editAdminForm.controls.email.pattern">
+              Please use your UST email
+           </div> -->
             <div class="login-form-error" *ngIf="editAdminForm.controls.email.errors?.email">
               Not a valid email.
             </div>
