@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   loginForm!: any;
   constructor(
     public auth: AuthService,
-    readonly fire: AngularFireAuth, 
+    readonly fire: AngularFireAuth,
     public router: Router,
     public toastService: ToastService,
     private fb: FormBuilder
@@ -25,7 +25,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required,Validators.email]],
+      email: ['',[Validators.required,
+                  Validators.email,
+                  Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
+
       password: ['', Validators.required],
     });
   }
@@ -47,11 +50,11 @@ export class LoginComponent implements OnInit {
     }
     /*
     if (this.email == '' && this.password == '') {
-      this.toastService.publish('Please fill up all required fields properly','formError');    } 
+      this.toastService.publish('Please fill up all required fields properly','formError');    }
     if (this.email != '' && this.password != '') {
       this.auth.signIn(this.email,this.password)
     } */
 
   }
-  
+
 }

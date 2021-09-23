@@ -97,7 +97,7 @@ export class TaskService {
 
   public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any>,pushTokens: any ):Promise<any> {
     let taskId = this.afs.createId();
-    
+
     recipients.forEach(recipient => {
       recipient.title = title;
       recipient.taskId = taskId;
@@ -134,6 +134,24 @@ export class TaskService {
         this.toastService.publish('There has been an error with the creation of the task','userDoesNotExist')
       })
   }
+
+
+
+  public updateTask(taskId:string, title:string, description:any, deadline:Date): Promise<any> {
+    return this.afs.collection('tasks').doc(taskId).update({
+
+      title: title,
+      description: description,
+      deadline: deadline
+
+    }).then(() => {
+      this.toastService.publish('task updated'+title,'success')
+    }).catch(() => {
+      this.toastService.publish('Updating task failed: ' + title, 'taskdoesnotexist')
+    })
+  }
+
+
 
   public updateStudentStatus(id:string,newData:any,oldData:any) {
     console.log(newData);
@@ -534,6 +552,8 @@ export class TaskService {
       console.log(err)
     })
   }
+
+
 
 }
 

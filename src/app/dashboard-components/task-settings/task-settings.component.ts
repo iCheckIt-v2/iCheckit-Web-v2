@@ -37,6 +37,9 @@ export class TaskSettingsComponent implements OnInit {
   deleteTaskForm!: any;
   deleteTaskModal!: boolean;
 
+  updateTaskForm!: any;
+  updateTaskConfirm!: boolean;
+
   // editTaskScope! : any;
   // end of edit task import
 
@@ -52,6 +55,13 @@ export class TaskSettingsComponent implements OnInit {
   ) { }
 
 	ngOnInit(): void {
+    this.updateTaskForm = this.fb.group({
+      title: ['',Validators.required],
+      description: ['',Validators.required],
+      deadline: ['',Validators.required],
+
+
+    })
     this.fire.user.subscribe((user:any) => {
       this.userData = user;
       this.auth.getUserData(user?.uid).subscribe(res => {
@@ -64,31 +74,61 @@ export class TaskSettingsComponent implements OnInit {
           return this.taskService.getTask(params['id'])
         })
       ).subscribe((res) => {
+        this.updateTaskForm.controls.title.setValue(res.title)
+        this.updateTaskForm.controls.description.setValue(res.description)
+        this.updateTaskForm.controls.deadline.setValue(res.deadline)
         this.taskData = res;
         console.log(res);
       })
 
   this.taskScopeArray = [];
 
-    this.addTaskForm = this.fb.group({
-      title: ['', Validators.required,],
-      description: ['', Validators.required],
-      scope: ['', Validators.required],
-      deadline: ['', Validators.required],
-    });
 
 
 
    }
 
-   public triggerAddTaskModal() {
-    this.addTaskModal = !this.addTaskModal;
-    this.taskScopeArray=this.taskData.scope
 
-   }
+
+
+
 
    public triggerDeleteTaskModal() {
     this.deleteTaskModal = !this.deleteTaskModal;
+
+  }
+
+  public triggerUpdateTask() {
+
+    this.updateTaskForm.controls.title.setValue(this.taskData.title);
+    this.updateTaskForm.controls.description.setValue(this.taskData.description);
+    this.updateTaskForm.controls.deadline.setValue(this.taskData.deadline);
+
+
+  }
+
+  public UpdateStudentTask() {
+
+    if (this.updateTaskForm.valid) {
+      this.taskService.updateTask(
+        this.taskData.taskId,
+        this.updateTaskForm.controls['title'].value,
+        this.updateTaskForm.controls['description'].value,
+        this.updateTaskForm.controls['deadline'].value,
+
+
+      ).then(() => this.triggerUpdateTask())
+      .finally(() => this.updateTaskForm.reset())
+    }
+    else if (this.updateTaskForm.invalid) {
+      this.updateTaskForm.controls['title'].markAsTouched();
+      this.updateTaskForm.controls['description'].markAsTouched();
+      this.updateTaskForm.controls['deadline'].markAsTouched();
+
+
+      this.toastService.publish("Please fillup all the requirements","updateError");
+
+    }
 
   }
 
@@ -137,29 +177,7 @@ export class TaskSettingsComponent implements OnInit {
 
 
 
-//   addTask() {
 
-//     if (this.addTaskForm.valid) {
-//       this.taskService.addTask(
-//         this.addTaskForm.controls['title'].value,
-//         this.addTaskForm.controls['description'].value,
-//         // this.taskScopeArray,
-//         this.newTaskScopeArray,
-//         new Date(this.addTaskForm.controls['deadline'].value),
-//         this.fsData.displayName,
-//         this.taskRecipients,
-//         this.userPushTokens
-//       )
-//     }
-//     else if (this.addTaskForm.invalid) {
-//       this.addTaskForm.controls['title'].markAsTouched();
-//       this.addTaskForm.controls['description'].markAsTouched();
-//       this.addTaskForm.controls['scope'].markAsTouched();
-//       this.addTaskForm.controls['deadline'].markAsTouched();
-
-
-//   }
-// }
 
   public deleteTask() {
 

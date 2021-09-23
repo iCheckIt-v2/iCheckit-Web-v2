@@ -89,16 +89,16 @@ export class TaskComponent implements OnInit {
       this.accomplishedRecipients = 0;
       
       res.recipients.forEach((element: any) => {
-        if(Object.values(element).includes("Pending")) { 
+        if(Object.values(element).includes("Pending")) {
           this.pendingRecipients += 1;
         }
-        if(Object.values(element).includes("For Approval")) { 
+        if(Object.values(element).includes("For Approval")) {
           this.forApprovalRecipients += 1;
         }
-        if(Object.values(element).includes("Late")) { 
+        if(Object.values(element).includes("Late")) {
           this.lateRecipients += 1;
         }
-        if(Object.values(element).includes("Accomplished")) { 
+        if(Object.values(element).includes("Accomplished")) {
           this.accomplishedRecipients += 1;
         }
       });
@@ -119,9 +119,12 @@ export class TaskComponent implements OnInit {
       // console.log(this.lateRecipientsPct)
     })
 
+
+
     this.updateStatusForm = this.fb.group({
       status: ['', Validators.required,],
     });
+
   }
 
   public triggerAddTaskModal(recipient?:any) {
@@ -131,11 +134,11 @@ export class TaskComponent implements OnInit {
       this.submissionLink = '';
       this.status = '';
       this.uid = '';
-      this.section = '';    
+      this.section = '';
       this.createdAt = '';
       this.uploadedBy = '';
-      this.title = '';   
-      this.description = '';    
+      this.title = '';
+      this.description = '';
       this.deadline = '';
       this.taskId = '';
       this.email = '';
@@ -145,15 +148,15 @@ export class TaskComponent implements OnInit {
       this.submissionLink = recipient.submissionLink;
       this.status = recipient.status;
       this.uid = recipient.uid;
-      this.section = recipient.section; 
-      this.title = this.taskData.title; 
-      this.taskId = this.taskData.taskId; 
-      this.description = this.taskData.description; 
-      this.deadline = this.taskData.deadline; 
-      this.uploadedBy = this.taskData.uploadedBy; 
+      this.section = recipient.section;
+      this.title = this.taskData.title;
+      this.taskId = this.taskData.taskId;
+      this.description = this.taskData.description;
+      this.deadline = this.taskData.deadline;
+      this.uploadedBy = this.taskData.uploadedBy;
       this.createdAt = this.taskData.createdAt;
       this.email = recipient.uid;
-    
+
       this.updateStatusModal = !this.updateStatusModal;
       this.updateStatusForm.controls.status.setValue(recipient.status);
     }

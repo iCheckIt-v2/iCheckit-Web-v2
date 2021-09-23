@@ -65,7 +65,7 @@ export class UserComponent implements OnInit {
       this.admin = res;
     })
 
-
+    // Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')
 
 
     this.editUserForm = this.fb.group({

@@ -27,7 +27,7 @@ export class UserManagementComponent implements OnInit {
   p: number = 1;
   constructor(
     public auth: AuthService,
-    readonly fire: AngularFireAuth, 
+    readonly fire: AngularFireAuth,
     public router: Router,
     private fb: FormBuilder,
     public toastService: ToastService,
@@ -41,7 +41,7 @@ export class UserManagementComponent implements OnInit {
         this.fsData = res;
       })
     })
-  
+
     this.userService.getStudentUsers().subscribe((res) => {
       this.studentUsers$ = res;
     });
@@ -51,6 +51,8 @@ export class UserManagementComponent implements OnInit {
     this.userService.getDeptHeadUsers().subscribe((res) => {
       this.deptHeadUsers$ = res;
     });
+
+    // Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$'
 
     this.createStudentForm = this.fb.group({
       displayName: ['', Validators.required,],
