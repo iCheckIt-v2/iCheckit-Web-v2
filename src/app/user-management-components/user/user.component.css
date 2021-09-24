@@ -57,11 +57,11 @@
     background-color: #35414F;
 }
 .account-status-verified {
-    @apply h-auto w-full p-3 mt-4;
+    @apply h-auto w-full p-3 mb-4;
     background-color: #00B633;
 }
 .account-status-not-verified {
-    @apply h-auto w-full p-3 mt-4;
+    @apply h-auto w-full p-3 mb-4;
     background-color: #F00000;
 }
 .account-type h1,.account-status-not-verified h1, .account-status-verified h1 {

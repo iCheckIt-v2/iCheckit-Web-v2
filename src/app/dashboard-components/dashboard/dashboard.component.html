@@ -52,7 +52,7 @@
             <p>{{task.deadline | date}}</p>
         </div>
           <div class="admin-container-children-right">
-              <p>{{task.description}}</p>
+              <span>{{task.description}}</span>
           </div>
       </div>
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -113,27 +113,27 @@
               </label>
               <select name="scope" id="scope" style="width: 100%;" (change)="changeTaskScope($event)" formControlName="scope">
                 <option value="" disabled>Choose the scope of the task</option>
-                <optgroup label="Departmental">
+                <optgroup label="Departmental" class="italic">
                   <option>All Departments **</option>
                   <option>BS Information Technology</option>
                   <option>BS Information Systems</option>
                   <option>BS Computer Science</option>
                 </optgroup>
-                <optgroup label="BS Information Technology">
+                <optgroup label="BS Information Technology" class="italic">
                   <option>BS Information Technology (1st Year)</option>
                   <option>BS Information Technology (2nd Year)</option>
                   <option>BS Information Technology (3rd Year)</option>
                   <option>BS Information Technology (4th Year)</option>
                   <option *ngFor="let it of itScope">{{it}}</option>
                 </optgroup>
-                <optgroup label="BS Information Systems">
+                <optgroup label="BS Information Systems" class="italic">
                   <option>BS Information Systems (1st Year)</option>
                   <option>BS Information Systems (2nd Year)</option>
                   <option>BS Information Systems (3rd Year)</option>
                   <option>BS Information Systems (4th Year)</option>
                   <option *ngFor="let is of isScope">{{is}}</option>
                 </optgroup>
-                <optgroup label="BS Computer Science">
+                <optgroup label="BS Computer Science" class="italic">
                   <option>BS Computer Science (1st Year)</option>
                   <option>BS Computer Science (2nd Year)</option>
                   <option>BS Computer Science (3rd Year)</option>

@@ -1,79 +1,86 @@
 <!-- <p>user works!</p>
 <p *ngIf="student">{{student.displayName}}</p> -->
 <app-navbar></app-navbar> <!-- NAVBAR -->
-<div class="main-container" *ngIf="student as user"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
-    <div class="main-title">
-        <div class="main-title-text">
-          <h1>User Management / {{user.displayName}} </h1>
-        </div>
-        <div class="main-title-date">
-          <h1>{{dateToday | date}}</h1>
-        </div>
+<div class="main-container" *ngIf="student as user">
+  <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+  <div class="main-title">
+    <div class="main-title-text">
+      <h1>User Management / {{user.displayName}} </h1>
     </div>
-    <div class="sub-container">
-        <div class="profile-container">
-            <div class="profile-container-left">
-              <div class="profile-container-left-header">
-                <h1>My Account Details:</h1>
-              </div>
-              <div class="profile-container-left-main">
-                <div class="profile-details">
-                  <p><span class="details-title">Full Name:</span> {{user.displayName}}</p>
-                  <p><span class="details-title">Email:</span>  {{user.email}}</p>
-                  <p><span class="details-title">Contact Number:</span>  {{user.contactNumber}}</p>
-                  <p><span class="details-title">Account Created At:</span>  {{user.createdAt | date}}</p>
-                </div>
-              </div>
-            </div>
-            <div class="profile-container-right" >
-              <div class="user-actions">
-                <div class="profile-container-left-header">
-                  <h1>User Actions:</h1>
-                </div>
-
-                <!-- Layout for Edit student beginning -->
-                <div class="actions-edit" (click)="triggerEditUserModal()" *ngIf="user.role == 'Student'">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                  </svg>
-                  <p>Edit User Profile</p>
-                </div>
-                <!-- Layout for Edit student End -->
-
-                <!-- Layout for Edit Admin beginning -->
-                <div class="actions-edit" (click)="triggerEditAdminModal()" *ngIf="user.role == 'Department Head'">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                  </svg>
-                  <p>Edit Admin Profile</p>
-                </div>
-                <!-- Layout for Edit Admin beginning End -->
-
-                <div class="actions-delete" (click)="triggerDeleteModal()">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                  <p>Delete User</p>
-                </div>
-              </div>
-              <div class="account-type">
-                <h1>Account Type:</h1>
-                <p>{{user.role}}</p>
-              </div>
-              <div class="account-status-verified" *ngIf="user.verified">
-                <h1>Status:</h1>
-                <p>Verified</p>
-              </div>
-              <div class="account-status-not-verified" *ngIf="!user.verified">
-                <h1>Status:</h1>
-                <p>Not Verified</p>
-              </div>
-            </div>
+    <div class="main-title-date">
+      <h1>{{dateToday | date}}</h1>
+    </div>
+  </div>
+  <div class="sub-container">
+    <div class="profile-container">
+      <div class="profile-container-left">
+        <div class="profile-container-left-header">
+          <h1>My Account Details:</h1>
+        </div>
+        <div class="profile-container-left-main">
+          <div class="profile-details">
+            <p><span class="details-title">Full Name:</span> {{user.displayName}}</p>
+            <p><span class="details-title">Email:</span> {{user.email}}</p>
+            <p><span class="details-title">Contact Number:</span> {{user.contactNumber}}</p>
+            <p><span class="details-title">Account Created At:</span> {{user.createdAt | date}}</p>
+            <p *ngIf="user.role == 'Student'"><span class="details-title">Section:</span> {{user.section}}</p>
+            <p *ngIf="user.role == 'Department Head'"><span class="details-title">Department:</span> {{user.department}}
+            </p>
           </div>
-    </div>
+        </div>
+      </div>
+      <div class="profile-container-right">
+        <div class="account-status-verified" *ngIf="user.verified">
+          <h1>Status:</h1>
+          <p>Verified</p>
+        </div>
+        <div class="account-status-not-verified" *ngIf="!user.verified">
+          <h1>Status:</h1>
+          <p>Not Verified</p>
+        </div>
+        <div class="profile-container-left-header">
+          <h1>User Actions:</h1>
+        </div>
+        <div class="user-actions">
+          <!-- Layout for Edit student beginning -->
+          <div class="actions-edit" (click)="triggerEditUserModal()" *ngIf="user.role == 'Student'">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+            <p>Edit User Profile</p>
+          </div>
+          <!-- Layout for Edit student End -->
 
-<!-- modal container for delete -->
-<div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="deleteModal">
+          <!-- Layout for Edit Admin beginning -->
+          <div class="actions-edit" (click)="triggerEditAdminModal()" *ngIf="user.role == 'Department Head'">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+            <p>Edit Admin Profile</p>
+          </div>
+          <!-- Layout for Edit Admin beginning End -->
+
+          <div class="actions-delete" (click)="triggerDeleteModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            <p>Delete User</p>
+          </div>
+        </div>
+        <div class="account-type">
+          <h1>Account Type:</h1>
+          <p>{{user.role}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal container for delete -->
+  <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="deleteModal">
     <div class="modal-center">
       <div class="modal-overlay" aria-hidden="true"></div>
       <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
@@ -81,8 +88,10 @@
         <div class="modal-bg">
           <div class="modal-header">
             <div class="modal-header-icon-delete">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
               </svg>
             </div>
             <div class="modal-header-title">
@@ -98,66 +107,69 @@
           </div>
         </div>
         <div class="modal-form-container">
-        <div class="modal-buttons">
-          <button type="submit" class="deleteBtn" (click)="deleteUser(user.uid,user.email)">
-            Delete Account
-          </button>
-          <button type="button" class="cancelBtn" (click)="triggerDeleteModal()">
-            Cancel
-          </button>
+          <div class="modal-buttons">
+            <button type="submit" class="deleteBtn" (click)="deleteUser(user.uid,user.email)">
+              Delete Account
+            </button>
+            <button type="button" class="cancelBtn" (click)="triggerDeleteModal()">
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
   <!-- end modal container for delete -->
 
 
- <!-- modal container for edit -->
- <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="editUserModal" >
-  <div class="modal-center" >
-    <div class="modal-overlay" aria-hidden="true"></div>
-    <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
-    <div class="modal">
-      <form [formGroup]="editUserForm" (ngSubmit)="editUserProfile()">
-      <div class="modal-bg">
-        <div class="modal-header">
-          <div class="modal-header-icon-edit">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-            </svg>
-          </div>
-          <div class="modal-header-title">
-            <h3 id="modal-title">
-              Edit User Profile
-            </h3>
-            <div class="mt-2">
-              <p>
-                Edit User's Account Information
-              </p>
+  <!-- modal container for edit -->
+  <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="editUserModal">
+    <div class="modal-center">
+      <div class="modal-overlay" aria-hidden="true"></div>
+      <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+      <div class="modal">
+        <form [formGroup]="editUserForm" (ngSubmit)="editUserProfile()">
+          <div class="modal-bg">
+            <div class="modal-header">
+              <div class="modal-header-icon-edit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                </svg>
+              </div>
+              <div class="modal-header-title">
+                <h3 id="modal-title">
+                  Edit User Profile
+                </h3>
+                <div class="mt-2">
+                  <p>
+                    Edit User's Account Information
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="modal-form-container">
-          <div class="modal-form">
-            <div class="mb-4">
-              <label for="displayName">
-                User's Full Name
-              </label>
-              <input id="displayName" type="text" placeholder="Input student's full name" formControlName="displayName" autocomplete="on">
-              <!--
+          <div class="modal-form-container">
+            <div class="modal-form">
+              <div class="mb-4">
+                <label for="displayName">
+                  User's Full Name
+                </label>
+                <input id="displayName" type="text" placeholder="Input student's full name"
+                  formControlName="displayName" autocomplete="on">
+                <!--
               <p class="error-msg">Please enter your comment for this task</p> -->
-            </div>
-            <div class="login-form-error" *ngIf="editUserForm.controls.displayName.errors?.required && editUserForm.controls.displayName.touched">
-              Full name is required.
-            </div>
+              </div>
+              <div class="login-form-error"
+                *ngIf="editUserForm.controls.displayName.errors?.required && editUserForm.controls.displayName.touched">
+                Full name is required.
+              </div>
 
 
 
-            <!-- newly added components in edit student detail. Start from here onwards -->
+              <!-- newly added components in edit student detail. Start from here onwards -->
 
-                          <!-- <div class="mb-4" *ngIf="user.role == 'Department Head'">
+              <!-- <div class="mb-4" *ngIf="user.role == 'Department Head'">
               <label for="Department" >
                 Department
               </label>
@@ -168,74 +180,78 @@
             </div> -->
 
 
-            <div class="mb-4" >
-              <label for="Department" >
-                Course
-              </label>
-              <select name="course" id="course" style="width: 100%;"  formControlName="course">
-                <option value="{{user.course}}" disabled> {{user.course}} </option>
+              <div class="mb-4">
+                <label for="Department">
+                  Course
+                </label>
+                <select name="course" id="course" style="width: 100%;" formControlName="course">
+                  <option value="{{user.course}}" disabled> {{user.course}} </option>
                   <option *ngFor="let course of studentCourses">{{course}}</option>
-              </select>
-            </div>
+                </select>
+              </div>
 
-            <div class="mb-4" *ngIf="user.role == 'Student'">
-              <label for="section" >
-                Section
-              </label>
-              <!-- (change)="changeSection($event)" -->
-              <select name="section" id="section" style="width: 100%;"  formControlName="section" >
-                <option value="{{user.section}}" disable > {{user.section}}</option>
-                <option *ngFor="let section of studentSections">{{section}}</option>
-              </select>
-            </div>
+              <div class="mb-4" *ngIf="user.role == 'Student'">
+                <label for="section">
+                  Section
+                </label>
+                <!-- (change)="changeSection($event)" -->
+                <select name="section" id="section" style="width: 100%;" formControlName="section">
+                  <option value="{{user.section}}" disable> {{user.section}}</option>
+                  <option *ngFor="let section of studentSections">{{section}}</option>
+                </select>
+              </div>
 
-            <!-- End of newly added components in edit student detail. -->
-
-
+              <!-- End of newly added components in edit student detail. -->
 
 
-            <div class="mb-4">
-              <label for="email">
-                User's Email
-              </label>
-              <input id="email" type="text" placeholder="Input student's email" formControlName="email" autocomplete="on">
-            </div>
-            <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.required && editUserForm.controls.email.touched">
-               Email is required.
-            </div>
-            <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.email">
-              Not a valid email.
-            </div>
-            <div class="mb-4">
-              <label for="contactNumber">
-                User's Contact Number
-              </label>
-              <input id="contactNumber" type="text" placeholder="Input student's contact number" formControlName="contactNumber" autocomplete="on">
-              <!--
+
+
+              <div class="mb-4">
+                <label for="email">
+                  User's Email
+                </label>
+                <input id="email" type="text" placeholder="Input student's email" formControlName="email"
+                  autocomplete="on">
+              </div>
+              <div class="login-form-error"
+                *ngIf="editUserForm.controls.email.errors?.required && editUserForm.controls.email.touched">
+                Email is required.
+              </div>
+              <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.email">
+                Not a valid email.
+              </div>
+              <div class="mb-4">
+                <label for="contactNumber">
+                  User's Contact Number
+                </label>
+                <input id="contactNumber" type="text" placeholder="Input student's contact number"
+                  formControlName="contactNumber" autocomplete="on">
+                <!--
               <p class="error-msg">Please enter your comment for this task</p> -->
-            </div>
-            <div class="login-form-error" *ngIf="editUserForm.controls.contactNumber.errors?.required && editUserForm.controls.contactNumber.touched">
-              Contact number is required.
-            </div>
+              </div>
+              <div class="login-form-error"
+                *ngIf="editUserForm.controls.contactNumber.errors?.required && editUserForm.controls.contactNumber.touched">
+                Contact number is required.
+              </div>
 
+            </div>
           </div>
-        </div>
-      <div class="modal-buttons">
-        <button type="submit" class="addBtn" *ngIf="editUserForm.valid">
-          Edit User Profile
-        </button>
-        <button type="submit" class="addBtn-disabled" *ngIf="editUserForm.invalid">
-          Edit User Profile
-        </button>
-        <button type="button" class="cancelBtn" (click)="triggerEditUserModal()">
-          Cancel
-        </button>
+          <div class="modal-buttons">
+            <button type="submit" class="addBtn" *ngIf="editUserForm.valid">
+              Edit User Profile
+            </button>
+            <button type="submit" class="addBtn-disabled" *ngIf="editUserForm.invalid">
+              Edit User Profile
+            </button>
+            <button type="button" class="cancelBtn" (click)="triggerEditUserModal()">
+              Cancel
+            </button>
+          </div>
+        </form>
       </div>
-      </form>
     </div>
   </div>
-</div>
-<!-- end modal container for edit -->
+  <!-- end modal container for edit -->
 
 
 
@@ -245,97 +261,104 @@
 
 
 
-<!-- ***Modal Container for Edit Admin Only*** -->
-<div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="editAdminModal">
-  <div class="modal-center">
-    <div class="modal-overlay" aria-hidden="true"></div>
-    <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
-    <div class="modal">
-      <form [formGroup]="editAdminForm" (ngSubmit)="editAdminProfile()">
-      <div class="modal-bg">
-        <div class="modal-header">
-          <div class="modal-header-icon-edit">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-            </svg>
-          </div>
-          <div class="modal-header-title">
-            <h3 id="modal-title">
-              Edit Admin Profile
-            </h3>
-            <div class="mt-2">
-              <p>
-                Edit Admin's Account Information
-              </p>
+  <!-- ***Modal Container for Edit Admin Only*** -->
+  <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="editAdminModal">
+    <div class="modal-center">
+      <div class="modal-overlay" aria-hidden="true"></div>
+      <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+      <div class="modal">
+        <form [formGroup]="editAdminForm" (ngSubmit)="editAdminProfile()">
+          <div class="modal-bg">
+            <div class="modal-header">
+              <div class="modal-header-icon-edit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                </svg>
+              </div>
+              <div class="modal-header-title">
+                <h3 id="modal-title">
+                  Edit Admin Profile
+                </h3>
+                <div class="mt-2">
+                  <p>
+                    Edit Admin's Account Information
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="modal-form-container">
+          <div class="modal-form-container">
 
-          <div class="modal-form">
-            <div class="mb-4">
-              <label for="displayName">
-                Admin's Full Name
-              </label>
-              <input id="displayName" type="text" placeholder="Input student's full name" formControlName="displayName" autocomplete="on">
-            </div>
+            <div class="modal-form">
+              <div class="mb-4">
+                <label for="displayName">
+                  Admin's Full Name
+                </label>
+                <input id="displayName" type="text" placeholder="Input student's full name"
+                  formControlName="displayName" autocomplete="on">
+              </div>
 
-            <div class="login-form-error" *ngIf="editAdminForm.controls.displayName.errors?.required && editAdminForm.controls.displayName.touched">
-              Full name is required.
-            </div>
+              <div class="login-form-error"
+                *ngIf="editAdminForm.controls.displayName.errors?.required && editAdminForm.controls.displayName.touched">
+                Full name is required.
+              </div>
 
-            <div class="mb-4" >
-              <label for="Department" >
-                Department
-              </label>
-              <select name="department" id="department" style="width: 100%;"  formControlName="department">
-                <option value="{{user.department}}" disabled> {{user.department}} </option>
+              <div class="mb-4">
+                <label for="Department">
+                  Department
+                </label>
+                <select name="department" id="department" style="width: 100%;" formControlName="department">
+                  <option value="{{user.department}}" disabled> {{user.department}} </option>
                   <option *ngFor="let department of studentCourses">{{department}}</option>
-              </select>
-            </div>
+                </select>
+              </div>
 
-            <div class="mb-4">
-              <label for="email">
-                Admin's Email
-              </label>
-              <input id="email" type="text" placeholder="Input student's email" formControlName="email" autocomplete="on">
-            </div>
-            <div class="login-form-error" *ngIf="editAdminForm.controls.email.errors?.required && editAdminForm.controls.email.touched">
-               Email is required.
-            </div>
-            <div class="login-form-error" *ngIf="editAdminForm.controls.email.errors?.email">
-              Not a valid email.
-            </div>
-            <div class="mb-4">
-              <label for="contactNumber">
-                Admin's Contact Number
-              </label>
-              <input id="contactNumber" type="text" placeholder="Input student's contact number" formControlName="contactNumber" autocomplete="on">
+              <div class="mb-4">
+                <label for="email">
+                  Admin's Email
+                </label>
+                <input id="email" type="text" placeholder="Input student's email" formControlName="email"
+                  autocomplete="on">
+              </div>
+              <div class="login-form-error"
+                *ngIf="editAdminForm.controls.email.errors?.required && editAdminForm.controls.email.touched">
+                Email is required.
+              </div>
+              <div class="login-form-error" *ngIf="editAdminForm.controls.email.errors?.email">
+                Not a valid email.
+              </div>
+              <div class="mb-4">
+                <label for="contactNumber">
+                  Admin's Contact Number
+                </label>
+                <input id="contactNumber" type="text" placeholder="Input student's contact number"
+                  formControlName="contactNumber" autocomplete="on">
+
+              </div>
+              <div class="login-form-error"
+                *ngIf="editAdminForm.controls.contactNumber.errors?.required && editAdminForm.controls.contactNumber.touched">
+                Contact number is required.
+              </div>
 
             </div>
-            <div class="login-form-error" *ngIf="editAdminForm.controls.contactNumber.errors?.required && editAdminForm.controls.contactNumber.touched">
-              Contact number is required.
-            </div>
-
           </div>
-        </div>
-      <div class="modal-buttons">
-        <button type="submit" class="addBtn" *ngIf="editAdminForm.valid">
-          Edit Admin Profile
-        </button>
-        <button type="submit" class="addBtn-disabled" *ngIf="editAdminForm.invalid">
-          Edit Admin Profile
-        </button>
-        <button type="button" class="cancelBtn" (click)="triggerEditAdminModal()">
-          Cancel
-        </button>
+          <div class="modal-buttons">
+            <button type="submit" class="addBtn" *ngIf="editAdminForm.valid">
+              Edit Admin Profile
+            </button>
+            <button type="submit" class="addBtn-disabled" *ngIf="editAdminForm.invalid">
+              Edit Admin Profile
+            </button>
+            <button type="button" class="cancelBtn" (click)="triggerEditAdminModal()">
+              Cancel
+            </button>
+          </div>
+        </form>
       </div>
-      </form>
     </div>
   </div>
-</div>
-<!-- ***End of Modal Container for Edit Admin*** -->
+  <!-- ***End of Modal Container for Edit Admin*** -->
 
 
 
@@ -353,57 +376,3 @@
 
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -20,6 +20,7 @@
             <p><span class="details-title">Email:</span>  {{user.email}}</p>
             <p><span class="details-title">Contact Number:</span>  {{user.contactNumber}}</p>
             <p><span class="details-title">Account Created At:</span>  {{user.createdAt | date}}</p>
+            <p><span class="details-title">Account Type:</span> {{user.role}} </p>
           </div>
         </div>
       </div>
@@ -52,10 +53,6 @@
             </svg>
             <p>Delete My Profile</p>
           </div>
-        </div>
-        <div class="account-type">
-          <h1>Account Type:</h1>
-          <p>{{user.role}}</p>
         </div>
       </div>
     </div>
