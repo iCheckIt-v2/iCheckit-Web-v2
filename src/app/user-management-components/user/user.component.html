@@ -155,7 +155,8 @@
 
 
 
-
+            <div class="login-form-error" *ngIf="editUserForm.controls.course.errors?.required && editUserForm.controls.course.touched">Student's course is required.
+            </div>
             <div class="mb-4" >
               <label for="Department" >
                 Course
@@ -166,15 +167,50 @@
               </select>
             </div>
 
-            <div class="mb-4" *ngIf="user.role == 'Student'">
+            <!-- <div class="mb-4" *ngIf="user.role == 'Student'">
               <label for="section" >
                 Section
               </label>
-              <!-- (change)="changeSection($event)" -->
+
               <select name="section" id="section" style="width: 100%;"  formControlName="section" >
                 <option value="{{user.section}}" disable > {{user.section}}</option>
                 <option *ngFor="let section of studentSections">{{section}}</option>
               </select>
+            </div> -->
+
+            <div class="mb-4" *ngIf="editUserForm.value.course == 'BS Information Technology'">
+              <label for="section">
+                Section
+              </label>
+              <select name="section" id="section" style="width: 100%;" (change)="editUserProfile()" formControlName="section">
+                <option value="{{user.section}}" disabled>{{user.section}}</option>
+                  <option *ngFor="let section of itSection">{{section}}</option>
+                </select>
+
+            </div>
+
+            <div class="mb-4" *ngIf="editUserForm.value.course == 'BS Computer Science'">
+              <label for="section">
+                Section
+              </label>
+              <select name="section" id="section" style="width: 100%;" (change)="editUserProfile()" formControlName="section">
+                <option value="{{user.section}}" disabled>{{user.section}}</option>
+                  <option *ngFor="let section of csSection">{{section}}</option>
+                </select>
+
+            </div>
+
+            <div class="mb-4" *ngIf="editUserForm.value.course == 'BS Information Systems'">
+              <label for="section">
+                Section
+              </label>
+              <select name="section" id="section" style="width: 100%;" (change)="editUserProfile()" formControlName="section">
+                <option value="{{user.section}}" disabled>{{user.section}}</option>
+                  <option *ngFor="let section of isSection">{{section}}</option>
+                </select>
+
+            </div>
+            <div class="login-form-error" *ngIf="editUserForm.controls.section.errors?.required && editUserForm.controls.section.touched">Student's section is required.
             </div>
 
             <!-- End of newly added components in edit student detail. -->
