@@ -24,6 +24,8 @@ import { UserComponent } from './user-management-components/user/user.component'
 import { TaskComponent } from './dashboard-components/task/task.component';
 import { TaskSettingsComponent } from './dashboard-components/task-settings/task-settings.component';
 import { ReportComponent } from './dashboard-components/report/report.component';
+import { ChartModule } from 'angular2-chartjs';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,7 @@ import { ReportComponent } from './dashboard-components/report/report.component'
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ChartModule,
     AngularFirestoreModule, //Firebase imports
     AngularFireAuthModule,
     ReactiveFormsModule,

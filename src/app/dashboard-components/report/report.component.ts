@@ -7,6 +7,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
@@ -27,6 +28,10 @@ export class ReportComponent implements OnInit {
   lateRecipientsPct = 0;
   forApprovalRecipientsPct = 0;
   accomplishedRecipientsPct = 0;
+  chart: any;
+  data: any;
+  type: any;
+  options: any;
   constructor( 
     public auth: AuthService,
     private route: ActivatedRoute,
@@ -80,7 +85,47 @@ export class ReportComponent implements OnInit {
       this.lateRecipientsPct = (this.lateRecipients / this.totalRecipients) * 100;
       this.forApprovalRecipientsPct = (this.forApprovalRecipients / this.totalRecipients) * 100;
       this.accomplishedRecipientsPct = (this.accomplishedRecipients / this.totalRecipients) * 100;
+
+      this.type = 'doughnut';
+      this.data = {
+        labels: ["Pending", "For Approval", "Accomplished", "Late",],
+        datasets: [
+          {
+            label: "My First dataset",
+            data: [this.pendingRecipientsPct , this.forApprovalRecipientsPct, this.accomplishedRecipientsPct, this.lateRecipientsPct],
+            backgroundColor: [ 
+              '#ffff00',
+              '#FF640D',
+              '#00B633',
+              '#F00000'
+              
+            ],
+            borderCplor: [ 
+              '#ffff00',
+              '#FF640D',
+              '#00B633',
+              '#F00000'
+            ],
+              hoverOffset: 4
+          },
+        ],
+       
+      };
+      this.options = {
+        title: {
+              display: true,
+              text: 'Task Status Report',
+              fontSize: 25,
+              fontFamily: 'Antonio',
+              fontColor: '#35414F'
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      };
+
     })
+
+    
   }
 
 }
