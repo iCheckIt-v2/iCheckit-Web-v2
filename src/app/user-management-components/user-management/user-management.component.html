@@ -114,6 +114,7 @@
               <div class="login-form-error" *ngIf="createStudentForm.controls.displayName.errors?.required && createStudentForm.controls.displayName.touched">
                 Student's full name is required.
               </div>
+
               <div class="mb-4">
                 <label for="course">
                   Course
@@ -122,22 +123,45 @@
                   <option value="" disabled>Choose the student's course</option>
                     <option *ngFor="let course of studentCourses">{{course}}</option>
                   </select>
-                <!--
-                <p class="error-msg">Please enter your comment for this task</p> -->
+
               </div>
               <div class="login-form-error" *ngIf="createStudentForm.controls.course.errors?.required && createStudentForm.controls.course.touched">Student's course is required.
               </div>
-              <div class="mb-4">
+              <!-- *ngIf="studentCourses ==  'BS Information Technology'" -->
+              <!-- *ngIf="userData.student.course of studentCourses == 'BS Information Technology'" -->
+              <div class="mb-4" *ngIf="createStudentForm.value.course == 'BS Information Technology'">
                 <label for="section">
                   Section
                 </label>
                 <select name="section" id="section" style="width: 100%;" (change)="changeSection($event)" formControlName="section">
                   <option value="" disabled>Choose the student's section</option>
-                    <option *ngFor="let section of studentSections">{{section}}</option>
+                    <option *ngFor="let section of itSection">{{section}}</option>
                   </select>
-                <!--
-                <p class="error-msg">Please enter your comment for this task</p> -->
+
               </div>
+
+              <div class="mb-4" *ngIf="createStudentForm.value.course == 'BS Computer Science'">
+                <label for="section">
+                  Section
+                </label>
+                <select name="section" id="section" style="width: 100%;" (change)="changeSection($event)" formControlName="section">
+                  <option value="" disabled>Choose the student's section</option>
+                    <option *ngFor="let section of csSection">{{section}}</option>
+                  </select>
+
+              </div>
+
+              <div class="mb-4" *ngIf="createStudentForm.value.course == 'BS Information Systems'">
+                <label for="section">
+                  Section
+                </label>
+                <select name="section" id="section" style="width: 100%;" (change)="changeSection($event)" formControlName="section">
+                  <option value="" disabled>Choose the student's section</option>
+                    <option *ngFor="let section of isSection">{{section}}</option>
+                  </select>
+
+              </div>
+
               <div class="login-form-error" *ngIf="createStudentForm.controls.section.errors?.required && createStudentForm.controls.section.touched">Student's section is required.
               </div>
               <!--
