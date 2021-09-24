@@ -1,5 +1,5 @@
 .admin-container {
-    @apply flex justify-center items-center w-full h-auto;
+    @apply flex justify-center w-full h-auto;
 }
 .dept-heads {
     @apply w-1/2 h-auto mr-2;

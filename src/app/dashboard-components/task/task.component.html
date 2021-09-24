@@ -1,168 +1,233 @@
-<app-navbar></app-navbar> <!-- NAVBAR -->
-<div class="main-container" *ngIf="fsData as user"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
-    <div class="main-title" *ngIf="taskData as task">
-        <div class="main-title-text">
-          <h1> {{task.title}} / {{user.displayName}} </h1>
-
-        </div>
-        <div class="main-title-date">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" [routerLink]="['/task/settings/', task.id, ]"  >
-            <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-          </svg>
-        </div>
+<app-navbar></app-navbar>
+<!-- NAVBAR -->
+<div class="main-container" *ngIf="fsData as user">
+  <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+  <div class="bg-white main-title" *ngIf="taskData as task">
+    <div class="main-title-text">
+      <h1 class="text-3xl my-2">{{ task.title }}</h1>
     </div>
-    <div flexbox>
-
-
+    <div class="main-title-date">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-5" viewBox="0 0 20 20" fill="currentColor"  [routerLink]="['/task/reports/', task.id]">
+        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+        [routerLink]="['/task/settings/', task.id]">
+        <path fill-rule="evenodd"
+          d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+          clip-rule="evenodd" />
+      </svg>
     </div>
+  </div>
+  <div flexbox></div>
   <div class="sub-container" *ngIf="taskData as task">
     <!-- Start Coding here -->
-        <!-- Task description -->
-      <div class="task-container-middle">
+    <!-- Task description -->
+    <!-- <div class="task-container-middle">
           <div class="taskDescrip-container-left-main">
               <h1 class="text-1xl mt-4">Task title: </h1>
                 <h1 class="text-3xl mt-4"> {{task.title}} </h1>
           </div>
-      </div>
-      <!-- elements box section -->
-      <!-- uploaded by layout -->
+      </div> -->
+    <!-- elements box section -->
+    <!-- uploaded by layout -->
     <div class="elements-firstrow-container">
-      <div class="uploadedBy-container-left" >
-          <div class="uploadedBy-container-left-main">
-              <h1 class="text-4xl mt-4 text-white">Uploaded by: </h1>
-              <h2 class="text-4xl mt-4 text-white"> {{task.uploadedBy}} </h2>
-          </div>
-      </div>
-      <!-- task deadline layout -->
-      <div class="taskDeadline-container-mid">
-        <div class="taskDeadline-container-mid-main">
-            <h1 class="text-4xl mt-4 text-white">Task Deadline: </h1>
-            <h2 class="text-4xl mt-4 text-white"> {{ task.deadline | date }} </h2>
+      <div class="taskDescrip-container-middle">
+        <div class="taskDescrip-container-left-main">
+          <h1 class="my-4 text-Black">Task Description:</h1>
+          <h2 class="mr-4 mb-4 text-Black">{{ task.description }}</h2>
         </div>
       </div>
+      <!-- task deadline layout -->
+      <!-- <div class="taskDeadline-container-mid">
+        <div class="taskDeadline-container-mid-main">
+          <h1 class="text-4xl mt-4 text-white">Task Deadline: </h1>
+          <h2 class="text-4xl mt-4 text-white"> {{ task.deadline | date }} </h2>
+        </div>
+      </div> -->
       <!-- Task scope layout -->
       <div class="taskScope-container-right">
         <div class="taskScope-container-right-main">
-            <h1 class="text-4xl mt-4 text-Black">Task Scope:</h1>
-            <h1 class="text-1.5xl mt-4 text-Black">{{task.scope}}</h1>
+          <h1 class="my-4 text-Black">Task Scope:</h1>
+          <!-- <h1 class="mr-4 my-4 text-Black">{{ task.scope }}</h1> -->
+          <span class="inline-flex items-center justify-center text-xs font-bold leading-none" *ngFor="let item of task.scope">
+            <span 
+            *ngIf="item.slice(1, 3) == 'IT'"
+            class="text-indigo-100 bg-indigo-700 px-2 py-1 mr-1 rounded">{{item}}</span>
+            <span 
+            *ngIf="item.slice(1, 3) == 'IS'"
+            class="text-green-100 bg-green-700 px-2 py-1 mr-1 rounded">{{item}}</span>
+            <span 
+            *ngIf="item.slice(1, 3) == 'CS'"
+            class="text-red-100 bg-red-700 px-2 py-1 mr-1 rounded">{{item}}</span>
+         </span>
         </div>
       </div>
     </div>
-      <!-- pending submission layout -->
+    <!-- pending submission layout -->
     <div class="elements-secondrow-container">
-      <div class="pending-container-left">
-        <div class="pending-container-left-main">
-            <h1 class="text-4xl mt-4 text-white">Pending Submission: </h1>
-            <h1 class="text-3xl mt-4 text-white">{{pendingRecipientsPct}}%</h1>
-          </div>
+      <div class="uploadedBy-container-left">
+        <div class="uploadedBy-container-left-main">
+          <h1 class="text-xl mt-4 text-white">Uploaded by:</h1>
+          <h1 class="text-xl mr-4 my-4 text-white">{{ user.displayName }}</h1>
+        </div>
       </div>
-       <!-- pending submission layout -->
-      <div class="approval-container-right">
-        <div class="approval-container-right-main">
-            <h1 class="text-4xl mt-4 text-white">For Approval Submission: </h1>
-            <h1 class="text-3xl mt-4 text-white">{{forApprovalRecipientsPct}}%</h1>
+      <!-- pending submission layout -->
+      <div class="taskDeadline-container-mid">
+        <div class="taskDeadline-container-mid-main">
+          <h1 class="text-xl mt-4 text-white">Task Deadline:</h1>
+          <h2 class="text-xl mr-4 my-4 text-white">
+            {{ task.deadline | date }}
+          </h2>
         </div>
       </div>
       <!-- Piechart place holder -->
-      <div class="piechart-container-right">
+      <!-- <div class="piechart-container-right">
         <div class="piechart-container-right-main">
-            <h1 class="text-4xl mt-4 text-white"></h1>
+          <h1 class="text-4xl mt-4 text-white"></h1>
+        </div>
+      </div> -->
+      <div class="pending-container-left" *ngIf="task.status == 'Pending'">
+        <div class="piechart-container-right-main">
+          <h1 class="text-xl mt-4 text-black" *ngIf="task.status == 'Pending'">
+            Task Status:
+          </h1>
+          <h2 class="text-xl mt-4 text-black" *ngIf="task.status == 'Pending'">
+            {{ task.status }}
+          </h2>
+        </div>
+      </div>
+      <div class="approved-container-right" *ngIf="task.status == 'Completed'">
+        <div class="piechart-container-right-main">
+          <h1 class="text-xl mt-4 text-white" *ngIf="task.status == 'Completed'">
+            Task Status:
+          </h1>
+          <h2 class="text-xl mt-4 text-white" *ngIf="task.status == 'Completed'">
+            {{ task.status }}
+          </h2>
         </div>
       </div>
     </div>
-        <!-- Late submission layout -->
-    <div class="elements-thirdrow-container">
+    <!-- Late submission layout -->
+    <!-- <div class="elements-thirdrow-container">
       <div class="late-container-left">
         <div class="late-container-left-main">
-            <h1 class="text-4xl mt-4 text-white">Late Submission: </h1>
-            <h1 class="text-3xl mt-4 text-white">{{lateRecipientsPct}}%</h1>
-          </div>
-      </div>
-      <!-- Approved Submission -->
-      <div class="approved-container-right">
+          <h1 class="text-4xl mt-4 text-white">Late Submission: </h1>
+          <h1 class="text-3xl mt-4 text-white">{{(lateRecipients / totalRecipients) * 100}}%</h1>
+        </div>
+      </div> -->
+    <!-- Approved Submission -->
+    <!-- <div class="approved-container-right">
         <div class="approved-container-right-main">
-            <h1 class="text-4xl mt-4 text-white">Approved Submission: </h1>
-            <h1 class="text-3xl mt-4 text-white">{{accomplishedRecipientsPct}}%</h1>
+          <h1 class="text-4xl mt-4 text-white">Approved Submission: </h1>
+          <h1 class="text-3xl mt-4 text-white">{{(accomplishedRecipients / totalRecipients) * 100}}%</h1>
         </div>
       </div>
       <div class="piechart-container-right">
         <div class="piechart-container-right-main">
-            <h1 class="text-4xl mt-4 text-white"></h1>
+          <h1 class="text-4xl mt-4 text-white"></h1>
         </div>
+      </div>
+    </div> -->
+
+    <!-- student tracker container -->
+    <div class="students">
+      <div class="admin-container-header">
+        <h1>Tasks:</h1>
+        <div class="acceptReject-Label">
+          <h1>Accept / Reject</h1>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 approveAll-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd" (click)="triggerAcceptAllSubmissionModal()" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rejectAll-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd" (click)="triggerRejectAllSubmissionModal()" />
+          </svg>
+        </div>
+        <!-- <div class="approveAll-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd" (click)="triggerAcceptAllSubmissionModal()" />
+          </svg>
+        </div>
+        <div class="rejectAll-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd" (click)="triggerRejectAllSubmissionModal()" />
+          </svg>
+        </div> -->
       </div>
     </div>
 
+    <div class="mr-10 admin-container-children" *ngFor="
+        let recipient of taskData.recipients
+          | paginate: { itemsPerPage: 10, currentPage: p }
+      " [routerLink]="['/task/', task.id]">
+      <div class="admin-container-children-left">
+        <p>{{ recipient.displayName }}</p>
+      </div>
+      <div class="admin-container-children-left">
+        <p>{{ recipient.section }}</p>
+      </div>
+      <div class="admin-container-children-left">
+        <p *ngIf="recipient.submissionLink != ''">Link to submission here</p>
+        <a href="{{ recipient.submissionLink }}" *ngIf="recipient.submissionLink != ''">
+          <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6 text-blue-500" viewBox="0 0 20 20"
+            fill="currentColor">
+            <path
+              d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+          </svg>
+        </a>
+        <p *ngIf="recipient.submissionLink == ''">No Submission Yet</p>
+      </div>
+      <div class="admin-container-children-right">
+        <div class="forApproval-container">
+          <p *ngIf="recipient.status == 'For Approval'">
+            Status:
+            <span class="recipient-forApproval">{{ recipient.status }}</span>
+          </p>
+        </div>
+        <p *ngIf="recipient.status == 'Late'">
+          Status: <span class="recipient-late">{{ recipient.status }}</span>
+        </p>
+        <p *ngIf="recipient.status == 'Pending'">
+          Status: <span class="recipient-pending">{{ recipient.status }}</span>
+        </p>
+        <p *ngIf="recipient.status == 'Accomplished'">
+          Status:
+          <span class="recipient-accomplished">{{ recipient.status }}</span>
+        </p>
+        <!-- *ngIf="recipient.status == 'For Approval'" -->
 
-        <!-- student tracker container -->
-        <div class="students">
-          <div class="admin-container-header">
-              <h1>Tasks:</h1>
-            <div class="acceptReject-Label">
-              <h1> Accept / Reject </h1>
-            </div>
-            <div class="approveAll-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" (click)="triggerAcceptAllSubmissionModal()" />
-              </svg>
-            </div>
-            <div class="rejectAll-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" (click)="triggerRejectAllSubmissionModal()"/>
-            </svg>
-          </div>
-          </div>
-          </div>
-
-          <div class="admin-container-children" *ngFor="let recipient of taskData.recipients | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/task/', task.id]">
-              <div class="admin-container-children-left">
-                  <p>{{recipient.displayName}}</p>
-              </div>
-              <div class="admin-container-children-left" >
-                <p>{{recipient.section}}</p>
-              </div>
-              <div class="admin-container-children-left" >
-                <a href="{{recipient.submissionLink}}" *ngIf="recipient.submissionLink != ''">
-                <p *ngIf="recipient.submissionLink != ''" class="link-submission">Link to submission here</p>
-                </a>
-                <a href="{{recipient.submissionLink}}" *ngIf="recipient.submissionLink != ''">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                  <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                </svg>
-                </a>
-                <p *ngIf="recipient.submissionLink == ''">No Submission Yet</p>
-              </div>
-              <div class="admin-container-children-right">
-                <div class="forApproval-container">
-                <p *ngIf="recipient.status == 'For Approval'">Status: <span class="recipient-forApproval">{{recipient.status}}</span></p>
-                </div>
-                <p *ngIf="recipient.status == 'Late'">Status: <span class="recipient-late">{{recipient.status}}</span></p>
-                <p *ngIf="recipient.status == 'Pending'">Status: <span class="recipient-pending">{{recipient.status}}</span></p>
-                <p *ngIf="recipient.status == 'Accomplished'">Status: <span class="recipient-accomplished">{{recipient.status}}</span></p>
-                <!-- *ngIf="recipient.status == 'For Approval'" -->
-
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" (click)="triggerAddTaskModal(recipient)">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" (click)="triggerAddTaskModal(recipient)">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg> -->
-              <div class="acceptRejectIcon">
-              <div class="checkIcon"  *ngIf="recipient.status == 'For Approval'">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 link-approve" viewBox="0 0 20 20" fill="currentColor" (click)="acceptSubmission(recipient)">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
-              </div>
-              <div class="xIcon"  *ngIf="recipient.status == 'For Approval'">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 link-reject" viewBox="0 0 20 20" fill="currentColor" (click)="rejectSubmission(recipient)">
-                  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </div>
-
-              </div>
-              </div>
-              <!-- <p>{{recipient.displayName}}</p> -->
-
+        <div class="acceptRejectIcon">
+          <div class="checkIcon" *ngIf="recipient.status == 'For Approval'">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd" />
+            </svg>
           </div>
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <div class="xIcon" *ngIf="recipient.status == 'For Approval'">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
       </div>
+    </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>
 <!--
  <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="updateStatusModal">
@@ -228,43 +293,38 @@
     <div class="modal-overlay" aria-hidden="true"></div>
     <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
     <div class="modal">
-      <form  >
-      <div class="modal-bg">
-        <div class="modal-header">
-          <div class="modal-header-icon-delete">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-            </svg>
-          </div>
-          <div class="modal-header-title" >
-            <h3 id="modal-title">
-              Accept All
-            </h3>
-            <div class="mt-2">
-              <p>
-                Are you sure you want to set all for approval submissions to accomplished?
-              </p>
+      <form>
+        <div class="modal-bg">
+          <div class="modal-header">
+            <div class="modal-header-icon-delete">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </div>
+            <div class="modal-header-title">
+              <h3 id="modal-title">Accept All</h3>
+              <div class="mt-2">
+                <p>Are You Sure You Want To Accept all this task Submission?</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-
-      <div class="modal-buttons">
-        <button type="submit" class="AcceptBtn" (click)="acceptAllSubmissions()">
-          Accept All
-        </button>
-        <button type="button" class="cancelBtn" (click)="triggerAcceptAllSubmissionModal()">
-          Cancel
-        </button>
-      </div>
-
-  </form>
+        <div class="modal-buttons">
+          <button type="submit" class="AcceptBtn" (click)="triggerAcceptAllSubmissionModal()">
+            Accept All
+          </button>
+          <button type="button" class="cancelBtn" (click)="triggerAcceptAllSubmissionModal()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-</div>
 <!-- End of Modal for Accept all task submission -->
-
 
 <!-- Modal for Reject All task submission -->
 <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="rejectAllModal">
@@ -272,39 +332,35 @@
     <div class="modal-overlay" aria-hidden="true"></div>
     <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
     <div class="modal">
-      <form  >
-      <div class="modal-bg">
-        <div class="modal-header">
-          <div class="modal-header-icon-delete">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-            </svg>
-          </div>
-          <div class="modal-header-title" >
-            <h3 id="modal-title">
-              Reject All
-            </h3>
-            <div class="mt-2">
-              <p>
-                Are you sure you want to reject all for approval submissions?              
-              </p>
+      <form>
+        <div class="modal-bg">
+          <div class="modal-header">
+            <div class="modal-header-icon-delete">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </div>
+            <div class="modal-header-title">
+              <h3 id="modal-title">Reject All</h3>
+              <div class="mt-2">
+                <p>Are You Sure You Want To Reject all this task Submission?</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-
-      <div class="modal-buttons">
-        <button type="submit" class="deleteBtn" (click)="rejectAllSubmission()">
-          Reject All
-        </button>
-        <button type="button" class="cancelBtn" (click)="triggerRejectAllSubmissionModal()">
-          Cancel
-        </button>
-      </div>
-
-  </form>
+        <div class="modal-buttons">
+          <button type="submit" class="deleteBtn" (click)="triggerRejectAllSubmissionModal()">
+            Reject All
+          </button>
+          <button type="button" class="cancelBtn" (click)="triggerRejectAllSubmissionModal()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 </div>
 <!-- End of reject all modal for task submission -->
