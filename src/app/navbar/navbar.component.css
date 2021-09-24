@@ -32,7 +32,7 @@
   border-left: 8px solid white;
 }
 
-.cics {
+/* .cics {
   @apply ml-5 flex-col-reverse items-center text-xs;
   font-family: "Abel", sans-serif;
   color: white;
@@ -41,4 +41,16 @@
 
 .cics hr {
   @apply my-5 text-center;
+} */
+
+.cics img {
+  @apply items-center mx-auto;
+  margin-top: 25rem;
+  width: 60px;
+  height: 70px;
+}
+
+.cics p {
+  @apply text-white text-center mt-3 text-sm px-4;
+  font-family: "Abel", sans-serif;
 }

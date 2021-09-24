@@ -15,10 +15,12 @@
     <div class="profile-container">
       <div class="profile-container-left">
         <div class="profile-container-left-header">
-          <h1>My Account Details:</h1>
+          <h1>Account Details:</h1>
         </div>
         <div class="profile-container-left-main">
           <div class="profile-details">
+            <h1 class="details-title" *ngIf="user.verified">Status: <span class="status-verified" *ngIf="user.verified"> Verified</span></h1>
+            <h1 class="details-title" *ngIf="!user.verified">Status: <span class="status-not-verified" *ngIf="!user.verified"> Not Verified</span></h1>
             <p><span class="details-title">Full Name:</span> {{user.displayName}}</p>
             <p><span class="details-title">Email:</span> {{user.email}}</p>
             <p><span class="details-title">Contact Number:</span> {{user.contactNumber}}</p>
@@ -30,14 +32,14 @@
         </div>
       </div>
       <div class="profile-container-right">
-        <div class="account-status-verified" *ngIf="user.verified">
+        <!-- <div class="account-status-verified" *ngIf="user.verified">
           <h1>Status:</h1>
           <p>Verified</p>
         </div>
         <div class="account-status-not-verified" *ngIf="!user.verified">
           <h1>Status:</h1>
           <p>Not Verified</p>
-        </div>
+        </div> -->
         <div class="profile-container-left-header">
           <h1>User Actions:</h1>
         </div>
@@ -71,10 +73,10 @@
             <p>Delete User</p>
           </div>
         </div>
-        <div class="account-type">
+        <!-- <div class="account-type">
           <h1>Account Type:</h1>
           <p>{{user.role}}</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
