@@ -25,6 +25,7 @@ import { TaskComponent } from './dashboard-components/task/task.component';
 import { TaskSettingsComponent } from './dashboard-components/task-settings/task-settings.component';
 import { ReportComponent } from './dashboard-components/report/report.component';
 import { ChartModule } from 'angular2-chartjs';
+import { DownloadReportComponent } from './dashboard-components/download-report/download-report.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ChartModule } from 'angular2-chartjs';
     UserComponent,
     TaskComponent,
     TaskSettingsComponent,
-    ReportComponent
+    ReportComponent,
+    DownloadReportComponent
   ],
   imports: [
     BrowserModule,

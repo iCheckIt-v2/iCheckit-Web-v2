@@ -1,20 +1,19 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Params, ActivatedRoute } from '@angular/router';
+import { jsPDF } from 'jspdf';
+import { switchMap } from 'rxjs/operators';
 import { AngularFireAuth  } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { TaskService } from 'src/app/services/task.service';
-import { switchMap } from 'rxjs/operators';
-import { FormBuilder, Validators } from '@angular/forms';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.css']
+  selector: 'app-download-report',
+  templateUrl: './download-report.component.html',
+  styleUrls: ['./download-report.component.css']
 })
-export class ReportComponent implements OnInit {
+export class DownloadReportComponent implements OnInit {
   @ViewChild('content', {static: false}) el!: ElementRef;
   dateToday = new Date();
   userData:any;
@@ -30,19 +29,19 @@ export class ReportComponent implements OnInit {
   lateRecipientsPct = 0;
   forApprovalRecipientsPct = 0;
   accomplishedRecipientsPct = 0;
+  mgaPasaway: any;
   chart: any;
   data: any;
   type: any;
   options: any;
   taskId:any;
-  constructor( 
+  constructor(
     public auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
     readonly fire: AngularFireAuth,
     private taskService: TaskService,
-    private fb: FormBuilder,
-    private storage: AngularFireStorage) { }
+  ) { }
 
   ngOnInit(): void {
     this.fire.user.subscribe((user:any) => {
@@ -70,16 +69,19 @@ export class ReportComponent implements OnInit {
       this.forApprovalRecipients = 0;
       this.lateRecipients = 0;
       this.accomplishedRecipients = 0;
-      
+      this.mgaPasaway = [];
       res.recipients.forEach((element: any) => {
         if(Object.values(element).includes("Pending")) {
           this.pendingRecipients += 1;
+          this.mgaPasaway.push(element)
         }
         if(Object.values(element).includes("For Approval")) {
           this.forApprovalRecipients += 1;
         }
         if(Object.values(element).includes("Late")) {
           this.lateRecipients += 1;
+          this.mgaPasaway.push(element)
+
         }
         if(Object.values(element).includes("Accomplished")) {
           this.accomplishedRecipients += 1;
@@ -89,7 +91,7 @@ export class ReportComponent implements OnInit {
       this.lateRecipientsPct = (this.lateRecipients / this.totalRecipients) * 100;
       this.forApprovalRecipientsPct = (this.forApprovalRecipients / this.totalRecipients) * 100;
       this.accomplishedRecipientsPct = (this.accomplishedRecipients / this.totalRecipients) * 100;
-
+      console.log(this.mgaPasaway)
       this.type = 'doughnut';
       this.data = {
         labels: ["Pending", "For Approval", "Accomplished", "Late",],
@@ -126,12 +128,28 @@ export class ReportComponent implements OnInit {
         responsive: true,
         maintainAspectRatio: false
       };
+    })
 
-    }) 
+    this.downloadPdf();
   }
 
   downloadPdf() {
-    this.router.navigate(['/task/reports-download/',this.taskId])
+    const quality = 1 // Higher the better but larger file
+    html2canvas(this.el.nativeElement,
+        { scale: quality }
+    ).then(canvas => {
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+        pdf.save();
+    }).then(() => {
+      this.router.navigate(['/task/reports/',this.taskId])
+    })
+  //   let doc = new jsPDF('l', 'mm', 'a4');
+  //   doc.html(this.el.nativeElement, {
+  //     callback: function (doc) {
+  //       doc.save();
+  //     }
+  //  });  
   }
 
 }

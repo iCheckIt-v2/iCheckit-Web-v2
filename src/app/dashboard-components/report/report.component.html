@@ -1,5 +1,5 @@
 <app-navbar></app-navbar> <!-- NAVBAR -->
-<div class="main-container" *ngIf="fsData as user"> <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+<div class="main-container" *ngIf="fsData as user" > <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
     <div class="main-title" *ngIf="taskData as task">
         <div class="main-title-text">
             <h1> {{task.title}} / {{user.displayName}} </h1>
@@ -39,4 +39,5 @@
         <chart [type]="type" [data]="data" [options]="options" style="width:100%; height: 70vh;"></chart>
 
     </div>
+    <button (click)="downloadPdf()">download pfg</button>
 </div>

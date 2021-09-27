@@ -10,6 +10,7 @@ import { UserComponent } from './user-management-components/user/user.component'
 import { TaskComponent } from './dashboard-components/task/task.component';
 import { TaskSettingsComponent } from './dashboard-components/task-settings/task-settings.component';
 import { ReportComponent } from './dashboard-components/report/report.component';
+import { DownloadReportComponent } from './dashboard-components/download-report/download-report.component';
 
 import { AngularFireAuthGuard, canActivate, customClaims, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { pipe } from 'rxjs';
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'task/:id', component: TaskComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'task/settings/:id', component: TaskSettingsComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'task/reports/:id', component: ReportComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  { path: 'task/reports-download/:id', component: DownloadReportComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'login', component: LoginComponent },
   { path: 'my-profile', component: MyProfileComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'user/:id', component: UserComponent, ...canActivate(redirectUnauthorizedToLogin)},
