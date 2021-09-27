@@ -11,5 +11,40 @@
     </div>
 
     <div flexbox></div>
-    
+    <div class="sub-container" *ngIf="taskData as task">
+        <div class="elements-firstrow-container">
+            <div class="taskDescrip-container-middle">
+                <div class="taskDescrip-container-left-main">
+                  <h1 class="my-4 text-Black">Task Description:</h1>
+                  <h2 class="mr-4 mb-4 text-Black">{{ task.description }}</h2>
+                </div>
+            </div>
+            <div class="taskScope-container-right">
+                <div class="taskScope-container-right-main">
+                  <h1 class="my-4 text-Black">Task Scope:</h1>
+                  <!-- <h1 class="mr-4 my-4 text-Black">{{ task.scope }}</h1> -->
+                  <span class="inline-flex items-center justify-center text-xs font-bold leading-none" >
+                    <span
+                    class="text-indigo-100 bg-indigo-700 px-2 py-1 mr-1 rounded">Non Verified Users</span>
+                 </span>
+                </div>
+            </div>
+        </div>
+        <div class="elements-secondrow-container">
+            <div class="uploadedBy-container-left">
+                <div class="uploadedBy-container-left-main">
+                  <h1 class="text-xl mt-4 text-white">Uploaded by:</h1>
+                  <h1 class="text-xl mr-4 my-4 text-white">{{ task.uploadedBy }}</h1>
+                </div>
+            </div>
+            <div class="taskDeadline-container-mid">
+                <div class="taskDeadline-container-mid-main">
+                  <h1 class="text-xl mt-4 text-white">Created At:</h1>
+                  <h2 class="text-xl mr-4 my-4 text-white">
+                    {{ task.createdAt | date }}
+                  </h2>
+                </div>
+              </div>
+        </div>
+    </div>
 </div>
