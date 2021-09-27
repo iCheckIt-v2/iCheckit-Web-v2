@@ -126,7 +126,7 @@ export class TaskService {
 
       return this.afs.collection('tasks').doc(taskId).set(task)
       .then(() => {
-        this.toastService.publish('Task has been succesfully created!','formSuccess')      
+        this.toastService.publish('Task has been succesfully created!','formSuccess')
       }).then(() => {
         this.router.navigate(['/task/',taskId])
       })
@@ -177,7 +177,7 @@ export class TaskService {
         let status = 'Rejected';
         let message = 'Your task status has been updated to ' + status + '!';
         let instructions = 'Your submission was rejected! Please re-submit your proof of completion and follow the proper instructions of the given task.'
-  
+
         params.set('email', email);
         params.set('uploadedBy', uploadedBy);
         params.set('title', title);
@@ -187,7 +187,7 @@ export class TaskService {
         params.set('message', message);
         params.set('instructions', instructions);
 
-  
+
         this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/sendEmail`, {
         email,
         uploadedBy,
@@ -201,7 +201,7 @@ export class TaskService {
           headers
         }).toPromise().then(
           () => {
-            this.toastService.publish('Email has been sent to ' + email,'formSuccess')      
+            this.toastService.publish('Email has been sent to ' + email,'formSuccess')
           }
         )
         }
@@ -220,7 +220,7 @@ export class TaskService {
         let status = 'Rejected';
         let message = 'Your task status has been updated to ' + status + '!';
         let instructions = 'Your submission was rejected! Please re-submit your proof of completion and follow the proper instructions of the given task.'
-  
+
         params.set('email', email);
         params.set('uploadedBy', uploadedBy);
         params.set('title', title);
@@ -231,7 +231,7 @@ export class TaskService {
         params.set('instructions', instructions);
         params.set('pushToken', pushToken);
 
-  
+
         this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/sendEmail`, {
         email,
         uploadedBy,
@@ -246,18 +246,18 @@ export class TaskService {
           headers
         }).toPromise().then(
           () => {
-            this.toastService.publish('Email has been sent to ' + email,'formSuccess')      
+            this.toastService.publish('Email has been sent to ' + email,'formSuccess')
           }
         )
         }
-        
+
       }
 
       if (newData.status == 'Accomplished') {
         if (newData.pushToken == '') {
           const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
           const params: URLSearchParams = new URLSearchParams();
-      
+
           // console.log(newData.email);
           let email = newData.email;
           let uploadedBy = newData.uploadedBy;
@@ -267,7 +267,7 @@ export class TaskService {
           let status = newData.status;
           let message = 'Your task status has been updated to ' + status + '!';
           let instructions = 'Your submission was approved! Visit the mobile app to view your accomplished submission.'
-    
+
           params.set('email', email);
           params.set('uploadedBy', uploadedBy);
           params.set('title', title);
@@ -276,8 +276,8 @@ export class TaskService {
           params.set('status', status);
           params.set('message', message);
           params.set('instructions', instructions);
-  
-    
+
+
           this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/sendEmail`, {
           email,
           uploadedBy,
@@ -291,14 +291,14 @@ export class TaskService {
             headers
           }).toPromise().then(
             () => {
-              this.toastService.publish('Email has been sent to ' + email,'formSuccess')      
+              this.toastService.publish('Email has been sent to ' + email,'formSuccess')
             }
           )
         }
         else if (newData.pushToken != '') {
           const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
           const params: URLSearchParams = new URLSearchParams();
-      
+
           // console.log(newData.email);
           let pushToken = newData.pushToken;
           let email = newData.email;
@@ -309,7 +309,7 @@ export class TaskService {
           let status = newData.status;
           let message = 'Your task status has been updated to ' + status + '!';
           let instructions = 'Your submission was approved! Visit the mobile app to view your accomplished submission.'
-    
+
           params.set('email', email);
           params.set('uploadedBy', uploadedBy);
           params.set('title', title);
@@ -320,7 +320,7 @@ export class TaskService {
           params.set('instructions', instructions);
           params.set('pushToken', pushToken);
 
-    
+
           this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/sendEmail`, {
           email,
           uploadedBy,
@@ -335,7 +335,7 @@ export class TaskService {
             headers
           }).toPromise().then(
             () => {
-              this.toastService.publish('Email has been sent to ' + email,'formSuccess')      
+              this.toastService.publish('Email has been sent to ' + email,'formSuccess')
             }
           )
         }
@@ -361,7 +361,7 @@ export class TaskService {
           if (element.pushToken == '') {
             const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             const params: URLSearchParams = new URLSearchParams();
-  
+
             // console.log(newData.email);
           let email = element.email;
           let uploadedBy = element.uploadedBy;
@@ -371,7 +371,7 @@ export class TaskService {
           let status = 'Rejected';
           let message = 'Your task status has been updated to ' + status + '!';
           let instructions = 'Your submission was rejected! Please re-submit your proof of completion and follow the proper instructions of the given task.'
-    
+
           params.set('email', email);
           params.set('uploadedBy', uploadedBy);
           params.set('title', title);
@@ -380,8 +380,8 @@ export class TaskService {
           params.set('status', status);
           params.set('message', message);
           params.set('instructions', instructions);
-  
-    
+
+
           this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/sendEmail`, {
           email,
           uploadedBy,
@@ -395,15 +395,15 @@ export class TaskService {
             headers
           }).toPromise().then(
             () => {
-              this.toastService.publish('Email has been sent to ' + email,'formSuccess')      
+              this.toastService.publish('Email has been sent to ' + email,'formSuccess')
             }
           )
           }
-  
+
           else if (element.pushToken != '') {
             const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             const params: URLSearchParams = new URLSearchParams();
-  
+
             // console.log(newData.email);
           let pushToken = element.pushToken;
           let email = element.email;
@@ -414,7 +414,7 @@ export class TaskService {
           let status = 'Rejected';
           let message = 'Your task status has been updated to ' + status + '!';
           let instructions = 'Your submission was rejected! Please re-submit your proof of completion and follow the proper instructions of the given task.'
-    
+
           params.set('email', email);
           params.set('uploadedBy', uploadedBy);
           params.set('title', title);
@@ -424,8 +424,8 @@ export class TaskService {
           params.set('message', message);
           params.set('instructions', instructions);
           params.set('pushToken', pushToken);
-  
-    
+
+
           this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/sendEmail`, {
           email,
           uploadedBy,
@@ -440,18 +440,18 @@ export class TaskService {
             headers
           }).toPromise().then(
             () => {
-              this.toastService.publish('Email has been sent to ' + email,'formSuccess')      
+              this.toastService.publish('Email has been sent to ' + email,'formSuccess')
             }
           )
           }
-          
+
         }
-  
+
         if (element.status == 'Accomplished') {
           if (element.pushToken == '') {
             const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             const params: URLSearchParams = new URLSearchParams();
-        
+
             // console.log(newData.email);
             let email = element.email;
             let uploadedBy = element.uploadedBy;
@@ -461,7 +461,7 @@ export class TaskService {
             let status = element.status;
             let message = 'Your task status has been updated to ' + status + '!';
             let instructions = 'Your submission was approved! Visit the mobile app to view your accomplished submission.'
-      
+
             params.set('email', email);
             params.set('uploadedBy', uploadedBy);
             params.set('title', title);
@@ -470,8 +470,8 @@ export class TaskService {
             params.set('status', status);
             params.set('message', message);
             params.set('instructions', instructions);
-    
-      
+
+
             this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/sendEmail`, {
             email,
             uploadedBy,
@@ -485,14 +485,14 @@ export class TaskService {
               headers
             }).toPromise().then(
               () => {
-                this.toastService.publish('Email has been sent to ' + email,'formSuccess')      
+                this.toastService.publish('Email has been sent to ' + email,'formSuccess')
               }
             )
           }
           else if (element.pushToken != '') {
             const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             const params: URLSearchParams = new URLSearchParams();
-        
+
             // console.log(newData.email);
             let pushToken = element.pushToken;
             let email = element.email;
@@ -503,7 +503,7 @@ export class TaskService {
             let status = element.status;
             let message = 'Your task status has been updated to ' + status + '!';
             let instructions = 'Your submission was approved! Visit the mobile app to view your accomplished submission.'
-      
+
             params.set('email', email);
             params.set('uploadedBy', uploadedBy);
             params.set('title', title);
@@ -513,8 +513,8 @@ export class TaskService {
             params.set('message', message);
             params.set('instructions', instructions);
             params.set('pushToken', pushToken);
-  
-      
+
+
             this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/sendEmail`, {
             email,
             uploadedBy,
@@ -529,7 +529,7 @@ export class TaskService {
               headers
             }).toPromise().then(
               () => {
-                this.toastService.publish('Email has been sent to ' + email,'formSuccess')      
+                this.toastService.publish('Email has been sent to ' + email,'formSuccess')
               }
             )
           }

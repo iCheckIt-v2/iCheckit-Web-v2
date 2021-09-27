@@ -65,7 +65,7 @@ export class UserService {
 
 
   public getStudentUsers():Observable<any> {
-    return this.afs.collection('users', ref => ref.where('role','==','Student').orderBy('createdAt','desc'))
+    return this.afs.collection('users', ref => ref.where('role','==','Student',).orderBy('createdAt','desc'))
     .snapshotChanges()
     .pipe(
       map((doc: any) => {
@@ -79,6 +79,8 @@ export class UserService {
         )})
     );
   }
+
+
 
   public getAdminUsers():Observable<any> {
     return this.afs.collection('users', ref => ref.where('role','==','CICS Office Staff').orderBy('createdAt','desc'))
