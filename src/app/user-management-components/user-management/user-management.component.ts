@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent implements OnInit {
-  studentCourses: any = ['BS Information Technology', 'BS Information Systems', 'BS Computer Science'];
+  studentCourses: any = ['Information Technology', 'Information Systems', 'Computer Science'];
   studentSections: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE'];
   dateToday = new Date();
   createStudentModal!: boolean;

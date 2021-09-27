@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './user-management-components/user/user.component';
 import { TaskComponent } from './dashboard-components/task/task.component';
 import { TaskSettingsComponent } from './dashboard-components/task-settings/task-settings.component';
+import { UserManualComponent } from './user-manual/user-manual.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { TaskSettingsComponent } from './dashboard-components/task-settings/task
     UserManagementComponent,
     UserComponent,
     TaskComponent,
-    TaskSettingsComponent
+    TaskSettingsComponent,
+    UserManualComponent
   ],
   imports: [
     BrowserModule,
