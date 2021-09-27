@@ -118,7 +118,7 @@ export class UserService {
             contactNumber: contactNumber,
             email: email,
             section: section,
-            verified: true,
+            verified: 'Verified',
             pushToken: '',
             course: course,
             displayName: displayName,
@@ -157,7 +157,7 @@ export class UserService {
             contactNumber: contactNumber,
             email: email,
             department: department,
-            verified: true,
+            verified: 'Verified',
             displayName: displayName,
             createdAt: Date.now(),
             role: 'Department Head' //just recycled the code for create student

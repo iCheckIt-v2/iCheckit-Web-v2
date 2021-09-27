@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserService } from 'src/app/services/user.service';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-user-management',
@@ -14,8 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserManagementComponent implements OnInit {
   studentList: any;
-
-
+  verifyTasks$: any;
   itStudentForm: any
   studentCourses: any = ['BS Information Technology', 'BS Information Systems', 'BS Computer Science'];
   allDepartment: any = ['All Department','BS Information Technology', 'BS Information Systems', 'BS Computer Science'];
@@ -42,9 +42,7 @@ export class UserManagementComponent implements OnInit {
     private fb: FormBuilder,
     public toastService: ToastService,
     public userService: UserService,
-
-
-
+    private taskService: TaskService,
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +55,9 @@ export class UserManagementComponent implements OnInit {
       })
     })
 
+    this.taskService.getVerificationTask().subscribe((res) => {
+      this.verifyTasks$ = res;
+    })
     this.userService.getStudentUsers().subscribe((res) => {
       this.studentUsers$ = res;
     });

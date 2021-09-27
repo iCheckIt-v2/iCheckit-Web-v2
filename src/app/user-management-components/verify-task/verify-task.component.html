@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<div class="main-container" *ngIf="fsData as user">
+    <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+    <div class="bg-white main-title" *ngIf="taskData as task">
+      <div class="main-title-text">
+        <h1 class="text-3xl my-2">{{ task.title }}</h1>
+      </div>
+      <div class="main-title-date">
+        <p>{{dateToday | date}}</p>
+      </div>
+    </div>
+
+    <div flexbox></div>
+    
+</div>

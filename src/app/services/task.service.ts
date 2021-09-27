@@ -21,7 +21,19 @@ export class TaskService {
     public toastService: ToastService,
     public router: Router,
   ) { }
+  
 
+  getVerificationTask():Observable<any> {
+    return this.afs.collection('verificationTasks')
+    .doc('60ThDEIPXLwWD8aHYs8E')
+    .snapshotChanges()
+    .pipe(
+      map((doc: any) => {
+        // console.log(doc)
+        return { id: doc.payload.id, ...doc.payload.data() };
+      })
+    );
+  }
   public getVerifyTasks():Observable<any> {
     return this.afs.collection('tasks',ref => ref.orderBy('type','desc'))
     .snapshotChanges()

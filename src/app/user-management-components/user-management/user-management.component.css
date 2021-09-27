@@ -4,6 +4,13 @@
 .dept-heads {
     @apply w-1/2 h-auto mr-2;
 }
+.verify-users {
+    @apply w-full h-auto;
+}
+.verify-users-div {
+    @apply w-1/2 flex flex-row h-full pl-2 items-center;
+    border-left: #ffe400 25px solid;
+}
 .students {
     @apply w-full h-auto mt-8;
 }

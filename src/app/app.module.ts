@@ -27,6 +27,7 @@ import { ReportComponent } from './dashboard-components/report/report.component'
 import { ChartModule } from 'angular2-chartjs';
 import { DownloadReportComponent } from './dashboard-components/download-report/download-report.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { VerifyTaskComponent } from './user-management-components/verify-task/verify-task.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     TaskComponent,
     TaskSettingsComponent,
     ReportComponent,
-    DownloadReportComponent
+    DownloadReportComponent,
+    VerifyTaskComponent
   ],
   imports: [
     BrowserModule,

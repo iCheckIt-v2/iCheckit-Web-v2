@@ -11,6 +11,7 @@ import { TaskComponent } from './dashboard-components/task/task.component';
 import { TaskSettingsComponent } from './dashboard-components/task-settings/task-settings.component';
 import { ReportComponent } from './dashboard-components/report/report.component';
 import { DownloadReportComponent } from './dashboard-components/download-report/download-report.component';
+import { VerifyTaskComponent } from './user-management-components/verify-task/verify-task.component';
 
 import { AngularFireAuthGuard, canActivate, customClaims, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { pipe } from 'rxjs';
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'my-profile', component: MyProfileComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'user/:id', component: UserComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'user-management', component: UserManagementComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  { path: 'user-management/verify-users', component: VerifyTaskComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: '',   redirectTo: '/dashboard', pathMatch: 'full' }, // redirect to `Home`
   { path: '**', component: PagenotfoundComponent },
