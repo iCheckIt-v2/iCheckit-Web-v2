@@ -116,6 +116,48 @@
 
     </div> -->
 
+    <div class="elements-secondrow-container mt-5">
+      <div class="uploadedBy-container-left">
+          <div class="uploadedBy-container-left-main">
+            <h1 class="text-xl mt-4 text-white">Total Students:</h1>
+            <h1 class="text-xl mr-4 my-4 text-white">           {{totalStudents}}
+            </h1>
+          </div>
+      </div>
+      <div class="taskDeadline-container-mid">
+          <div class="taskDeadline-container-mid-main">
+            <h1 class="text-xl mt-4 text-white">Total Verified Students:</h1>
+            <h2 class="text-xl mr-4 my-4 text-white">
+             {{totalVerified}}
+            </h2>
+          </div>
+      </div>
+      <div class="pending-container-left">
+          <div class="taskDeadline-container-mid-main">
+            <h1 class="text-xl mt-4 text-white">Total Not Verified Students:</h1>
+            <h2 class="text-xl mr-4 my-4 text-white">
+              {{totalNotVerified}}
+            </h2>
+          </div>
+      </div>
+    </div>
+    <div class="verify-users" *ngIf="verifyTasks$ as task">
+      <div class="admin-container-header">
+        <h1>User Verification Task:</h1>
+      </div>
+      <div class="admin-container-children verify-users-div" [routerLink]="['/user-management/verify-users/']">
+        <div class="admin-container-children-left">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+          </svg>
+          <p>{{task.title}}</p>
+        </div>
+        <div class="admin-container-children-right">
+          <p>aa</p>
+        </div>
+      </div>
+    </div>
 
     <div class="students" *ngIf="studentUsers$ as students">
       <div class="admin-container-header" >
@@ -448,21 +490,5 @@
     </div>
   </div>
   <!-- end modal container for edit -->
-  <div class="verify-users" *ngIf="verifyTasks$ as task">
-    <div class="admin-container-header">
-      <h1>User Verification Task:</h1>
-    </div>
-    <div class="admin-container-children verify-users-div" [routerLink]="['/user-management/verify-users/']">
-      <div class="admin-container-children-left">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path
-            d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-        </svg>
-        <p>{{task.title}}</p>
-      </div>
-      <div class="admin-container-children-right">
-        <p>aa</p>
-      </div>
-    </div>
-  </div>
+  
 </div>

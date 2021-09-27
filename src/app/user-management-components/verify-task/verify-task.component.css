@@ -59,7 +59,7 @@
   }
   .pending-container-left {
     @apply w-1/3 h-auto shadow-lg pl-5;
-    background-color: #ffff00;
+    background-color: #35414f;
     font-family: Antonio;
   }
   
@@ -157,7 +157,7 @@
   }
   
   .acceptRejectIcon {
-    @apply text-right flex flex-row justify-end;
+    @apply text-right flex flex-row justify-end items-end;
   }
   .checkIcon {
     @apply flex justify-end items-start mr-2 ml-2;

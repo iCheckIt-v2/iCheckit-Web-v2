@@ -17,6 +17,9 @@ export class VerifyTaskComponent implements OnInit {
   userData:any;
   fsData: any;
   taskData: any;
+  studentTaskList: any;
+  p: number = 1;
+
   constructor(
     public auth: AuthService,
     private router: Router,

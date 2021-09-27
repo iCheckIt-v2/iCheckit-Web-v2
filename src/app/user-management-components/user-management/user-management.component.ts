@@ -35,6 +35,9 @@ export class UserManagementComponent implements OnInit {
   studentUsers$: any;
   deptHeadUsers$:any;
   p: number = 1;
+  totalStudents = 0;
+  totalVerified = 0;
+  totalNotVerified = 0;
   constructor(
     public auth: AuthService,
     readonly fire: AngularFireAuth,
@@ -60,6 +63,20 @@ export class UserManagementComponent implements OnInit {
     })
     this.userService.getStudentUsers().subscribe((res) => {
       this.studentUsers$ = res;
+      this.totalStudents = 0;
+      this.totalVerified = 0;
+      this.totalNotVerified = 0;
+      res.forEach((element: { [s: string]: unknown; } | ArrayLike<unknown>) => {
+        this.totalStudents += 1;
+        if(Object.values(element).includes("Enrolled")) {
+          this.totalVerified += 1;
+        }
+
+        if(Object.values(element).includes("Not Verified")) {
+          this.totalNotVerified += 1;
+        }
+
+      });
     });
     this.userService.getAdminUsers().subscribe((res) => {
       this.adminUsers$ = res;
