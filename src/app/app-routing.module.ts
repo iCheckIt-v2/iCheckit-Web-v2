@@ -16,12 +16,14 @@ import { VerifyTaskComponent } from './user-management-components/verify-task/ve
 import { AngularFireAuthGuard, canActivate, customClaims, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserManualComponent } from './user-manual/user-manual.component';
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  { path: 'user-manual', component: UserManualComponent},
   { path: 'task/:id', component: TaskComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'task/settings/:id', component: TaskSettingsComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'task/reports/:id', component: ReportComponent, ...canActivate(redirectUnauthorizedToLogin)},

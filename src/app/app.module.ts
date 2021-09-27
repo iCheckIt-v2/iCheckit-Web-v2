@@ -29,6 +29,7 @@ import { DownloadReportComponent } from './dashboard-components/download-report/
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { VerifyTaskComponent } from './user-management-components/verify-task/verify-task.component';
 
+import { UserManualComponent } from './user-manual/user-manual.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { VerifyTaskComponent } from './user-management-components/verify-task/ve
     TaskSettingsComponent,
     ReportComponent,
     DownloadReportComponent,
-    VerifyTaskComponent
+    VerifyTaskComponent,
+    UserManualComponent
   ],
   imports: [
     BrowserModule,
