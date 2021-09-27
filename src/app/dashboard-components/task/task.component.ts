@@ -14,6 +14,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
+  studentTaskList: any;
   dateToday = new Date();
   userData:any;
   fsData: any;
@@ -46,7 +47,7 @@ export class TaskComponent implements OnInit {
   accomplishedRecipientsPct = 0;
   acceptAllModal!: boolean;
   rejectAllModal!: boolean;
-  
+
   constructor(
     public auth: AuthService,
     private route: ActivatedRoute,
@@ -58,8 +59,8 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
- 
+
+
     this.fire.user.subscribe((user:any) => {
       this.userData = user;
       this.auth.getUserData(user?.uid).subscribe(res => {
@@ -87,7 +88,7 @@ export class TaskComponent implements OnInit {
       this.forApprovalRecipients = 0;
       this.lateRecipients = 0;
       this.accomplishedRecipients = 0;
-      
+
       res.recipients.forEach((element: any) => {
         if(Object.values(element).includes("Pending")) {
           this.pendingRecipients += 1;
@@ -179,12 +180,12 @@ export class TaskComponent implements OnInit {
     let oldData: any[] = [];
     let acceptedSubmissions: any[] = [];
     this.taskData.recipients.forEach((element: any) => {
-      if(Object.values(element).includes('For Approval')) { 
+      if(Object.values(element).includes('For Approval')) {
         console.log('Approved!');
         oldData.push(element)
       }
     })
-    
+
     oldData.forEach((element: any) => {
         let updatedData = {
           createdAt: element.createdAt,
@@ -200,7 +201,7 @@ export class TaskComponent implements OnInit {
           title: element.title,
           uid: element.uid,
           uploadedBy: element.uploadedBy
-        } 
+        }
         acceptedSubmissions.push(updatedData)
     })
     // acceptedSubmissions.forEach(data => {
@@ -224,12 +225,12 @@ export class TaskComponent implements OnInit {
     let oldData: any[] = [];
     let acceptedSubmissions: any[] = [];
     this.taskData.recipients.forEach((element: any) => {
-      if(Object.values(element).includes('For Approval')) { 
+      if(Object.values(element).includes('For Approval')) {
         console.log('Approved!');
         oldData.push(element)
       }
     })
-    
+
     oldData.forEach((element: any) => {
         let updatedData = {
           createdAt: element.createdAt,
@@ -245,7 +246,7 @@ export class TaskComponent implements OnInit {
           title: element.title,
           uid: element.uid,
           uploadedBy: element.uploadedBy
-        } 
+        }
         acceptedSubmissions.push(updatedData)
     })
     // acceptedSubmissions.forEach(data => {
@@ -264,9 +265,9 @@ export class TaskComponent implements OnInit {
     console.log(acceptedSubmissions)
     this.taskService.updateMultipleStudentStatus(this.taskData.taskId,acceptedSubmissions,oldData)
   }
- 
+
   public acceptSubmission(recipient:any) {
-   
+
 
     let accomplishedData = {
       createdAt: recipient.createdAt,
@@ -343,11 +344,11 @@ export class TaskComponent implements OnInit {
   //     this.submissionLink = '';
   //     this.status = '';
   //     this.uid = '';
-  //     this.section = '';   
+  //     this.section = '';
   //     this.createdAt = '';
   //     this.uploadedBy = '';
-  //     this.title = '';   
-  //     this.description = '';    
+  //     this.title = '';
+  //     this.description = '';
   //     this.deadline = '';
   //     this.taskId = '';
   //     this.email = '';

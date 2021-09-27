@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs/operators';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-report',
@@ -30,6 +31,7 @@ export class ReportComponent implements OnInit {
   lateRecipientsPct = 0;
   forApprovalRecipientsPct = 0;
   accomplishedRecipientsPct = 0;
+  mgaPasaway: any;
   chart: any;
   data: any;
   type: any;
@@ -70,9 +72,11 @@ export class ReportComponent implements OnInit {
       this.forApprovalRecipients = 0;
       this.lateRecipients = 0;
       this.accomplishedRecipients = 0;
-      
+      this.mgaPasaway = [];
+
       res.recipients.forEach((element: any) => {
         if(Object.values(element).includes("Pending")) {
+          this.mgaPasaway.push(element)
           this.pendingRecipients += 1;
         }
         if(Object.values(element).includes("For Approval")) {
@@ -80,6 +84,7 @@ export class ReportComponent implements OnInit {
         }
         if(Object.values(element).includes("Late")) {
           this.lateRecipients += 1;
+          this.mgaPasaway.push(element)
         }
         if(Object.values(element).includes("Accomplished")) {
           this.accomplishedRecipients += 1;
@@ -130,8 +135,18 @@ export class ReportComponent implements OnInit {
     }) 
   }
 
-  downloadPdf() {
-    this.router.navigate(['/task/reports-download/',this.taskId])
-  }
+  // downloadPdf() {
+  //   // this.router.navigate(['/task/reports-download/',this.taskId])
+  //   const quality = 1 // Higher the better but larger file
+  //   html2canvas(this.el.nativeElement,
+  //       { scale: quality }
+  //   ).then(canvas => {
+  //       const pdf = new jsPDF('l', 'mm', 'a4');
+  //       pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+  //       pdf.save();
+  //   }).then(() => {
+  //     this.router.navigate(['/task/reports/',this.taskId])
+  //   })
+  // }
 
 }

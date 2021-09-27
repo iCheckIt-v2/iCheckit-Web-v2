@@ -11,10 +11,26 @@
     @apply w-1/2 h-auto ml-2;
 }
 .admin-container-header {
-    @apply h-auto p-3 w-full text-white text-lg;
+    @apply h-auto p-3 w-full text-white text-lg flex flex-row justify-start;
     font-family: 'Antonio', sans-serif;
     background-color: #35414F;
 }
+.search-bar {
+  @apply h-auto p-3 w-full text-white text-lg flex flex-row justify-end;
+}
+.admin-container-header-text {
+  @apply h-auto w-full text-white text-lg flex flex-row justify-start;
+}
+.input-text {
+  @apply h-7 w-1/12 text-black flex flex-row justify-end ml-16;
+}
+/* .whole-container {
+  @apply flex p-2 w-full items-center justify-start shadow-md ;
+  transition: .15s all ease-in-out;
+  margin-bottom: 1.5px;
+  font-family: 'Antonio', sans-serif;
+  cursor: pointer;
+} */
 .admin-container-children {
     @apply flex p-2 w-full items-center justify-start shadow-md ;
     transition: .15s all ease-in-out;
@@ -38,7 +54,24 @@
     @apply px-10 py-2 border border-gray-300 text-white mr-5 text-sm;
     background-color: #35414F;
 }
-
+.department-filter-container {
+  @apply h-auto w-1/12 text-lg flex flex-row justify-end text-black ml-40;
+}
+.section-filter-container {
+  @apply h-auto w-1/12 text-lg flex flex-row justify-end text-black ml-10;
+}
+.select-options {
+  @apply text-sm;
+}
+.course {
+  @apply text-white;
+}
+.department-filter {
+  @apply flex flex-row justify-end;
+}
+.option-value-style {
+  @apply text-black;
+}
 /* modal css */
 .modal-container {
     @apply fixed z-10 inset-0 overflow-y-auto ;

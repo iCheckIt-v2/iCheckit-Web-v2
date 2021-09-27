@@ -26,6 +26,7 @@ import { TaskSettingsComponent } from './dashboard-components/task-settings/task
 import { ReportComponent } from './dashboard-components/report/report.component';
 import { ChartModule } from 'angular2-chartjs';
 import { DownloadReportComponent } from './dashboard-components/download-report/download-report.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { DownloadReportComponent } from './dashboard-components/download-report/
     NgxPaginationModule,
     AngularFireFunctionsModule,
     AngularFireStorageModule,
+    Ng2SearchPipeModule,
     AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [],

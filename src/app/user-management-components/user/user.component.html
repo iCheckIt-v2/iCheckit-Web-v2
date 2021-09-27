@@ -192,14 +192,36 @@
                 </select>
               </div>
 
-              <div class="mb-4" *ngIf="user.role == 'Student'">
+              <div class="mb-4" *ngIf="editUserForm.value.course == 'BS Information Technology'">
                 <label for="section">
                   Section
                 </label>
                 <!-- (change)="changeSection($event)" -->
                 <select name="section" id="section" style="width: 100%;" formControlName="section">
                   <option value="{{user.section}}" disable> {{user.section}}</option>
-                  <option *ngFor="let section of studentSections">{{section}}</option>
+                  <option *ngFor="let section of itSection">{{section}}</option>
+                </select>
+              </div>
+
+              <div class="mb-4" *ngIf="editUserForm.value.course == 'BS Computer Science'">
+                <label for="section">
+                  Section
+                </label>
+                <!-- (change)="changeSection($event)" -->
+                <select name="section" id="section" style="width: 100%;" formControlName="section">
+                  <option value="{{user.section}}" disable> {{user.section}}</option>
+                  <option *ngFor="let section of csSection">{{section}}</option>
+                </select>
+              </div>
+
+              <div class="mb-4" *ngIf="editUserForm.value.course == 'BS Information Systems'">
+                <label for="section">
+                  Section
+                </label>
+                <!-- (change)="changeSection($event)" -->
+                <select name="section" id="section" style="width: 100%;" formControlName="section">
+                  <option value="{{user.section}}" disable> {{user.section}}</option>
+                  <option *ngFor="let section of isSection">{{section}}</option>
                 </select>
               </div>
 
@@ -222,6 +244,9 @@
               <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.email">
                 Not a valid email.
               </div>
+              <!-- <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.pattern">
+                Please use your UST email
+              </div> -->
               <div class="mb-4">
                 <label for="contactNumber">
                   User's Contact Number
