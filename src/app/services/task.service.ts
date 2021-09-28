@@ -565,6 +565,21 @@ export class TaskService {
     })
   }
 
+  public verifyStudent(id: string, data:any) {
+    console.log(data);
+
+    return this.afs.collection('users').doc(id).update({
+      section: data.proposedSection,
+      verified: 'Enrolled'
+    }).then(() => {
+      this.toastService.publish(data.displayName + ' has been successfully verified!','formSuccess')
+    }).then(() => {
+      return this.afs.collection('verificationTasks').doc('60ThDEIPXLwWD8aHYs8E').update({
+        recipients: firebase.firestore.FieldValue.arrayRemove(data),
+      })
+    })
+  }
+
 
 
 }

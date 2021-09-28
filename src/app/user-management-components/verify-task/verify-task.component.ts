@@ -42,4 +42,8 @@ export class VerifyTaskComponent implements OnInit {
     })
   }
 
+  public verifyStudent(data:any) {
+    this.taskService.verifyStudent(data.uid,data);
+  }
+
 }

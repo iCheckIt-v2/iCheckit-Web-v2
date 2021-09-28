@@ -304,7 +304,7 @@ export class TaskComponent implements OnInit {
       uid: recipient.uid,
       uploadedBy: recipient.uploadedBy,
     }
-
+    console.log(recipient.submissionLink)
     this.storage.refFromURL(recipient.submissionLink).delete().subscribe((res) => console.log(res));
 
     this.taskService.updateStudentStatus(this.taskData.taskId,accomplishedData,recipient);
