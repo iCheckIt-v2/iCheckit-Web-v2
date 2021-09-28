@@ -46,4 +46,8 @@ export class VerifyTaskComponent implements OnInit {
     this.taskService.verifyStudent(data.uid,data);
   }
 
+  public deleteSubmission(data:any) {
+    this.taskService.deleteStudentVerification(data.uid,data);
+  }
+
 }

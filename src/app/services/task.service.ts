@@ -580,6 +580,14 @@ export class TaskService {
     })
   }
 
+  public deleteStudentVerification(id: string, data:any) {
+    console.log(data);
+
+    return this.afs.collection('verificationTasks').doc('60ThDEIPXLwWD8aHYs8E').update({
+      recipients: firebase.firestore.FieldValue.arrayRemove(data),
+    })
+  }
+
 
 
 }
