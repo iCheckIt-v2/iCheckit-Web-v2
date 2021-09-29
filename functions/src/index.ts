@@ -1,6 +1,6 @@
-import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
-const cors = require("cors")({origin: true});
+import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
+const cors = require('cors')({ origin: true });
 const nodemailer = require('nodemailer');
 // Configure the email transport using the default SMTP transport and a GMail account.
 // For Gmail, enable these:
@@ -13,7 +13,7 @@ const gmailPassword = functions.config().gmail.password;
 const mailTransport = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
-  secure: true, 
+  secure: true,
   auth: {
     user: gmailEmail,
     pass: gmailPassword,
@@ -32,13 +32,13 @@ const APP_NAME = 'iCheckit';
 admin.initializeApp();
 
 const db = admin.firestore();
-const settings = {timeStampInSnapshots: true};
+const settings = { timeStampInSnapshots: true };
 db.settings(settings);
 
 exports.adminCreateStudent = functions.https.onRequest((request, response) => {
   cors(request, response, () => {
-    if (request.method !== "POST") {
-      response.status(405).send("Method Not Allowed");
+    if (request.method !== 'POST') {
+      response.status(405).send('Method Not Allowed');
     } else {
       const body = request.body;
       const displayName = body.displayName;
@@ -48,217 +48,199 @@ exports.adminCreateStudent = functions.https.onRequest((request, response) => {
         const contactNumber = body.contactNumber;
         */
       const email = body.email;
-      const password = "password";
+      const password = 'password';
 
-      admin.auth().createUser({
-        email: email,
-        emailVerified: false,
-        password: password,
-        displayName: displayName,
-        disabled: false,
-      })
-          .then((userRecord) => {
-            const mailOptions = {
-              from: `${APP_NAME} <noreply@firebase.com>`,
-              to: email,
-              subject: `Welcome to ${APP_NAME}!`,
-              // html: `Hey ${displayName}! Welcome to ${APP_NAME}. I hope you will enjoy our service. We aim to provide a platform for students in terms of submission and keeping track of non academic college-wide tasks. Visit our mobile application to view all the tasks uploaded in our system.`
-              html: `<body style="background-color: #7d1d2d">
-              <div style="margin: auto; background-color: white; height: auto;justify-content: center;">
-                  <div style="padding: 3rem;">
-                      <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
-                      <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
-                      <p style="margin-top: 2rem;"> iCheckit </p>
-                  </div>
-                  <div style="padding: 3rem; font-size: 100%;">
-                      <p> Hello there!</p>
-                      <p> Welcome to ${APP_NAME}. This application is a task list and notification system for the students of the
-                          College of Information and Computing Sciences that will help remind the students on accomplishing
-                          non-curricular tasks such as Satisfaction Surveys and Faculty Evaluation that we usually forget to do
-                          because of our academic load. You must download the application to your device to receive push
-                          notification about new tasks or updated tasks assigned to you and you will also be able to submit your
-                          proof of completion on these tasks once you downloaded the application. </p>
-                      <p> We hope that in creating this app to notify every one of us on the non-curricular tasks, we will have an
-                          organized system of task completion and verification under our College.
-                      </p>
-                      <p> That would be all for now! Enjoy exploring iCheckIt! </p>
-                      <p style="margin-top: 5rem;"> Kind regards, </ps>
-                      <p> iCheckIt team </p>
-                  </div>
-              </div>
-              <!-- <hr style="background-color: black; width: 75%;">
-              <div style="padding: 2rem; font-size: 100%;">
-                  <p style="padding-left: 2rem;"><b>Submission Details</b></p>
-                  <span style="padding-left: 2rem;">Task title:</span> <br>
-                  <span style="padding-left: 2rem;">Task ID:</span> <br> 
-                  <span style="padding-left: 2rem;">Date/Time of submission:</span> <br>
-                  <span style="padding-left: 2rem;"># of submission attempt:</span> <br>
-                  <span style="padding-left: 2rem;">Link of submitted file:</span> <br>
-                  <span style="padding-left: 2rem;">Size and name of file received:</span> <br>
-              </div>
-              <div style="padding: 3rem;">
-                  <button style="background-color: red; width: auto; height: auto; color: white;"> Open iCheckit </button>
-              </div> -->
-          </body>`
-            };
-            mailTransport.sendMail(mailOptions);
-            functions.logger.log('New welcome email sent to:', email);
-            return response.status(200).send({
-              message: "successfully created user",
-              userRecord,
-            });
-          })
-          .catch((error) => {
-            return response.status(400).send("Failed to create user: " + error);
+      admin
+        .auth()
+        .createUser({
+          email: email,
+          emailVerified: false,
+          password: password,
+          displayName: displayName,
+          disabled: false,
+        })
+        .then((userRecord) => {
+          const mailOptions = {
+            from: `${APP_NAME} <noreply@firebase.com>`,
+            to: email,
+            subject: `Welcome to ${APP_NAME}!`,
+            // html: `Hey ${displayName}! Welcome to ${APP_NAME}. I hope you will enjoy our service. We aim to provide a platform for students in terms of submission and keeping track of non academic college-wide tasks. Visit our mobile application to view all the tasks uploaded in our system.`
+            html: `<div style="margin: auto; background-color: white; height: auto;justify-content: center;">
+            <div style="padding: 1rem;">
+                <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
+                <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
+                <p style="margin-top: 2rem;"> iCheckit </p>
+            </div>
+            <div style="padding: 1rem; font-size: 100%;">
+                <p> Hello, (student name)</p>
+                <p> Welcome to ${APP_NAME}. This application is a task list and notification system for the students of the
+                    College of Information and Computing Sciences that will help remind the students on accomplishing
+                    non-curricular tasks such as Satisfaction Surveys and Faculty Evaluation that we usually forget to do
+                    because of our academic load. You must download the application to your device to receive push
+                    notification about new tasks or updated tasks assigned to you and you will also be able to submit your
+                    proof of completion on these tasks once you downloaded the application. </p>
+                <p> We hope that in creating this app to notify every one of us on the non-curricular tasks, we will have an
+                    organized system of task completion and verification under our College.
+                </p>
+                <p> That would be all for now! Enjoy exploring iCheckIt! </p>
+                <p style="margin-top: 5rem;"> Kind regards, </ps>
+                <p> iCheckIt team </p>
+            </div>
+        </div>`,
+          };
+          mailTransport.sendMail(mailOptions);
+          functions.logger.log('New welcome email sent to:', email);
+          return response.status(200).send({
+            message: 'successfully created user',
+            userRecord,
           });
+        })
+        .catch((error) => {
+          return response.status(400).send('Failed to create user: ' + error);
+        });
     }
-  }
-  );
+  });
 });
 
 exports.deleteUser = functions.firestore
-    .document('users/{id}')
-    .onDelete((snap, context) => {
+  .document('users/{id}')
+  .onDelete((snap, context) => {
+    const deletedValue = snap.data();
+    const userEmail = deletedValue.email;
 
-        const deletedValue = snap.data();
-        const userEmail = deletedValue.email;
-
-        return admin.auth().getUserByEmail(userEmail)
-            .then(userRecord => {
-                const userID = userRecord.uid;
-                return admin.auth().deleteUser(userID)
-            })
-            .catch(error => {
-                console.log(error.message);
-                return null;
-            })
-    });
+    return admin
+      .auth()
+      .getUserByEmail(userEmail)
+      .then((userRecord) => {
+        const userID = userRecord.uid;
+        return admin.auth().deleteUser(userID);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        return null;
+      });
+  });
 
 exports.updateUser = functions.firestore
-    .document('users/{id}')
-    .onUpdate((change, context) => {
+  .document('users/{id}')
+  .onUpdate((change, context) => {
+    const updatedValues = change.after.data();
+    // const userEmail = deletedValue.email;
+    const uid = updatedValues.uid;
+    const userEmail = updatedValues.email;
+    const displayName = updatedValues.displayName;
+    return admin
+      .auth()
+      .getUser(uid)
+      .then((userRecord) => {
+        const userID = userRecord.uid;
+        return admin.auth().updateUser(userID, {
+          displayName: displayName,
+          email: userEmail,
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        return null;
+      });
+  });
 
-        const updatedValues = change.after.data();
-        // const userEmail = deletedValue.email;
-        const uid = updatedValues.uid;
-        const userEmail = updatedValues.email;
-        const displayName = updatedValues.displayName;
-        return admin.auth().getUser(uid)
-            .then(userRecord => {
-                const userID = userRecord.uid;
-                return admin.auth().updateUser(userID, {
-                    displayName: displayName,
-                    email: userEmail
-                })
-            })
-            .catch(error => {
-                console.log(error.message);
-                return null;
-            })
+exports.sendPushNotification = functions.firestore
+  .document('tasks/{taskId}')
+  .onCreate((event) => {
+    // Access data required for payload notification
+    const data = event.data();
+    const taskTitle = data.title;
+    const uploadedBy = data.uploadedBy;
+    const pushTokens = data.pushTokens;
+    const deadline = data.deadline;
+    const recipients = data.recipients;
+    const description = data.description;
+
+    // Determine the message
+    const payload = {
+      notification: {
+        title: taskTitle,
+        body: 'A new task has been uploaded. Click on this notification to open the application.',
+        sound: 'default',
+        badge: '1',
+      },
+    };
+    console.log(payload);
+    pushTokens.forEach((element: any) => {
+      if (element.pushToken == '') {
+        console.log('no push token');
+      } else if (element.pushToken != '') {
+        console.log('sent to :', element.pushToken);
+        admin.messaging().sendToDevice(element.pushToken, payload);
+      }
     });
-
-    exports.sendPushNotification = functions.firestore
- .document("tasks/{taskId}")
- .onCreate((event) => {
-
-// Access data required for payload notification
-const data = event.data();
-const taskTitle = data.title;
-const uploadedBy = data.uploadedBy;
-const pushTokens = data.pushTokens;
-const deadline = data.deadline;
-const recipients = data.recipients;
-const description = data.description;
-
-// Determine the message
-const payload = {
-  notification: {
-    title: taskTitle,
-    body: 'A new task has been uploaded. Click on this notification to open the application.',
-    sound: 'default',
-    badge: '1'
-  }
-}
-console.log(payload);
-pushTokens.forEach((element: any) => {
-  if (element.pushToken == '') {
-      console.log('no push token')
-  }   
-  else if (element.pushToken != '') {
-      console.log('sent to :', element.pushToken);
-      admin.messaging().sendToDevice(element.pushToken, payload);
-  }
-});
-recipients.forEach((element: any) => {
-  if (element.email == '') {
-      console.log('no email')
-  }   
-  else if (element.email != '') {
-    const mailOptions = {
-      from: `${APP_NAME} <noreply@firebase.com>`,
-      to: element.email,
-      subject: `New Task Assignment - <${taskTitle}>`,
-      // text: `Hey ${element.displayName || ''}! Welcome to ${APP_NAME}. I hope you will enjoy our service.`
-      // html: `<h2>A new task has been uploaded for you.</h2>
-      // <p>1.) ${taskTitle}</p>
-      // <p>- ${description}
-      // <ul>
-      // <li>Uploaded by: ${uploadedBy}</li>
-      // <li>Deadline: ${new Date(deadline).toUTCString()}</li>
-      // </ul>
-      // <br>
-      // <p>Please submit your proof of completion on or before the said deadline</p>
-      // `
-      html: `<body style="background-color: #7d1d2d;">
-      <div style="margin: auto; background-color: white; height: auto; justify-content: center;">
-          <div style="padding: 3rem;">
+    recipients.forEach((element: any) => {
+      if (element.email == '') {
+        console.log('no email');
+      } else if (element.email != '') {
+        const mailOptions = {
+          from: `${APP_NAME} <noreply@firebase.com>`,
+          to: element.email,
+          subject: `New Task Assignment - <${taskTitle}>`,
+          // text: `Hey ${element.displayName || ''}! Welcome to ${APP_NAME}. I hope you will enjoy our service.`
+          // html: `<h2>A new task has been uploaded for you.</h2>
+          // <p>1.) ${taskTitle}</p>
+          // <p>- ${description}
+          // <ul>
+          // <li>Uploaded by: ${uploadedBy}</li>
+          // <li>Deadline: ${new Date(deadline).toUTCString()}</li>
+          // </ul>
+          // <br>
+          // <p>Please submit your proof of completion on or before the said deadline</p>
+          // `
+          html: `<div style="margin: auto; background-color: white; height: auto; justify-content: center;">
+          <div style="padding: 1rem;">
               <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
               <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
               <p style="margin-top: 2rem;"> iCheckit </p>
           </div>
-          <div style="padding: 3rem; font-size: 100%;">
+          <div style="padding: 1rem; font-size: 100%;">
               <p> Greetings, (student name)!</p>
               <p> A new task has been assigned to you for your compliance. Click the button to open the task in your
                   mobile application to see the task instructions.
               </p>
           </div>
-          <hr style="background-color: black; width: 75%;">
-          <div style="padding: 2rem; font-size: 100%;">
-              <p style="padding-left: 2rem;"><b>Task Details</b></p>
-              <span style="padding-left: 2rem;">Task title:</span> <br>
-              <span style="padding-left: 2rem;">Task ID:</span> <br>
-              <span style="padding-left: 2rem;">Task Status:</span> <br>
-              <span style="padding-left: 2rem;">Size and name of file received:</span> <br>
+          <hr style="background-color: black; width: 90%;">
+          <div style="padding: 1rem; font-size: 100%;">
+              <p><b>Task Details</b></p>
+              <span>Task title:</span> <br>
+              <span>Task ID:</span> <br>
+              <span>Task Status:</span> <br>
+              <span>Size and name of file received:</span> <br>
           </div>
-          <div style="padding: 3rem;">
+          <div style="padding: 1rem;">
               <button style="background-color: red; width: auto; height: auto; color: white;"> Open iCheckit </button>
           </div>
-      </div>
-  </body>`
-    };
-    mailTransport.sendMail(mailOptions);
-    functions.logger.log('New welcome email sent to:', element.email);
-  }
-});
-// // Get the user's tokenID
-// var pushToken = "";
-// return functions
-// .firestore
-//   .collection("Users/{user-ID}")
-//   .get()
-//   .then((doc) => {
-//     pushToken = doc.data().tokenID;
-//     // Send the message to the device
-//     return admin.messaging().sendTodevice(pushToken, message)
-//   });
-});
+      </div>`,
+        };
+        mailTransport.sendMail(mailOptions);
+        functions.logger.log('New welcome email sent to:', element.email);
+      }
+    });
+    // // Get the user's tokenID
+    // var pushToken = "";
+    // return functions
+    // .firestore
+    //   .collection("Users/{user-ID}")
+    //   .get()
+    //   .then((doc) => {
+    //     pushToken = doc.data().tokenID;
+    //     // Send the message to the device
+    //     return admin.messaging().sendTodevice(pushToken, message)
+    //   });
+  });
 
 exports.sendEmail = functions.https.onRequest((request, response) => {
   cors(request, response, () => {
-    if (request.method !== "POST") {
-      response.status(405).send("Method Not Allowed");
-    }
-    else {
+    if (request.method !== 'POST') {
+      response.status(405).send('Method Not Allowed');
+    } else {
       if (request.body.pushToken != '') {
         console.log(request.body.pushToken);
         const body = request.body;
@@ -270,15 +252,15 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
         const message = body.message;
         const status = body.status;
         const instructions = body.instructions;
-  
+
         // Determine the message
         const payload = {
           notification: {
             title: `${status} - <${title}>`,
             body: `${message}`,
-            badge: '1'
-          }
-        }
+            badge: '1',
+          },
+        };
 
         // update student status
         const mailOptions = {
@@ -296,34 +278,28 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
           // <br>
           // <p>${instructions}</p>
           // `
-          html:`<body style="background-color: #7d1d2d">
-          <div style="margin: auto; background-color: white; height: auto;justify-content: center;">
-              <div style="padding: 3rem;">
-                  <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
-                  <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
-                  <p style="margin-top: 2rem;"> iCheckit </p>
-              </div>
-              <div style="padding: 3rem; font-size: 100%;">
-                  <p> Thank you for submitting your proof of completion! </p>
-                  <p> ${message}.</p>
-                  <p> ${instructions}.</p>
-              </div>
-              <hr style="background-color: black; width: 75%;">
-              <div style="padding: 2rem; font-size: 100%;">
-                  <p style="padding-left: 2rem;"><b>Submission Details</b></p>
-                  <span style="padding-left: 2rem;">Task title:</span> <br>
-                  <span style="padding-left: 2rem;">Task ID:</span> <br>
-                  <span style="padding-left: 2rem;">Date/Time of submission:</span> <br>
-                  <span style="padding-left: 2rem;"># of submission attempt:</span> <br>
-                  <span style="padding-left: 2rem;">Link of submitted file:</span> <br>
-                  <span style="padding-left: 2rem;">Size and name of file received:</span> <br>
-              </div>
+          html: `<div style="margin: auto; background-color: white; height: auto;justify-content: center;">
+          <div style="padding: 1rem;">
+              <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
+              <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
+              <p style="margin-top: 2rem;"> iCheckit </p>
           </div>
-      
-          <!-- <div style="padding: 3rem;">
-              <button style="background-color: red; width: auto; height: auto; color: white;"> Open iCheckit </button>
-          </div> -->
-      </body>`
+          <div style="padding: 1rem; font-size: 100%;">
+              <p> Thank you for submitting your proof of completion! </p>
+              <p> ${message}.</p>
+              <p> ${instructions}.</p>
+          </div>
+          <hr style="background-color: black; width: 90%;">
+          <div style="padding: 1rem; font-size: 100%;">
+              <p ><b>Submission Details</b></p>
+              <span >Task title:</span> <br>
+              <span >Task ID:</span> <br>
+              <span >Date/Time of submission:</span> <br>
+              <span ># of submission attempt:</span> <br>
+              <span >Link of submitted file:</span> <br>
+              <span >Size and name of file received:</span> <br>
+          </div>
+      </div>`,
         };
         mailTransport.sendMail(mailOptions);
         functions.logger.log('New welcome email sent to:', email);
@@ -339,7 +315,7 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
         const message = body.message;
         const status = body.status;
         const instructions = body.instructions;
-        
+
         const mailOptions = {
           from: `${APP_NAME} <noreply@firebase.com>`,
           to: email,
@@ -355,38 +331,32 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
           // <br>
           // <p>${instructions}</p>
           // `
-          html: `<body style="background-color: #7d1d2d">
-          <div style="margin: auto; background-color: white; height: auto;justify-content: center;">
-              <div style="padding: 3rem;">
-                  <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
-                  <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
-                  <p style="margin-top: 2rem;"> iCheckit </p>
-              </div>
-              <div style="padding: 3rem; font-size: 100%;">
-                  <p> Thank you for submitting your proof of completion! </p>
-                  <p> ${message}.</p>
-                  <p> ${instructions}.</p>
-              </div>
-              <hr style="background-color: black; width: 75%;">
-              <div style="padding: 2rem; font-size: 100%;">
-                  <p style="padding-left: 2rem;"><b>Submission Details</b></p>
-                  <span style="padding-left: 2rem;">Task title:</span> <br>
-                  <span style="padding-left: 2rem;">Task ID:</span> <br>
-                  <span style="padding-left: 2rem;">Date/Time of submission:</span> <br>
-                  <span style="padding-left: 2rem;"># of submission attempt:</span> <br>
-                  <span style="padding-left: 2rem;">Link of submitted file:</span> <br>
-                  <span style="padding-left: 2rem;">Size and name of file received:</span> <br>
-              </div>
+          html: `<div style="margin: auto; background-color: white; height: auto;justify-content: center;">
+          <div style="padding: 1rem;">
+              <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
+              <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
+              <p style="margin-top: 2rem;"> iCheckit </p>
           </div>
-      
-          <!-- <div style="padding: 3rem;">
-              <button style="background-color: red; width: auto; height: auto; color: white;"> Open iCheckit </button>
-          </div> -->
-      </body>`
+          <div style="padding: 1rem; font-size: 100%;">
+              <p> Thank you for submitting your proof of completion! </p>
+              <p> ${message}.</p>
+              <p> ${instructions}.</p>
+          </div>
+          <hr style="background-color: black; width: 90%;">
+          <div style="padding: 1rem; font-size: 100%;">
+              <p ><b>Submission Details</b></p>
+              <span >Task title:</span> <br>
+              <span >Task ID:</span> <br>
+              <span >Date/Time of submission:</span> <br>
+              <span ># of submission attempt:</span> <br>
+              <span >Link of submitted file:</span> <br>
+              <span >Size and name of file received:</span> <br>
+          </div>
+      </div>`,
         };
         mailTransport.sendMail(mailOptions);
         functions.logger.log('New welcome email sent to:', email);
-        return null; 
+        return null;
       }
     }
   });

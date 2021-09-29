@@ -29,6 +29,7 @@ export class UserManagementComponent implements OnInit {
   createStudentForm!:any;
   createAdminForm!:any;
   createAdminModal!:boolean;
+  importUserManual!:boolean;
   userData:any;
   fsData: any;
   adminUsers$: any;
@@ -115,6 +116,10 @@ export class UserManagementComponent implements OnInit {
 
   public triggerCreateAdminModal() {
     this.createAdminModal = !this.createAdminModal;
+  }
+
+  public triggerImportUserManual(){
+    this.importUserManual = !this.importUserManual;
   }
 
   public createStudent() {
