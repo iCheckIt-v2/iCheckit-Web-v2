@@ -89,7 +89,7 @@
   cursor: pointer;
 }
 .input-text {
-  @apply h-7 w-1/12 text-black flex flex-row justify-end ml-16;
+  @apply h-7 text-black flex flex-row justify-end ml-16;
 }
 .admin-container-children:hover {
   background-color: #dee2e7;
