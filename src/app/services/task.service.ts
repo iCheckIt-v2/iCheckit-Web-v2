@@ -107,7 +107,7 @@ export class TaskService {
     );
   }
 
-  public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any>,pushTokens: any ):Promise<any> {
+  public addTask(title:string, description:string, scope:Array<string>,deadline:Date,uploadedBy:string, recipients: Array<any>,pushTokens: any,term:string ):Promise<any> {
     let taskId = this.afs.createId();
 
     recipients.forEach(recipient => {
@@ -130,7 +130,8 @@ export class TaskService {
         uploadedBy: uploadedBy,
         recipients: recipients,
         type: 'task',
-        pushTokens: pushTokens
+        pushTokens: pushTokens,
+        term: term
       }
 
       console.log(task)

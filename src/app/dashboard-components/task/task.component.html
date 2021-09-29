@@ -4,7 +4,7 @@
   <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
   <div class="bg-white main-title" *ngIf="taskData as task">
     <div class="main-title-text">
-      <h1 class="text-3xl my-2">{{ task.title }}</h1>
+      <h1 class="text-3xl my-2">{{ task.title }} / {{task.term}}</h1>
     </div>
     <div class="main-title-date">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-5" viewBox="0 0 20 20" fill="currentColor"  [routerLink]="['/task/reports/', task.id]">
