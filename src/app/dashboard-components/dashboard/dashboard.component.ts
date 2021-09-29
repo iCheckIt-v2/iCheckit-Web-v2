@@ -104,6 +104,7 @@ export class DashboardComponent implements OnInit {
 
   public clearScope() {
     this.taskScopeArray = [];
+    this.addTaskForm.controls.scope.setValue(this.taskScopeArray);
   }
 
   changeTaskScope(e:any) {
@@ -306,5 +307,6 @@ export class DashboardComponent implements OnInit {
       this.addTaskForm.controls['deadline'].markAsTouched();
     }
   }
+
 
 }

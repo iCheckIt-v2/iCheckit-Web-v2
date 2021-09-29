@@ -8,10 +8,10 @@
         </div>
     </div>
 
-    <div *ngIf="taskData as task" style="margin-bottom: 2rem;">        
+    <div *ngIf="taskData as task" style="margin-bottom: 2rem;">
         <chart [type]="type" [data]="data" [options]="options" style="width:100%; height: 70vh; background-color: none;"></chart>
     </div>
-    
+
     <h3 style="text-align: center; font-size: 1.3rem;">Late and Non-Submissions</h3>
     <section class="container mx-auto p-6 font-mono">
         <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
@@ -20,11 +20,12 @@
               <thead>
                 <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
                   <th class="px-4 py-3">Name</th>
+
                   <th class="px-4 py-3">Section</th>
                   <th class="px-4 py-3">Status</th>
                 </tr>
               </thead>
-              <tbody class="bg-white">
+
                 <tr class="text-gray-700" *ngFor="let student of mgaPasaway">
                     <td class="px-4 py-3 border">
                       <div class="flex items-center text-sm">
@@ -42,7 +43,7 @@
                         <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm"> Late </span>
                     </td>
                 </tr>
-              </tbody>
+
             </table>
           </div>
         </div>
@@ -50,3 +51,4 @@
 
     <!-- <button (click)="downloadPdf()">download pfg</button> -->
 </div>
+

@@ -3,7 +3,7 @@
     <div class="main-title" *ngIf="taskData as task">
         <div class="main-title-text">
             <h1> {{task.title}} / {{user.displayName}} </h1>
-  
+
         </div>
         <div class="main-title-date">
             <p>{{dateToday | date}}</p>
@@ -44,16 +44,27 @@
     <section class="container mx-auto p-6 font-mono">
         <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div class="w-full overflow-x-auto">
+            <div class="admin-container-header">
+              <h1>Tasks:</h1>
+            <input type="text" [(ngModel)]="searchBar" name="searchBar" class="input-text" placeholder="Search for Data">
+          </div>
             <table class="w-full">
+
               <thead>
+
+
                 <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+
                   <th class="px-4 py-3">Name</th>
                   <th class="px-4 py-3">Section</th>
                   <th class="px-4 py-3">Status</th>
+
                 </tr>
               </thead>
+
               <tbody class="bg-white">
-                <tr class="text-gray-700" *ngFor="let student of mgaPasaway">
+
+                <tr class="text-gray-700" *ngFor="let student of mgaPasaway | filter: searchBar">
                     <td class="px-4 py-3 border">
                       <div class="flex items-center text-sm">
                         <div>
@@ -72,6 +83,7 @@
                 </tr>
               </tbody>
             </table>
+
           </div>
         </div>
       </section>
