@@ -17,6 +17,7 @@ import html2canvas from 'html2canvas';
 })
 export class ReportComponent implements OnInit {
   @ViewChild('content', {static: false}) el!: ElementRef;
+  searchBar: any;
   dateToday = new Date();
   userData:any;
   fsData: any;
@@ -37,7 +38,7 @@ export class ReportComponent implements OnInit {
   type: any;
   options: any;
   taskId:any;
-  constructor( 
+  constructor(
     public auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
@@ -102,14 +103,14 @@ export class ReportComponent implements OnInit {
           {
             label: "My First dataset",
             data: [this.pendingRecipientsPct , this.forApprovalRecipientsPct, this.accomplishedRecipientsPct, this.lateRecipientsPct],
-            backgroundColor: [ 
+            backgroundColor: [
               '#ffff00',
               '#FF640D',
               '#00B633',
               '#F00000'
-              
+
             ],
-            borderCplor: [ 
+            borderCplor: [
               '#ffff00',
               '#FF640D',
               '#00B633',
@@ -118,7 +119,7 @@ export class ReportComponent implements OnInit {
               hoverOffset: 4
           },
         ],
-       
+
       };
       this.options = {
         title: {
@@ -132,7 +133,7 @@ export class ReportComponent implements OnInit {
         maintainAspectRatio: false
       };
 
-    }) 
+    })
   }
 
   // downloadPdf() {

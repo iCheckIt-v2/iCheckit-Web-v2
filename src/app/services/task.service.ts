@@ -21,7 +21,7 @@ export class TaskService {
     public toastService: ToastService,
     public router: Router,
   ) { }
-  
+
 
   getVerificationTask():Observable<any> {
     return this.afs.collection('verificationTasks')
@@ -154,7 +154,7 @@ export class TaskService {
 
       title: title,
       description: description,
-      deadline: deadline
+      deadline:+ deadline
 
     }).then(() => {
       this.toastService.publish('task updated'+title,'success')

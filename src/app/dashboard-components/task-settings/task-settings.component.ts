@@ -107,7 +107,7 @@ export class TaskSettingsComponent implements OnInit {
 
   }
 
-  public UpdateStudentTask() {
+  public updateTask() {
 
     if (this.updateTaskForm.valid) {
       this.taskService.updateTask(
