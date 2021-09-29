@@ -9,3 +9,14 @@
     background-color: #35414F;
     font-family: Antonio;
   }
+  /* .border {
+    @apply w-full bg-gray-100;
+  } */
+  .input-text {
+    @apply w-auto h-7 bg-gray-100 ml-12 text-sm text-black;
+  }
+  .admin-container-header {
+    @apply h-auto p-3 w-full text-white text-lg flex flex-row justify-start;
+
+    background-color: #35414f;
+  }

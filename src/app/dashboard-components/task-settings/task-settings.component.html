@@ -30,7 +30,7 @@
         <div class="taskComponents-container">
 
           <!-- FORM GROUP -->
-        <Form [formGroup]="updateTaskForm" (ngSubmit)="UpdateStudentTask()">
+        <Form [formGroup]="updateTaskForm" (ngSubmit)="updateTask()">
           <div class="taskSettings-container-layout">
               <div class="text-main">
                 <!-- Task Title here -->
@@ -55,7 +55,7 @@
 
               </div>
               <div class="updateTask-button">
-                <button type="" class="updateTaskBtn" (click)="UpdateStudentTask()"> Update Task </button>
+                <button type="" class="updateTaskBtn" (click)="updateTask()"> Update Task </button>
               </div>
               <!-- <div class="updateTask-button">
                 <button type="" class="updateTaskBtn" (click)="triggerUpdateTask()"> Load Data </button>
