@@ -200,7 +200,8 @@ export class TaskComponent implements OnInit {
           taskId: element.taskId,
           title: element.title,
           uid: element.uid,
-          uploadedBy: element.uploadedBy
+          uploadedBy: element.uploadedBy,
+          term: element.term
         }
         acceptedSubmissions.push(updatedData)
     })
@@ -245,7 +246,8 @@ export class TaskComponent implements OnInit {
           taskId: element.taskId,
           title: element.title,
           uid: element.uid,
-          uploadedBy: element.uploadedBy
+          uploadedBy: element.uploadedBy,
+          term: element.term
         }
         acceptedSubmissions.push(updatedData)
     })
@@ -283,6 +285,7 @@ export class TaskComponent implements OnInit {
       title: recipient.title,
       uid: recipient.uid,
       uploadedBy: recipient.uploadedBy,
+      term: recipient.term
     }
 
     this.taskService.updateStudentStatus(this.taskData.taskId,accomplishedData,recipient);
@@ -303,6 +306,7 @@ export class TaskComponent implements OnInit {
       title: recipient.title,
       uid: recipient.uid,
       uploadedBy: recipient.uploadedBy,
+      term: recipient.term
     }
     console.log(recipient.submissionLink)
     this.storage.refFromURL(recipient.submissionLink).delete().subscribe((res) => console.log(res));
