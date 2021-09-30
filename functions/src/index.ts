@@ -1,8 +1,8 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-const cors = require("cors")({origin: true});
+const cors = require('cors')({ origin: true });
 const nodemailer = require('nodemailer');
-// Configure the email transport using the default SMTP transport and a GMail account.
+// Configure the email transport using the Fdefault SMTP transport and a GMail account.
 // For Gmail, enable these:
 // 1. https://www.google.com/settings/security/lesssecureapps
 // 2. https://accounts.google.com/DisplayUnlockCaptcha
@@ -36,6 +36,7 @@ const settings = {timeStampInSnapshots: true};
 db.settings(settings);
 
 exports.adminCreateStudent = functions.https.onRequest((request, response) => {
+  response.set('Access-Control-Allow-Origin', '*');
   cors(request, response, () => {
     if (request.method !== "POST") {
       response.status(405).send("Method Not Allowed");
@@ -101,12 +102,9 @@ exports.adminCreateStudent = functions.https.onRequest((request, response) => {
               </div> -->
           </body>`
             };
-            mailTransport.sendMail(mailOptions);
             functions.logger.log('New welcome email sent to:', email);
-            return response.status(200).send({
-              message: "successfully created user",
-              userRecord,
-            });
+            return mailTransport.sendMail(mailOptions);
+            
           })
           .catch((error) => {
             return response.status(400).send("Failed to create user: " + error);
@@ -225,10 +223,10 @@ recipients.forEach((element: any) => {
           <hr style="background-color: black; width: 75%;">
           <div style="padding: 2rem; font-size: 100%;">
               <p style="padding-left: 2rem;"><b>Task Details</b></p>
-              <span style="padding-left: 2rem;">Task title:</span> <br>
-              <span style="padding-left: 2rem;">Task ID:</span> <br>
-              <span style="padding-left: 2rem;">Task Status:</span> <br>
-              <span style="padding-left: 2rem;">Size and name of file received:</span> <br>
+              <span style="padding-left: 2rem;">Task title: ${taskTitle}</span> <br>
+              <span style="padding-left: 2rem;">Task Description: ${description}</span> <br>
+              <span style="padding-left: 2rem;">Task Deadline: ${deadline}</span> <br>
+              <span style="padding-left: 2rem;">Uploaded By: ${uploadedBy} </span> <br>
           </div>
           <div style="padding: 3rem;">
               <button style="background-color: red; width: auto; height: auto; color: white;"> Open iCheckit </button>
@@ -236,8 +234,8 @@ recipients.forEach((element: any) => {
       </div>
   </body>`
     };
-    mailTransport.sendMail(mailOptions);
-    functions.logger.log('New welcome email sent to:', element.email);
+    functions.logger.log('New task email sent to:', element.email);
+    return mailTransport.sendMail(mailOptions);
   }
 });
 // // Get the user's tokenID
@@ -254,13 +252,14 @@ recipients.forEach((element: any) => {
 });
 
 exports.sendEmail = functions.https.onRequest((request, response) => {
+  response.set('Access-Control-Allow-Origin', '*');
   cors(request, response, () => {
     if (request.method !== "POST") {
       response.status(405).send("Method Not Allowed");
     }
     else {
       if (request.body.pushToken != '') {
-        console.log(request.body.pushToken);
+        console.log('may push token');
         const body = request.body;
         const email = body.email;
         const uploadedBy = body.uploadedBy;
@@ -311,12 +310,10 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
               <hr style="background-color: black; width: 75%;">
               <div style="padding: 2rem; font-size: 100%;">
                   <p style="padding-left: 2rem;"><b>Submission Details</b></p>
-                  <span style="padding-left: 2rem;">Task title:</span> <br>
-                  <span style="padding-left: 2rem;">Task ID:</span> <br>
-                  <span style="padding-left: 2rem;">Date/Time of submission:</span> <br>
-                  <span style="padding-left: 2rem;"># of submission attempt:</span> <br>
-                  <span style="padding-left: 2rem;">Link of submitted file:</span> <br>
-                  <span style="padding-left: 2rem;">Size and name of file received:</span> <br>
+                  <span style="padding-left: 2rem;">Task title: ${title}</span> <br>
+                  <span style="padding-left: 2rem;">Task Description: ${description}</span> <br>
+                  <span style="padding-left: 2rem;">Task Deadline: ${deadline}</span> <br>
+                  <span style="padding-left: 2rem;">Uploaded By: ${uploadedBy} </span> <br>
               </div>
           </div>
       
@@ -325,11 +322,15 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
           </div> -->
       </body>`
         };
-        mailTransport.sendMail(mailOptions);
-        functions.logger.log('New welcome email sent to:', email);
-        return admin.messaging().sendToDevice(request.body.pushToken, payload);
+        functions.logger.log('updated task status email sent to:', email);
+        
+        admin.messaging().sendToDevice(request.body.pushToken, payload);
+
+        return mailTransport.sendMail(mailOptions)
+       
       }
       if (request.body.pushToken == '') {
+        console.log('no push token');
         const body = request.body;
         const email = body.email;
         const uploadedBy = body.uploadedBy;
@@ -370,12 +371,10 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
               <hr style="background-color: black; width: 75%;">
               <div style="padding: 2rem; font-size: 100%;">
                   <p style="padding-left: 2rem;"><b>Submission Details</b></p>
-                  <span style="padding-left: 2rem;">Task title:</span> <br>
-                  <span style="padding-left: 2rem;">Task ID:</span> <br>
-                  <span style="padding-left: 2rem;">Date/Time of submission:</span> <br>
-                  <span style="padding-left: 2rem;"># of submission attempt:</span> <br>
-                  <span style="padding-left: 2rem;">Link of submitted file:</span> <br>
-                  <span style="padding-left: 2rem;">Size and name of file received:</span> <br>
+                  <span style="padding-left: 2rem;">Task title: ${title}</span> <br>
+                  <span style="padding-left: 2rem;">Task Description: ${description}</span> <br>
+                  <span style="padding-left: 2rem;">Task Deadline: ${deadline}</span> <br>
+                  <span style="padding-left: 2rem;">Uploaded By: ${uploadedBy} </span> <br>
               </div>
           </div>
       
@@ -384,9 +383,9 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
           </div> -->
       </body>`
         };
-        mailTransport.sendMail(mailOptions);
-        functions.logger.log('New welcome email sent to:', email);
-        return null; 
+        functions.logger.log('updated task status email sent to:', email);
+        return mailTransport.sendMail(mailOptions);
+       
       }
     }
   });
