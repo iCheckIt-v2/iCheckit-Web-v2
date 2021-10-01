@@ -6,7 +6,7 @@
       <h1>User Management</h1>
     </div>
     <div class="main-title-date">
-      <button class="main-title-buttons">Import Users</button>
+      <button class="main-title-buttons" (click)="triggerImportUserManual()">Import Users</button>
       <button class="main-title-buttons" (click)="triggerCreateAdminModal()">Create Dept. Head</button>
       <button class="main-title-buttons" (click)="triggerCreateStudentModal()">Create Student</button>
       <h1>{{dateToday | date}}</h1>
@@ -509,5 +509,20 @@
     </div>
   </div>
   <!-- end modal container for edit -->
+
+  <!-- modal container for import user manual -->
+  <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="importUserManual">
+    <div class="modal-center">
+      <div class="modal-overlay" aria-hidden="true"></div>
+      <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+      <div class="modal">
+        <div class="modal-buttons">
+          <button type="button" class="cancelBtn" (click)="triggerImportUserManual()">
+            Okay, I got it!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   
 </div>

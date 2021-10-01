@@ -116,6 +116,7 @@ export class TaskService {
       recipient.description = description;
       recipient.deadline = + deadline;
       recipient.uploadedBy = uploadedBy;
+      recipient.attemptsLeft = 2;
       recipient.createdAt = + new Date();
       console.log(recipient)
     });

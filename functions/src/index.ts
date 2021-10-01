@@ -64,43 +64,28 @@ exports.adminCreateStudent = functions.https.onRequest((request, response) => {
               to: email,
               subject: `Welcome to ${APP_NAME}!`,
               // html: `Hey ${displayName}! Welcome to ${APP_NAME}. I hope you will enjoy our service. We aim to provide a platform for students in terms of submission and keeping track of non academic college-wide tasks. Visit our mobile application to view all the tasks uploaded in our system.`
-              html: `<body style="background-color: #7d1d2d">
-              <div style="margin: auto; background-color: white; height: auto;justify-content: center;">
-                  <div style="padding: 3rem;">
-                      <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
-                      <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
-                      <p style="margin-top: 2rem;"> iCheckit </p>
-                  </div>
-                  <div style="padding: 3rem; font-size: 100%;">
-                      <p> Hello there!</p>
-                      <p> Welcome to ${APP_NAME}. This application is a task list and notification system for the students of the
-                          College of Information and Computing Sciences that will help remind the students on accomplishing
-                          non-curricular tasks such as Satisfaction Surveys and Faculty Evaluation that we usually forget to do
-                          because of our academic load. You must download the application to your device to receive push
-                          notification about new tasks or updated tasks assigned to you and you will also be able to submit your
-                          proof of completion on these tasks once you downloaded the application. </p>
-                      <p> We hope that in creating this app to notify every one of us on the non-curricular tasks, we will have an
-                          organized system of task completion and verification under our College.
-                      </p>
-                      <p> That would be all for now! Enjoy exploring iCheckIt! </p>
-                      <p style="margin-top: 5rem;"> Kind regards, </ps>
-                      <p> iCheckIt team </p>
-                  </div>
-              </div>
-              <!-- <hr style="background-color: black; width: 75%;">
-              <div style="padding: 2rem; font-size: 100%;">
-                  <p style="padding-left: 2rem;"><b>Submission Details</b></p>
-                  <span style="padding-left: 2rem;">Task title:</span> <br>
-                  <span style="padding-left: 2rem;">Task ID:</span> <br> 
-                  <span style="padding-left: 2rem;">Date/Time of submission:</span> <br>
-                  <span style="padding-left: 2rem;"># of submission attempt:</span> <br>
-                  <span style="padding-left: 2rem;">Link of submitted file:</span> <br>
-                  <span style="padding-left: 2rem;">Size and name of file received:</span> <br>
-              </div>
-              <div style="padding: 3rem;">
-                  <button style="background-color: red; width: auto; height: auto; color: white;"> Open iCheckit </button>
-              </div> -->
-          </body>`
+              html: `<div style="margin: auto; background-color: white; height: auto;justify-content: center;">
+            <div style="padding: 1rem;">
+                <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
+                <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
+                <p style="margin-top: 2rem;"> iCheckit </p>
+            </div>
+            <div style="padding: 1rem; font-size: 100%;">
+                <p> Hello, (student name)</p>
+                <p> Welcome to ${APP_NAME}. This application is a task list and notification system for the students of the
+                    College of Information and Computing Sciences that will help remind the students on accomplishing
+                    non-curricular tasks such as Satisfaction Surveys and Faculty Evaluation that we usually forget to do
+                    because of our academic load. You must download the application to your device to receive push
+                    notification about new tasks or updated tasks assigned to you and you will also be able to submit your
+                    proof of completion on these tasks once you downloaded the application. </p>
+                <p> We hope that in creating this app to notify every one of us on the non-curricular tasks, we will have an
+                    organized system of task completion and verification under our College.
+                </p>
+                <p> That would be all for now! Enjoy exploring iCheckIt! </p>
+                <p style="margin-top: 5rem;"> Kind regards, </ps>
+                <p> iCheckIt team </p>
+            </div>
+        </div>`,
             };
             functions.logger.log('New welcome email sent to:', email);
             return mailTransport.sendMail(mailOptions);
@@ -207,32 +192,32 @@ recipients.forEach((element: any) => {
       // <br>
       // <p>Please submit your proof of completion on or before the said deadline</p>
       // `
-      html: `<body style="background-color: #7d1d2d;">
+      html: `
       <div style="margin: auto; background-color: white; height: auto; justify-content: center;">
-          <div style="padding: 3rem;">
+          <div style="padding: 1rem;">
               <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
               <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
               <p style="margin-top: 2rem;"> iCheckit </p>
           </div>
-          <div style="padding: 3rem; font-size: 100%;">
+          <div style="padding: 1rem; font-size: 100%;">
               <p> Greetings, (student name)!</p>
               <p> A new task has been assigned to you for your compliance. Click the button to open the task in your
                   mobile application to see the task instructions.
               </p>
           </div>
-          <hr style="background-color: black; width: 75%;">
-          <div style="padding: 2rem; font-size: 100%;">
-              <p style="padding-left: 2rem;"><b>Task Details</b></p>
+          <hr style="background-color: black; width: 90%;">
+          <div style="padding: 1rem; font-size: 100%;">
+              <p><b>Task Details</b></p>
               <span style="padding-left: 2rem;">Task title: ${taskTitle}</span> <br>
               <span style="padding-left: 2rem;">Task Description: ${description}</span> <br>
               <span style="padding-left: 2rem;">Task Deadline: ${deadline}</span> <br>
-              <span style="padding-left: 2rem;">Uploaded By: ${uploadedBy} </span> <br>
+              <span style="padding-left: 2rem;">Uploaded By: ${uploadedBy} </span><br>
           </div>
-          <div style="padding: 3rem;">
+          <div style="padding: 1rem;">
               <button style="background-color: red; width: auto; height: auto; color: white;"> Open iCheckit </button>
           </div>
       </div>
-  </body>`
+  `
     };
     functions.logger.log('New task email sent to:', element.email);
     return mailTransport.sendMail(mailOptions);
@@ -295,32 +280,28 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
           // <br>
           // <p>${instructions}</p>
           // `
-          html:`<body style="background-color: #7d1d2d">
+          html:`
           <div style="margin: auto; background-color: white; height: auto;justify-content: center;">
-              <div style="padding: 3rem;">
-                  <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
-                  <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
-                  <p style="margin-top: 2rem;"> iCheckit </p>
-              </div>
-              <div style="padding: 3rem; font-size: 100%;">
-                  <p> Thank you for submitting your proof of completion! </p>
-                  <p> ${message}.</p>
-                  <p> ${instructions}.</p>
-              </div>
-              <hr style="background-color: black; width: 75%;">
-              <div style="padding: 2rem; font-size: 100%;">
-                  <p style="padding-left: 2rem;"><b>Submission Details</b></p>
-                  <span style="padding-left: 2rem;">Task title: ${title}</span> <br>
-                  <span style="padding-left: 2rem;">Task Description: ${description}</span> <br>
-                  <span style="padding-left: 2rem;">Task Deadline: ${deadline}</span> <br>
-                  <span style="padding-left: 2rem;">Uploaded By: ${uploadedBy} </span> <br>
-              </div>
+          <div style="padding: 1rem;">
+              <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
+              <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
+              <p style="margin-top: 2rem;"> iCheckit </p>
           </div>
-      
-          <!-- <div style="padding: 3rem;">
-              <button style="background-color: red; width: auto; height: auto; color: white;"> Open iCheckit </button>
-          </div> -->
-      </body>`
+          <div style="padding: 1rem; font-size: 100%;">
+              <p> Thank you for submitting your proof of completion! </p>
+              <p> ${message}.</p>
+              <p> ${instructions}.</p>
+          </div>
+          <hr style="background-color: black; width: 90%;">
+          <div style="padding: 1rem; font-size: 100%;">
+          <p style="padding-left: 2rem;"><b>Submission Details</b></p>
+          <span style="padding-left: 2rem;">Task title: ${title}</span> <br>
+          <span style="padding-left: 2rem;">Task Description: ${description}</span> <br>
+          <span style="padding-left: 2rem;">Task Deadline: ${deadline}</span> <br>
+          <span style="padding-left: 2rem;">Uploaded By: ${uploadedBy} </span> <br>
+          </div>
+      </div>
+      `
         };
         functions.logger.log('updated task status email sent to:', email);
         
@@ -390,3 +371,23 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
     }
   });
 });
+
+exports.emailForApproval = functions.firestore
+    .document('tasks/{id}/recipients/{userId}')
+    .onUpdate((change, context) => {
+      // Get an object representing the document
+      // e.g. {'name': 'Marie', 'age': 66}
+      const newValue = change.after.data();
+
+      // ...or the previous value before this update
+      const previousValue = change.before.data();
+
+      // access a particular field as you would any JS property
+      const status = newValue.status;
+
+      console.log(newValue)
+      console.log(previousValue)
+      console.log(status)
+
+      // perform desired operations ...
+    });
