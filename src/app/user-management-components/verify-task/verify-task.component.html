@@ -1,107 +1,110 @@
 <app-navbar></app-navbar>
 <div class="main-container" *ngIf="fsData as user">
-    <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
-    <div class="bg-white main-title" *ngIf="taskData as task">
-      <div class="main-title-text">
-        <h1 class="text-3xl my-2">{{ task.title }}</h1>
+  <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+  <div class="bg-ust-back bg-cover bg-no-repeat main-title bg-center" *ngIf="taskData as task">
+    <div class="p-6 main-title-text text-white flex">
+      <h1>{{task.term}}</h1>
+    </div>
+    <div class="p-6 text-center text-white">
+      <p class="text-5xl title">iCheckit | College of Information and Computing Sciences </p>
+      <p class="mt-4 text-2xl title-2 uppercase tracking-widest">task title • {{task.title}}</p>
+    </div>
+  </div>
+
+  <div flexbox></div>
+  <div class="sub-container" *ngIf="taskData as task">
+    <div class="elements-firstrow-container">
+      <div class="transition duration-500 ease-in-out hover:scale-110 shadow-md  taskDescrip-container-middle">
+        <div class="taskDescrip-container-left-main">
+          <h1 class="my-4 text-Black">Task Description:</h1>
+          <h2 class="mr-4 mb-4 text-Black">{{ task.description }}</h2>
+        </div>
       </div>
-      <div class="main-title-date">
-        <p>{{dateToday | date}}</p>
+      <div class="transition duration-500 ease-in-out hover:scale-110 shadow-md  taskScope-container-right">
+        <div class="taskScope-container-right-main">
+          <h1 class="my-4 text-Black">Task Scope:</h1>
+          <!-- <h1 class="mr-4 my-4 text-Black">{{ task.scope }}</h1> -->
+          <span class="inline-flex items-center justify-center text-xs font-bold leading-none">
+            <span class="text-indigo-100 bg-indigo-700 px-2 py-1 mr-1 rounded">Non Verified Users</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="elements-secondrow-container">
+      <div class="transition duration-500 ease-in-out hover:scale-110 shadow-md  uploadedBy-container-left">
+        <div class="uploadedBy-container-left-main">
+          <h1 class="text-xl mt-4 text-white">Uploaded by:</h1>
+          <h1 class="text-xl mr-4 my-4 text-white">{{ task.uploadedBy }}</h1>
+        </div>
+      </div>
+      <div class="transition duration-500 ease-in-out hover:scale-110 shadow-md  taskDeadline-container-mid">
+        <div class="taskDeadline-container-mid-main">
+          <h1 class="text-xl mt-4 text-white">Created At:</h1>
+          <h2 class="text-xl mr-4 my-4 text-white">
+            {{ task.createdAt | date }}
+          </h2>
+        </div>
+      </div>
+      <div class="transition duration-500 ease-in-out hover:scale-110 shadow-md  pending-container-left">
+        <div class="taskDeadline-container-mid-main">
+          <h1 class="text-xl mt-4 text-white">Current Term:</h1>
+          <h2 class="text-xl mr-4 my-4 text-white">
+            {{ task.term }}
+          </h2>
+        </div>
       </div>
     </div>
 
-    <div flexbox></div>
-    <div class="sub-container" *ngIf="taskData as task">
-        <div class="elements-firstrow-container">
-            <div class="taskDescrip-container-middle">
-                <div class="taskDescrip-container-left-main">
-                  <h1 class="my-4 text-Black">Task Description:</h1>
-                  <h2 class="mr-4 mb-4 text-Black">{{ task.description }}</h2>
-                </div>
-            </div>
-            <div class="taskScope-container-right">
-                <div class="taskScope-container-right-main">
-                  <h1 class="my-4 text-Black">Task Scope:</h1>
-                  <!-- <h1 class="mr-4 my-4 text-Black">{{ task.scope }}</h1> -->
-                  <span class="inline-flex items-center justify-center text-xs font-bold leading-none" >
-                    <span
-                    class="text-indigo-100 bg-indigo-700 px-2 py-1 mr-1 rounded">Non Verified Users</span>
-                 </span>
-                </div>
-            </div>
-        </div>
-        <div class="elements-secondrow-container">
-            <div class="uploadedBy-container-left">
-                <div class="uploadedBy-container-left-main">
-                  <h1 class="text-xl mt-4 text-white">Uploaded by:</h1>
-                  <h1 class="text-xl mr-4 my-4 text-white">{{ task.uploadedBy }}</h1>
-                </div>
-            </div>
-            <div class="taskDeadline-container-mid">
-                <div class="taskDeadline-container-mid-main">
-                  <h1 class="text-xl mt-4 text-white">Created At:</h1>
-                  <h2 class="text-xl mr-4 my-4 text-white">
-                    {{ task.createdAt | date }}
-                  </h2>
-                </div>
-            </div>
-            <div class="pending-container-left">
-                <div class="taskDeadline-container-mid-main">
-                  <h1 class="text-xl mt-4 text-white">Current Term:</h1>
-                  <h2 class="text-xl mr-4 my-4 text-white">
-                    {{ task.term }}
-                  </h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="students">
-            <div class="admin-container-header">
-                <h1>Verification:</h1>
-            </div>
-            <div class="mr-10 admin-container-children" *ngFor="
+    <div class="students">
+      <div class="admin-container-header">
+        <h1>Verification:</h1>
+      </div>
+      <div class="mr-10 admin-container-children" *ngFor="
                 let recipient of task.recipients
                 | paginate: { itemsPerPage: 10, currentPage: p } | filter: studentTaskList
             ">
-                <div class="admin-container-children-left">
-                    <p>{{ recipient.displayName }}</p>
-                </div>
-                <div class="admin-container-children-left">
-                    <p>Applying for: {{ recipient.proposedSection }}</p>
-                </div>
-                <div class="admin-container-children-left">
-                    <p *ngIf="recipient.submissionLink != ''">Link to submission here</p>
-                    <a href="{{ recipient.submissionLink }}" *ngIf="recipient.submissionLink != ''">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6 text-blue-500" viewBox="0 0 20 20"
-                        fill="currentColor">
-                        <path
-                          d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                      </svg>
-                    </a>
-                    <p *ngIf="recipient.submissionLink == ''">No Submission Yet</p>
-                </div>
-                <div class="admin-container-children-right">
-                    <div class="acceptRejectIcon">
-                        <div class="checkIcon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" (click)="verifyStudent(recipient)">
-                              <path fill-rule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clip-rule="evenodd" />
-                            </svg>
-                          </div>
-                          <div class="xIcon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                              <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                            </svg>
-                          </div>
-                    </div>
-                </div>
-            </div>
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <div class="admin-container-children-left">
+          <p>{{ recipient.displayName }}</p>
         </div>
-
-
-
+        <div class="admin-container-children-left">
+          <p>Applying for: {{ recipient.proposedSection }}</p>
+        </div>
+        <div class="admin-container-children-left">
+          <p *ngIf="recipient.submissionLink != ''">Link to submission here</p>
+          <a href="{{ recipient.submissionLink }}" *ngIf="recipient.submissionLink != ''">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6 text-blue-500" viewBox="0 0 20 20"
+              fill="currentColor">
+              <path
+                d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+            </svg>
+          </a>
+          <p *ngIf="recipient.submissionLink == ''">No Submission Yet</p>
+        </div>
+        <div class="admin-container-children-right">
+          <div class="acceptRejectIcon">
+            <div class="checkIcon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+                (click)="verifyStudent(recipient)">
+                <path fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="xIcon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                  clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
+
+
+
+  </div>
 </div>

@@ -71,7 +71,7 @@
 }
 
 .students {
-  @apply w-full h-auto mt-8;
+  @apply rounded-full w-full h-auto mt-8;
 }
 .cics-admins {
   @apply w-1/2 h-auto ml-2;
@@ -89,7 +89,8 @@
   cursor: pointer;
 }
 .input-text {
-  @apply h-7 text-black flex flex-row justify-end ml-16;
+  @apply text-black flex flex-row justify-end;
+  font-family: 'Abel', 'FontAwesome';
 }
 .admin-container-children:hover {
   background-color: #dee2e7;
@@ -134,6 +135,9 @@
 }
 .modal-header {
   @apply sm:flex sm:items-start;
+}
+.modal-header-icon-create {
+  @apply mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-300 sm:mx-0 sm:h-10 sm:w-10;
 }
 .modal-header-icon-edit {
   @apply mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-yellow-200 sm:mx-0 sm:h-10 sm:w-10;
@@ -195,4 +199,33 @@
 
 .italic option {
   font-style: normal;
+}
+
+.container, .container-pending, .container-accomplished{
+  font-family: 'Abel', sans-serif;
+}
+
+.container-pending{
+  background-color: #ffe400;
+}
+
+.container-accomplished {
+  background-color: green;
+}
+
+.title {
+  font-family: 'Antonio', sans-serif;
+}
+
+.title-2 {
+  font-family: 'Abel', sans-serif;
+}
+
+.main-title {
+  background-blend-mode: soft-light;
+  background-color: #7D1D2D;
+}
+
+.archive {
+  font-family: 'FontAwesome', 'Abel';
 }

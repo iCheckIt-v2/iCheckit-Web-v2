@@ -47,6 +47,7 @@ export class TaskComponent implements OnInit {
   accomplishedRecipientsPct = 0;
   acceptAllModal!: boolean;
   rejectAllModal!: boolean;
+  term!:string;
 
   constructor(
     public auth: AuthService,
@@ -59,7 +60,25 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    var d = new Date();
+    var y = d.getFullYear()
+    var n = d.getMonth();
+    console.log(n)
+    console.log(y)
+    if (n >= 1 && n <= 6) {
+      console.log('January to June');
+      console.log('2nd Term SY ' + y + '-' + (y + 1))
+      this.term = '2nd Term SY ' + y + '-' + (y + 1);
+    }
+    else if (n >= 8 && n <= 12) {
+      console.log('August to December');
+      console.log('1st Term SY ' + y + '-' + (y + 1))
+      this.term = '1st Term SY ' + y + '-' + (y + 1);
+    }
+    else {
+      console.log('Summer Term' + y + '-' + (y + 1))
+      this.term = 'Summer Term' + y + '-' + (y + 1);
+    }
 
     this.fire.user.subscribe((user:any) => {
       this.userData = user;

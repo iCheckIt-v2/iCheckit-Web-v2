@@ -43,9 +43,12 @@
   @apply my-5 text-center;
 } */
 
+.cics {
+  bottom: 50px;
+}
 .cics img {
   @apply items-center mx-auto;
-  margin-top: 23rem;
+  /* margin-top: 23rem; */
   width: 60px;
   height: 70px;
 }

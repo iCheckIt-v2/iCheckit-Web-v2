@@ -158,3 +158,15 @@
 .status-not-verified {
   @apply text-red-600;
 }
+.title {
+  font-family: 'Antonio', sans-serif;
+}
+
+.title-2 {
+  font-family: 'Abel', sans-serif;
+}
+
+.main-title {
+  background-blend-mode: soft-light;
+  background-color: #7D1D2D;
+}

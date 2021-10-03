@@ -11,6 +11,8 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  accomplishedTasks = 0;
+  pendingTasks = 0;
   // taskScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE'];
   taskList: any;
   itScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITG','2ITA','2ITB','2ITC','2ITD','3ITA','3ITB','3ITC','3ITD','3ITE','4ITA','4ITB','4ITC','4ITD','4ITE','4ITF','4ITG','4ITH'];
@@ -82,6 +84,17 @@ export class DashboardComponent implements OnInit {
     this.taskService.getVerifyTasks().subscribe((res) => {
       this.verifyTasks$ = res;
       console.log(this.verifyTasks$);
+      this.accomplishedTasks = 0;
+      this.pendingTasks = 0;
+      res.forEach((element: { [s: string]: unknown;} | ArrayLike<unknown>) => {
+        if (Object.values(element).includes("Pending")) {
+          this.pendingTasks += 1;
+        }
+
+        if (Object.values(element).includes("Completed")) {
+          this.accomplishedTasks += 1;
+        }
+      })
     })
 
     this.taskScopeArray = [];
@@ -94,6 +107,7 @@ export class DashboardComponent implements OnInit {
     });
 
     // delete task
+
   }
 
 
