@@ -9,11 +9,11 @@ body {
     @apply pl-52;
 }
 .main-title {
-    @apply w-full h-auto pr-3 pl-3 pb-3 pt-12 text-black shadow-md flex;
+    @apply w-full h-auto pt-12 text-black;
 }
 .main-title-text {
-    @apply w-1/2 flex justify-start items-center font-bold text-lg;
-    font-family: 'Antonio', sans-serif;
+    @apply w-full justify-start items-center text-lg;
+    font-family: 'Abel', sans-serif;
 }
 .main-title-date {
     @apply w-1/2 flex items-center justify-end;

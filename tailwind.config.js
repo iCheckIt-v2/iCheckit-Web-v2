@@ -15,6 +15,7 @@ module.exports = {
       extend: {
         backgroundImage: theme => ({
           'ust-main': "url('/assets/ust.jpg')",
+          'ust-back': "url('/assets/USTBackground.png')",
          })
       },
     },
