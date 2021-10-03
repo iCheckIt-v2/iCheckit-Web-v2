@@ -117,6 +117,7 @@ export class TaskService {
       recipient.deadline = + deadline;
       recipient.uploadedBy = uploadedBy;
       recipient.attemptsLeft = 2;
+      recipient.deadlineLimit = 7;
       recipient.createdAt = + new Date();
       console.log(recipient)
     });

@@ -154,22 +154,23 @@ const recipients = data.recipients;
 const description = data.description;
 
 // Determine the message
-const payload = {
-  notification: {
-    title: taskTitle,
-    body: 'A new task has been uploaded. Click on this notification to open the application.',
-    sound: 'default',
-    badge: '1'
-  }
-}
-console.log(payload);
+
 pushTokens.forEach((element: any) => {
   if (element.pushToken == '') {
       console.log('no push token')
   }   
   else if (element.pushToken != '') {
-      console.log('sent to :', element.pushToken);
-      admin.messaging().sendToDevice(element.pushToken, payload);
+    const payload = {
+      notification: {
+        title: taskTitle,
+        body: 'A new task has been uploaded. Click on this notification to open the application.',
+        sound: 'default',
+        badge: '1'
+      }
+    }
+    console.log(payload);
+    console.log('sent to :', element.pushToken);
+    return admin.messaging().sendToDevice(element.pushToken, payload)
   }
 });
 recipients.forEach((element: any) => {
