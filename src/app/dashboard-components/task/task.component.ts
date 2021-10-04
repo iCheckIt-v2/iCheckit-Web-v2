@@ -393,4 +393,8 @@ export class TaskComponent implements OnInit {
     this.closeSubmission = !this.closeSubmission
   }
 
+  public closeAllSubmission() {
+
+  }
+
 }

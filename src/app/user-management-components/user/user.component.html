@@ -21,8 +21,8 @@
         </div>
         <div class="profile-container-left-main">
           <div class="profile-details">
-            <h1 class="details-title" *ngIf="user.verified">Status: <span class="status-verified" *ngIf="user.verified"> Verified</span></h1>
-            <h1 class="details-title" *ngIf="!user.verified">Status: <span class="status-not-verified" *ngIf="!user.verified"> Not Verified</span></h1>
+            <h1 class="details-title">Status: <span class="status-verified" *ngIf="user.verified == 'Enrolled'"> Verified</span>
+              <span class="status-not-verified" *ngIf="user.verified == 'Not Verified'"> Not Verified</span></h1>
             <p><span class="details-title">Full Name:</span> {{user.displayName}}</p>
             <p><span class="details-title">Email:</span> {{user.email}}</p>
             <p><span class="details-title">Contact Number:</span> {{user.contactNumber}}</p>
