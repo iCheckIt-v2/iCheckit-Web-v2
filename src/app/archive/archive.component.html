@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<!-- NAVBAR -->
+<div class="main-container" *ngIf="fsData as user">
+  <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+  <div
+    class="bg-ust-back bg-cover bg-no-repeat bg-center main-title"
+    *ngIf="taskData as task"
+  >
+    <div class="p-6 main-title-text text-white flex">
+      <!-- <h1>{{ term }}</h1> -->
+    </div>
+    <div class="p-6 text-center text-white">
+      <p class="text-5xl title">
+        iCheckit | College of Information and Computing Sciences
+      </p>
+      <p class="mt-4 text-2xl title-2 uppercase tracking-widest">
+        archived tasks • {{ term }}
+      </p>
+    </div>
+  </div>
+  <div flexbox></div>
+
+  <!-- table header -->
+  <div class="sub-container" *ngIf="taskData as task">
+    <div class="students">
+      <input
+        type="text"
+        [(ngModel)]="taskList"
+        name="TaskList"
+        class="w-1/4 mb-5 float-right rounded-full input-text"
+        placeholder="&#xf002; Search for a task"
+      />
+    </div>
+    <div class="admin-container-header">
+      <h1>Archive for completed Tasks:</h1>
+    </div>
+    <!-- table body -->
+    <div
+      class="admin-container-children"
+      *ngFor="
+        let task of task
+          | paginate: { itemsPerPage: 50, currentPage: p }
+          | filter: taskList
+      "
+      [routerLink]="['/task/', task.id]"
+    >
+      <div
+        class="admin-container-children-left-completed"
+        *ngIf="task.status == 'Completed'"
+      >
+        <p>{{ task.title }}</p>
+        <p>{{ task.deadline | date }}</p>
+      </div>
+    </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>

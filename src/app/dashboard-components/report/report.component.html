@@ -1,92 +1,98 @@
 <app-navbar></app-navbar> <!-- NAVBAR -->
-<div class="main-container" *ngIf="fsData as user" > <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
-    <div class="main-title" *ngIf="taskData as task">
-        <div class="main-title-text">
-            <h1> {{task.title}} / {{user.displayName}} </h1>
-
-        </div>
-        <div class="main-title-date">
-            <p>{{dateToday | date}}</p>
-        </div>
+<div class="main-container" *ngIf="fsData as user">
+  <!-- MAIN CONTAINER LAGI NYONG LAGYAN NITO -->
+  <div class="bg-ust-back bg-cover bg-no-repeat bg-center main-title" *ngIf="taskData as task">
+    <div class="p-6 main-title-text text-white flex">
+      <h1> {{term}} </h1>
     </div>
-    <div class="sub-container" *ngIf="taskData as task">
-        <div class="elements-firstrow-container">
-            <div class="uploadedBy-container-left" style="background-color: #ffff00;">
-                <div class="uploadedBy-container-left-main" >
-                    <h1 class="text-3xl mt-4 text-white">Pending Recipients: </h1>
-                    <h2 class="text-4xl mt-4 text-white"> {{pendingRecipientsPct}}%</h2>
-                </div>
-            </div>
-            <div class="uploadedBy-container-left" style="background-color: #FF640D;">
-                <div class="uploadedBy-container-left-main">
-                    <h1 class="text-3xl mt-4 text-white">For Approval Recipients:</h1>
-                    <h2 class="text-4xl mt-4 text-white"> {{forApprovalRecipientsPct}}%</h2>
-                </div>
-            </div>
-            <div class="uploadedBy-container-left" style="background-color: #F00000;">
-                <div class="uploadedBy-container-left-main">
-                    <h1 class="text-3xl mt-4 text-white">Late Recipients: </h1>
-                    <h2 class="text-4xl mt-4 text-white"> {{lateRecipientsPct}}%</h2>
-                </div>
-            </div>
-            <div class="uploadedBy-container-left" style="background-color: #00B633;">
-                <div class="uploadedBy-container-left-main">
-                    <h1 class="text-3xl mt-4 text-white">Accomplished Recipients: </h1>
-                    <h2 class="text-4xl mt-4 text-white"> {{accomplishedRecipientsPct}}%</h2>
-                </div>
-            </div>
-        </div>
-        <chart [type]="type" [data]="data" [options]="options" style="width:100%; height: 70vh;"></chart>
+    <div class="p-6 text-center text-white">
+      <p class="text-5xl title">iCheckit | College of Information and Computing Sciences </p>
+      <p class="mt-4 text-2xl title-2 uppercase tracking-widest">report • {{task.title}}</p>
     </div>
+  </div>
+  <div class="sub-container" *ngIf="taskData as task">
+    <div class="elements-firstrow-container">
+      <div class="uploadedBy-container-left" style="background-color: #ffff00;">
+        <div class="uploadedBy-container-left-main">
+          <h1 class="text-3xl mt-4 text-white">Pending Recipients: </h1>
+          <h2 class="text-4xl mt-4 text-white"> {{pendingRecipientsPct}}%</h2>
+        </div>
+      </div>
+      <div class="uploadedBy-container-left" style="background-color: #FF640D;">
+        <div class="uploadedBy-container-left-main">
+          <h1 class="text-3xl mt-4 text-white">For Approval Recipients:</h1>
+          <h2 class="text-4xl mt-4 text-white"> {{forApprovalRecipientsPct}}%</h2>
+        </div>
+      </div>
+      <div class="uploadedBy-container-left" style="background-color: #F00000;">
+        <div class="uploadedBy-container-left-main">
+          <h1 class="text-3xl mt-4 text-white">Late Recipients: </h1>
+          <h2 class="text-4xl mt-4 text-white"> {{lateRecipientsPct}}%</h2>
+        </div>
+      </div>
+      <div class="uploadedBy-container-left" style="background-color: #00B633;">
+        <div class="uploadedBy-container-left-main">
+          <h1 class="text-3xl mt-4 text-white">Accomplished Recipients: </h1>
+          <h2 class="text-4xl mt-4 text-white"> {{accomplishedRecipientsPct}}%</h2>
+        </div>
+      </div>
+    </div>
+    <chart [type]="type" [data]="data" [options]="options" style="width:100%; height: 70vh;"></chart>
+  </div>
 
-    <div id="content" #content>
-     <h3 style="text-align: center; font-size: 1.3rem;">Late and Non-Submissions</h3>
-    <section class="container mx-auto p-6 font-mono">
-        <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-          <div class="w-full overflow-x-auto">
-            <div class="admin-container-header">
-              <h1>Tasks:</h1>
-            <input type="text" [(ngModel)]="searchBar" name="searchBar" class="input-text" placeholder="Search for Data">
-          </div>
-            <table class="w-full">
+  <div id="content" #content>
+    <h3 style="text-align: center; font-size: 1.3rem; font-family: 'Antonio';">Late and Non-Submissions</h3>
+    <section class="container mx-auto p-6">
+      <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+        <div class="w-full overflow-x-auto">
+          <input type="text" [(ngModel)]="searchBar" name="searchBar"
+            class="w-1/4 mb-5 float-right rounded-full input-text" placeholder="&#xf002; Search for a student">
 
-              <thead>
-
-
-                <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-
-                  <th class="px-4 py-3">Name</th>
-                  <th class="px-4 py-3">Section</th>
-                  <th class="px-4 py-3">Status</th>
-
-                </tr>
-              </thead>
-
-              <tbody class="bg-white">
-
-                <tr class="text-gray-700" *ngFor="let student of mgaPasaway | filter: searchBar">
-                    <td class="px-4 py-3 border">
-                      <div class="flex items-center text-sm">
-                        <div>
-                          <p class="font-semibold text-black">{{student.displayName}}</p>
-                          <p class="text-xs text-gray-600">{{student.email}}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3 text-sm border">{{student.section}}</td>
-                    <td class="px-4 py-3 text-xs border" *ngIf="student.status == 'Pending'">
-                        <span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-sm"> Pending </span>
-                    </td>
-                    <td class="px-4 py-3 text-xs border" *ngIf="student.status == 'Late'">
-                        <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm"> Late </span>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="admin-container-header">
+            <h1>Late and Non-submission:</h1>
 
           </div>
+          <table class="w-full table-data">
+
+            <thead>
+
+
+              <tr
+                class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600" style="font-family: 'Antonio';">
+
+                <th class="px-4 py-3">Name</th>
+                <th class="px-4 py-3">Section</th>
+                <th class="px-4 py-3">Status</th>
+
+              </tr>
+            </thead>
+
+            <tbody class="bg-white">
+              <tr class="text-gray-700"
+                *ngFor="let student of mgaPasaway | filter: searchBar | paginate: { itemsPerPage: 50, currentPage: p }">
+                <td class="px-4 py-3 border">
+                  <div class="flex items-center text-sm">
+                    <div style="font-family: 'Abel';">
+                      <p class="font-semibold text-black">{{student.displayName}}</p>
+                      <p class="text-xs text-gray-600">{{student.email}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-sm border" style="font-family: 'Abel';">{{student.section}}</td>
+                <td class="px-4 py-3 text-xs border" *ngIf="student.status == 'Pending'">
+                  <span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-sm" style="font-family: 'Abel';"> Pending
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-xs border" *ngIf="student.status == 'Late'">
+                  <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm" style="font-family: 'Abel';"> Late </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </section>
-    </div>
-    <!-- <button (click)="downloadPdf()">download pfg</button> -->
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </section>
+  </div>
+  <!-- <button (click)="downloadPdf()">download pfg</button> -->
 </div>

@@ -589,7 +589,26 @@ export class TaskService {
       recipients: firebase.firestore.FieldValue.arrayRemove(data),
     })
   }
-
+  
+  public getCompletedTask(): Observable<any> {
+    return this.afs
+      .collection('tasks', (ref) =>
+        ref.where('status', '==', 'Completed').orderBy('createdAt')
+      )
+      .snapshotChanges()  
+      .pipe(
+        map((doc: any) => {
+          // console.log(doc)
+          return doc.map(
+            (c: { payload: { doc: { data: () => any; id: any } } }) => {
+              const data = c.payload.doc.data();
+              const id = c.payload.doc.id;
+              return { id, ...data };
+            }
+          );
+        })
+      );
+  }
 
 
 }

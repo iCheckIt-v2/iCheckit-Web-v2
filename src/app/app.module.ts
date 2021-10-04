@@ -30,6 +30,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { VerifyTaskComponent } from './user-management-components/verify-task/verify-task.component';
 
 import { UserManualComponent } from './user-manual/user-manual.component';
+import { ArchiveComponent } from './archive/archive.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { UserManualComponent } from './user-manual/user-manual.component';
     ReportComponent,
     DownloadReportComponent,
     VerifyTaskComponent,
-    UserManualComponent
+    UserManualComponent,
+    ArchiveComponent
   ],
   imports: [
     BrowserModule,
