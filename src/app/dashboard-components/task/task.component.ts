@@ -48,6 +48,7 @@ export class TaskComponent implements OnInit {
   acceptAllModal!: boolean;
   rejectAllModal!: boolean;
   term!:string;
+  closeSubmission!: boolean;
 
   constructor(
     public auth: AuthService,
@@ -387,5 +388,9 @@ export class TaskComponent implements OnInit {
   //     this.triggerAddTaskModal();
   //   })
   // }
+  
+  public triggerCloseSubmission() {
+    this.closeSubmission = !this.closeSubmission
+  }
 
 }

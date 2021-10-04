@@ -9,8 +9,8 @@
     </div>
     <div class="p-6 text-center text-white">
       <p class="text-5xl title">iCheckit | College of Information and Computing Sciences </p>
-      <p class="mt-4 text-2xl title-2 uppercase tracking-widest" *ngIf="user.role == 'Student'">student • {{user.displayName}}</p>
-      <p class="mt-4 text-2xl title-2 uppercase tracking-widest" *ngIf="user.role == 'Department Head'">department head • {{user.displayName}}</p>
+      <p class="mt-4 text-2xl title-2 uppercase tracking-widest" *ngIf="user.role == 'Student'">{{user.displayName}}</p>
+      <p class="mt-4 text-2xl title-2 uppercase tracking-widest" *ngIf="user.role == 'Department Head'">{{user.displayName}}</p>
     </div>
   </div>
   <div class="sub-container">
