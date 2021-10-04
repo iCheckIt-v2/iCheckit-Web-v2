@@ -1,3 +1,4 @@
+import { ArchiveComponent } from './archive/archive.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from '../app/dashboard-components/dashboard/dashboard.component'
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'user-management/verify-users', component: VerifyTaskComponent, ...canActivate(redirectUnauthorizedToLogin)},
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: '',   redirectTo: '/dashboard', pathMatch: 'full' }, // redirect to `Home`
+  { path: 'archive', component: ArchiveComponent},
   { path: '**', component: PagenotfoundComponent },
 ];
 
