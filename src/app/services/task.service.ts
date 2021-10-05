@@ -567,10 +567,12 @@ export class TaskService {
     })
   }
 
-  public verifyStudent(id: string, data:any) {
+  public verifyStudent(id: string, data:any,course:string) {
     console.log(data);
+    // let course = data.proposedSection.slice(1,3);
 
     return this.afs.collection('users').doc(id).update({
+      course: course,
       section: data.proposedSection,
       verified: 'Enrolled'
     }).then(() => {

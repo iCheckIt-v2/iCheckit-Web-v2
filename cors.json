@@ -1,7 +1,7 @@
 [
-    {
-      "origin": ["*"],
-      "method": ["*"],
-      "maxAgeSeconds": 3600
-    }
-  ]
+  {
+    "origin": ["*"],
+    "method": ["*"],
+    "maxAgeSeconds": 3600
+  }
+]

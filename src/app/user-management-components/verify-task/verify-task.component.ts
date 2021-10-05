@@ -60,7 +60,19 @@ export class VerifyTaskComponent implements OnInit {
   }
 
   public verifyStudent(data:any) {
-    this.taskService.verifyStudent(data.uid,data);
+    let course = data.proposedSection.slice(1,3);
+    if (course == 'IT') {
+      this.taskService.verifyStudent(data.uid,data,'BS Information Technology');
+    }
+    else if (course == 'IS') {
+      this.taskService.verifyStudent(data.uid,data,'BS Information Systems');
+    }
+    else if (course == 'CS') {
+      this.taskService.verifyStudent(data.uid,data,'BS Computer Science');
+    } else {
+      console.log('may error')
+    }
+
   }
 
   public deleteSubmission(data:any) {

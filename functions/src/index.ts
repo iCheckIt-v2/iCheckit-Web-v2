@@ -36,7 +36,6 @@ const settings = {timeStampInSnapshots: true};
 db.settings(settings);
 
 exports.adminCreateStudent = functions.https.onRequest((request, response) => {
-  response.set('Access-Control-Allow-Origin', '*');
   cors(request, response, () => {
     if (request.method !== "POST") {
       response.status(405).send("Method Not Allowed");
@@ -88,7 +87,11 @@ exports.adminCreateStudent = functions.https.onRequest((request, response) => {
         </div>`,
             };
             functions.logger.log('New welcome email sent to:', email);
-            return mailTransport.sendMail(mailOptions);
+            mailTransport.sendMail(mailOptions);
+            return response.status(200).send({
+              message: 'successfully created user',
+              userRecord
+            });
             
           })
           .catch((error) => {
@@ -238,7 +241,6 @@ recipients.forEach((element: any) => {
 });
 
 exports.sendEmail = functions.https.onRequest((request, response) => {
-  response.set('Access-Control-Allow-Origin', '*');
   cors(request, response, () => {
     if (request.method !== "POST") {
       response.status(405).send("Method Not Allowed");
@@ -309,6 +311,11 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
         admin.messaging().sendToDevice(request.body.pushToken, payload);
 
         return mailTransport.sendMail(mailOptions)
+
+        // return response.status(200).send({
+        //   message: 'sent email to' + email,
+        // })
+
        
       }
       if (request.body.pushToken == '') {
@@ -366,8 +373,11 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
       </body>`
         };
         functions.logger.log('updated task status email sent to:', email);
-        return mailTransport.sendMail(mailOptions);
-       
+        return mailTransport.sendMail(mailOptions)
+        
+        // return response.status(200).send({
+        //   message: 'sent email to' + email,
+        // })      
       }
     }
   });
