@@ -307,14 +307,21 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
       `
         };
         functions.logger.log('updated task status email sent to:', email);
-        
-        admin.messaging().sendToDevice(request.body.pushToken, payload);
 
-        mailTransport.sendMail(mailOptions)
+        // return admin.messaging().sendToDevice(element.pushToken, payload)
 
-        return response.status(200).send({
-          message: 'sent email to' + email,
+        return admin.messaging().sendToDevice(request.body.pushToken, payload).then((res) => {
+          console.log(res)
+          mailTransport.sendMail(mailOptions)
+          return response.status(200).send({
+            message: 'sent email to' + email,
+          })
+        }).catch((err) => {
+          return response.status(400).send("Failed to create user: " + err);
         })
+
+
+       
 
        
       }

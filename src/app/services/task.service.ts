@@ -169,8 +169,6 @@ export class TaskService {
 
 
   public updateStudentStatus(id:string,newData:any,oldData:any) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-    const params: URLSearchParams = new URLSearchParams();
     console.log(newData);
     console.log(oldData);
     return this.afs.collection('tasks').doc(id).update({
@@ -180,11 +178,13 @@ export class TaskService {
         recipients: firebase.firestore.FieldValue.arrayUnion(newData),
       })
     }).then((res) => {
-      if (newData.status == 'Pending') {
-        if (newData.pushToken == '') {
-         
+      if (newData.status == "Pending") {
+        if (newData.pushToken == "") {
+          const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+            const params: URLSearchParams = new URLSearchParams();
 
           // console.log(newData.email);
+        let pushToken = newData.pushToken;
         let email = newData.email;
         let uploadedBy = newData.uploadedBy;
         let title = newData.title;
@@ -212,18 +212,22 @@ export class TaskService {
         description,
         status,
         message,
-        instructions
+        instructions,
+        pushToken
         }, {
           headers
         }).toPromise().then(
           () => {
             this.toastService.publish('Email has been sent to ' + email,'formSuccess')
           }
-        )
+        ).catch((err) => {
+          console.log(err)
+        })
         }
 
-        else if (newData.pushToken != '') {
-         
+        else if (newData.pushToken != "") {
+          const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+            const params: URLSearchParams = new URLSearchParams();
 
           // console.log(newData.email);
         let pushToken = newData.pushToken;
@@ -263,15 +267,19 @@ export class TaskService {
           () => {
             this.toastService.publish('Email has been sent to ' + email,'formSuccess')
           }
-        )
+        ).catch((err) => {
+          console.log(err)
+        })
         }
 
       }
 
-      if (newData.status == 'Accomplished') {
-        if (newData.pushToken == '') {
-         
+      if (newData.status == "Accomplished") {
+        if (newData.pushToken == "") {
+          const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+            const params: URLSearchParams = new URLSearchParams();
           // console.log(newData.email);
+          let pushToken = newData.pushToken;
           let email = newData.email;
           let uploadedBy = newData.uploadedBy;
           let title = newData.title;
@@ -299,19 +307,22 @@ export class TaskService {
           description,
           status,
           message,
-          instructions
+          instructions,
+          pushToken
           }, {
             headers
           }).toPromise().then(
             () => {
               this.toastService.publish('Email has been sent to ' + email,'formSuccess')
             }
-          )
+          ).catch((err) => {
+            console.log(err)
+          })
         }
         
-        else if (newData.pushToken != '') {
-                    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-          const params: URLSearchParams = new URLSearchParams
+        else if (newData.pushToken != "") {
+          const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+          const params: URLSearchParams = new URLSearchParams();
          
           // console.log(newData.email);
           let pushToken = newData.pushToken;
@@ -351,7 +362,9 @@ export class TaskService {
             () => {
               this.toastService.publish('Email has been sent to ' + email,'formSuccess')
             }
-          )
+          ).catch((err) => {
+            console.log(err)
+          })
         }
       }
     }).catch((err) => {
@@ -371,10 +384,10 @@ export class TaskService {
           recipients: firebase.firestore.FieldValue.arrayUnion(element),
         })
       }).then((res) => {
-        if (element.status == 'Pending') {
-          if (element.pushToken == '') {
-                      const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-          const params: URLSearchParams = new URLSearchParams
+        if (element.status == "Pending") {
+          if (element.pushToken == "") {
+            const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+            const params: URLSearchParams = new URLSearchParams();
 
             // console.log(newData.email);
           let email = element.email;
@@ -414,9 +427,9 @@ export class TaskService {
           )
           }
 
-          else if (element.pushToken != '') {
-                      const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-          const params: URLSearchParams = new URLSearchParams
+          else if (element.pushToken != "") {
+            const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+            const params: URLSearchParams = new URLSearchParams();
 
             // console.log(newData.email);
           let pushToken = element.pushToken;
@@ -461,10 +474,10 @@ export class TaskService {
 
         }
 
-        if (element.status == 'Accomplished') {
-          if (element.pushToken == '') {
-                      const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-          const params: URLSearchParams = new URLSearchParams
+        if (element.status == "Accomplished") {
+          if (element.pushToken == "") {
+            const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+            const params: URLSearchParams = new URLSearchParams();
 
             // console.log(newData.email);
             let email = element.email;
@@ -503,9 +516,9 @@ export class TaskService {
               }
             )
           }
-          else if (element.pushToken != '') {
-                      const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-          const params: URLSearchParams = new URLSearchParams
+          else if (element.pushToken != "") {
+            const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+            const params: URLSearchParams = new URLSearchParams();
 
             // console.log(newData.email);
             let pushToken = element.pushToken;
