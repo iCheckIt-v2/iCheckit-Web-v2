@@ -246,7 +246,7 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
       response.status(405).send("Method Not Allowed");
     }
     else {
-      if (request.body.pushToken != '') {
+      if (request.body.pushToken != "") {
         console.log('may push token');
         const body = request.body;
         const email = body.email;
@@ -310,15 +310,15 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
         
         admin.messaging().sendToDevice(request.body.pushToken, payload);
 
-        return mailTransport.sendMail(mailOptions)
+        mailTransport.sendMail(mailOptions)
 
-        // return response.status(200).send({
-        //   message: 'sent email to' + email,
-        // })
+        return response.status(200).send({
+          message: 'sent email to' + email,
+        })
 
        
       }
-      if (request.body.pushToken == '') {
+      if (request.body.pushToken == "") {
         console.log('no push token');
         const body = request.body;
         const email = body.email;
@@ -373,11 +373,11 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
       </body>`
         };
         functions.logger.log('updated task status email sent to:', email);
-        return mailTransport.sendMail(mailOptions)
+         mailTransport.sendMail(mailOptions)
         
-        // return response.status(200).send({
-        //   message: 'sent email to' + email,
-        // })      
+        return response.status(200).send({
+          message: 'sent email to' + email,
+        })      
       }
     }
   });
