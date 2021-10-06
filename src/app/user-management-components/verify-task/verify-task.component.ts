@@ -13,6 +13,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
   styleUrls: ['./verify-task.component.css']
 })
 export class VerifyTaskComponent implements OnInit {
+  studentList: any;
   dateToday = new Date();
   userData:any;
   fsData: any;
