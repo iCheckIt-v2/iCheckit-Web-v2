@@ -17,6 +17,18 @@
 .text-main {
   @apply mr-8 ml-8;
 }
+.main-title {
+  @apply w-full flex flex-row ;
+}
+.main-title-text {
+  @apply ml-2;
+}
+.delete-icon {
+  @apply flex flex-row justify-end mr-2;
+}
+.delete-icon:hover {
+  background-color: azure
+}
 .taskSettings-buttons {
   @apply mt-10 ;
 }

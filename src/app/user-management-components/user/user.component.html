@@ -187,7 +187,7 @@
 
               <div class="mb-4">
                 <label for="Department">
-                  Course
+                  Degree Program
                 </label>
                 <select name="course" id="course" style="width: 100%;" formControlName="course">
                   <option value="{{user.course}}" disabled> {{user.course}} </option>
@@ -197,7 +197,7 @@
 
               <div class="mb-4" *ngIf="editUserForm.value.course == 'BS Information Technology'">
                 <label for="section">
-                  Degree Program
+                  Section
                 </label>
                 <!-- (change)="changeSection($event)" -->
                 <select name="section" id="section" style="width: 100%;" formControlName="section">
