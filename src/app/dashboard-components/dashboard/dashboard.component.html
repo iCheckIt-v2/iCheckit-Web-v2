@@ -17,9 +17,9 @@
     </div>
     <div class="p-6 text-center text-white">
       <p class="text-5xl title">iCheckit | College of Information and Computing Sciences </p>
-      <p class="mt-4 text-2xl title-2 uppercase tracking-widest">taskboard • user management • event tracker</p>
+      <p class="mt-4 text-2xl title-2 tracking-widest uppercase">A Task List and Notification System</p>
     </div>
-    <div class="h-auto w-full p-6 flex">
+    <!-- <div class="h-auto w-full p-6 flex">
       <div class="transition duration-500 ease-in-out hover:scale-110 shadow-md p-3 mr-2 w-1/3 bg-white container">
         <p class="text-2xl"> Today's date is {{dateToday|date}}.</p>
         <p class="mt-5 pt-2 text-2xl"> Welcome back, {{user.displayName}}!</p>
@@ -30,10 +30,10 @@
         <p class="mt-5 pt-2 text-7xl"> {{pendingTasks}}</p>
       </div>
       <div class="transition duration-500 ease-in-out hover:scale-110 shadow-md p-3 mr-2 w-1/3 bg-green-700 text-white container-accomplished">
-        <p class="text-2xl"> Accomplished tasks by the students:</p>
+        <p class="text-2xl"> Completed tasks by the students:</p>
         <p class="mt-5 pt-2 text-7xl"> {{accomplishedTasks}}</p>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="sub-container">
     <!-- <div class="profile-container">
@@ -69,12 +69,12 @@
         <div class="admin-container-children-left-pending" *ngIf="task.status == 'Pending'">
           <p>{{task.title}}</p>
           <p class="mt-2">{{task.deadline | date}}</p>
-          <p class="text-sm w-40 mt-2 truncate">{{task.description}}</p>
+          <p class="text-sm w-40 mt-5 truncate">{{task.description}}</p>
         </div>
         <div class="admin-container-children-left-completed" *ngIf="task.status == 'Completed'">
           <p>{{task.title}}</p>
           <p class="mt-2">{{task.deadline | date}}</p>
-          <p class="text-sm w-40 mt-2 truncate">{{task.description}}</p>
+          <p class="text-sm w-40 mt-5 truncate">{{task.description}}</p>
         </div>
       </div>
       <pagination-controls (pageChange)="p = $event"></pagination-controls>

@@ -202,5 +202,10 @@
 }
 
 .title-2 {
+  font-family: "Antonio", sans-serif;
+  background-color: #35414f;
+}
+
+.title-3 {
   font-family: "Abel", sans-serif;
 }

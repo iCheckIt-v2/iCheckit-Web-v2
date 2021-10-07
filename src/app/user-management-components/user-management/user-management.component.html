@@ -6,19 +6,19 @@
     <div class="p-6 main-title-text text-white flex">
       <h1>{{ term }}</h1>
       <div class="flex ml-auto">
-        <button class="hover:bg-red-200 text-lg title-2 uppercase tracking-widest" (click)="triggerImportUserManual()">import users</button>
-        <p class="text-2xl mx-1">•</p>
-        <button class="hover:bg-red-200 text-lg title-2 uppercase tracking-widest" (click)="triggerCreateAdminModal()">create department head</button>
-        <p class="text-2xl mx-1">•</p>
-        <button class="hover:bg-red-200 text-lg title-2 uppercase tracking-widest" (click)="triggerCreateStudentModal()">create student</button>
+        <button class="p-2 title-2 capitalize" (click)="triggerImportUserManual()"> import users </button>
+        <p class="text-2xl p-2 mx-1">•</p>
+        <button class="p-2 title-2 capitalize" (click)="triggerCreateAdminModal()"> create department head </button>
+        <p class="text-2xl p-2 mx-1">•</p>
+        <button class="p-2 title-2 capitalize" (click)="triggerCreateStudentModal()"> create student </button>
       </div>
     </div>
     <div class="p-6 text-center text-white">
       <p class="text-5xl title">
         iCheckit | College of Information and Computing Sciences
       </p>
-      <p class="mt-4 text-2xl title-2 uppercase tracking-widest">
-        taskboard • user management • event tracker
+      <p class="mt-4 text-2xl title-3 uppercase tracking-widest">
+        A Task List and Notification System
       </p>
 
       <!-- <button class="main-title-buttons" (click)="triggerImportUserManual()">Import Users</button>
@@ -170,7 +170,7 @@
       </div>
       <div class="transition duration-500 ease-in-out hover:scale-110 taskDeadline-container-mid" style="background: green">
         <div class="taskDeadline-container-mid-main">
-          <h1 class="text-xl mt-4 text-white">Total Verified Students:</h1>
+          <h1 class="text-xl mt-4 text-white">Total Enrolled Students:</h1>
           <h2 class="text-xl mr-4 my-4 text-white">
             {{ totalVerified }}
           </h2>
@@ -178,7 +178,7 @@
       </div>
       <div class="transition duration-500 ease-in-out hover:scale-110 pending-container-left" style="background: red">
         <div class="taskDeadline-container-mid-main">
-          <h1 class="text-xl mt-4 text-white">Total Not Verified Students:</h1>
+          <h1 class="text-xl mt-4 text-white">Total Not Enrolled Students:</h1>
           <h2 class="text-xl mr-4 my-4 text-white">
             {{ totalNotVerified }}
           </h2>
