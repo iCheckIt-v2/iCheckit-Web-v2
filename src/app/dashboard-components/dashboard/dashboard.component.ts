@@ -249,7 +249,8 @@ export class DashboardComponent implements OnInit {
                 submissionLink: '',
                 displayName: data.displayName,
                 pushToken: '',
-                term: this.term
+                term: this.term,
+
               }
               console.log(data.pushToken)
               if (!this.taskRecipients.some(e => e.uid === userData.uid)) {
@@ -273,7 +274,7 @@ export class DashboardComponent implements OnInit {
                 section: data.section,
                 submissionLink: '',
                 displayName: data.displayName,
-                term: this.term
+                term: this.term,
               }
               console.log(data.pushToken)
               if (!this.taskRecipients.some(e => e.uid === userData.uid)) {

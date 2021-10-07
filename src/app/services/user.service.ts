@@ -118,7 +118,7 @@ export class UserService {
             contactNumber: contactNumber,
             email: email,
             section: section,
-            verified: 'Verified',
+            verified: 'Enrolled',
             pushToken: '',
             course: course,
             displayName: displayName,
@@ -133,9 +133,13 @@ export class UserService {
       .then(() => {
         this.toastService.publish('Student account with the email ' + email + ' has been successfully created','formSuccess')
       })
-      .catch(() => {
-        this.toastService.publish('The student account creation was not successful. The user email might have been already existing in our database,','userDoesNotExist');
+      // .catch(() => {
+      //   this.toastService.publish('The student account creation was not successful. The user email might have been already existing in our database,','userDoesNotExist');
+      // });
+      .catch((err) => {
+        console.log(err)
       });
+
   }
 
   createAdmin(displayName:string,department:string,contactNumber:string,email:string) : Promise<any> {
@@ -157,7 +161,7 @@ export class UserService {
             contactNumber: contactNumber,
             email: email,
             department: department,
-            verified: 'Verified',
+            verified: 'Enrolled',
             displayName: displayName,
             createdAt: Date.now(),
             role: 'Department Head' //just recycled the code for create student

@@ -221,7 +221,9 @@ export class TaskComponent implements OnInit {
           title: element.title,
           uid: element.uid,
           uploadedBy: element.uploadedBy,
-          term: element.term
+          term: element.term,
+          attemptsLeft: element.attemptsLeft,
+          deadlineLimit: element.deadlineLimit
         }
         acceptedSubmissions.push(updatedData)
     })
@@ -267,7 +269,9 @@ export class TaskComponent implements OnInit {
           title: element.title,
           uid: element.uid,
           uploadedBy: element.uploadedBy,
-          term: element.term
+          term: element.term,
+          attemptsLeft: element.attemptsLeft,
+          deadlineLimit: element.deadlineLimit
         }
         acceptedSubmissions.push(updatedData)
     })
@@ -305,7 +309,9 @@ export class TaskComponent implements OnInit {
       title: recipient.title,
       uid: recipient.uid,
       uploadedBy: recipient.uploadedBy,
-      term: recipient.term
+      term: recipient.term,
+      attemptsLeft: recipient.attemptsLeft,
+      deadlineLimit: recipient.deadlineLimit
     }
 
     this.taskService.updateStudentStatus(this.taskData.taskId,accomplishedData,recipient);
@@ -326,7 +332,9 @@ export class TaskComponent implements OnInit {
       title: recipient.title,
       uid: recipient.uid,
       uploadedBy: recipient.uploadedBy,
-      term: recipient.term
+      term: recipient.term,
+      attemptsLeft: recipient.attemptsLeft,
+      deadlineLimit: recipient.deadlineLimit
     }
     console.log(recipient.submissionLink)
     this.storage.refFromURL(recipient.submissionLink).delete().subscribe((res) => console.log(res));
@@ -383,6 +391,10 @@ export class TaskComponent implements OnInit {
   
   public triggerCloseSubmission() {
     this.closeSubmission = !this.closeSubmission
+  }
+
+  public closeAllSubmission() {
+
   }
 
 }
