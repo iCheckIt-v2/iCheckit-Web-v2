@@ -126,7 +126,7 @@ export class TaskSettingsComponent implements OnInit {
       this.updateTaskForm.controls['deadline'].markAsTouched();
 
 
-      this.toastService.publish("Please fillup all the requirements","updateError");
+      this.toastService.publish("Please fillup all the requirements","formSuccess");
 
     }
 

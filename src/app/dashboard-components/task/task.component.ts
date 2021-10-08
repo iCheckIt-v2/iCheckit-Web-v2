@@ -394,6 +394,40 @@ export class TaskComponent implements OnInit {
   }
 
   public closeAllSubmission() {
+    let oldData: any[] = [];
+    let acceptedSubmissions: any[] = [];
+    this.taskData.recipients.forEach((element: any) => {
+      if(Object.values(element).includes('Pending')) {
+        oldData.push(element)
+      }
+      if(Object.values(element).includes('Late')) {
+        oldData.push(element)
+      }
+    })
+
+    console.log(oldData);
+
+  //   oldData.forEach((element: any) => {
+  //     let updatedData = {
+  //       createdAt: element.createdAt,
+  //       deadline: element.deadline,
+  //       description: element.description,
+  //       displayName: element.displayName,
+  //       email: element.email,
+  //       pushToken: element.pushToken,
+  //       section: element.section,
+  //       status: "Pending",
+  //       submissionLink: element.submissionLink,
+  //       taskId: element.taskId,
+  //       title: element.title,
+  //       uid: element.uid,
+  //       uploadedBy: element.uploadedBy,
+  //       term: element.term,
+  //       attemptsLeft: element.attemptsLeft,
+  //       deadlineLimit: element.deadlineLimit
+  //     }
+  //     acceptedSubmissions.push(updatedData)
+  // })
 
   }
 

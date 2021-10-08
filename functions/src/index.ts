@@ -70,7 +70,7 @@ exports.adminCreateStudent = functions.https.onRequest((request, response) => {
                 <p style="margin-top: 2rem;"> iCheckit </p>
             </div>
             <div style="padding: 1rem; font-size: 100%;">
-                <p> Hello, (student name)</p>
+                <p> Hello, ${displayName}</p>
                 <p> Welcome to ${APP_NAME}. This application is a task list and notification system for the students of the
                     College of Information and Computing Sciences that will help remind the students on accomplishing
                     non-curricular tasks such as Satisfaction Surveys and Faculty Evaluation that we usually forget to do
@@ -409,3 +409,93 @@ exports.emailForApproval = functions.firestore
 
       // perform desired operations ...
     });
+
+    // exports.updateEmail = functions.https.onRequest((request, response) => {
+    //   cors(request, response, () => {
+    //     if (request.method !== "POST") {
+    //       response.status(405).send("Method Not Allowed");
+    //     } else {
+    //       const body = request.body;
+    //       const recipients = body.recipients;
+    //       /*
+    //         const section = body.section;
+    //         const course = body.course;
+    //         const contactNumber = body.contactNumber;
+    //         */
+        
+    //         recipients.forEach(element => {
+    //         const mailOptions = {
+    //           from: `${APP_NAME} <noreply@firebase.com>`,
+    //           to: element.email,
+    //           subject: `${APP_NAME} has been updated!`,
+    //           // html: `Hey ${displayName}! Welcome to ${APP_NAME}. I hope you will enjoy our service. We aim to provide a platform for students in terms of submission and keeping track of non academic college-wide tasks. Visit our mobile application to view all the tasks uploaded in our system.`
+    //           html: `<div style="margin: auto; background-color: white; height: auto;justify-content: center;">
+    //         <div style="padding: 1rem;">
+    //             <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
+    //             <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
+    //             <p style="margin-top: 2rem;"> iCheckit </p>
+    //         </div>
+    //         <div style="padding: 1rem; font-size: 100%;">
+    //             <p> Hello, ${APP_NAME}</p>
+    //             <p> Welcome to ${APP_NAME}. This application is a task list and notification system for the students of the
+    //                 College of Information and Computing Sciences that will help remind the students on accomplishing
+    //                 non-curricular tasks such as Satisfaction Surveys and Faculty Evaluation that we usually forget to do
+    //                 because of our academic load. You must download the application to your device to receive push
+    //                 notification about new tasks or updated tasks assigned to you and you will also be able to submit your
+    //                 proof of completion on these tasks once you downloaded the application. </p>
+    //             <p> We hope that in creating this app to notify every one of us on the non-curricular tasks, we will have an
+    //                 organized system of task completion and verification under our College.
+    //             </p>
+    //             <p> That would be all for now! Enjoy exploring iCheckIt! </p>
+    //             <p style="margin-top: 5rem;"> Kind regards, </ps>
+    //             <p> iCheckIt team </p>
+    //         </div>
+    //     </div>`,
+    //         };
+    //         functions.logger.log('New welcome email sent to:', email);
+    //         mailTransport.sendMail(mailOptions);
+    //         return response.status(200).send({
+    //           message: 'successfully created user',
+    //           userRecord
+    //         });
+    //       });
+    //     }
+    //   }
+    //   );
+    // });
+    exports.helloAuth = (event: any, context: any) => {
+      // The unique id of the user whose auth record changed
+      const uid = event.uid;
+      // log out the uid that caused the function to be triggered
+      console.log('Function triggered by change to user: ' +  uid);
+
+      const usersRef = db.collection('users').doc(uid)
+
+      usersRef.get()
+        .then((docSnapshot) => {
+          if (docSnapshot.exists) {
+            usersRef.onSnapshot((doc) => {
+              console.log('already exists in firestore')
+              console.log(doc)
+            });
+          } else {
+            usersRef.set({
+              email: event.email,
+              displayName: event.displayName,
+              course: '',
+              contactNumber: event.contactNumber,
+              createdAt: Date.now(),
+              pushToken: '',
+              role: 'Student',
+              section: '',
+              uid: event.uid,
+              verified: 'Not Verified'
+            }) // create the document
+          }
+      });
+     
+        
+      // now log the full event object
+      console.log(JSON.stringify(event));
+    };
+    
