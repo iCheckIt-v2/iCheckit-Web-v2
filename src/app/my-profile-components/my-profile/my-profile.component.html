@@ -198,6 +198,9 @@
               <div class="login-form-error" *ngIf="updateEmailForm.controls.currentEmail.errors?.email">
                 Not a valid email.
               </div>
+              <div class="login-form-error" *ngIf="updateEmailForm.controls.currentEmail.errors?.pattern">
+                Please use a UST account email
+            </div>
               <div class="mb-4">
                 <label for="newEmail">
                   Input Your New Email
@@ -212,6 +215,9 @@
               <div class="login-form-error" *ngIf="updateEmailForm.controls.newEmail.errors?.email">
                 Not a valid email.
               </div>
+              <div class="login-form-error" *ngIf="updateEmailForm.controls.newEmail.errors?.pattern">
+                Please use a UST account email
+            </div>
               <div class="mb-4">
                 <label for="password">
                   Input Your Password
@@ -287,6 +293,9 @@
               <div class="login-form-error" *ngIf="deleteAccountForm.controls.currentEmail.errors?.email">
                 Not a valid email.
               </div>
+              <div class="login-form-error" *ngIf="deleteAccountForm.controls.currentEmail.errors?.pattern">
+                Please use a UST account email
+            </div>
               <div class="mb-4">
                 <label for="password">
                   Input Your Password

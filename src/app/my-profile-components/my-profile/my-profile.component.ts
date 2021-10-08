@@ -68,18 +68,18 @@ export class MyProfileComponent implements OnInit {
     });
 
     this.updateEmailForm = this.fb.group({
-      currentEmail: ['', [Validators.required,Validators.email]],
-      newEmail: ['', [Validators.required,Validators.email]],
+      currentEmail: ['', [Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
+      newEmail: ['', [Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
       password: ['', Validators.required],
     });
 
     this.deleteAccountForm = this.fb.group({
-      currentEmail: ['', [Validators.required,Validators.email]],
+      currentEmail: ['', [Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
       password: ['', Validators.required]
     });
 
     this.changePassForm = this.fb.group({
-      email: ['', [Validators.required,Validators.email]],
+      email: ['', [Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
       oldPassword: ['', Validators.required],
       newPassword: ['', Validators.required]
     });
