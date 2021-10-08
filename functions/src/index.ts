@@ -463,39 +463,4 @@ exports.emailForApproval = functions.firestore
     //   }
     //   );
     // });
-    exports.helloAuth = (event: any, context: any) => {
-      // The unique id of the user whose auth record changed
-      const uid = event.uid;
-      // log out the uid that caused the function to be triggered
-      console.log('Function triggered by change to user: ' +  uid);
-
-      const usersRef = db.collection('users').doc(uid)
-
-      usersRef.get()
-        .then((docSnapshot) => {
-          if (docSnapshot.exists) {
-            usersRef.onSnapshot((doc) => {
-              console.log('already exists in firestore')
-              console.log(doc)
-            });
-          } else {
-            usersRef.set({
-              email: event.email,
-              displayName: event.displayName,
-              course: '',
-              contactNumber: event.contactNumber,
-              createdAt: Date.now(),
-              pushToken: '',
-              role: 'Student',
-              section: '',
-              uid: event.uid,
-              verified: 'Not Verified'
-            }) // create the document
-          }
-      });
-     
-        
-      // now log the full event object
-      console.log(JSON.stringify(event));
-    };
-    
+  
