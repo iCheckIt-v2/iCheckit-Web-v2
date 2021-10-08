@@ -208,7 +208,7 @@
 
               <div class="mb-4" *ngIf="editUserForm.value.course == 'BS Computer Science'">
                 <label for="section">
-                  Degree Program
+                  Section
                 </label>
                 <!-- (change)="changeSection($event)" -->
                 <select name="section" id="section" style="width: 100%;" formControlName="section">
@@ -219,7 +219,7 @@
 
               <div class="mb-4" *ngIf="editUserForm.value.course == 'BS Information Systems'">
                 <label for="section">
-                  Degree Program
+                  Section
                 </label>
                 <!-- (change)="changeSection($event)" -->
                 <select name="section" id="section" style="width: 100%;" formControlName="section">
@@ -247,6 +247,9 @@
               <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.email">
                 Not a valid email.
               </div>
+              <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.pattern">
+                Please use a UST account email
+            </div>
               <!-- <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.pattern">
                 Please use your UST email
               </div> -->
@@ -358,6 +361,9 @@
               <div class="login-form-error" *ngIf="editAdminForm.controls.email.errors?.email">
                 Not a valid email.
               </div>
+              <div class="login-form-error" *ngIf="editAdminForm.controls.email.errors?.pattern">
+                Please use a UST account email
+            </div>
               <div class="mb-4">
                 <label for="contactNumber">
                   Admin's Contact Number
