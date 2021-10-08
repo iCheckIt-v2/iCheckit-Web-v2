@@ -152,14 +152,46 @@ export class TaskService {
 
 
 
-  public updateTask(taskId:string, title:string, description:any, deadline:Date): Promise<any> {
+  public updateTask(recipients:any,taskId:string, title:string, description:any, deadline:Date): Promise<any> {
+
+    
     return this.afs.collection('tasks').doc(taskId).update({
 
       title: title,
       description: description,
       deadline:+ deadline
 
-    }).then(() => {
+    })
+    .then(() => {
+      recipients.forEach((element:any) => {
+        let updatedData = {
+          attemptsLeft:element.attemptsLeft,
+          createdAt:element.createdAt,
+          deadline:deadline,
+          deadlineLimit:element.deadlineLimit,
+          description:description,
+          displayName:element.displayName,
+          email:element.email,
+          pushToken:element.pushToken,
+          section:element.section,
+          status:element.status,
+          submissionLink:element.submissionLink,
+          taskId:element.taskId,
+          term:element.term,
+          title:title,
+          uid:element.uid,
+          uploadedBy:element.uploadedBy,
+        }
+        return this.afs.collection('tasks').doc(taskId).update({
+          recipients: firebase.firestore.FieldValue.arrayRemove(element),
+        }).then(() => {
+          this.afs.collection('tasks').doc(taskId).update({
+            recipients: firebase.firestore.FieldValue.arrayUnion(updatedData),
+          })
+        });
+      });
+    })
+    .then(() => {
       this.toastService.publish('task updated'+title,'success')
     }).catch(() => {
       this.toastService.publish('Updating task failed: ' + title, 'taskdoesnotexist')

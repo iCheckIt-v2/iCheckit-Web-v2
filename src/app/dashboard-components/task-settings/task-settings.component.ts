@@ -111,12 +111,11 @@ export class TaskSettingsComponent implements OnInit {
 
     if (this.updateTaskForm.valid) {
       this.taskService.updateTask(
+        this.taskData.recipients,
         this.taskData.taskId,
         this.updateTaskForm.controls['title'].value,
         this.updateTaskForm.controls['description'].value,
         new Date (this.updateTaskForm.controls['deadline'].value),
-
-
       ).then(() => this.triggerUpdateTask())
       .finally(() => this.updateTaskForm.reset())
     }
