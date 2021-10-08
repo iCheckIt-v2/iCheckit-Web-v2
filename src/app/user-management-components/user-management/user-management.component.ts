@@ -70,7 +70,7 @@ export class UserManagementComponent implements OnInit {
       console.log('Summer Term' + y + '-' + (y + 1))
       this.term = 'Summer Term' + y + '-' + (y + 1);
     }
-    
+
     this.fire.user.subscribe((user:any) => {
       this.userData = user;
       this.auth.getUserData(user?.uid).subscribe(res => {
@@ -114,14 +114,14 @@ export class UserManagementComponent implements OnInit {
       section: ['', Validators.required],
       course: ['', Validators.required],
       contactNumber: ['', Validators.required],
-      email: ['', [Validators.required,Validators.email]],
+      email: ['', [Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
     });
 
     this.createAdminForm = this.fb.group({
       displayName: ['', Validators.required,],
       department: ['', Validators.required],
       contactNumber: ['', Validators.required],
-      email: ['', [Validators.required,Validators.email]],
+      email: ['', [Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
     });
 
     this.itStudentForm = this.fb.group ({

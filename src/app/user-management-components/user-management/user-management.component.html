@@ -210,7 +210,7 @@
       <div class="admin-container-header">
         <div class="admin-container-header-text">
           <h1>Students:</h1>
-         
+
           <!-- <div class="search-bar">
           <h2>Search Data: </h2>
 
@@ -408,6 +408,9 @@
                 <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.email">
                   Not a valid email.
                 </div>
+                <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.pattern">
+                  Please use a UST email
+                </div>
                 <!--
               <div class="login-form-error" *ngIf="editAccountForm.controls.contactNumber.errors?.required && editAccountForm.controls.contactNumber.touched">
                 Contact number is required.
@@ -524,6 +527,9 @@
                 </div>
                 <div class="login-form-error" *ngIf="createAdminForm.controls.email.errors?.email">
                   Not a valid email.
+                </div>
+                <div class="login-form-error" *ngIf="createAdminForm.controls.email.errors?.pattern">
+                  Please use a UST email
                 </div>
                 <!--
             <div class="login-form-error" *ngIf="editAccountForm.controls.contactNumber.errors?.required && editAccountForm.controls.contactNumber.touched">
