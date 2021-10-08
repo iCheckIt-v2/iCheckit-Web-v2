@@ -53,6 +53,7 @@
   @apply h-auto w-2/3 shadow-lg mr-10 pl-5;
   background-color: white;
   font-family: Antonio;
+  white-space: pre-wrap;
 }
 .input-text {
   @apply text-black flex flex-row justify-end;
