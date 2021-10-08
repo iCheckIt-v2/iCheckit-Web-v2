@@ -126,8 +126,8 @@
               <label for="description">
                 Task Description
               </label>
-              <input id="description" type="text" placeholder="Input the description of this task" autocomplete="on"
-                formControlName="description">
+              <textarea id="description" type="text" placeholder="Input the description of this task" autocomplete="on"
+                formControlName="description" class="w-full h-64"> </textarea>
             </div>
             <div class="login-form-error"
               *ngIf="addTaskForm.controls.description.errors?.required && addTaskForm.controls.description.touched">
