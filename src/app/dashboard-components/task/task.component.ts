@@ -405,30 +405,33 @@ export class TaskComponent implements OnInit {
       }
     })
 
-    console.log(oldData);
 
-  //   oldData.forEach((element: any) => {
-  //     let updatedData = {
-  //       createdAt: element.createdAt,
-  //       deadline: element.deadline,
-  //       description: element.description,
-  //       displayName: element.displayName,
-  //       email: element.email,
-  //       pushToken: element.pushToken,
-  //       section: element.section,
-  //       status: "Pending",
-  //       submissionLink: element.submissionLink,
-  //       taskId: element.taskId,
-  //       title: element.title,
-  //       uid: element.uid,
-  //       uploadedBy: element.uploadedBy,
-  //       term: element.term,
-  //       attemptsLeft: element.attemptsLeft,
-  //       deadlineLimit: element.deadlineLimit
-  //     }
-  //     acceptedSubmissions.push(updatedData)
-  // })
-
+    oldData.forEach((element: any) => {
+      let updatedData = {
+        createdAt: element.createdAt,
+        deadline: element.deadline,
+        description: element.description,
+        displayName: element.displayName,
+        email: element.email,
+        pushToken: element.pushToken,
+        section: element.section,
+        status: "Late",
+        submissionLink: element.submissionLink,
+        taskId: element.taskId,
+        title: element.title,
+        uid: element.uid,
+        uploadedBy: element.uploadedBy,
+        term: element.term,
+        attemptsLeft: element.attemptsLeft,
+        deadlineLimit: 0
+      }
+      acceptedSubmissions.push(updatedData)
+  })
+  console.log(acceptedSubmissions)
+  this.taskService.closeSubmissions(this.taskData.taskId,oldData,acceptedSubmissions).then(() => {
+    this.closeSubmission = !this.closeSubmission
+  })
+  
   }
 
 }

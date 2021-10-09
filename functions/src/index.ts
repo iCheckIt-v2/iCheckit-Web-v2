@@ -408,6 +408,10 @@ exports.emailForApproval = functions.firestore
       console.log(status)
 
       // perform desired operations ...
+    }); 
+
+    exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
+      console.log(user)
     });
 
     // exports.updateEmail = functions.https.onRequest((request, response) => {

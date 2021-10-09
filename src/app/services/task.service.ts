@@ -150,6 +150,37 @@ export class TaskService {
       })
   }
 
+  public closeSubmissions(id:any,oldData:any,newData:any) {
+     return this.afs.collection('tasks').doc(id).update({
+        status:'Completed'
+     }).then(() => {
+      oldData.forEach((element: any) => {
+        return this.afs.collection('tasks').doc(id).update({
+           recipients: firebase.firestore.FieldValue.arrayRemove(element),
+        })
+       });
+
+       newData.forEach((element: any) => {
+        return this.afs.collection('tasks').doc(id).update({
+           recipients: firebase.firestore.FieldValue.arrayUnion(element),
+        })
+       });
+     })
+
+    // return this.afs.collection('tasks').doc(id).update({
+    //   status:'Completed',
+    //   recipients: firebase.firestore.FieldValue.arrayRemove(oldData),
+    // }).then(() => {
+    //   return this.afs.collection('tasks').doc(id).update({
+    //     recipients: firebase.firestore.FieldValue.arrayUnion(newData),
+    //   })
+    // }).then(() => {
+    //   this.toastService.publish('The task is now closed','success')
+    // }).catch(() => {
+    //   this.toastService.publish('closing task failed', 'taskdoesnotexist')
+    // })
+
+  }
 
 
   public updateTask(recipients:any,taskId:string, title:string, description:any, deadline:Date): Promise<any> {
