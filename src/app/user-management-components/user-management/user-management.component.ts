@@ -113,14 +113,14 @@ export class UserManagementComponent implements OnInit {
       displayName: ['', Validators.required,],
       section: ['', Validators.required],
       course: ['', Validators.required],
-      contactNumber: ['', Validators.required],
+      contactNumber: [''],
       email: ['', [Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
     });
 
     this.createAdminForm = this.fb.group({
       displayName: ['', Validators.required,],
       department: ['', Validators.required],
-      contactNumber: ['', Validators.required],
+      contactNumber: [''],
       email: ['', [Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
     });
 

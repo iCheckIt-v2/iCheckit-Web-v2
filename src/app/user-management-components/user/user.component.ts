@@ -94,7 +94,7 @@ export class UserComponent implements OnInit {
     this.editUserForm = this.fb.group({
       displayName: ['', Validators.required,],
       email: ['', [Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
-      contactNumber: ['', Validators.required],
+      contactNumber: [''],
       course: ['',Validators.required],
       section: ['',Validators.required],
 
@@ -103,7 +103,7 @@ export class UserComponent implements OnInit {
     this.editAdminForm = this.fb.group({
       displayName: ['', Validators.required,],
       email: ['', [Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[(ust.edu)]+\\.ph$')]],
-      contactNumber: ['', Validators.required],
+      contactNumber: [''],
       department: ['',Validators.required],
 
 
