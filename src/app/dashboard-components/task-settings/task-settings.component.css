@@ -17,9 +17,7 @@
 .text-main {
   @apply mr-8 ml-8;
 }
-.main-title {
-  @apply w-full flex flex-row ;
-}
+
 .main-title-text {
   @apply ml-2;
 }
@@ -140,6 +138,6 @@
   background-color: #7d1d2d;
 }
 
-.archive {
-  font-family: "FontAwesome", "Abel";
+.main-container{
+  overflow-x: hidden;
 }
