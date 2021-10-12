@@ -1,17 +1,17 @@
 .taskSettings-container {
-  @apply h-auto w-full flex justify-center items-start mt-20 ;
+  @apply h-auto w-full flex justify-center items-start mt-20;
 }
 .taskSettings-container-bar {
   @apply h-auto pb-4 pl-3 w-full justify-center text-white text-lg ml-20 mr-20;
-  font-family: 'Antonio', sans-serif;
-  background-color: #35414F;
+  font-family: "Antonio", sans-serif;
+  background-color: #35414f;
 }
 .taskComponents-container {
-  @apply h-auto w-full justify-center ;
+  @apply h-auto w-full justify-center;
 }
 .taskSettings-container-layout {
   @apply h-auto p-3  text-lg ml-20 mr-20 shadow-lg;
-  font-family: 'Antonio', sans-serif;
+  font-family: "Antonio", sans-serif;
   background-color: white;
 }
 .text-main {
@@ -30,7 +30,7 @@
   background-color: azure
 }
 .taskSettings-buttons {
-  @apply mt-10 ;
+  @apply mt-10;
 }
 .taskTitle-textfield {
   @apply h-10 p-3 w-full mr-10 mt-3;
@@ -46,32 +46,30 @@
 }
 .addScopeBtn {
   @apply px-20 py-2 border border-gray-300 text-white ml-8 mr-5 text-lg shadow-lg;
-  background-color: #35414F;
+  background-color: #35414f;
 }
 .removeScopeBtn {
   @apply px-20 py-2 border border-gray-300 text-white mr-5 ml-2 text-lg shadow-lg;
-  background-color: #F00000;
+  background-color: #f00000;
 }
 .clearScopeBtn {
   @apply px-20 py-2 border border-gray-300 text-white mr-5 ml-2 text-lg shadow-lg;
-  background-color: #B7152F;;
+  background-color: #b7152f;
 }
 .updateTask-button {
   @apply py-5 text-white text-sm flex justify-end items-end w-full;
-
 }
 .updateTaskBtn {
   @apply px-20 py-2 mr-8 border border-gray-300 text-white text-base flex justify-center items-center;
-  background-color: #35414F;
+  background-color: #35414f;
 }
 .scope-btn {
-  background-color: #35414F;
+  background-color: #35414f;
 }
-
 
 /* modal css */
 .modal-container {
-  @apply fixed z-10 inset-0 overflow-y-auto ;
+  @apply fixed z-10 inset-0 overflow-y-auto;
 }
 .modal-center {
   @apply flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0;
@@ -127,4 +125,21 @@
 .login-form-error {
   @apply text-red-700 italic block text-sm p-5;
   margin-top: -0.75rem;
+}
+
+.title {
+  font-family: "Antonio", sans-serif;
+}
+
+.title-2 {
+  font-family: "Abel", sans-serif;
+}
+
+.main-title {
+  background-blend-mode: soft-light;
+  background-color: #7d1d2d;
+}
+
+.archive {
+  font-family: "FontAwesome", "Abel";
 }
