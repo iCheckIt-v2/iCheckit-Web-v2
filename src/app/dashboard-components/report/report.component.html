@@ -14,26 +14,26 @@
     <div class="elements-firstrow-container">
       <div class="uploadedBy-container-left" style="background-color: #ffff00;">
         <div class="uploadedBy-container-left-main">
-          <h1 class="text-3xl mt-4 text-white">Pending Recipients: </h1>
-          <h2 class="text-4xl mt-4 text-white"> {{pendingRecipientsPct.toFixed(2)}}%</h2>
+          <h1 class="text-2xl mt-4 text-black">Pending Recipients: </h1>
+          <h2 class="text-3xl mt-4 text-black">{{pendingRecipients}} ({{pendingRecipientsPct.toFixed(2)}}%)</h2>
         </div>
       </div>
       <div class="uploadedBy-container-left" style="background-color: #FF640D;">
         <div class="uploadedBy-container-left-main">
-          <h1 class="text-3xl mt-4 text-white">For Approval Recipients:</h1>
-          <h2 class="text-4xl mt-4 text-white"> {{forApprovalRecipientsPct.toFixed(2)}}%</h2>
+          <h1 class="text-2xl mt-4 text-black">For Approval Recipients:</h1>
+          <h2 class="text-3xl mt-4 text-black">{{forApprovalRecipients}} ({{forApprovalRecipientsPct.toFixed(2)}}%)</h2>
         </div>
       </div>
       <div class="uploadedBy-container-left" style="background-color: #F00000;">
         <div class="uploadedBy-container-left-main">
-          <h1 class="text-3xl mt-4 text-white">Late Recipients: </h1>
-          <h2 class="text-4xl mt-4 text-white"> {{lateRecipientsPct.toFixed(2)}}%</h2>
+          <h1 class="text-2xl mt-4 text-black">Late Recipients: </h1>
+          <h2 class="text-3xl mt-4 text-black">{{lateRecipients}} ({{lateRecipientsPct.toFixed(2)}}%)</h2>
         </div>
       </div>
       <div class="uploadedBy-container-left" style="background-color: #00B633;">
         <div class="uploadedBy-container-left-main">
-          <h1 class="text-3xl mt-4 text-white">Accomplished Recipients: </h1>
-          <h2 class="text-4xl mt-4 text-white"> {{accomplishedRecipientsPct.toFixed(2)}}%</h2>
+          <h1 class="text-2xl mt-4 text-black">Accomplished Recipients: </h1>
+          <h2 class="text-3xl mt-4 text-black">{{accomplishedRecipients}} ({{accomplishedRecipientsPct.toFixed(2)}}%)</h2>
         </div>
       </div>
     </div>
@@ -47,26 +47,19 @@
         <div class="w-full overflow-x-auto">
           <input type="text" [(ngModel)]="searchBar" name="searchBar"
             class="w-1/4 mb-5 float-right rounded-full input-text" placeholder="&#xf002; Search for a student">
-
           <div class="admin-container-header">
             <h1>Late and Non-submission:</h1>
-
           </div>
           <table class="w-full table-data">
-
             <thead>
-
-
               <tr
-                class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600" style="font-family: 'Antonio';">
-
+                class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600"
+                style="font-family: 'Antonio';">
                 <th class="px-4 py-3">Name</th>
                 <th class="px-4 py-3">Section</th>
                 <th class="px-4 py-3">Status</th>
-
               </tr>
             </thead>
-
             <tbody class="bg-white">
               <tr class="text-gray-700"
                 *ngFor="let student of mgaPasaway | filter: searchBar | paginate: { itemsPerPage: 50, currentPage: p }">
@@ -80,11 +73,13 @@
                 </td>
                 <td class="px-4 py-3 text-sm border" style="font-family: 'Abel';">{{student.section}}</td>
                 <td class="px-4 py-3 text-xs border" *ngIf="student.status == 'Pending'">
-                  <span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-sm" style="font-family: 'Abel';"> Pending
+                  <span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-sm"
+                    style="font-family: 'Abel';"> Pending
                   </span>
                 </td>
                 <td class="px-4 py-3 text-xs border" *ngIf="student.status == 'Late'">
-                  <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm" style="font-family: 'Abel';"> Late </span>
+                  <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm"
+                    style="font-family: 'Abel';"> Late </span>
                 </td>
               </tr>
             </tbody>
