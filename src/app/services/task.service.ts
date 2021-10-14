@@ -185,7 +185,7 @@ export class TaskService {
 
   public updateTask(recipients:any,taskId:string, title:string, description:any, deadline:Date): Promise<any> {
 
-    
+
     return this.afs.collection('tasks').doc(taskId).update({
 
       title: title,
@@ -224,7 +224,10 @@ export class TaskService {
     })
     .then(() => {
       this.toastService.publish('task updated'+title,'success')
-    }).catch(() => {
+    }).then(() => {
+      this.router.navigate(['/dashboard/'])
+    })
+    .catch(() => {
       this.toastService.publish('Updating task failed: ' + title, 'taskdoesnotexist')
     })
   }
@@ -382,11 +385,11 @@ export class TaskService {
             console.log(err)
           })
         }
-        
+
         else if (newData.pushToken != "") {
           const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
           const params: URLSearchParams = new URLSearchParams();
-         
+
           // console.log(newData.email);
           let pushToken = newData.pushToken;
           let email = newData.email;
@@ -667,13 +670,13 @@ export class TaskService {
       recipients: firebase.firestore.FieldValue.arrayRemove(data),
     })
   }
-  
+
   public getCompletedTask(): Observable<any> {
     return this.afs
       .collection('tasks', (ref) =>
         ref.where('status', '==', 'Completed').orderBy('createdAt')
       )
-      .snapshotChanges()  
+      .snapshotChanges()
       .pipe(
         map((doc: any) => {
           // console.log(doc)
