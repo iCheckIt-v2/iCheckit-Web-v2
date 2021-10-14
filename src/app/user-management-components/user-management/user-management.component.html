@@ -408,7 +408,7 @@
                 <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.email">
                   Not a valid email.
                 </div>
-                <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.pattern">
+                <div class="login-form-error-ust" *ngIf="createStudentForm.controls.email.errors?.pattern">
                   Please use a UST email
                 </div>
                 <!--
@@ -528,7 +528,7 @@
                 <div class="login-form-error" *ngIf="createAdminForm.controls.email.errors?.email">
                   Not a valid email.
                 </div>
-                <div class="login-form-error" *ngIf="createAdminForm.controls.email.errors?.pattern">
+                <div class="login-form-error-ust" *ngIf="createAdminForm.controls.email.errors?.pattern">
                   Please use a UST email
                 </div>
                 <!--
