@@ -388,12 +388,12 @@
                   <input id="contactNumber" type="number" placeholder="Input the student's contact number"
                     formControlName="contactNumber" autocomplete="on" />
                 </div>
-                <div class="login-form-error" *ngIf="
+                <!-- <div class="login-form-error" *ngIf="
                     createStudentForm.controls.contactNumber.errors?.required &&
                     createStudentForm.controls.contactNumber.touched
                   ">
                   Student's contact number name is required.
-                </div>
+                </div> -->
                 <div class="mb-4">
                   <label for="email"> Email </label>
                   <input id="email" type="text" placeholder="Input the student's email" formControlName="email"
@@ -408,7 +408,7 @@
                 <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.email">
                   Not a valid email.
                 </div>
-                <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.pattern">
+                <div class="login-form-error-ust" *ngIf="createStudentForm.controls.email.errors?.pattern">
                   Please use a UST email
                 </div>
                 <!--
@@ -528,7 +528,7 @@
                 <div class="login-form-error" *ngIf="createAdminForm.controls.email.errors?.email">
                   Not a valid email.
                 </div>
-                <div class="login-form-error" *ngIf="createAdminForm.controls.email.errors?.pattern">
+                <div class="login-form-error-ust" *ngIf="createAdminForm.controls.email.errors?.pattern">
                   Please use a UST email
                 </div>
                 <!--

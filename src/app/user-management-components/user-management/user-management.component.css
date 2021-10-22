@@ -160,6 +160,10 @@
   @apply text-red-700 italic block text-sm;
   margin-top: -0.75rem;
 }
+.login-form-error-ust {
+  @apply text-red-700 italic block text-sm;
+  margin-top: 1;
+}
 .uploadedBy-container-left-main {
   @apply h-auto w-auto;
 }

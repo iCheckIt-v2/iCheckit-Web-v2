@@ -63,7 +63,7 @@ export class MyProfileComponent implements OnInit {
 
     this.editAccountForm = this.fb.group({
       displayName: ['', Validators.required,],
-      contactNumber: ['', Validators.required],
+      contactNumber: [''],
       password: ['', Validators.required],
     });
 

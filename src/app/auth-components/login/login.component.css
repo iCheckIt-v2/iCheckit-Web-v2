@@ -85,6 +85,10 @@
   @apply text-red-700 italic block text-sm;
   margin-top: -0.75rem;
 }
+.login-form-error-ust {
+  @apply text-red-700 italic block text-sm;
+  margin-top: 1;
+}
 
 .photo-credit {
   font-family: "Abel", sans-serif;
