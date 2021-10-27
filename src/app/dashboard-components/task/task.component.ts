@@ -204,6 +204,7 @@ export class TaskComponent implements OnInit {
         console.log('Approved!');
         oldData.push(element)
       }
+
     })
 
     oldData.forEach((element: any) => {
@@ -242,6 +243,7 @@ export class TaskComponent implements OnInit {
     console.log(oldData)
     console.log(acceptedSubmissions)
     this.taskService.updateMultipleStudentStatus(this.taskData.taskId,acceptedSubmissions,oldData)
+    this.acceptAllModal =! this.acceptAllModal;
   }
 
   public rejectAllSubmission() {
@@ -290,6 +292,7 @@ export class TaskComponent implements OnInit {
     console.log(oldData)
     console.log(acceptedSubmissions)
     this.taskService.updateMultipleStudentStatus(this.taskData.taskId,acceptedSubmissions,oldData)
+    this.rejectAllModal =! this.rejectAllModal;
   }
 
   public acceptSubmission(recipient:any) {
@@ -388,7 +391,7 @@ export class TaskComponent implements OnInit {
   //     this.triggerAddTaskModal();
   //   })
   // }
-  
+
   public triggerCloseSubmission() {
     this.closeSubmission = !this.closeSubmission
   }
@@ -431,7 +434,7 @@ export class TaskComponent implements OnInit {
   this.taskService.closeSubmissions(this.taskData.taskId,oldData,acceptedSubmissions).then(() => {
     this.closeSubmission = !this.closeSubmission
   })
-  
+
   }
 
 }
