@@ -225,7 +225,7 @@ export class TaskService {
     .then(() => {
       this.toastService.publish('task updated'+title,'success')
     }).then(() => {
-      this.router.navigate(['/dashboard/'])
+      this.router.navigate(['task/',taskId])
     })
     .catch(() => {
       this.toastService.publish('Updating task failed: ' + title, 'taskdoesnotexist')
