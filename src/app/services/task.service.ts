@@ -35,7 +35,7 @@ export class TaskService {
     );
   }
   public getVerifyTasks():Observable<any> {
-    return this.afs.collection('tasks',ref => ref.orderBy('type','desc'))
+    return this.afs.collection('tasks',ref => ref.where('status','==','Pending'))
     .snapshotChanges()
     .pipe(
       map((doc: any) => {
@@ -221,6 +221,32 @@ export class TaskService {
           })
         });
       });
+    })
+    .then(() => {
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+      const params: URLSearchParams = new URLSearchParams();
+
+      params.set('recipients', recipients);
+      params.set('title', title);
+      params.set('deadline', deadline.toUTCString());
+      params.set('description', description);
+
+      this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/taskUpdatedEmail`, {
+        recipients,
+        title,
+        deadline,
+        description,
+       
+        }, {
+          headers
+        }).toPromise().then(
+          () => {
+            console.log('emails sent!')
+          }
+        ).catch((err) => {
+          console.log(err)
+        })
+
     })
     .then(() => {
       this.toastService.publish('task updated'+title,'success')

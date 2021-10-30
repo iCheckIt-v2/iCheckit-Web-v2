@@ -204,7 +204,6 @@ recipients.forEach((element: any) => {
               <p style="margin-top: 2rem;"> iCheckit </p>
           </div>
           <div style="padding: 1rem; font-size: 100%;">
-              <p> Greetings, (student name)!</p>
               <p> A new task has been assigned to you for your compliance. Click the button to open the task in your
                   mobile application to see the task instructions.
               </p>
@@ -216,9 +215,6 @@ recipients.forEach((element: any) => {
               <span style="padding-left: 2rem;">Task Description: ${description}</span> <br>
               <span style="padding-left: 2rem;">Task Deadline: ${deadline}</span> <br>
               <span style="padding-left: 2rem;">Uploaded By: ${uploadedBy} </span><br>
-          </div>
-          <div style="padding: 1rem;">
-              <button style="background-color: red; width: auto; height: auto; color: white;"> Open iCheckit </button>
           </div>
       </div>
   `
@@ -467,4 +463,68 @@ exports.emailForApproval = functions.firestore
     //   }
     //   );
     // });
-  
+    exports.taskUpdatedEmail = functions.https.onRequest((request, response) => {
+      cors(request, response, () => {
+        if (request.method !== "POST") {
+          response.status(405).send("Method Not Allowed");
+        } else {
+          const body = request.body;
+          const recipients = body.recipients;
+          const title = body.title;
+          const description = body.description;
+          const deadline = body.deadline
+
+          /*
+            const section = body.section;
+            const course = body.course;
+            const contactNumber = body.contactNumber;
+            */
+            recipients.forEach((element: any) => {
+              const mailOptions = {
+                from: `${APP_NAME} <noreply@firebase.com>`,
+                to: element.email,
+                subject: `${title} has been updated!`,
+                // html: `Hey ${displayName}! Welcome to ${APP_NAME}. I hope you will enjoy our service. We aim to provide a platform for students in terms of submission and keeping track of non academic college-wide tasks. Visit our mobile application to view all the tasks uploaded in our system.`
+                html: `
+                <div style="margin: auto; background-color: white; height: auto; justify-content: center;">
+          <div style="padding: 1rem;">
+              <!-- <img src="/logo.png" style="max-height: 80px; max-width: 80px; margin-top: 2rem;" />
+              <img src="/cics.png" style="max-height: 80px; max-width: 100px; margin-top: 2rem;" /> -->
+              <p style="margin-top: 2rem;"> iCheckit </p>
+          </div>
+          <div style="padding: 1rem; font-size: 100%;">
+              <p> The task ${title} has been updated. Please visit the mobile application to view the updates to the task
+              </p>
+          </div>
+          <hr style="background-color: black; width: 90%;">
+          <div style="padding: 1rem; font-size: 100%;">
+              <p><b>Task Details</b></p>
+              <span style="padding-left: 2rem;">Task title: ${title}</span> <br>
+              <span style="padding-left: 2rem;">Task Description: ${description}</span> <br>
+              <span style="padding-left: 2rem;">Task Deadline: ${deadline}</span> <br>
+          </div>
+      </div>
+                `,
+              };
+              const payload = {
+                notification: {
+                  title: `${title} has updates!`,
+                  body: `There has been updates to the task ${title}. Click here to open the application.`,
+                  badge: '1'
+                }
+              }
+               return admin.messaging().sendToDevice(element.pushToken, payload).then((res) => {
+                console.log(res)
+                functions.logger.log('updated task email sent to:', element.email)
+                  mailTransport.sendMail(mailOptions)
+                  return response.status(200).send({
+                    message: 'email sent to' + element.email
+                  });
+              }).catch((err) => {
+                return response.status(400).send("Failed to create user: " + err);
+              })
+           })         
+        }
+      }
+      );
+    }); 
