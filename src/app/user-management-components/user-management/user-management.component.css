@@ -26,7 +26,19 @@
   @apply h-auto p-3 w-full text-white text-lg flex flex-row justify-end;
 }
 .admin-container-header-text {
-  @apply h-auto w-full text-white text-lg flex flex-row justify-start;
+  @apply h-auto w-full text-white text-lg flex flex-row items-center justify-start;
+}
+.admin-container-header-students {
+  @apply h-auto w-full text-white text-lg flex flex-row ;
+}
+.admin-container-header-status {
+  @apply h-auto w-full text-white text-lg flex flex-row justify-end;
+}
+.admin-container-header-program {
+  @apply h-auto w-full text-white text-lg flex flex-row ;
+}
+.admin-container-header-section {
+  @apply h-auto w-full text-white justify-end text-lg flex flex-row ;
 }
 .input-text {
   @apply text-black flex flex-row justify-end;
