@@ -13,10 +13,11 @@
     </div>
     <div class="p-6 text-center text-white">
       <p class="text-5xl title">
-        iCheckit | College of Information and Computing Sciences
+        A Task List and Notification System
+
       </p>
       <p class="mt-4 text-2xl title-3 uppercase tracking-widest">
-        A Task List and Notification System
+        iCheckit | College of Information and Computing Sciences
       </p>
 
       <!-- <button class="main-title-buttons" (click)="triggerImportUserManual()">Import Users</button>
@@ -90,7 +91,7 @@
             <p>{{ admin.displayName }}</p>
           </div>
           <div class="admin-container-children-right">
-            <p>{{ admin.role }}</p>
+            <p></p>
           </div>
         </div>
       </div>
@@ -208,22 +209,24 @@
       <input type="text" [(ngModel)]="studentList" name="studentList" class="w-1/4 mb-5 float-right rounded-full input-text"
         placeholder="&#xf002; Search for Data" />
       <div class="admin-container-header">
-        <div class="admin-container-header-text">
+        <div class="admin-container-header-students">
           <h1>Students:</h1>
-
-          <!-- <div class="search-bar">
-          <h2>Search Data: </h2>
-
-        </div> -->
         </div>
-        <!-- filter: studentList -->
-        <!-- paginate: { itemsPerPage: 10, currentPage: p } -->
+        <div class="admin-container-header-program">
+          <h1>Degree Program:</h1>
+        </div>
+        <div class="admin-container-header-section">
+          <h1>Section:</h1>
+        </div>
+        <div class="admin-container-header-status">
+          <h1>Status:</h1>
+        </div>
       </div>
 
       <!-- <div class="whole-container" *ngFor="let student of students | paginate: { itemsPerPage: 10, currentPage: p }"> -->
       <div class="admin-container-children" *ngFor="
           let student of students
-            | paginate: { itemsPerPage: 10, currentPage: p }
+            | paginate: { itemsPerPage: 100, currentPage: p }
             | filter: studentList
         " [routerLink]="['/user/', student.uid]">
         <div class="admin-container-children-left">
