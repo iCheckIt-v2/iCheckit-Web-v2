@@ -70,6 +70,7 @@
 .admin-container-children-right {
   @apply w-1/2 text-right pr-2;
 }
+
 .main-title-buttons {
   @apply px-10 py-2 border border-gray-300 text-white mr-5 text-sm;
   background-color: #35414f;
