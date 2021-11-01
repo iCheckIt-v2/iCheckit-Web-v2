@@ -230,6 +230,54 @@ export class DashboardComponent implements OnInit {
         });
         console.log(this.taskScopeArray);
       }
+      else if (e.target.value == 'All Departments (1st Year)') {
+        this.itScope1st.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        this.isScope1st.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        this.csScope1st.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'All Departments (2nd Year)') {
+        this.itScope2nd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        this.isScope2nd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        this.csScope2nd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'All Departments (3rd Year)') {
+        this.itScope3rd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        this.isScope3rd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        this.csScope3rd.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
+      else if (e.target.value == 'All Departments (4th Year)') {
+        this.itScope4th.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        this.isScope4th.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        this.csScope4th.forEach((element: string) => {
+          this.taskScopeArray.push(element);
+        });
+        console.log(this.taskScopeArray);
+      }
       else {
         this.taskScopeArray.push(e.target.value)
         console.log(this.taskScopeArray);
