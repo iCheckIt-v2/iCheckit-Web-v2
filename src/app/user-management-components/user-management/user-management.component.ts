@@ -20,9 +20,9 @@ export class UserManagementComponent implements OnInit {
   itStudentForm: any
   allDepartment: any = ['Information Technology', 'Information Systems', 'Computer Science'];
   studentCourses: any = ['BS Information Technology', 'BS Information Systems', 'BS Computer Science'];
-  studentSections: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE'];
+  studentSections: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITG','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE'];
   allSections: any = ['All sections']
-  itSection: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE'];
+  itSection: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE','4ITF','4ITG'];
   csSection: any = ['1CSA','1CSB','1CSC','2CSA','2CSB','2CSC','3CSA','3CSB','3CSC','3CSD','4CSA','4CSB'];
   isSection: any = ['1ISA','1ISB','2ISA','2ISB','3ISA','3ISB','4ISA','4ISB'];
   dateToday = new Date();
@@ -75,7 +75,7 @@ export class UserManagementComponent implements OnInit {
       this.userData = user;
       this.auth.getUserData(user?.uid).subscribe(res => {
         this.fsData = res;
-
+        // this.createStudentForm.controls.course.setValue("Test Course")
 
       })
     })
