@@ -58,7 +58,7 @@
               <p>{{ deptHead.displayName }}</p>
             </div>
             <div class="admin-container-children-right">
-              <p>{{ deptHead.role }} of {{ deptHead.department }}</p>
+              <p>Chair, {{ deptHead.department }}</p>
             </div>
           </div>
         </div>
@@ -307,7 +307,7 @@
                 <div class="mb-4">
                   <label for="course"> Course </label>
                   <select name="course" id="course" style="width: 100%" (change)="changeCourse($event)" formControlName="course">
-                    <option value="" disabled>
+                    <option value="" >
                       Choose the student's course
                     </option>
                     <option *ngFor="let course of studentCourses">
