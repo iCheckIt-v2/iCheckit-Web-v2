@@ -45,8 +45,8 @@
             <div class="w-3 h-3 -mt-2 rotate-45 bg-black"></div>
           </div>
         </div>
-        
-        
+
+
       </div>
     </div>
     <div class="p-6 text-center text-white">
@@ -213,7 +213,7 @@
     <!-- paginate: { itemsPerPage: 10, currentPage: p } -->
     <div class="mr-10 admin-container-children" *ngFor="
         let recipient of taskData.recipients
-          | paginate: { itemsPerPage: 10, currentPage: p } | filter: studentTaskList
+          | paginate: { itemsPerPage: 100, currentPage: p } | filter: studentTaskList
       " [routerLink]="['/task/', task.id]">
       <div class="admin-container-children-left">
         <p>{{ recipient.displayName }}</p>

@@ -343,7 +343,7 @@
                 </label>
                 <select name="department" id="department" style="width: 100%;" formControlName="department">
                   <option value="{{user.department}}" disabled> {{user.department}} </option>
-                  <option *ngFor="let department of studentCourses">{{department}}</option>
+                  <option *ngFor="let department of adminDepartment">{{department}}</option>
                 </select>
               </div>
 
