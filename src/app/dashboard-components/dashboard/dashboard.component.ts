@@ -56,6 +56,15 @@ export class DashboardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    console.log(new Date())
+    console.log(+ new Date())
+    console.log(new Date().getTime())
+
+    console.log(new Date())
+    console.log(+ new Date() - 86400000)
+    console.log(new Date().getTime() - 86400000)
+    console.log(new Date(+ new Date() - 86400000))
+
     var d = new Date();
     var y = d.getFullYear()
     var n = d.getMonth();
