@@ -334,9 +334,18 @@
                     <option value="" disabled>
                       Choose the student's section
                     </option>
-                    <option *ngFor="let section of itSection">
-                      {{ section }}
-                    </option>
+                      <optgroup label="BS Information Technology (1st Year)" class="italic">
+                        <option *ngFor="let it of itScope1st">{{it}}</option>
+                      </optgroup>
+                      <optgroup label="BS Information Technology (2nd Year)" class="italic">
+                        <option *ngFor="let it of itScope2nd">{{it}}</option>
+                      </optgroup>
+                      <optgroup label="BS Information Technology (3rd Year)" class="italic">
+                        <option *ngFor="let it of itScope3rd">{{it}}</option>
+                      </optgroup>
+                      <optgroup label="BS Information Technology (4th Year)" class="italic">
+                        <option *ngFor="let it of itScope4th">{{it}}</option>
+                      </optgroup>
                   </select>
                   <!--
                 <p class="error-msg">Please enter your comment for this task</p> -->
@@ -351,9 +360,18 @@
                     <option value="" disabled>
                       Choose the student's section
                     </option>
-                    <option *ngFor="let section of csSection">
-                      {{ section }}
-                    </option>
+                    <optgroup label="BS Computer Science (1st Year)" class="italic">
+                      <option *ngFor="let cs of csScope1st">{{cs}}</option>
+                    </optgroup>
+                    <optgroup label="BS Computer Science (2nd Year)" class="italic">
+                      <option *ngFor="let cs of csScope2nd">{{cs}}</option>
+                    </optgroup>
+                    <optgroup label="BS Computer Science (3rd Year)" class="italic">
+                      <option *ngFor="let cs of csScope3rd">{{cs}}</option>
+                    </optgroup>
+                    <optgroup label="BS Computer Science (4th Year)" class="italic">
+                      <option *ngFor="let cs of csScope4th">{{cs}}</option>
+                    </optgroup>
                   </select>
                   <!--
                 <p class="error-msg">Please enter your comment for this task</p> -->
@@ -368,9 +386,18 @@
                     <option value="" disabled>
                       Choose the student's section
                     </option>
-                    <option *ngFor="let section of isSection">
-                      {{ section }}
-                    </option>
+                    <optgroup label="BS Information Systems (1st Year)" class="italic">
+                      <option *ngFor="let is of isScope1st">{{is}}</option>
+                    </optgroup>
+                    <optgroup label="BS Information Systems (2nd Year)" class="italic">
+                      <option *ngFor="let is of isScope2nd">{{is}}</option>
+                    </optgroup>
+                    <optgroup label="BS Information Systems (3rd Year)" class="italic">
+                      <option *ngFor="let is of isScope3rd">{{is}}</option>
+                    </optgroup>
+                    <optgroup label="BS Information Systems (4th Year)" class="italic">
+                      <option *ngFor="let is of isScope4th">{{is}}</option>
+                    </optgroup>
                   </select>
                   <!--
                 <p class="error-msg">Please enter your comment for this task</p> -->

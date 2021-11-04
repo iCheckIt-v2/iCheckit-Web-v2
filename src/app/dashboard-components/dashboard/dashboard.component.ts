@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   pendingTasks = 0;
   // taskScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITH','2ITA','2ITB','2ITC','2ITD','2ITE','2ITF','3ITA','3ITB','3ITC','3ITD','3ITF','3ITG','3ITF','3ITG','4ITA','4ITB','4ITC','4ITD','4ITE'];
   taskList: any;
-  itScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITG','2ITA','2ITB','2ITC','2ITD','3ITA','3ITB','3ITC','3ITD','3ITE','4ITA','4ITB','4ITC','4ITD','4ITE','4ITF','4ITG','4ITH'];
+  itScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITG','2ITA','2ITB','2ITC','2ITD','3ITA','3ITB','3ITC','3ITD','3ITE','3ITF','3ITG','3ITH','3ITI','3ITJ','4ITA','4ITB','4ITC','4ITD','4ITE','4ITF','4ITG','4ITH'];
   itScope1st: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITG'];
   itScope2nd: any = ['2ITA','2ITB','2ITC','2ITD'];
   itScope3rd: any = ['3ITA','3ITB','3ITC','3ITD','3ITE','3ITF','3ITG','3ITH','3ITI','3ITJ']
