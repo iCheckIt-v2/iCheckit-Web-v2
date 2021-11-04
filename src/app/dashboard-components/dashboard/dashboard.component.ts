@@ -18,18 +18,18 @@ export class DashboardComponent implements OnInit {
   itScope: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITG','2ITA','2ITB','2ITC','2ITD','3ITA','3ITB','3ITC','3ITD','3ITE','4ITA','4ITB','4ITC','4ITD','4ITE','4ITF','4ITG','4ITH'];
   itScope1st: any = ['1ITA','1ITB','1ITC','1ITD','1ITE','1ITF','1ITG'];
   itScope2nd: any = ['2ITA','2ITB','2ITC','2ITD'];
-  itScope3rd: any = ['3ITA','3ITB','3ITC','3ITD','3ITE']
+  itScope3rd: any = ['3ITA','3ITB','3ITC','3ITD','3ITE','3ITF','3ITG','3ITH','3ITI','3ITJ']
   itScope4th: any = ['4ITA','4ITB','4ITC','4ITD','4ITE','4ITF','4ITG','4ITH'];
   isScope: any = ['1ISA','1ISB','2ISA','2ISB','3ISA','3ISB','4ISA','4ISB'];
   isScope1st: any = ['1ISA','1ISB'];
   isScope2nd: any = ['2ISA','2ISB'];
-  isScope3rd: any = ['3ISA','3ISB'];
-  isScope4th: any = ['4ISA','4ISB'];
+  isScope3rd: any = ['3ISA','3ISB','3ISC'];
+  isScope4th: any = ['4ISA','4ISB','4ISC'];
   csScope: any = ['1CSA','1CSB','1CSC','2CSA','2CSB','2CSC','3CSA','3CSB','3CSC','3CSD','4CSA','4CSB'];
   csScope1st: any = ['1CSA','1CSB','1CSC'];
   csScope2nd: any = ['2CSA','2CSB','2CSC'];
   csScope3rd: any = ['3CSA','3CSB','3CSC','3CSD'];
-  csScope4th: any = ['4CSA','4CSB'];
+  csScope4th: any = ['4CSA','4CSB','4CSC'];
   taskScopeArray!: string[];
   p: number = 1;
   email!:string;
