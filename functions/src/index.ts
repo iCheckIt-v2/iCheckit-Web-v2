@@ -86,8 +86,9 @@ exports.adminCreateStudent = functions.https.onRequest((request, response) => {
         </div>`,
             };
             functions.logger.log('New welcome email sent to:', email);
-            mailTransport.sendMail(mailOptions);
-        
+            setTimeout(() => {
+              mailTransport.sendMail(mailOptions);
+            }, 1000);        
             return response.status(200).send({
               message: 'successfully created user',
               userRecord
@@ -219,7 +220,9 @@ recipients.forEach((element: any) => {
       </div>
   `
     };
-    mailTransport.sendMail(mailOptions);
+    setTimeout(() => {
+      mailTransport.sendMail(mailOptions);
+    }, 1000);
   }
 });
 // // Get the user's tokenID
@@ -307,8 +310,9 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
 
         return admin.messaging().sendToDevice(request.body.pushToken, payload).then((res) => {
           console.log(res)
-          mailTransport.sendMail(mailOptions);
-      
+          setTimeout(() => {
+            mailTransport.sendMail(mailOptions);
+          }, 1000);      
           return response.status(200).send({
             message: 'sent email to' + email,
           })
@@ -376,8 +380,9 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
       </body>`
         };
         functions.logger.log('updated task status email sent to:', email);
-        mailTransport.sendMail(mailOptions);
-    
+        setTimeout(() => {
+          mailTransport.sendMail(mailOptions);
+        }, 1000);    
         return response.status(200).send({
           message: 'sent email to' + email,
         })      
@@ -527,8 +532,9 @@ exports.emailForApproval = functions.firestore
               //   }
               // }
 
-              mailTransport.sendMail(mailOptions);
-          
+              setTimeout(() => {
+                mailTransport.sendMail(mailOptions);
+              }, 1000);          
               //  return admin.messaging().sendToDevice(element.pushToken, payload).then((res) => {
               //   console.log(res)
               //   functions.logger.log('updated task email sent to:', element.email)
