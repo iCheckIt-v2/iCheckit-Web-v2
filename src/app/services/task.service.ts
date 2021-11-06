@@ -236,7 +236,6 @@ export class TaskService {
         title,
         deadline,
         description,
-       
         }, {
           headers
         }).toPromise().then(

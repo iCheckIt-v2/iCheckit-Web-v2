@@ -13,7 +13,7 @@
   @apply w-auto text-right pr-2 flex flex-row justify-end;
 }
 .admin-container-children-left-completed {
-  @apply w-1/2 p-2 flex flex-col h-full items-start;
+  @apply w-full p-2 flex flex-col h-full items-start;
   border-left: green 25px solid;
 }
 .admin-container-children:hover {

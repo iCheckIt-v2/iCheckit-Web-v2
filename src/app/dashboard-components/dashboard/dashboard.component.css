@@ -96,15 +96,15 @@
   background-color: #dee2e7;
 }
 .admin-container-children-left-pending {
-  @apply w-1/2 p-2 flex flex-col h-full items-start;
+  @apply w-full p-2 flex flex-col h-full items-start;
   border-left: #ffe400 25px solid;
 }
 .admin-container-children-left-late {
-  @apply w-1/2 p-2 flex flex-col h-full items-start;
+  @apply w-full p-2 flex flex-col h-full items-start;
   border-left: #f00000 25px solid;
 }
 .admin-container-children-left-completed {
-  @apply w-1/2 p-2 flex flex-col h-full items-start;
+  @apply w-full p-2 flex flex-col h-full items-start;
   border-left: green 25px solid;
 }
 .admin-container-children-left svg {

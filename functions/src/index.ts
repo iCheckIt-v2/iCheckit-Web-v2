@@ -9,6 +9,7 @@ const nodemailer = require('nodemailer');
 // For other types of transports such as Sendgrid see https://nodemailer.com/transports/
 // TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
 const mailTransport = nodemailer.createTransport({
+  pool: true,
   host: 'smtp.gmail.com',
   port: 465,
   secure: true, 
@@ -86,6 +87,7 @@ exports.adminCreateStudent = functions.https.onRequest((request, response) => {
             };
             functions.logger.log('New welcome email sent to:', email);
             mailTransport.sendMail(mailOptions);
+        
             return response.status(200).send({
               message: 'successfully created user',
               userRecord
@@ -217,8 +219,7 @@ recipients.forEach((element: any) => {
       </div>
   `
     };
-    functions.logger.log('New task email sent to:', element.email);
-    return mailTransport.sendMail(mailOptions);
+    mailTransport.sendMail(mailOptions);
   }
 });
 // // Get the user's tokenID
@@ -306,7 +307,8 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
 
         return admin.messaging().sendToDevice(request.body.pushToken, payload).then((res) => {
           console.log(res)
-          mailTransport.sendMail(mailOptions)
+          mailTransport.sendMail(mailOptions);
+      
           return response.status(200).send({
             message: 'sent email to' + email,
           })
@@ -374,8 +376,8 @@ exports.sendEmail = functions.https.onRequest((request, response) => {
       </body>`
         };
         functions.logger.log('updated task status email sent to:', email);
-         mailTransport.sendMail(mailOptions)
-        
+        mailTransport.sendMail(mailOptions);
+    
         return response.status(200).send({
           message: 'sent email to' + email,
         })      
@@ -478,6 +480,19 @@ exports.emailForApproval = functions.firestore
             const contactNumber = body.contactNumber;
             */
             recipients.forEach((element: any) => {
+              if (element.pushToken != '') {
+                const payload = {
+                  notification: {
+                    title: title + ' has been updated',
+                    body: 'Open the mobile app to view the changes to the task.',
+                    sound: 'default',
+                    badge: '1'
+                  }
+                }
+
+                return admin.messaging().sendToDevice(element.pushToken, payload)
+
+              }
               const mailOptions = {
                 from: `${APP_NAME} <noreply@firebase.com>`,
                 to: element.email,
@@ -504,23 +519,26 @@ exports.emailForApproval = functions.firestore
       </div>
                 `,
               };
-              const payload = {
-                notification: {
-                  title: `${title} has updates!`,
-                  body: `There has been updates to the task ${title}. Click here to open the application.`,
-                  badge: '1'
-                }
-              }
-               return admin.messaging().sendToDevice(element.pushToken, payload).then((res) => {
-                console.log(res)
-                functions.logger.log('updated task email sent to:', element.email)
-                  mailTransport.sendMail(mailOptions)
-                  return response.status(200).send({
-                    message: 'email sent to' + element.email
-                  });
-              }).catch((err) => {
-                return response.status(400).send("Failed to create user: " + err);
-              })
+              // const payload = {
+              //   notification: {
+              //     title: `${title} has updates!`,
+              //     body: `There has been updates to the task ${title}. Click here to open the application.`,
+              //     badge: '1'
+              //   }
+              // }
+
+              mailTransport.sendMail(mailOptions);
+          
+              //  return admin.messaging().sendToDevice(element.pushToken, payload).then((res) => {
+              //   console.log(res)
+              //   functions.logger.log('updated task email sent to:', element.email)
+              //     mailTransport.sendMail(mailOptions)
+              //     return response.status(200).send({
+              //       message: 'email sent to' + element.email
+              //     });
+              // }).catch((err) => {
+              //   return response.status(400).send("Failed to create user: " + err);
+              // })
            })         
         }
       }
