@@ -137,7 +137,7 @@ export class UserService {
       //   this.toastService.publish('The student account creation was not successful. The user email might have been already existing in our database,','userDoesNotExist');
       // });
       .catch((err) => {
-        console.log(err)
+        this.toastService.publish('The student account creation was not successful. The user email might have been already existing in our database,','userDoesNotExist');
       });
 
   }
@@ -176,7 +176,7 @@ export class UserService {
       })
       .catch((err) => {
         console.log(err);
-        this.toastService.publish('The student account creation was not successful. The user email might have been already existing in our database,','userDoesNotExist');
+        this.toastService.publish('The admin account creation was not successful. The user email might have been already existing in our database,','userDoesNotExist');
       });
   }
 
