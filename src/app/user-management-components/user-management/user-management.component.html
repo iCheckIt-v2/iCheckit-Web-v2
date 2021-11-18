@@ -513,7 +513,7 @@
                   <label for="course"> Deparment </label>
                   <select name="department" id="department" style="width: 100%" (change)="changeDepartment($event)"
                     formControlName="department">
-                    <option value="" disabled>
+                    <option value="" >
                       Choose the admin's department
                     </option>
                     <option *ngFor="let department of allDepartment">
