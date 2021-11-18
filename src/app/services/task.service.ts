@@ -699,7 +699,7 @@ export class TaskService {
   public getCompletedTask(): Observable<any> {
     return this.afs
       .collection('tasks', (ref) =>
-        ref.where('status', '==', 'Completed').orderBy('deadline')
+        ref.where('status', '==', 'Completed').orderBy('deadline', 'desc')
       )
       .snapshotChanges()
       .pipe(
