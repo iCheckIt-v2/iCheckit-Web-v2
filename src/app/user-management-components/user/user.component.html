@@ -26,7 +26,7 @@
             <p><span class="details-title">Full Name:</span> {{user.displayName}}</p>
             <p><span class="details-title">Email:</span> {{user.email}}</p>
             <p><span class="details-title">Contact Number:</span> {{user.contactNumber}}</p>
-            <p><span class="details-title">Account Created At:</span> {{user.createdAt | date}}</p>
+            <p><span class="details-title">Account Date Created:</span> {{user.createdAt | date}}</p>
             <p *ngIf="user.role == 'Student'"><span class="details-title">Degree Program:</span> {{user.course}}</p>
             <p *ngIf="user.role == 'Student'"><span class="details-title">Section:</span> {{user.section}}</p>
             <p *ngIf="user.role == 'Department Head'"><span class="details-title">Department:</span> {{user.department}}

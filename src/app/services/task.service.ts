@@ -118,6 +118,7 @@ export class TaskService {
       recipient.uploadedBy = uploadedBy;
       recipient.attemptsLeft = 2;
       recipient.deadlineLimit = 7;
+      recipient.submittedAt = '';
       recipient.createdAt = + new Date();
       console.log(recipient)
     });
@@ -209,6 +210,7 @@ export class TaskService {
           submissionLink:element.submissionLink,
           taskId:element.taskId,
           term:element.term,
+          submittedAt:element.submittedAt,
           title:title,
           uid:element.uid,
           uploadedBy:element.uploadedBy,
@@ -621,6 +623,7 @@ export class TaskService {
             let status = element.status;
             let message = 'Your task status has been updated to ' + status + '!';
             let instructions = 'Your submission was approved! Visit the mobile app to view your accomplished submission.'
+            submittedAt:element.submittedAt,
 
             params.set('email', email);
             params.set('uploadedBy', uploadedBy);

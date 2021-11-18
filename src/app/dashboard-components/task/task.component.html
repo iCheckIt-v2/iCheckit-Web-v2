@@ -222,8 +222,8 @@
         <p>{{ recipient.section }}</p>
       </div>
       <div class="admin-container-children-left">
-        <p *ngIf="recipient.submissionLink != ''">Link to submission here</p>
-        <a href="{{ recipient.submissionLink }}" *ngIf="recipient.submissionLink != ''">
+        <p *ngIf="recipient.submittedAt != ''" class="text-blue-500">{{recipient.submittedAt | date}}</p>
+        <a href="{{ recipient.submissionLink }}" *ngIf="recipient.submissionLink != ''" target="_blank">
           <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6 text-blue-500" viewBox="0 0 20 20"
             fill="currentColor">
             <path

@@ -223,6 +223,7 @@ export class TaskComponent implements OnInit {
           uid: element.uid,
           uploadedBy: element.uploadedBy,
           term: element.term,
+          submittedAt:element.submittedAt,
           attemptsLeft: element.attemptsLeft,
           deadlineLimit: element.deadlineLimit
         }
@@ -270,6 +271,7 @@ export class TaskComponent implements OnInit {
           taskId: element.taskId,
           title: element.title,
           uid: element.uid,
+          submittedAt:'',
           uploadedBy: element.uploadedBy,
           term: element.term,
           attemptsLeft: element.attemptsLeft,
@@ -308,6 +310,7 @@ export class TaskComponent implements OnInit {
       pushToken: recipient.pushToken,
       status: 'Accomplished',
       submissionLink: recipient.submissionLink,
+      submittedAt:recipient.submittedAt,
       taskId: recipient.taskId,
       title: recipient.title,
       uid: recipient.uid,
@@ -333,6 +336,7 @@ export class TaskComponent implements OnInit {
       submissionLink: '',
       taskId: recipient.taskId,
       title: recipient.title,
+      submittedAt:'',
       uid: recipient.uid,
       uploadedBy: recipient.uploadedBy,
       term: recipient.term,

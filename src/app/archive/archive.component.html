@@ -49,7 +49,7 @@
         *ngIf="task.status == 'Completed'"
       >
       <p class="text-xl">{{task.title}}</p>
-      <p class="mt-2">CREATED AT: {{task.deadline | date}}  |  DEADLINE: {{task.deadline | date}}</p>
+      <p class="mt-2">DATE CREATED: {{task.deadline | date}}  |  DEADLINE: {{task.deadline | date}}</p>
       <p> <span class="inline-flex items-center justify-center text-xs font-bold leading-none"
         *ngFor="let item of task.scope">
         <span *ngIf="item.slice(1, 3) == 'IT'"
