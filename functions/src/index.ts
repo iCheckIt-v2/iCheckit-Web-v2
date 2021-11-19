@@ -495,7 +495,11 @@ exports.emailForApproval = functions.firestore
                   }
                 }
 
-                return admin.messaging().sendToDevice(element.pushToken, payload)
+                return admin.messaging().sendToDevice(element.pushToken, payload).then(() => {
+                  response.status(200).send({
+                    message: 'push notif sent to' + element.email
+                })
+              })
 
               }
               const mailOptions = {
@@ -535,6 +539,54 @@ exports.emailForApproval = functions.firestore
               setTimeout(() => {
                 mailTransport.sendMail(mailOptions);
               }, 1000);          
+              //  return admin.messaging().sendToDevice(element.pushToken, payload).then((res) => {
+              //   console.log(res)
+              //   functions.logger.log('updated task email sent to:', element.email)
+              //     mailTransport.sendMail(mailOptions)
+              //     return response.status(200).send({
+              //       message: 'email sent to' + element.email
+              //     });
+              // }).catch((err) => {
+              //   return response.status(400).send("Failed to create user: " + err);
+              // })
+           })         
+        }
+      }
+      );
+    }); 
+
+    exports.taskClosedEmail = functions.https.onRequest((request, response) => {
+      cors(request, response, () => {
+        if (request.method !== "POST") {
+          response.status(405).send("Method Not Allowed");
+        } else {
+          const body = request.body;
+          const recipients = body.recipients;
+         
+          /*
+            const section = body.section;
+            const course = body.course;
+            const contactNumber = body.contactNumber;
+            */
+            recipients.forEach((element: any) => {
+              if (element.pushToken != '') {
+                const payload = {
+                  notification: {
+                    title: element.title + ' has been closed',
+                    body: 'The submission for this task has been closed.',
+                    sound: 'default',
+                    badge: '1'
+                  }
+                }
+
+                return admin.messaging().sendToDevice(element.pushToken, payload).then(() => {
+                  response.status(200).send({
+                    message: 'push notif sent to' + element.email
+                })
+              })
+                
+              }
+                    
               //  return admin.messaging().sendToDevice(element.pushToken, payload).then((res) => {
               //   console.log(res)
               //   functions.logger.log('updated task email sent to:', element.email)

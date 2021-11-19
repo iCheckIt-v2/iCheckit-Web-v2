@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
   number!:string;
   userData:any;
   fsData: any;
+  invalidDate!: boolean;
   addTaskModal!: boolean;
   deleteTaskModal!: boolean;
   dateToday = new Date();
@@ -56,6 +57,7 @@ export class DashboardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.invalidDate = false;
     console.log(new Date())
     console.log(+ new Date())
     console.log(new Date().getTime())
@@ -359,18 +361,26 @@ export class DashboardComponent implements OnInit {
   addTask() {
 
     if (this.addTaskForm.valid) {
-      this.taskService.addTask(
-        this.addTaskForm.controls['title'].value,
-        this.addTaskForm.controls['description'].value,
-        this.taskScopeArray,
-        new Date(this.addTaskForm.controls['deadline'].value),
-        this.fsData.displayName,
-        this.taskRecipients,
-        this.userPushTokens,
-        this.term
-      ).then(() => {
-        this.addTaskForm.reset()
-      })
+      if ((+ new Date(this.addTaskForm.controls['deadline'].value).getDate()) < (new Date().getDate())) {
+        this.invalidDate = true;
+        setTimeout(() => {
+          this.invalidDate = false;
+        }, 3000);
+      } else {
+        console.log(new Date(this.addTaskForm.controls['deadline'].value))
+        this.taskService.addTask(
+          this.addTaskForm.controls['title'].value,
+          this.addTaskForm.controls['description'].value,
+          this.taskScopeArray,
+          new Date(this.addTaskForm.controls['deadline'].value),
+          this.fsData.displayName,
+          this.taskRecipients,
+          this.userPushTokens,
+          this.term
+        ).then(() => {
+          this.addTaskForm.reset()
+        })
+      }
     }
     else if (this.addTaskForm.invalid) {
       this.addTaskForm.controls['title'].markAsTouched();

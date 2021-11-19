@@ -1,8 +1,8 @@
 {"users": [
 {
   "localId": "abcdefgh0000001",
-  "email": "jcmiguel14@ust.edu.ph",
-  "displayName": "jcaquino14",
+  "email": "aldrinmariel.delica.iics@ust.edu.ph",
+  "displayName": "Aldrin Delica UST",
   "passwordHash":"Ubu2Ww6nAtCgLx50WZGRUJeitSkzTj7Z89Ji4UWVKr4BI2fXEAa0HiCdf9vbZpG3l5pmrFVjVuaoL7bNWFIQVw==",
   "salt": "vnDkBXlqFNoCtw==",
   "createdAt": "1633679769525",
@@ -11,8 +11,28 @@
 },
 {
   "localId": "abcdefgh0000002",
-  "email": "jcmiguel15@ust.edu.ph",
-  "displayName": "jcaquino15",
+  "email": "alma.perol@ust.edu.ph",
+  "displayName": "Alma Perol",
+  "passwordHash":"Ubu2Ww6nAtCgLx50WZGRUJeitSkzTj7Z89Ji4UWVKr4BI2fXEAa0HiCdf9vbZpG3l5pmrFVjVuaoL7bNWFIQVw==",
+  "salt": "vnDkBXlqFNoCtw==",
+  "createdAt": "1633679769525",
+  "disabled": false,
+  "providerUserInfo": []
+},
+{
+  "localId": "abcdefgh0000002",
+  "email": "mylene.domingo@ust.edu.ph",
+  "displayName": "Mylene Domingo",
+  "passwordHash":"Ubu2Ww6nAtCgLx50WZGRUJeitSkzTj7Z89Ji4UWVKr4BI2fXEAa0HiCdf9vbZpG3l5pmrFVjVuaoL7bNWFIQVw==",
+  "salt": "vnDkBXlqFNoCtw==",
+  "createdAt": "1633679769525",
+  "disabled": false,
+  "providerUserInfo": []
+},
+{
+  "localId": "abcdefgh0000002",
+  "email": "eugenia.zhuo@ust.edu.ph",
+  "displayName": "Eugenia Zhuo",
   "passwordHash":"Ubu2Ww6nAtCgLx50WZGRUJeitSkzTj7Z89Ji4UWVKr4BI2fXEAa0HiCdf9vbZpG3l5pmrFVjVuaoL7bNWFIQVw==",
   "salt": "vnDkBXlqFNoCtw==",
   "createdAt": "1633679769525",
@@ -20,4 +40,3 @@
   "providerUserInfo": []
 }
 ]}
-

@@ -106,7 +106,7 @@
               </h3>
               <div class="mt-2">
                 <p>
-                  Create a new task to be uploaded to the verified   students in the system.
+                  Create a new task to be uploaded to the verified students in the system.
                 </p>
               </div>
             </div>
@@ -237,6 +237,9 @@
             <div class="login-form-error"
               *ngIf="addTaskForm.controls.deadline.errors?.required && addTaskForm.controls.deadline.touched">Task scope
               is required.
+            </div>
+            <div class="login-form-error"
+              *ngIf="invalidDate">Task deadline error. Cannot be a date that has passed.
             </div>
 
             <!-- <div class="login-form-error" *ngIf="createStudentForm.controls.email.errors?.required && createStudentForm.controls.email.touched">

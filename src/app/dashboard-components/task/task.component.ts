@@ -435,7 +435,7 @@ export class TaskComponent implements OnInit {
       acceptedSubmissions.push(updatedData)
   })
   console.log(acceptedSubmissions)
-  this.taskService.closeSubmissions(this.taskData.taskId,oldData,acceptedSubmissions).then(() => {
+  this.taskService.closeSubmissions(this.taskData.taskId,oldData,acceptedSubmissions,this.taskData.recipients).then(() => {
     this.closeSubmission = !this.closeSubmission
   })
 

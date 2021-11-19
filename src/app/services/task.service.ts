@@ -146,12 +146,13 @@ export class TaskService {
       }).then(() => {
         this.router.navigate(['/task/',taskId])
       })
-      .catch(() => {
-        this.toastService.publish('There has been an error with the creation of the task','userDoesNotExist')
+      .catch((err) => {
+        this.toastService.publish('There has been an error with the creation of the task','userDoesNotExist');
+        console.log(err)
       })
   }
 
-  public closeSubmissions(id:any,oldData:any,newData:any) {
+  public closeSubmissions(id:any,oldData:any,newData:any,recipients:any) {
      return this.afs.collection('tasks').doc(id).update({
         status:'Completed'
      }).then(() => {
@@ -166,7 +167,29 @@ export class TaskService {
            recipients: firebase.firestore.FieldValue.arrayUnion(element),
         })
        });
-     })
+     }).then(() => {
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+      const params: URLSearchParams = new URLSearchParams();
+
+      params.set('recipients', recipients);
+
+
+      this.http.post(`https://us-central1-icheckit-6a8bb.cloudfunctions.net/taskClosedEmail`, {
+        recipients
+        }, {
+          headers
+        }).toPromise().then(
+          () => {
+            console.log('emails sent!')
+          }
+        ).catch((err) => {
+          console.log(err)
+        })
+    }).then(() => {
+      this.toastService.publish('task has been successfully closed','success')
+    }).catch(() => {
+      this.toastService.publish('Closing of task failed: ' , 'taskdoesnotexist')
+    })
 
     // return this.afs.collection('tasks').doc(id).update({
     //   status:'Completed',
@@ -185,14 +208,10 @@ export class TaskService {
 
 
   public updateTask(recipients:any,taskId:string, title:string, description:any, deadline:Date): Promise<any> {
-
-
     return this.afs.collection('tasks').doc(taskId).update({
-
       title: title,
       description: description,
       deadline:+ deadline
-
     })
     .then(() => {
       recipients.forEach((element:any) => {
