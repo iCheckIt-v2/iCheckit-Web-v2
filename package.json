@@ -37,6 +37,7 @@
     "@tailwindcss/forms": "0.3.3",
     "@tailwindcss/typography": "0.4.1",
     "@types/jasmine": "~3.6.0",
+    "@types/jspdf": "^2.0.0",
     "@types/node": "^12.11.1",
     "firebase-tools": "^8.0.0 || ^9.0.0",
     "fuzzy": "^0.1.3",

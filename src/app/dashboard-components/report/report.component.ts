@@ -16,6 +16,10 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./report.component.css']
 })
 export class ReportComponent implements OnInit {
+  
+  
+  
+  
   @ViewChild('content', {static: false}) el!: ElementRef;
   searchBar: any;
   dateToday = new Date();
@@ -33,6 +37,9 @@ export class ReportComponent implements OnInit {
   forApprovalRecipientsPct = 0;
   accomplishedRecipientsPct = 0;
   mgaPasaway: any;
+  diPaNagpapasa: any;
+  forApprovalPa: any;
+  nagpasaNa: any;
   chart: any;
   data: any;
   type: any;
@@ -94,15 +101,20 @@ export class ReportComponent implements OnInit {
       this.forApprovalRecipients = 0;
       this.lateRecipients = 0;
       this.accomplishedRecipients = 0;
+      this.diPaNagpapasa = [];
       this.mgaPasaway = [];
+      this.nagpasaNa = [];
+      this.forApprovalPa = [];
 
       res.recipients.forEach((element: any) => {
         if(Object.values(element).includes("Pending")) {
           this.mgaPasaway.push(element)
+          this.diPaNagpapasa.push(element)
           this.pendingRecipients += 1;
         }
         if(Object.values(element).includes("For Approval")) {
           this.forApprovalRecipients += 1;
+          this.forApprovalPa.push(element)
         }
         if(Object.values(element).includes("Late")) {
           this.lateRecipients += 1;
@@ -110,6 +122,7 @@ export class ReportComponent implements OnInit {
         }
         if(Object.values(element).includes("Accomplished")) {
           this.accomplishedRecipients += 1;
+          this.nagpasaNa.push(element)
         }
       });
       this.pendingRecipientsPct = (this.pendingRecipients / this.totalRecipients) * 100;
@@ -157,18 +170,170 @@ export class ReportComponent implements OnInit {
     })
   }
 
-  // downloadPdf() {
-  //   // this.router.navigate(['/task/reports-download/',this.taskId])
-  //   const quality = 1 // Higher the better but larger file
-  //   html2canvas(this.el.nativeElement,
-  //       { scale: quality }
-  //   ).then(canvas => {
-  //       const pdf = new jsPDF('l', 'mm', 'a4');
-  //       pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-  //       pdf.save();
-  //   }).then(() => {
-  //     this.router.navigate(['/task/reports/',this.taskId])
-  //   })
-  // }
+  // var headers = createHeaders([
+  //   "id",
+  //   "coin",
+  //   "game_group",
+  //   "game_name",
+  //   "game_version",
+  //   "machine",
+  //   "vlt"
+  // ]);
+  
+  // var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "landscape" });
+  // doc.table(1, 1, generateData(100), headers, { autoSize: true });
+
+  public generateData(amount:any) {
+    var result = [];
+    var data = {
+      Name: "100",
+      Course: "GameGroup",
+      Section: "XPTO2",
+      Status: "25",
+    };
+    for (var i = 0; i < amount; i += 1) {
+      result.push(Object.assign({}, data));
+    }
+    return result;
+  };
+  
+  public createHeaders(keys:any) {
+    var result = [];
+    for (var i = 0; i < keys.length; i += 1) {
+      result.push({
+        name: keys[i],
+        prompt: keys[i],
+        width: 65,
+        align: "center",
+        padding: 0
+      });
+    }
+    return result;
+  }
+
+  
+
+  downloadPdf() {
+    let resultPending: { [key: string]: string; }[] | { Name: any; Email: any; Section: any; Status: any; }[] = [];
+    let resultLate: { [key: string]: string; }[] | { Name: any; Email: any; Section: any; Status: any; }[] = [];
+    let resultForApproval: { [key: string]: string; }[] | { Name: any; Email: any; Section: any; Status: any; }[] = [];
+    let resultAccomplished: { [key: string]: string; }[] | { Name: any; Email: any; Section: any; Status: any; }[] = [];
+
+    console.log('pdf')
+      const test = new jsPDF('portrait')
+      const headers = [
+        'Name',
+        'Email',
+        'Section',
+        'Status',
+      ]
+      // const invoiceObjectTableRows = [
+      //   {
+      //     Name: 'testing',
+      //     Student_Date_Of_Birth: 'testing',
+      //     Student_ID_No_Course: 'testing',
+      //     Course: 'testing',
+      //     Course_Total_Tuition_Fee: 'testing',
+      //   }
+      // ]
+
+      test.text(`Task Name: ${this.taskData.title}`, 5, 20);
+      test.text(`Uploaded By: ${this.taskData.uploadedBy}`, 5, 30);
+      test.text(`Task Creation Date: ${this.taskData.createdAt}`, 5, 40);
+      test.text(`Task Deadline: ${this.taskData.deadline}`, 5, 50);
+      test.text(`Task Scope: ${this.taskData.scope}`, 5, 60,{maxWidth:200});
+
+      test.text(`Pending Recipients Percentage: ${this.pendingRecipientsPct.toFixed(2)}%`, 5, 90);
+      test.text(`No Submission Recipients Percentage: ${this.lateRecipientsPct.toFixed(2)}%`, 5, 100);
+      test.text(`For Approval Recipients Percentage: ${this.forApprovalRecipientsPct.toFixed(2)}%`, 5, 110);
+      test.text(`Accomplished Recipients Percentage: ${this.accomplishedRecipientsPct.toFixed(2)}%`, 5, 120);
+
+
+      test.addPage('portrait');
+
+      this.diPaNagpapasa.forEach((element: any) => {
+        var data = {
+          Name: element.displayName,
+          Email: element.email,
+          Section: element.section,
+          Status: element.status
+        }
+        resultPending.push(Object.assign({}, data));
+      });
+
+      this.mgaPasaway.forEach((element: any) => {
+        var data = {
+          Name: element.displayName,
+          Email: element.email,
+          Section: element.section,
+          Status: element.status
+        }
+        resultLate.push(Object.assign({}, data));
+      });
+
+      this.forApprovalPa.forEach((element: any) => {
+        var data = {
+          Name: element.displayName,
+          Email: element.email,
+          Section: element.section,
+          Status: element.status
+        }
+        resultForApproval.push(Object.assign({}, data));
+      });
+
+      this.nagpasaNa.forEach((element: any) => {
+        var data = {
+          Name: element.displayName,
+          Email: element.email,
+          Section: element.section,
+          Status: element.status
+        }
+        resultAccomplished.push(Object.assign({}, data));
+      });
+
+      if (resultPending.length != 0) {
+        test.text("Pending Recipients", 5, 20);
+        test.table(5, 30, resultPending, headers, { autoSize: true })
+        test.addPage('portrait');
+      }
+      
+      if (resultLate.length != 0) {
+        test.text("No Submission Recipients", 5, 20);
+        test.table(5, 30, resultLate, headers, { autoSize: true })
+        test.addPage('portrait');
+      }
+     
+      if (resultForApproval.length != 0) {
+        test.text("For Approval Recipients", 5, 20);
+      test.table(5, 30, resultForApproval, headers, { autoSize: true })
+      test.addPage('portrait');
+      }
+      
+      if (resultAccomplished.length != 0) {
+        test.text("Accomplished Recipients", 5, 20);
+      test.table(5, 30, resultAccomplished, headers, { autoSize: true })
+      test.addPage('portrait');
+      }
+      
+
+      // test.table(5, 80, invoiceObjectTableRows, headers, { autoSize: true })
+      test.save()
+    
+    
+
+  
+
+    // this.router.navigate(['/task/reports-download/',this.taskId])
+    // const quality = 1 // Higher the better but larger file
+    // html2canvas(this.el.nativeElement,
+    //     { scale: quality }
+    // ).then(canvas => {
+    //     const pdf = new jsPDF('l', 'mm', 'a4');
+    //     pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+    //     pdf.save();
+    // }).then(() => {
+    //   this.router.navigate(['/task/reports/',this.taskId])
+    // })
+  }
 
 }
