@@ -287,21 +287,26 @@ export class ReportComponent implements OnInit {
         });
   
         if (resultPending.length != 0) {
-          test.text("Pending Recipients", 5, 20);
-          test.table(5, 30, resultPending, headers, { autoSize: true })
+          test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
+          test.text("Pending Recipients", 26, 60);
+          test.table(26, 65, resultLate, headers, { autoSize: true })
           test.addPage('portrait');
         }
         
        
         if (resultForApproval.length != 0) {
-          test.text("For Approval Recipients", 5, 20);
-        test.table(5, 30, resultForApproval, headers, { autoSize: true })
+          test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
+
+          test.text("For Approval Recipients", 26, 60);
+          test.table(26, 65, resultLate, headers, { autoSize: true })
         test.addPage('portrait');
         }
         
         if (resultAccomplished.length != 0) {
-          test.text("Accomplished Recipients", 5, 20);
-        test.table(5, 30, resultAccomplished, headers, { autoSize: true })
+          test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
+
+          test.text("Accomplished Recipients", 26, 60);
+          test.table(26, 65, resultLate, headers, { autoSize: true })
         test.addPage('portrait');
         }
         
@@ -337,20 +342,26 @@ export class ReportComponent implements OnInit {
         });
     
         if (resultLate.length != 0) {
-          test.text("No Submission Recipients", 5, 20);
-          test.table(5, 30, resultLate, headers, { autoSize: true })
+          test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
+
+          test.text("No Submission Recipients", 26, 60);
+          test.table(26, 65, resultLate, headers, { autoSize: true })
           test.addPage('portrait');
         }
        
         if (resultForApproval.length != 0) {
-          test.text("For Approval Recipients", 5, 20);
-        test.table(5, 30, resultForApproval, headers, { autoSize: true })
+          test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
+
+          test.text("For Approval Recipients", 26, 60);
+          test.table(26, 65, resultLate, headers, { autoSize: true })
         test.addPage('portrait');
         }
         
         if (resultAccomplished.length != 0) {
-          test.text("Accomplished Recipients", 5, 20);
-        test.table(5, 30, resultAccomplished, headers, { autoSize: true })
+          test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
+
+          test.text("Accomplished Recipients", 26, 60);
+          test.table(26, 65, resultLate, headers, { autoSize: true })
         test.addPage('portrait');
         }
         
