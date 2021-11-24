@@ -116,7 +116,7 @@ export class ReportComponent implements OnInit {
           this.forApprovalRecipients += 1;
           this.forApprovalPa.push(element)
         }
-        if(Object.values(element).includes("Late")) {
+        if(Object.values(element).includes("No Submission")) {
           this.lateRecipients += 1;
           this.mgaPasaway.push(element)
         }
@@ -132,7 +132,7 @@ export class ReportComponent implements OnInit {
 
       this.type = 'doughnut';
       this.data = {
-        labels: ["Pending", "For Approval", "Accomplished", "Late",],
+        labels: ["Pending", "For Approval", "Accomplished", "No Submission",],
         datasets: [
           {
             label: "My First dataset",
@@ -205,7 +205,7 @@ export class ReportComponent implements OnInit {
         prompt: keys[i],
         width: 65,
         align: "center",
-        padding: 0
+        padding: 10
       });
     }
     return result;
@@ -288,8 +288,8 @@ export class ReportComponent implements OnInit {
   
         if (resultPending.length != 0) {
           test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
-          test.text("Pending Recipients", 26, 60);
-          test.table(26, 65, resultLate, headers, { autoSize: true })
+          test.text("Pending Recipients", 36, 60);
+          test.table(36, 65, resultPending, headers, { autoSize: true,padding: 3,fontSize:10})
           test.addPage('portrait');
         }
         
@@ -297,16 +297,16 @@ export class ReportComponent implements OnInit {
         if (resultForApproval.length != 0) {
           test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
 
-          test.text("For Approval Recipients", 26, 60);
-          test.table(26, 65, resultLate, headers, { autoSize: true })
+          test.text("For Approval Recipients", 36, 60);
+          test.table(36, 65, resultForApproval, headers,  { autoSize: true,padding: 3,fontSize:10})
         test.addPage('portrait');
         }
         
         if (resultAccomplished.length != 0) {
           test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
 
-          test.text("Accomplished Recipients", 26, 60);
-          test.table(26, 65, resultLate, headers, { autoSize: true })
+          test.text("Accomplished Recipients", 36, 60);
+          test.table(36, 65, resultAccomplished, headers,  { autoSize: true,padding: 3,fontSize:10})
         test.addPage('portrait');
         }
         
@@ -344,24 +344,24 @@ export class ReportComponent implements OnInit {
         if (resultLate.length != 0) {
           test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
 
-          test.text("No Submission Recipients", 26, 60);
-          test.table(26, 65, resultLate, headers, { autoSize: true })
+          test.text("No Submission Recipients", 36, 60);
+          test.table(36, 65, resultLate, headers, { autoSize: true,padding: 3,fontSize:10})
           test.addPage('portrait');
         }
        
         if (resultForApproval.length != 0) {
           test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
 
-          test.text("For Approval Recipients", 26, 60);
-          test.table(26, 65, resultLate, headers, { autoSize: true })
+          test.text("For Approval Recipients", 36, 60);
+          test.table(36, 65, resultForApproval, headers,  { autoSize: true,padding: 3,fontSize:10})
         test.addPage('portrait');
         }
         
         if (resultAccomplished.length != 0) {
           test.addImage("../../../assets/report_header.PNG", "PNG", 5, 10, 200, 30);
 
-          test.text("Accomplished Recipients", 26, 60);
-          test.table(26, 65, resultLate, headers, { autoSize: true })
+          test.text("Accomplished Recipients", 36, 60);
+          test.table(36, 65, resultAccomplished, headers,  { autoSize: true,padding: 3,fontSize:10})
         test.addPage('portrait');
         }
         

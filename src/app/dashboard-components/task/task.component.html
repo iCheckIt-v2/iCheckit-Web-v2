@@ -240,7 +240,7 @@
             <span class="recipient-forApproval">{{ recipient.status }}</span>
           </p>
         </div>
-        <p *ngIf="recipient.status == 'Late'">
+        <p *ngIf="recipient.status == 'No Submission'">
           Status: <span class="recipient-late">{{ recipient.status }}</span>
         </p>
         <p *ngIf="recipient.status == 'Pending'">

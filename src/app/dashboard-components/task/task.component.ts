@@ -116,7 +116,7 @@ export class TaskComponent implements OnInit {
         if(Object.values(element).includes("For Approval")) {
           this.forApprovalRecipients += 1;
         }
-        if(Object.values(element).includes("Late")) {
+        if(Object.values(element).includes("No Submission")) {
           this.lateRecipients += 1;
         }
         if(Object.values(element).includes("Accomplished")) {
@@ -407,7 +407,7 @@ export class TaskComponent implements OnInit {
       if(Object.values(element).includes('Pending')) {
         oldData.push(element)
       }
-      if(Object.values(element).includes('Late')) {
+      if(Object.values(element).includes('No Submission')) {
         oldData.push(element)
       }
     })
@@ -422,7 +422,7 @@ export class TaskComponent implements OnInit {
         email: element.email,
         pushToken: element.pushToken,
         section: element.section,
-        status: "Late",
+        status: "No Submission",
         submissionLink: element.submissionLink,
         taskId: element.taskId,
         title: element.title,
