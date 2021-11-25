@@ -68,7 +68,7 @@
         [routerLink]="['/task/', task.id]">
         <div class="admin-container-children-left-pending" *ngIf="task.status == 'Pending'">
           <p class="text-xl">{{task.title}}</p>
-          <p class="mt-2">DATE CREATED: {{task.createdAt | date}}  |  DEADLINE: {{task.deadline | date}}</p>
+          <p class="mt-2">DATE CREATED: {{task.createdAt | date}}  |  TASK DURATION: {{task.startsAt | date}} - {{task.deadline | date}}</p>
           <p> <span class="inline-flex items-center justify-center text-xs font-bold leading-none"
             *ngFor="let item of task.scope">
             <span *ngIf="item.slice(1, 3) == 'IT'"
@@ -230,12 +230,26 @@
 
             <div class="mb-4">
               <label for="deadline">
+                Task Start Date:
+              </label>
+              <input type="date" id="startsAt" name="startsAt" formControlName="startsAt">
+            </div>
+            <div class="login-form-error"
+              *ngIf="addTaskForm.controls.startsAt.errors?.required && addTaskForm.controls.startsAt.touched">Task Start Date
+              is required.
+            </div>
+            <div class="login-form-error"
+              *ngIf="invalidDate">Task start date error. Cannot be a date that has passed.
+            </div>
+
+            <div class="mb-4">
+              <label for="deadline">
                 Task Deadline
               </label>
               <input type="date" id="deadline" name="deadline" formControlName="deadline">
             </div>
             <div class="login-form-error"
-              *ngIf="addTaskForm.controls.deadline.errors?.required && addTaskForm.controls.deadline.touched">Task scope
+              *ngIf="addTaskForm.controls.deadline.errors?.required && addTaskForm.controls.deadline.touched">Task Deadline
               is required.
             </div>
             <div class="login-form-error"

@@ -110,6 +110,7 @@ export class TaskComponent implements OnInit {
       this.accomplishedRecipients = 0;
 
       res.recipients.forEach((element: any) => {
+        // console.log(new Date(element.startsAt).getDate())
         if(Object.values(element).includes("Pending")) {
           this.pendingRecipients += 1;
         }
@@ -139,8 +140,6 @@ export class TaskComponent implements OnInit {
       // this.accomplishedRecipientsPct = Math.floor((this.totalRecipients / this.accomplishedRecipients) * 100)
       // console.log(this.lateRecipientsPct)
     })
-
-
 
     this.updateStatusForm = this.fb.group({
       status: ['', Validators.required,],
@@ -210,6 +209,7 @@ export class TaskComponent implements OnInit {
     oldData.forEach((element: any) => {
         let updatedData = {
           createdAt: element.createdAt,
+          startsAt: element.startsAt,
           deadline: element.deadline,
           description: element.description,
           displayName: element.displayName,
@@ -260,6 +260,7 @@ export class TaskComponent implements OnInit {
     oldData.forEach((element: any) => {
         let updatedData = {
           createdAt: element.createdAt,
+          startsAt: element.startsAt,
           deadline: element.deadline,
           description: element.description,
           displayName: element.displayName,
@@ -302,6 +303,7 @@ export class TaskComponent implements OnInit {
 
     let accomplishedData = {
       createdAt: recipient.createdAt,
+      startsAt: recipient.startsAt,
       deadline: recipient.deadline,
       description: recipient.description,
       displayName: recipient.displayName,
@@ -326,6 +328,7 @@ export class TaskComponent implements OnInit {
   public rejectSubmission(recipient:any) {
     let accomplishedData = {
       createdAt: recipient.createdAt,
+      startsAt: recipient.startsAt,
       deadline: recipient.deadline,
       description: recipient.description,
       displayName: recipient.displayName,
@@ -416,6 +419,7 @@ export class TaskComponent implements OnInit {
     oldData.forEach((element: any) => {
       let updatedData = {
         createdAt: element.createdAt,
+        startsAt: element.startsAt,
         deadline: element.deadline,
         description: element.description,
         displayName: element.displayName,

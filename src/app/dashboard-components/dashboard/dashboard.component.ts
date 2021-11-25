@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
   userData:any;
   fsData: any;
   invalidDate!: boolean;
+  invalidDate1!: boolean;
   addTaskModal!: boolean;
   deleteTaskModal!: boolean;
   dateToday = new Date();
@@ -58,6 +59,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.invalidDate = false;
+    this.invalidDate1 = false;
+
     console.log(new Date())
     console.log(+ new Date())
     console.log(new Date().getTime())
@@ -114,6 +117,7 @@ export class DashboardComponent implements OnInit {
       title: ['', Validators.required,],
       description: ['', Validators.required],
       scope: ['', Validators.required],
+      startsAt: ['', Validators.required],
       deadline: ['', Validators.required],
     });
 
@@ -366,12 +370,20 @@ export class DashboardComponent implements OnInit {
         setTimeout(() => {
           this.invalidDate = false;
         }, 3000);
-      } else {
+      }
+      if ((+ new Date(this.addTaskForm.controls['startsAt'].value).getDate()) < (new Date().getDate())) {
+        this.invalidDate1 = true;
+        setTimeout(() => {
+          this.invalidDate1 = false;
+        }, 3000);
+      }
+      else {
         console.log(new Date(this.addTaskForm.controls['deadline'].value))
         this.taskService.addTask(
           this.addTaskForm.controls['title'].value,
           this.addTaskForm.controls['description'].value,
           this.taskScopeArray,
+          new Date(this.addTaskForm.controls['startsAt'].value),
           new Date(this.addTaskForm.controls['deadline'].value),
           this.fsData.displayName,
           this.taskRecipients,
