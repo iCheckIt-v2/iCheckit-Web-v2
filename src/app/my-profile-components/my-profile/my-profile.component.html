@@ -5,6 +5,20 @@
     <div class="p-6 main-title-text text-white flex">
       <h1>{{term}}</h1>
     </div>
+    <!-- Profile Pic Added -->
+ 
+    <div class="flex justify-center items-center">
+      <div class="bg-white rounded-full relative left-[140px] bottom-[50px] hover:opacity-70">
+        <!--
+       <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+            -->
+            </div>
+      <img src="{{user.photoUrl ? user.photoUrl : 'https://firebasestorage.googleapis.com/v0/b/icheckit-6a8bb.appspot.com/o/profilepics%2Fuser.png?alt=media&token=86f227a7-b38f-461a-84e1-ee53607f71be'}}" alt="Profile Pic" class="max-h-[150px] max-w-[150px] min-w-[150px] min-h-[150px] rounded-full object-cover">
+     
+    </div>
     <div class="p-6 text-center text-white">
       <p class="text-5xl title">{{user.displayName}} </p>
       <p class="mt-4 text-2xl title-2 uppercase tracking-widest"> iCheckit | College of Information and Computing Sciences</p>
@@ -73,7 +87,7 @@
     <div class="modal-center">
       <div class="modal-overlay" aria-hidden="true"></div>
       <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
-      <div class="modal">
+      <div class="modal  w-[500px]">
         <form [formGroup]="editAccountForm" (ngSubmit)="editMyProfile()">
           <div class="modal-bg">
             <div class="modal-header">
@@ -95,8 +109,13 @@
               </div>
             </div>
           </div>
+
+
           <div class="modal-form-container">
             <div class="modal-form">
+             
+              <div class="flex flex-row">
+                <div class="flex flex-col">
               <div class="mb-4">
                 <label for="displayName">
                   Full Name
@@ -121,6 +140,13 @@
               </div>
 
               <div class="mb-4">
+                <label for="FileSelectInputDialog">
+                 Profile Picture:
+                </label>
+                  <input class="border border-black" type="file" accept="image/png, image/gif, image/jpeg" (change)="handleOnChangeFile($event)" formControlName="FileSelectInputDialog" id="FileSelectInputDialog"/>
+              </div>
+
+              <div class="mb-4">
                 <label for="password">
                   Input Your Password
                 </label>
@@ -133,7 +159,25 @@
                 Password is required.
               </div>
             </div>
+               <div class="ml-auto mr-auto">
+                <div class="font-bold text-[0.9rem] ">Profile Picture Preview:</div>
+                  <div class="flex justify-center items-center">
+      <div class="bg-white rounded-full relative left-[140px] bottom-[50px] hover:opacity-70">
+        <!--
+       <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+            -->
+            </div>
+      <img src="{{this.preview ? this.preview : user.photoUrl ? user.photoUrl : 'https://firebasestorage.googleapis.com/v0/b/icheckit-6a8bb.appspot.com/o/profilepics%2Fuser.png?alt=media&token=86f227a7-b38f-461a-84e1-ee53607f71be'}}" alt="Profile Pic" class="mt-10 max-h-[180px] max-w-[158px] min-w-[180px] min-h-[180px] rounded-full object-cover">
+     
+    </div>
+              </div>
           </div>
+        </div>
+      
+        </div>
           <div class="modal-buttons">
             <button type="submit" class="addBtn" *ngIf="editAccountForm.valid">
               Edit Profile

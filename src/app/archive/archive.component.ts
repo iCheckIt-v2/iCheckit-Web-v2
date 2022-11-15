@@ -13,6 +13,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class ArchiveComponent implements OnInit {
   completedTasks$: any;
+
   userData: any;
   fsData: any;
   taskData: any;
@@ -23,6 +24,7 @@ export class ArchiveComponent implements OnInit {
   accomplishedRecipients = 0;
   accomplishedRecipientsPct = 0;
   term!: string;
+
   constructor(
     public router: Router,
     private route: ActivatedRoute,

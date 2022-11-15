@@ -7,6 +7,20 @@
     <div class="p-6 main-title-text text-white flex">
       <h1>{{term}}</h1>
     </div>
+      <!-- Profile Pic Added -->
+ 
+    <div class="flex justify-center items-center">
+      <div class="bg-white rounded-full relative left-[140px] bottom-[50px] hover:opacity-70">
+        <!--
+       <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+            -->
+            </div>
+      <img src="{{user.photoUrl ? user.photoUrl : 'https://firebasestorage.googleapis.com/v0/b/icheckit-6a8bb.appspot.com/o/profilepics%2Fuser.png?alt=media&token=86f227a7-b38f-461a-84e1-ee53607f71be'}}" alt="Profile Pic" class="max-h-[150px] max-w-[150px] min-w-[150px] min-h-[150px] rounded-full object-cover">
+     
+    </div>
     <div class="p-6 text-center text-white">
       <p class="text-5xl title"> {{user.displayName}}</p>
       <p class="mt-4 text-2xl title-2 uppercase tracking-widest" *ngIf="user.role == 'Student'">iCheckit | College of Information and Computing Sciences</p>
@@ -29,6 +43,7 @@
             <p><span class="details-title">Account Date Created:</span> {{user.createdAt | date}}</p>
             <p *ngIf="user.role == 'Student'"><span class="details-title">Degree Program:</span> {{user.course}}</p>
             <p *ngIf="user.role == 'Student'"><span class="details-title">Section:</span> {{user.section}}</p>
+            <p *ngIf="user.role == 'Archived'"><span class="details-title">Year Graduated:</span> {{user.yearGraduated}}</p>
             <p *ngIf="user.role == 'Department Head'"><span class="details-title">Department:</span> {{user.department}}
             </p>
           </div>
@@ -55,6 +70,16 @@
             </svg>
             <p>Edit User Profile</p>
           </div>
+
+            <div class="actions-edit" (click)="triggerArchiveUserModal()" *ngIf="user.role == 'Student'">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20">
+    <g>
+        <path fill="none" d="M0 0h24v24H0z"/>
+        <path d="M4 3h16l2 4v13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.004L4 3zm9 11v-4h-2v4H8l4 4 4-4h-3zm6.764-7l-1-2H5.237l-1 2h15.527z"/>
+    </g>
+</svg>
+            <p>Archive User Account</p>
+          </div>
           <!-- Layout for Edit student End -->
 
           <!-- Layout for Edit Admin beginning -->
@@ -67,13 +92,22 @@
           </div>
           <!-- Layout for Edit Admin beginning End -->
 
-          <div class="actions-delete" (click)="triggerDeleteModal()">
+          <div class="actions-delete" (click)="triggerDeleteModal()" *ngIf="user.role == 'Student'">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
               stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
             <p>Delete User</p>
+          </div>
+
+           <div class="actions-delete" (click)="triggerDeleteArchive()" *ngIf="user.role == 'Archived'">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            <p>Delete Archive</p>
           </div>
         </div>
         <!-- <div class="account-type">
@@ -114,6 +148,49 @@
         <div class="modal-form-container">
           <div class="modal-buttons">
             <button type="submit" class="deleteBtn" (click)="deleteUser(user.uid,user.email)">
+              Delete Account
+            </button>
+            <button type="button" class="cancelBtn" (click)="triggerDeleteModal()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal container for delete -->
+
+
+   <!-- modal container for delete -->
+  <div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="deleteArchiveModal">
+    <div class="modal-center">
+      <div class="modal-overlay" aria-hidden="true"></div>
+      <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+      <div class="modal">
+        <div class="modal-bg">
+          <div class="modal-header">
+            <div class="modal-header-icon-delete">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </div>
+            <div class="modal-header-title">
+              <h3 id="modal-title">
+                Delete Archived User Account
+              </h3>
+              <div class="mt-2">
+                <p>
+                  Are You Sure You Want To Delete This Archived Account And It's Corresponding Data?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-form-container">
+          <div class="modal-buttons">
+            <button type="submit" class="deleteBtn" (click)="deleteArchived(user.uid,user.email)">
               Delete Account
             </button>
             <button type="button" class="cancelBtn" (click)="triggerDeleteModal()">
@@ -397,10 +474,116 @@
   <!-- ***End of Modal Container for Edit Admin*** -->
 
 
+ <!-- ***Modal Container for Archive Student*** -->
+<div class="modal-container" aria-labelledby="modal-title" role="dialog" aria-modal="true" *ngIf="editArchiveModal">
+    <div class="modal-center">
+      <div class="modal-overlay" aria-hidden="true"></div>
+      <span class="modal-container-spacing" aria-hidden="true">&#8203;</span>
+      <div class="modal">
+        <form [formGroup]="editArchiveForm" (ngSubmit)="archiveUser()">
+          <div class="modal-bg">
+            <div class="modal-header">
+              <div class="modal-header-icon-edit">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20">
+    <g>
+        <path fill="none" d="M0 0h24v24H0z"/>
+        <path d="M4 3h16l2 4v13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.004L4 3zm9 11v-4h-2v4H8l4 4 4-4h-3zm6.764-7l-1-2H5.237l-1 2h15.527z"/>
+    </g>
+</svg>
+              </div>
+              <div class="modal-header-title">
+                <h3 id="modal-title">
+                  Archive User Account
+                </h3>
+                <div class="mt-2">
+                  <p>
+                    Archive User's Account Information
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-form-container">
+            <div class="modal-form">
+              <div class="mb-4">
+                <label for="displayName">
+                  User's Full Name
+                </label>
+                <input [attr.disabled]="''" id="displayName" type="text" placeholder="Input student's full name"
+                  formControlName="displayName" autocomplete="on">
+              </div>
+            
+              <div class="mb-4">
+                <label for="Department">
+                  Degree Program
+                </label>
+                <input [attr.disabled]="''" autocomplete="on" type="text" name="course" id="course" style="width: 100%;" formControlName="course"/>
+              </div>
+
+              <div class="mb-4" >
+                <label for="section">
+                  Section
+                </label>
+                <!-- (change)="changeSection($event)" -->
+                <input [attr.disabled]="''"  type="text" autocomplete="on" name="section" id="section" style="width: 100%;" formControlName="section"/>  
+              </div>
+              <!-- End of newly added components in edit student detail. -->
+
+              <div class="mb-4">
+                <label for="email">
+                  User's Email
+                </label>
+                <input  id="email" type="text" placeholder="Student's email is blank" formControlName="email"
+                  autocomplete="on">
+              </div>
+              
+              <!-- <div class="login-form-error" *ngIf="editUserForm.controls.email.errors?.pattern">
+                Please use your UST email
+              </div> -->
+              <div class="mb-4">
+                <label for="contactNumber">
+                  User's Contact Number
+                </label>
+                <input [attr.disabled]="''" id="contactNumber" type="text" placeholder="Student's contact number is blank"
+                  formControlName="contactNumber" autocomplete="on">
+                <!--
+              <p class="error-msg">Please enter your comment for this task</p> -->
+              </div>
+              <!-- <div class="login-form-error"
+                *ngIf="editUserForm.controls.contactNumber.errors?.required && editUserForm.controls.contactNumber.touched">
+                Contact number is required.
+              </div> -->
+
+              <div class="mb-4">
+                <label for="contactNumber">
+                 Year Graduated
+                </label>
+                <input  id="yearGraduated" type="number" placeholder="Input student's year graduated"
+                  formControlName="yearGraduated" autocomplete="on">
+                <!--
+              <p class="error-msg">Please enter your comment for this task</p> -->
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-buttons">
+            <button type="submit" class="addBtn" *ngIf="editArchiveForm.valid">
+              Archive User Account
+            </button>
+            <button type="submit" class="addBtn-disabled" *ngIf="editArchiveForm.invalid">
+              Archive User Account
+            </button>
+            <button type="button" class="cancelBtn" (click)="triggerArchiveUserModal()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 
-
-
+ <!-- ***End Modal Container for Archive Student*** -->
 
 
 

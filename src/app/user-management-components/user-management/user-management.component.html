@@ -82,7 +82,8 @@
         <div class="admin-container-header">
           <h1>CICS Office Admins:</h1>
         </div>
-        <div class="admin-container-children" *ngFor="let admin of admins">
+        <div class="admin-container-children" *ngFor="let admin of admins" 
+        [routerLink]="['/user/', admin.uid]">
           <div class="admin-container-children-left">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path
@@ -206,8 +207,17 @@
     </div>
 
     <div class="students" *ngIf="studentUsers$ as students">
-      <input type="text" [(ngModel)]="studentList" name="studentList" class="w-1/4 mb-5 float-right rounded-full input-text"
+      <div class="flex flex-row">
+      <div [routerLink]="['/user-management/archived-accounts']" class="cursor-pointer mb-2 p-4 text-[1.2rem] rounded-md text-white flex items-center justify-center transition duration-500 ease-in-out hover:scale-110 archived-accounts-container">
+        <h1>Archived Accounts</h1>
+        <svg width="46" height="23" viewBox="0 0 46 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M45.085 12.0357C45.657 11.4365 45.635 10.487 45.0357 9.91497L35.2704 0.593544C34.6712 0.0215349 33.7217 0.0436161 33.1497 0.642864C32.5777 1.24211 32.5997 2.1916 33.199 2.76361L41.8793 11.0493L33.5935 19.7296C33.0215 20.3288 33.0436 21.2783 33.6429 21.8503C34.2421 22.4223 35.1916 22.4003 35.7636 21.801L45.085 12.0357ZM1.03487 13.4996L44.0349 12.4996L43.9651 9.50041L0.965126 10.5004L1.03487 13.4996Z" fill="white"/>
+</svg>
+
+      </div>
+      <input type="text" [(ngModel)]="studentList" name="studentList" class="ml-auto w-1/4 mb-5 float-right rounded-full input-text"
         placeholder="&#xf002; Search for Data" />
+        </div>
       <div class="admin-container-header">
         <div class="admin-container-header-students">
           <h1>Students:</h1>
@@ -617,25 +627,32 @@
             <div class="modal-form">
               <ol class="pl-5 list-decimal">
                 <li class="my-2">
-                  Open any text editor (e.g Visual Studio Code, Sublime).
+                  You can get a template or extract data using firebase-CLI
                 </li>
                 <li class="my-2">
-                  Make sure that the JSON file you have has this template.
-                </li>
-                <img src="../../../assets/json.PNG" class="my-2" />
-                <li class="my-2">
-                  Open terminal and type "auth:import (file name)".
+                  Open terminal Make sure you are logged in using command: <b>firebase login</b>
                 </li>
                 <li class="my-2">
-                  Add the paramaters needed in the JSON file.
+                 Type the command: <b>firebase auth:export users.json --format=JSON</b>
                 </li>
-                <li class="my-2">Press enter.</li>
+                <!--<img src="../../../assets/json.PNG" class="my-2" />-->
+                <li class="my-2">
+                  Import the exported data using the import button
+                </li>
+                  <li class="my-2">
+                  You can also use this template provided:
+                </li>
+                <img src="../../../assets/template.png" class="my-2" />
               </ol>
             </div>
           </div>
+          <input type="file"  accept="application/json,.json" (change)="handleFileOnChange($event)" style="display: none;" #file id="file" />
           <div class="modal-buttons">
-            <button type="button" class="cancelBtn" (click)="triggerImportUserManual()">
-              Okay, I got it!
+            <button type="button" class="addBtn" (click)="importJSON()" >
+              Import JSON
+            </button>
+              <button type="button" class="cancelBtn" (click)="triggerImportUserManual()">
+             Cancel
             </button>
           </div>
         </div>

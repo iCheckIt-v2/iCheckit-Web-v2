@@ -55,7 +55,21 @@
       </div>
     </div> -->
 
+    
+
     <div class="students" *ngIf="verifyTasks$ as tasks">
+      <div class="flex flex-row">
+<div class="flex flex-row gap-4 items-center relative top-12 text-gray-600 antonio">
+        <h1 class="font-bold text-black ">Sort By:</h1>
+        <select class="rounded-md" name="sortby" [(ngModel)]="selectedOption2" (ngModelChange)="sortBy($event)">
+            <option *ngFor="let o of options">
+      {{o}}
+   </option>
+           
+        </select>
+    </div>
+      </div>
+      
       <input type="text" [(ngModel)]="taskList" name="taskList" class="w-1/4 mb-5 float-right rounded-full input-text" placeholder="&#xf002; Search for a task">
       <div class="admin-container-header">
         <h1>Tasks:</h1>

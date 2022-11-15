@@ -18,25 +18,68 @@ import { AngularFireAuthGuard, canActivate, customClaims, redirectUnauthorizedTo
 import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserManualComponent } from './user-manual/user-manual.component';
-
+import { ArchivedAccountsComponent } from './user-management-components/archived-accounts/archived-accounts.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  { path: 'user-manual', component: UserManualComponent},
-  { path: 'task/:id', component: TaskComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  { path: 'task/settings/:id', component: TaskSettingsComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  { path: 'task/reports/:id', component: ReportComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  { path: 'task/reports-download/:id', component: DownloadReportComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  { path: 'user-manual', component: UserManualComponent },
+  {
+    path: 'task/:id',
+    component: TaskComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'task/settings/:id',
+    component: TaskSettingsComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'task/reports/:id',
+    component: ReportComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'task/reports-download/:id',
+    component: DownloadReportComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
   { path: 'login', component: LoginComponent },
-  { path: 'my-profile', component: MyProfileComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  { path: 'user/:id', component: UserComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  { path: 'user-management', component: UserManagementComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  { path: 'user-management/verify-users', component: VerifyTaskComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  {
+    path: 'my-profile',
+    component: MyProfileComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'user/:id',
+    component: UserComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'user-management',
+    component: UserManagementComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'user-management/verify-users',
+    component: VerifyTaskComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'user-management/archived-accounts',
+    component: ArchivedAccountsComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: '',   redirectTo: '/dashboard', pathMatch: 'full' }, // redirect to `Home`
-  { path: 'archive', component: ArchiveComponent},
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // redirect to `Home`
+  { path: 'archive', component: ArchiveComponent },
+  { path: 'calendar', component: CalendarComponent },
   { path: '**', component: PagenotfoundComponent },
 ];
 
